@@ -1,12 +1,11 @@
-<p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#cliente" role="button" aria-expanded="false" aria-controls="collapseExample">
-      Cliente
-    </a>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#profesional" aria-expanded="false" aria-controls="collapseExample">
-      Profesional
-    </button>
-  </p>
-  <div class="collapse show" id="cliente" style="width: 12%; height: 70%; background-color: white;">
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+   <li> <a class="btn btn-primary" data-toggle="collapse" href="#cliente" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Cliente</a></li> 
+    <li> <a class="btn btn-primary" data-toggle="collapse" href="#profesional" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Profesional</a></li>
+    
+</ul>
+  <div class="tab-pane fade active" id="cliente" style="width: 12%; height: 70%; background-color: white;">
     <nav class="navbar navbar-dark "> 
         <ul class="navbar-nav mr-auto list-group">
             <li class="nav-item  list-group-item ">Perfil</li>
@@ -19,9 +18,9 @@
     </nav>
   </div>
 
-  <div class="collapse show" id="profesional" style="width: 12%; height: 70%; background-color: white;">
+  <div class="tab-pane fade show" id="profesional" style="width: 12%; height: 70%; background-color: white;">
     <nav class="navbar navbar-dark "> 
-        <ul class="mr-auto list-group">
+        <ul class="mr-auto list-group ">
             <li class="list-group-item">Perfil</li>
             <li class="list-group-item ">Chat</li>
             <li class="list-group-item  ">Ofertas de Trabajos</li>

@@ -1,0 +1,66 @@
+:root {
+    --color_uno:#08d9d6;
+    --color_dos:#252a34;
+    --color_tres:#ff2e63;
+    --color_cuatro:#eaeaea;
+}
+
+.login-box {
+    margin-top: 75px;
+    height: auto;
+    background:#252a34;
+    text-align: center;
+    box-shadow: 0 3px 6px  #eaeaea, 0 3px 6px  #08d9d6;
+}
+
+.login-key{
+    margin-top: 10px;
+    height: 1.2em;
+    width: 1.2em;
+    position: relative;
+    left: 450px;
+}
+.login-icon{
+    color: var(--color_uno,#08d9d6) ;
+}
+.titulo{
+    color: var(--color_cuatro,#eaeaea);
+    margin-top: 40px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.login-form{
+    margin-top: 25px;
+    text-align: left;
+    margin-left: 45px;
+}
+.form-group {
+    margin-bottom: 40px;
+    outline: 0px;
+    margin-right: 20px;
+}
+.form-control-label{
+    font-size: 10px;
+    color: var(--color_uno,#08d9d6); 
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-right: 20px;
+}
+.login-btm {
+    float: left;
+    margin-bottom: 5px;
+}
+.btn-outline-primary {
+    border-color:var(--color_uno,#08d9d6);
+    color:var(--color_uno,#08d9d6);
+    border-radius: 3px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn-outline-primary:hover {
+    background-color:var(--color_uno,#08d9d6);
+}
