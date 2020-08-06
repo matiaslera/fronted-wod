@@ -1,0 +1,36 @@
+:root {
+    --color_uno:#08d9d6;
+    --color_dos:#252a34;
+    --color_tres:#ff2e63;
+    --color_cuatro:#eaeaea;
+}
+
+.error-page-wrap {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: var(--color_uno,#08d9d6);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    text-align: Center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .error-page-wrap h1 {
+    font-size: 100px;
+    margin: 0;
+    color: #fff;
+  }
+  .error-page-wrap h2 {
+    margin: 0;
+    color: #fff;
+    margin: 20px 0;
+  }
+  .error-page-wrap a {
+    color: #fff;
+    display: block;
+  }
+  

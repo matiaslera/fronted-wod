@@ -9,7 +9,7 @@ import { UsersService } from '../services/users.service';
 export class LoginComponent implements OnInit {
 
   usuario: string;
-  password: string;
+  contrasenia: string;
   users: any;
 
   constructor( public usersService: UsersService) { }
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log(this.usuario);
-    console.log(this.password);
+    console.log(this.contrasenia);
   }
 
 }

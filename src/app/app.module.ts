@@ -11,6 +11,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { UsersService } from './services/users.service';
 import { MessagesService } from './services/messages.service';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [UsersService, MessagesService],
   bootstrap: [AppComponent]
