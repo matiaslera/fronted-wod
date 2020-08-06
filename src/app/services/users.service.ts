@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs/internal/Observable';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,13 @@ export class UsersService {
   constructor(private http: HttpClient) {
    }
 
-   getUsers(){
-    this.http.get('https://reqres.in/api/users?page=2').subscribe(data => {
-      console.log(data);
-    });
-    console.log("Esto se ejecutará antes que el console log de arriba");
+   getUsers(): Observable<any>{
+    return this.http.get('https://reqres.in/api/users?page=2');
+  }
+  createUser(user: any): Observable<any>{
+    return this.http.post('https://reqres.in/api/users', user);
+  }
+  editUser(user: any): Observable<any>{
+    return this.http.put('https://reqres.in/api/users/2', user);
   }
 }

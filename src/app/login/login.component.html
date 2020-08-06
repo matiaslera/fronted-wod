@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="row justify-content-md-center">
     <div class="col col-lg-3 col-md-2"></div>
     <div class="col col-lg-6 col-md-8 login-box">
@@ -34,3 +36,10 @@
     </div>
     <div class="col col-lg-3 col-md-2"></div>  
 </div>
+
+<div *ngIf="users">
+    <ul >
+        <li *ngFor="let hero of users.data"><span class="badge">{{hero.id}}</span> {{hero.first_name}}  {{hero.last_name}} email:{{hero.email}} </li>
+      </ul>
+</div>
+

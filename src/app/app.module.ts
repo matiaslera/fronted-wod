@@ -7,6 +7,10 @@ import { HeaderComponent } from './header/header.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HttpClientModule } from "@angular/common/http";
+import { UsersService } from './services/users.service';
+import { MessagesService } from './services/messages.service';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -14,13 +18,15 @@ import { RegisterComponent } from './register/register.component';
     HeaderComponent,
     NavegacionComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [UsersService, MessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
