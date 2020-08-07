@@ -1,15 +1,19 @@
 <nav class="navbar navbar-dark bg-secondary">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active"><a class="nav-link" href="#">
+        <li *ngIf="!prueba()" class="nav-item active"><a class="nav-link" href="#">
             Home <i class="fa fa-home fa-lg"></i> 
         </a></li>
+        <li *ngIf="prueba()" class="nav-item active nav-link">  WOD <i class="fa fa-tools fa-lg"></i> 
+        </li>
     </ul>
-    
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a class="nav-link" href="#">
+    <ul *ngIf="!prueba()" class="navbar-nav ml-auto">
+        <li class="nav-item active"> <a class="nav-link" href="#">
             Salir <i class="fa fa-times-circle"></i>
         </a></li>
     </ul>
+    <div *ngIf="!prueba()" class="form-inline my-2 my-lg-0"> 
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+      </div>
 </nav>
 
 

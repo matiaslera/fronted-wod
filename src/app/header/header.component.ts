@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  fecha= Date.now();
+  condicion: boolean;
+  constructor() { 
+    this.condicion= 2>1;
+  }
 
   ngOnInit(): void {
+    this.userIsLogged()
+  }
+
+  userIsLogged():boolean{
+    return false
+  }
+
+  prueba(){
+  return this.condicion
   }
 
 }

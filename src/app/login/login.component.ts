@@ -11,8 +11,11 @@ export class LoginComponent implements OnInit {
   usuario: string;
   contrasenia: string;
   users: any;
+  condicion: boolean;
 
-  constructor( public usersService: UsersService) { }
+  constructor( public usersService: UsersService) {
+    this.condicion= 2>1;
+   }
 
   ngOnInit(): void {
     this.usersService.getUsers().subscribe(data => {
