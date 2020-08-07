@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class RegisterComponent implements OnInit {
 
   email: string;
-  password: string;
-  confirmPassword: string;
+  usuario:string;
+  contrasenia: string;
+  confirmarContrasenia: string;
 
   constructor() {}
 
@@ -18,7 +19,9 @@ export class RegisterComponent implements OnInit {
 
   register() {
     console.log(this.email);
-    console.log(this.password);
+    console.log(this.usuario);
+    console.log(this.contrasenia);
+    console.log(this.confirmarContrasenia);
   }
 
 }

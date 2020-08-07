@@ -1,28 +1,19 @@
 
 <div class="register">
-    <form class="custom-form" method="post">
-      <h1>Register</h1>
-      <input
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        placeholder="Email"
-        required="required"
-      />
-      <input
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        placeholder="Password"
-        required="required"
-      />
-      <input
-        type="password"
-        [(ngModel)]="confirmPassword"
-        name="password"
-        placeholder="Repeat the password"
-        required="required"
-      />
-      <button type="submit" (click)="register()">Register</button>
+    <form class="custom-form">
+      <h1>Crea una cuenta gratis</h1>
+      <label class="form-control-label">EMAIL</label>
+      <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" 
+      placeholder="Ingrese su Email" autocomplete="off" required/>
+      <label class="form-control-label">USUARIO</label>
+      <input type="text" [(ngModel)]="usuario" [ngModelOptions]="{standalone: true}" 
+      placeholder="Ingrese su usuario" autocomplete="off" required/>
+      <label class="form-control-label">CONTRASEÑA</label>
+      <input type="password" [(ngModel)]="contrasenia" [ngModelOptions]="{standalone: true}" 
+      placeholder="Ingrese su contraseña" autocomplete="off" required/>
+      <label class="form-control-label">CONFIRMAR CONTRASEÑA</label>
+      <input type="password" [(ngModel)]="confirmarContrasenia" [ngModelOptions]="{standalone: true}" 
+      placeholder="Ingrese de nuevo su contraseña" autocomplete="off" required/>
+      <button type="submit" (click)="register()">REGISTRARSE</button>
     </form>
   </div>

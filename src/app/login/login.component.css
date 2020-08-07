@@ -3,14 +3,21 @@
     --color_dos:#252a34;
     --color_tres:#ff2e63;
     --color_cuatro:#eaeaea;
+    --color_cinco:#ecf0f3;
 }
 
 .login-box {
-    margin-top: 75px;
+    min-width: 300px;
+    max-width: 60%;
+    margin-top: 12%;
     height: auto;
-    background:#252a34;
+    padding: 2rem 3rem;
+    border-radius: 2.5rem;
+    background-color:var(--color_cuatro,#252a34);
+    color: var(--color_cuatro,#eaeaea);
     text-align: center;
     box-shadow: 0 3px 6px  #eaeaea, 0 3px 6px  #08d9d6;
+    box-sizing: border-box;
 }
 
 .login-key{
@@ -61,5 +68,16 @@
 }
 
 .btn-outline-primary:hover {
-    background-color:var(--color_uno,#08d9d6);
+    background-color:var(--color_cuatro,#eaeaea);
+}
+.form-control{
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: none;
+    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
+        rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    background: #ebf5fc;
 }
