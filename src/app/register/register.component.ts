@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-register',
@@ -11,17 +12,18 @@ export class RegisterComponent implements OnInit {
   usuario:string;
   contrasenia: string;
   confirmarContrasenia: string;
+  passwordError: boolean;
 
-  constructor() {}
+  constructor(public servicioUsuario: UsersService) {}
 
   ngOnInit(): void {
   }
 
   register() {
-    console.log(this.email);
-    console.log(this.usuario);
-    console.log(this.contrasenia);
-    console.log(this.confirmarContrasenia);
+      const user = { email: this.email, password: this.contrasenia };
+    this.servicioUsuario.register(user).subscribe(data => {
+      this.servicioUsuario.setToken(data.token);
+    });
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   users: any;
   condicion: boolean;
 
-  constructor( public usersService: UsersService) {
+  constructor( public usersService: UsersService, public router: Router) {
     this.condicion= 2>1;
    }
 
@@ -32,8 +33,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.usuario);
-    console.log(this.contrasenia);
+    const user = {email: this.usuario, password: this.contrasenia};
+    this.usersService.login(user).subscribe( data => {
+      this.usersService.setToken(data.token);
+      this.router.navigateByUrl('perfil');
+    });
   }
 
 }

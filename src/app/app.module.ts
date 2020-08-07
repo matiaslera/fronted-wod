@@ -12,7 +12,8 @@ import { UsersService } from './services/users.service';
 import { MessagesService } from './services/messages.service';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FormsModule } from '@angular/forms';
-
+import { CookieService } from "ngx-cookie-service";
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     NavegacionComponent,
     LoginComponent,
     RegisterComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UsersService, MessagesService],
+  providers: [UsersService, 
+    MessagesService,
+    CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
