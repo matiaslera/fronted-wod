@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators,FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,39 +10,40 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  usuario: string;
-  contrasenia: string;
-  users: any;
-  condicion: boolean;
-
-  constructor( public usersService: UsersService, public router: Router) {
-    this.condicion= 2>1;
+  formulario:FormGroup;
+  
+  constructor( public servicioUsuario: UsersService, public router: Router, private formularioFB: FormBuilder) {
+    this.formulario = this.formularioFB.group({
+      usuario:['',Validators.required],
+      contrasenia:['',[Validators.required, Validators.minLength(4)]],
+    })
    }
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe(data => {
-      this.users = data;
-    });
-    this.usersService.createUser({
-      name: "matias nuevo",
-      job: "leader"
-    });
-    this.usersService.editUser({
-      name: "matias edit",
-      job: "zion resident"
-    });
+
   }
 
+  get usuario() {return this.formulario.get('usuario')}
+  get contrasenia() {return this.formulario.get('contrasenia')}
+
   login() {
-    const user = {email: this.usuario, password: this.contrasenia};
-    this.usersService.login(user).subscribe( data => {
-      this.usersService.setToken(data.token);
+    this.servicioUsuario.logueado =true
+    this.router.navigateByUrl('perfil');
+    if (this.formulario.valid) {
+      console.log(this.formulario.value)
+    }
+    else{
+      alert("FILL ALL FIELDS")
+    }
+   /*  const user = {email: this.usuario, password: this.contrasenia};
+    this.servicioUsuario.login(user).subscribe( data => {
+      this.servicioUsuario.setToken(data.token);
       this.router.navigateByUrl('perfil');
     },
     error => {
       console.log(error);
     }
-    );
+    ); */
   }
-
+ 
 }

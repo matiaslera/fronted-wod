@@ -11,7 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { UsersService } from './services/users.service';
 import { MessagesService } from './services/messages.service';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from "ngx-cookie-service";
 import { ProfileComponent } from './profile/profile.component';
 
@@ -29,7 +29,9 @@ import { ProfileComponent } from './profile/profile.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
   ],
   providers: [UsersService, 
     MessagesService,

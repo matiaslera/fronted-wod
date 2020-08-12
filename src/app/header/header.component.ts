@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  fecha= Date.now();
-  condicion: boolean;
-  constructor() { 
-    this.condicion= 2>1;
+  constructor( private servicioUsuario:UsersService, public router: Router) {  
   }
 
   ngOnInit(): void {
@@ -18,11 +17,12 @@ export class HeaderComponent implements OnInit {
   }
 
   userIsLogged():boolean{
-    return false
+    return this.servicioUsuario.logueado
   }
 
-  prueba(){
-  return this.condicion
+  exit(){
+    this.servicioUsuario.logueado =false
+    this.userIsLogged()
+    this.router.navigateByUrl('ingresar');
   }
-
 }

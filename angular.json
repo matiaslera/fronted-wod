@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "frontend-wod"
+    }
+  },
+  "defaultProject": "frontend-wod",
+  "cli": {
+    "analytics": false
+  }
 }

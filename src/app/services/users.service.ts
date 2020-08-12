@@ -8,8 +8,10 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class UsersService {
+  logueado:boolean;
 
   constructor(private http: HttpClient,private cookies: CookieService) {
+    
    }
 
    getUsers(): Observable<any>{
