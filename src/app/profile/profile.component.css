@@ -1,0 +1,72 @@
+:root {
+    --color_uno:#08d9d6;
+    --color_dos:#252a34;
+    --color_tres:#ff2e63;
+    --color_cuatro:#eaeaea;
+    --color_cinco:#ecf0f3;
+}
+
+.imag{
+    margin-left: 25%; 
+    margin-right:auto;
+    width: 50%;
+    height: 50%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50% !important;
+    background-size: 100% auto;
+}
+  
+  /* Profile sidebar */
+  .profile-sidebar {
+    border: 1px solid var(--color_tres,#ff2e63);
+    min-width:100%;
+    padding-top: 10%;
+    height: 140%;
+    border-radius: 5%;
+    box-shadow: aqua;
+  }
+  .profile-sidebar:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  
+  .profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .profile-usertitle-name {
+    color: var(--color_dos,#252a34);
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+  
+  .profile-usertitle-job {
+    text-transform: uppercase;
+    color: var(--color_dos,#252a34);
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+  }
+  
+  .profile-userbuttons .btn:last-child {
+    margin-right: 0px;
+  }
+  
+  /* Profile Content */
+  .profile-content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+  }

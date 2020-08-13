@@ -1,7 +1,10 @@
+<div *ngIf="true">
+
+
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
    <li> <a class="btn btn-primary" data-toggle="collapse" href="#cliente" role="button" aria-expanded="false" aria-controls="collapseExample">
     Cliente</a></li> 
-    <li> <a class="btn btn-primary" data-toggle="collapse" href="#profesional" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <li *ngIf="false"> <a class="btn btn-primary" data-toggle="collapse" href="#profesional" role="button" aria-expanded="false" aria-controls="collapseExample">
         Profesional</a></li>
     
 </ul>
@@ -18,7 +21,7 @@
     </nav>
   </div>
 
-  <div class="tab-pane fade show" id="profesional" style="width: 12%; height: 70%; background-color: white;">
+  <div *ngIf="false" class="tab-pane fade show" id="profesional" style="width: 12%; height: 70%; background-color: white;">
     <nav class="navbar navbar-dark "> 
         <ul class="mr-auto list-group ">
             <li class="list-group-item">Perfil</li>
@@ -30,3 +33,4 @@
     </nav>
   </div>
 
+</div>

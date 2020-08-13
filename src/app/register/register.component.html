@@ -1,5 +1,6 @@
-
-<div class="register">
+<div class="row ">
+  <div class="col col-1 col-lg-1 col-md-1"></div>
+  <div class="col col-lg-8 col-md-8 login-box">
     <form class="custom-form">
       <h1>Crea una cuenta gratis</h1>
       <label class="form-control-label">EMAIL</label>
@@ -14,6 +15,9 @@
       <label class="form-control-label">CONFIRMAR CONTRASEÑA</label>
       <input type="password" [(ngModel)]="confirmarContrasenia" [ngModelOptions]="{standalone: true}" 
       placeholder="Ingrese de nuevo su contraseña" autocomplete="off" required/>
-      <button type="submit" (click)="register()">REGISTRARSE</button>
+      <button type="submit" (click)="register()">REGISTRARSE COMO CLIENTE</button>
+      <button type="submit" (click)="register()">REGISTRARSE COMO PROFESIONAL</button>
     </form>
   </div>
+  <div class="col col-1 col-lg-1 col-md-1"></div>
+</div>

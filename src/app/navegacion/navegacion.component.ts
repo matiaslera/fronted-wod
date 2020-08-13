@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-navegacion',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavegacionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private servicioUsuario:UsersService) { }
 
   ngOnInit(): void {
+  }
+
+  userIsLogged():boolean{
+    return this.servicioUsuario.logueado
   }
 
 }
