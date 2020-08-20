@@ -1,6 +1,5 @@
 .cabecera{
     background-color: var(--color_uno);
-    width: 100%;
     display: flex;
     justify-content: space-between;
     color: var(--color_cuatro);

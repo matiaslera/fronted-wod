@@ -1,0 +1,24 @@
+.a{
+    width:100%;
+    height: auto;
+}
+.box{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+.b{
+    display: flex;
+    align-self:flex-start;
+    width: 20%;
+    min-width: 7em;
+}
+.c{
+    display: flex;
+    width: 80%;
+    min-width: 180px;
+    align-self:flex-end;
+    background-color: bisque;
+}
