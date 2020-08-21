@@ -20,29 +20,33 @@
             <a class=""> <i class="fa fa-fw fa-home"></i> Turnos</a>
     </nav>
   </div> -->
-<!--   <div class="barra_lateral">
-  <button class="btn_open" (click)="openNav()">&#9776; MENU</button>
-  
-  <div id="mySidepanel" class="sidepanel">
-    <a  class="closebtn" (click)="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+<div *ngIf="false">    
+  <div id="mySidebar" class="barra_lat">
+     <a  class="closebtn" (click)="closeNav()">×</a>
+     <div class="linea"><a href="#"> Perfil</a> <i class="far fa-user icon"></i>   </div>
+     <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon">                  </i>     </div>  
+     <div class="linea"><a href="#">Obtener Presupuesto</a> <i class="fas fa-pencil-alt icon"></i>     </div>  
+     <div class="linea"><a href="#">Trabajo Finalizado</a> <i class="fas fa-toolbox icon">     </i>    </div>  
+     <div class="linea"><a href="#">Trabajo Pendiente</a>  <i class="fas fa-hammer  icon">   </i>    </div>  
+     <div class="linea"><a href="#">Consultas</a>        <i class="fas fa-file-contract icon"></i>     </div>  
+  </div>    
+
+ <div id="main">
+    <button type="button" class="openbtn " (click)="openNav()">☰ MENU</button>  
   </div>
-  
-  
 </div>
- -->
+
+<div *ngIf="true">
 <div id="mySidebar" class="barra_lat">
   <a  class="closebtn" (click)="closeNav()">×</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <div class="linea"><a href="#"> Perfil</a> <i class="far fa-user icon"></i></div>
+  <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon">                  </i> </div>  
+  <div class="linea"><a href="#"> Ofertas de Trabajos</a> <i class="far fas fa-hammer  icon"></i></div>
+  <div class="linea"><a href="#">Trabajo Finalizado</a> <i class="fas fa-toolbox icon">                  </i> </div>  
+  <div class="linea"><a href="#"> Turnos</a> <i class="fas fa-file-contract icon"></i></div> 
 </div>
 
 <div id="main">
   <button type="button" class="openbtn " (click)="openNav()">☰ MENU</button>  
- 
+</div>
 </div>
