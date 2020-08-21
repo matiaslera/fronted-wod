@@ -1,39 +1,77 @@
-/* Style the sidebar - fixed full height */
-.barra_lateral {
-    /* height: 100%;*/
-    /* min-width: 15%; */
-    display: flex;
-    background-color: #111;
+
+.barra_lat {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    /* top: 0; */
+    left: 0;
+    background-color:var(--color_uno);
     overflow-x: hidden;
-    padding-top: 16px;
-    /* width: 15em; */
+    transition: 0.5s;
+    /* padding-top: 60px; */
+    display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
   }
   
-  /* Style sidebar links */
-  .barra_lateral a {
-    padding: 6px 8px 6px 16px;
+  .barra_lat a {
+    padding: 0.4em 0.1em;
     text-decoration: none;
+    font-size: 2em;
+    color:var(--color_cinco);
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .barra_lat a:hover {
+    color: var(--color_tres);
+  }
+  
+  .barra_lat .closebtn {
+      padding: 0em;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .openbtn {
     font-size: 20px;
-    color: #818181;
-    display: block;
+    cursor: pointer;
+    color: var(--color_uno);
+    border: none;
+    display: flex;
+    background-color: transparent;
+    border: 1px solid var(--color_uno);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
   }
   
-  /* Style links on mouse-over */
-  .barra_lateral a:hover {
-    color: #f1f1f1;
+  .openbtn:hover {
+    background-color: var(--color_uno);
+    color: var(--color_cinco);
   }
   
-  /* Style the main content */
-  .main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    padding: 0px 10px;
+  #main {
+    transition: margin-left .5s;
+    padding: 8px;
+    display: flex;
   }
   
-  /* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
- /*  @media screen and (max-height: 450px) {
-    .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
-  } */
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-width: 450px) {
+    /* .barra_lat {padding-top: 15px;} */
+    .barra_lat a {font-size: 18px;}
+    .openbtn{
+        margin: 0em;
+        font-size: 1rem;
+    }
+    .barra_lat .closebtn {
+        right: 6px;
+    }
+    #main{
+        padding: 0em;
+    }
+  }

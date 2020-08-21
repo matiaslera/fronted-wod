@@ -11,14 +11,15 @@
 }
 .b{
     display: flex;
+    flex-direction: column;
     align-self:flex-start;
-    width: 20%;
-    min-width: 7em;
+    width: 18%;
 }
 .c{
     display: flex;
-    width: 80%;
+    width: 88%;
     min-width: 180px;
     align-self:flex-end;
+    flex-flow: row nowrap;
     background-color: bisque;
 }

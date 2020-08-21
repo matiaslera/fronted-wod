@@ -25,4 +25,5 @@ export class HeaderComponent implements OnInit {
     this.userIsLogged()
     this.router.navigateByUrl('ingresar');
   }
+
 }
