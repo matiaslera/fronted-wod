@@ -1,48 +1,32 @@
-
-
-<div class="row ">
-    <div class="col col-1 col-lg-1 col-md-1"></div>
-    <div class="col col-lg-8 col-md-8 login-box">
-            <div class="col-5"></div>
-            <div class="col-2 mx-auto login-key">
-                     <i class="fa fa-key fa-3x login-icon center" aria-hidden="true"></i>
-                </div>
-                <div class="col-5"></div>
-            <div class="col-12 titulo"> Iniciar Sesion </div>
-            <div class="col-lg-10 login-form">
-              
-                    <form [formGroup]="formulario" (ngSubmit)="login()">
-                        <div class="form-group">
-                            <label class="form-control-label">USUARIO</label>
-                            <input type="text" class="form-control" formControlName="usuario"
-                             autocomplete="off"  placeholder="ingrese el usuario" required>
-                             <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="alert alert-danger">
-                                <div *ngIf="usuario.errors.required">
-                                    Usuario requerido
-                                </div>
-                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">CONTRASEÑA</label>
-                            <input type="password" class="form-control" formControlName="contrasenia"  
-                             autocomplete="off" placeholder="ingrese la contraseña">
-                             <div *ngIf="contrasenia.invalid && (contrasenia.dirty || contrasenia.touched)" class="alert alert-danger">
-                                <div *ngIf="contrasenia.errors.required">
-                                    Contraseña requerida
-                                </div>
-                                <div *ngIf="contrasenia.errors.minlength">
-                                   La contraseña debe contener 4 caracter
-                               </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 login-btm login-button">
-                            <button type="submit" class="btn btn-outline-primary" [disabled]="formulario.invalid">INGRESAR</button>
-                        </div>
-                    </form>
-            </div>
+<div class="contenedor">
+    <div class="login-key">
+        <div class=" titulo"> Iniciar Sesion </div> <i class="fas fa-key"></i>
     </div>
-    <div class="col col-1 col-lg-1 col-md-2"></div>  
+
+    <form [formGroup]="formulario" (ngSubmit)="login()" class="login-form">
+        <label class="form-control-label">USUARIO</label>
+        <input type="text" class="form-control" formControlName="usuario" autocomplete="off"
+            placeholder="ingrese el usuario" required>
+        <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="alert alert-danger">
+            <div *ngIf="usuario.errors.required">
+                Usuario requerido
+            </div>
+        </div>
+
+        <label class="form-control-label">CONTRASEÑA</label>
+        <input type="password" class="form-control" formControlName="contrasenia" autocomplete="off"
+            placeholder="ingrese la contraseña">
+        <div *ngIf="contrasenia.invalid && (contrasenia.dirty || contrasenia.touched)" class="alert alert-danger">
+            <div *ngIf="contrasenia.errors.required">
+                Contraseña requerida
+            </div>
+            <div *ngIf="contrasenia.errors.minlength">
+                La contraseña debe contener 4 caracter
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary" [disabled]="formulario.invalid">INGRESAR</button>
+    </form>
 </div>
 
 <!---div *ngIf="users">
@@ -50,4 +34,3 @@
         <li *ngFor="let hero of users.data"><span class="badge">{{hero.id}}</span> {{hero.first_name}}  {{hero.last_name}} email:{{hero.email}} </li>
       </ul>
 </div--->
-

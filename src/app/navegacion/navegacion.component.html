@@ -1,52 +1,30 @@
-
-
-<!--   <div class="barra_lateral" id="cliente">
-    <nav class=""> 
-            <a class=""><i class="fa fa-fw fa-home"></i> Perfil</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Chat</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Obtener Presupuesto</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Trabajo Finalizado</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Trabajo Pendiente</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Consultas</a>
-    </nav>
+<div *ngIf="false">
+  <div id="mySidebar" class="barra_lat">
+    <a class="closebtn" (click)="closeNav()">×</a>
+    <div class="linea"><a href="#"> Perfil</a> <i class="far fa-user icon"></i> </div>
+    <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon"> </i> </div>
+    <div class="linea"><a href="#">Obtener Presupuesto</a> <i class="fas fa-pencil-alt icon"></i> </div>
+    <div class="linea"><a href="#">Trabajo Finalizado</a> <i class="fas fa-toolbox icon"> </i> </div>
+    <div class="linea"><a href="#">Trabajo Pendiente</a> <i class="fas fa-hammer  icon"> </i> </div>
+    <div class="linea"><a href="#">Consultas</a> <i class="fas fa-file-contract icon"></i> </div>
   </div>
 
-  <div class="barra_lateral" id="profesional">
-    <nav class=" "> 
-            <a class=""> <i class="fa fa-fw fa-home"></i> Perfil</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Chat</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Ofertas de Trabajos</a>
-            <a class=""><i class="fa fa-fw fa-home"></i> Trabajo Finalizado</a>
-            <a class=""> <i class="fa fa-fw fa-home"></i> Turnos</a>
-    </nav>
-  </div> -->
-<div *ngIf="false">    
-  <div id="mySidebar" class="barra_lat">
-     <a  class="closebtn" (click)="closeNav()">×</a>
-     <div class="linea"><a href="#"> Perfil</a> <i class="far fa-user icon"></i>   </div>
-     <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon">                  </i>     </div>  
-     <div class="linea"><a href="#">Obtener Presupuesto</a> <i class="fas fa-pencil-alt icon"></i>     </div>  
-     <div class="linea"><a href="#">Trabajo Finalizado</a> <i class="fas fa-toolbox icon">     </i>    </div>  
-     <div class="linea"><a href="#">Trabajo Pendiente</a>  <i class="fas fa-hammer  icon">   </i>    </div>  
-     <div class="linea"><a href="#">Consultas</a>        <i class="fas fa-file-contract icon"></i>     </div>  
-  </div>    
-
- <div id="main">
-    <button type="button" class="openbtn " (click)="openNav()">☰ MENU</button>  
+  <div id="main">
+    <button type="button" class="openbtn " (click)="openNav()">☰ MENU</button>
   </div>
 </div>
 
 <div *ngIf="true">
-<div id="mySidebar" class="barra_lat">
-  <a  class="closebtn" (click)="closeNav()">×</a>
-  <div class="linea"><a href="#"> Perfil</a> <i class="far fa-user icon"></i></div>
-  <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon">                  </i> </div>  
-  <div class="linea"><a href="#"> Ofertas de Trabajos</a> <i class="far fas fa-hammer  icon"></i></div>
-  <div class="linea"><a href="#">Trabajo Finalizado</a> <i class="fas fa-toolbox icon">                  </i> </div>  
-  <div class="linea"><a href="#"> Turnos</a> <i class="fas fa-file-contract icon"></i></div> 
-</div>
+  <div id="mySidebar" class="barra_lat">
+    <a class="closebtn" (click)="closeNav()">×</a>
+    <div class="linea"><a href="#"> Perfil</a> <i class="far fa-user icon"></i></div>
+    <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon"> </i> </div>
+    <div class="linea"><a href="#"> Ofertas de Trabajos</a> <i class="far fas fa-hammer  icon"></i></div>
+    <div class="linea"><a href="#">Trabajo Finalizado</a> <i class="fas fa-toolbox icon"> </i> </div>
+    <div class="linea"><a href="#"> Turnos</a> <i class="fas fa-file-contract icon"></i></div>
+  </div>
 
-<div id="main">
-  <button type="button" class="openbtn " (click)="openNav()">☰ MENU</button>  
-</div>
+  <div id="main">
+    <button type="button" class="openbtn " (click)="openNav()">☰ MENU</button>
+  </div>
 </div>

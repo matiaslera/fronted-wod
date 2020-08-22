@@ -8,7 +8,6 @@ import { UsersService } from '../services/users.service';
 })
 export class NavegacionComponent implements OnInit {
 
-  vista =false;
   constructor(private servicioUsuario:UsersService) { }
 
   ngOnInit(): void {

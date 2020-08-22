@@ -1,4 +1,3 @@
-
 .barra_lat {
     height: 100%;
     width: 0;
@@ -11,7 +10,6 @@
     display: flex;
     flex-direction: column;
   }
-  
   .barra_lat a {
     padding: 0.4em 0.1em;
     text-decoration: none;
@@ -29,7 +27,6 @@
   .linea a:hover,.linea i:hover{
     color: var(--color_tres);
   }
-  
   .barra_lat .closebtn {
     padding: 0em;
     font-size: 2.5em;
@@ -65,8 +62,8 @@
     transition: margin-left .5s;
     padding: 8px;
     display: flex;
+    align-self: flex-start;
   }
-  
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-width: 450px) {
