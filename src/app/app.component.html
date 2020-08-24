@@ -1,6 +1,6 @@
 <div class="a"> <app-header></app-header> </div>
 <div class="box">
-    <div class="b"> <app-navegacion></app-navegacion> </div>
+    <div *ngIf="barraLat()" class="b"> <app-navegacion></app-navegacion> </div>
     <div class="c"> <router-outlet></router-outlet> </div>
 </div>
 

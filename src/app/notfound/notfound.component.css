@@ -6,18 +6,14 @@
 }
 
 .error-page-wrap {
-    min-width: 200px;
-    min-height: 200px;
     border-radius: 50%;
     background: var(--color_uno,#08d9d6);
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 50%;
     text-align: Center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 50%;
     height: 50%;
   }
   .error-page-wrap h1 {

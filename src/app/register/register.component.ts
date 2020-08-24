@@ -24,6 +24,6 @@ export class RegisterComponent implements OnInit {
     this.servicioUsuario.register(user).subscribe(data => {
       this.servicioUsuario.setToken(data.token);
     });
-  }
+  } 
 
 }

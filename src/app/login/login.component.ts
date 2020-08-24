@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.servicioUsuario.logueado =true
     this.router.navigateByUrl('perfil');
+    this.servicioUsuario.barra_lateral=true;
     if (this.formulario.valid) {
       console.log(this.formulario.value)
     }
@@ -46,4 +47,4 @@ export class LoginComponent implements OnInit {
     ); */
   }
  
-}
+} 

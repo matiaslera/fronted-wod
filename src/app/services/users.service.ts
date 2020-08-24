@@ -9,9 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class UsersService {
   logueado:boolean;
-
+  barra_lateral:boolean;
   constructor(private http: HttpClient,private cookies: CookieService) {
-    
+    this.barra_lateral=false
    }
 
    getUsers(): Observable<any>{

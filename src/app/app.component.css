@@ -17,7 +17,8 @@
 .c{
     display: flex;
     min-width: 82%;
-    width: 1700px;
+    width: 100%;
+    /* width: 1700px; */
     height: 881px;
     min-height: 80%;
     max-height: 900px; 
@@ -27,3 +28,8 @@
     align-items: center;
     background-color: rgb(248, 239, 228);
 }
+
+@media screen and (max-width: 360px) {
+     .c {height: 584px;} 
+    .b {height: 584px;}
+  }

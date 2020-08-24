@@ -82,3 +82,24 @@
     display: flex;
 }
 
+@media screen and (max-width: 360px) {
+    .contenedor {padding: 1.6em;
+    font-size: 1em;
+    } 
+    .titulo{
+        font-size: 1.5em;
+    }
+    .login-key{
+        font-size: 0.8em;
+    }
+    .login-form{
+        margin-top: 0.9em;
+    }
+    /* h1{ font-size: 1.4em;}
+    .form-control-label{
+      font-size: 0.8em;
+    }
+    .botones button{
+      font-size: 0.7em;
+    } */
+  }
