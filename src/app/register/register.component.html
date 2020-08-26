@@ -13,7 +13,7 @@
   <input type="password" [(ngModel)]="confirmarContrasenia" [ngModelOptions]="{standalone: true}"
     placeholder="Ingrese de nuevo su contraseña" autocomplete="off" required />
   <div class="botones">
-    <button  (click)="register()">REGISTRARSE COMO CLIENTE</button>
-    <button  (click)="register()">REGISTRARSE COMO PROFESIONAL</button>
+    <button  routerLink="../registarCliente">REGISTRARSE COMO CLIENTE</button>
+    <button  routerLink="../registarProfesional">REGISTRARSE COMO PROFESIONAL</button>
   </div>
 </form>

@@ -6,6 +6,8 @@ import { HeaderComponent } from './header/header.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegClientComponent } from './reg-client/reg-client.component';
+import { RegProfComponent } from './reg-prof/reg-prof.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: "registar", component: RegisterComponent, pathMatch: "full" },
   { path: "perfil", component: ProfileComponent, pathMatch: "full" },
   /* { path: '**', redirectTo: '404', pathMatch: 'full' }, */
+  { path: "registarCliente", component: RegClientComponent, pathMatch: "full" },
+  { path: "registarProfesional", component: RegProfComponent, pathMatch: "full" },
 ];
 
 @NgModule({

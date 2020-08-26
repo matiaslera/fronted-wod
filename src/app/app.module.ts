@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from "ngx-cookie-service";
 import { ProfileComponent } from './profile/profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RegProfComponent } from './reg-prof/reg-prof.component';
+import { RegClientComponent } from './reg-client/reg-client.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     RegisterComponent,
     NotfoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegProfComponent,
+    RegClientComponent
   ],
   imports: [
     BrowserModule,
