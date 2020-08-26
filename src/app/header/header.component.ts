@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   exit(){
+    this.servicioUsuario.barra_lateral=false
     this.servicioUsuario.logueado =false
     this.userIsLogged()
     this.router.navigateByUrl('ingresar');

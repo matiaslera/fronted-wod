@@ -36,7 +36,7 @@
   .linea{
     font-size: 1.2em;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
   /*Boton y su contenedor*/
   .openbtn {
@@ -85,4 +85,8 @@
     #mySidebar{
         max-width: 100px;
     }
+    .linea{
+      display: flex;
+      justify-content: center;
+  }
   }
