@@ -25,6 +25,7 @@
     class="alert alert-danger">
     <div *ngIf="confirmarContrasenia.errors.required"> Contraseña requerido </div>
     <div *ngIf="confirmarContrasenia.errors.minlength">Minimo 4 caracteres </div>
+    <div *ngIf="confirmarContrasenia.errors.notEquivalent">No son iguales</div>
   </div>
   <div class="botones">
     <button type="submit" [disabled]="formulario.invalid" (click)="registerClient()">REGISTRARSE COMO CLIENTE</button>

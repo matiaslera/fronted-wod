@@ -29,8 +29,8 @@ export class RegisterComponent implements OnInit {
       confirmarContrasenia: [
         '',
         [Validators.required, Validators.minLength(4)],
-      ] /* },
-      {validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia') */,
+      ] },
+      {validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia'),
     });
   }
 
@@ -50,14 +50,14 @@ export class RegisterComponent implements OnInit {
   }
 
   registerClient() {
-    this.router.navigateByUrl('registarCliente');
+    this.router.navigateByUrl('registrarCliente');
     console.log('se ingreso como Cliente');
     console.warn(this.formulario.value);
     console.log(this.formulario.value);
   }
 
   registerProf() {
-    this.router.navigateByUrl('registarProfesional');
+    this.router.navigateByUrl('registrarProfesional');
     console.log('se ingreso como Profesional');
     console.warn(this.formulario.value);
     console.log(this.formulario.value);

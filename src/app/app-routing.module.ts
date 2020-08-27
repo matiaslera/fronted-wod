@@ -17,11 +17,11 @@ const routes: Routes = [
   //] 
 },
   { path: "404", component: NotfoundComponent, pathMatch: "full" },
-  { path: "registar", component: RegisterComponent, pathMatch: "full" },
+  { path: "registrar", component: RegisterComponent, pathMatch: "full" },
   { path: "perfil", component: ProfileComponent, pathMatch: "full" },
   /* { path: '**', redirectTo: '404', pathMatch: 'full' }, */
-  { path: "registarCliente", component: RegClientComponent, pathMatch: "full" },
-  { path: "registarProfesional", component: RegProfComponent, pathMatch: "full" },
+  { path: "registrarCliente", component: RegClientComponent, pathMatch: "full" },
+  { path: "registrarProfesional", component: RegProfComponent, pathMatch: "full" },
 ];
 
 @NgModule({

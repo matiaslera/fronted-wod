@@ -16,4 +16,8 @@ export class AppComponent {
   barraLat(){
     return this.user.barra_lateral
   }
+
+  medidas(){
+      
+  }
 }
