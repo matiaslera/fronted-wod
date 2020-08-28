@@ -1,72 +1,115 @@
-:root {
-    --color_uno:#08d9d6;
-    --color_dos:#252a34;
-    --color_tres:#ff2e63;
-    --color_cuatro:#eaeaea;
-    --color_cinco:#ecf0f3;
+/*Box*/
+.box{
+  height: auto;
+}
+.perfil {
+  border: 1px solid var(--color_dos);
+  border-radius: 5%;
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+}
+.perfil:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.imag{
-    margin-left: 25%; 
-    margin-right:auto;
-    width: 50%;
-    height: 50%;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    border-radius: 50% !important;
-    background-size: 100% auto;
+.imag {
+  width: 380px;
+  border-radius: 50%;
+  background-size: 100% auto;
+  display: flex;
+  align-items: center;
+  margin: 0.4em;
+  border: 0.6em double var(--color_dos);
 }
-  
-  /* Profile sidebar */
-  .profile-sidebar {
-    border: 1px solid var(--color_tres,#ff2e63);
-    min-width:100%;
-    padding-top: 10%;
-    height: 140%;
-    border-radius: 5%;
-    box-shadow: aqua;
-  }
-  .profile-sidebar:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  }
-  
-  .profile-usertitle {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .profile-usertitle-name {
-    color: var(--color_dos,#252a34);
-    font-weight: 600;
-    margin-bottom: 7px;
-  }
-  
-  .profile-usertitle-job {
-    text-transform: uppercase;
-    color: var(--color_dos,#252a34);
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  
-  .profile-userbuttons {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .profile-userbuttons .btn {
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: 6px 15px;
-    margin-right: 5px;
-  }
-  
-  .profile-userbuttons .btn:last-child {
-    margin-right: 0px;
-  }
-  
-  /* Profile Content */
-  .profile-content {
-    padding: 20px;
-    background: #fff;
-    min-height: 460px;
-  }
+/* Profile Datos */
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.5em;
+}
+
+.profile-usertitle-name {
+  text-transform: uppercase;
+  color: var(--color_uno, #252a34);
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.profile-usertitle-job {
+  color: var(--color_uno, #252a34);
+  font-weight: 600;
+  font-size: 1.2em;
+  margin:0.4em;
+}
+/* Profile Botones */
+.profile-userbuttons {
+  text-align: center;
+  margin: 0.8em;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin:0.4em;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+
+@media screen and (min-width: 280px) {
+  .imag {
+    width: 150px;}
+    .profile-usertitle-name {
+      font-size: 0.9em;
+    }
+    .profile-usertitle-job {
+      font-size: 0.7em;
+    }
+    .box{
+      height: 640px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+}
+
+@media screen and (min-width: 576px) {
+  .imag {
+    width: 250px;}
+    .profile-usertitle-name {
+      font-size: 1em;
+    }
+    .profile-usertitle-job {
+      font-size: 0.9em;
+    }
+    .box{
+      height: 640px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+  .imag {
+    width: 300px;}
+    .profile-usertitle-name {
+      font-size: 1.2em;
+    }
+    .profile-usertitle-job {
+      font-size: 1em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+  .imag {
+    width: 350px;}
+    .profile-usertitle-name {
+      font-size: 1.3em;
+    }
+    .profile-usertitle-job {
+      font-size: 1.1em;
+    }
+}
