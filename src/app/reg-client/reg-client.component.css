@@ -12,6 +12,7 @@
      display: flex;
      justify-content: center;
      color: var(--color_tres);
+     font-size: 2.5em;
    }
   
    .form_dato{
@@ -71,16 +72,77 @@
     font-size: x-large;
  }
 
- @media screen and (max-width: 360px) {
-   .form {padding: 1.4em;
-   font-size: 1em;
-   margin-top: 5px;
+ @media screen and (min-width: 280px) {
+  .form {
+  padding: 1em;
+  font-size: 0.7em;
+  } 
+.form_titulo{ font-size: 1.5em;}
+  .form_dato{
+    font-size: 0.8em;
+  }
+  .botones button{
+    font-size: 0.7em;
+  }
+}
+
+ @media screen and (min-width: 576px) {
+   .form {
+   padding: 1em;
+   font-size: 0.8em;
    } 
- .form_titulo{ font-size: 1.4em;}
+ .form_titulo{ font-size: 1.7em;}
    .form_dato{
      font-size: 0.8em;
    }
    .botones button{
      font-size: 0.7em;
    }
+
  }
+
+ @media screen and (min-width: 768px) {
+  .form {
+  padding: 1.1em;
+  font-size: 0.9em;
+  } 
+.form_titulo{ font-size: 1.9em;}
+  .form_dato{
+    font-size: 0.8em;
+  }
+  .botones button{
+    font-size: 0.7em;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .form {
+  padding: 1.2em;
+  font-size: 1em;
+  } 
+.form_titulo{ font-size: 2.1em;}
+  .form_dato{
+    font-size: 0.8em;
+  }
+  .botones button{
+    font-size: 0.7em;
+  }
+
+}
+
+@media screen and (min-width: 1200px) {
+  .form {
+  padding: 1.4em;
+  font-size: 1.1em;
+  } 
+.form_titulo{ font-size: 2.3em;}
+  .form_dato{
+    font-size: 0.8em;
+  }
+  .botones button{
+    font-size: 0.7em;
+  }
+
+}
+

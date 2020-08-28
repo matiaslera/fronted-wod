@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
@@ -27,10 +20,10 @@ export class RegClientComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       dni: ['', Validators.required],
-      fec_nacim:'',
+      fec_nacim: '',
       telefono: '',
       genero: '',
-      foto:'',
+      foto: '',
     });
   }
 
@@ -49,17 +42,17 @@ export class RegClientComponent implements OnInit {
     return this.formulario.get('contrasenia');
   }
 
-  reset_foto(){
+  reset_foto() {
     this.formulario.patchValue({
       foto: '',
     });
   }
-  
-  acept(){
-    console.log(this.formulario.value)
+
+  acept() {
+    console.log(this.formulario.value);
   }
 
-  cancel(){
+  cancel() {
     this.router.navigateByUrl('registrar');
   }
 }

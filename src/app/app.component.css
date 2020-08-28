@@ -20,8 +20,8 @@
     width: 100%;
     /* width: 1700px; */
     height: 881px;
-    min-height: 80%;
-    max-height: 900px; 
+/*     min-height: 80%;
+    max-height: 900px;  */
     align-self:flex-end;
     flex-flow: row nowrap;
     justify-content: center;
@@ -29,7 +29,19 @@
     background-color: rgb(248, 239, 228);
 }
 
-@media screen and (max-width: 360px) {
-     .c {height: 591px;} 
-    .b {height: 591px;}
+@media screen and (min-width: 280px) {
+     .c {height: auto;} 
+    .b {height: auto;}
   }
+  @media screen and (min-width: 576px) {
+    .c {height: auto;} 
+   .b {height: auto;}
+ }
+ @media screen and (min-width: 768px) {
+    .c {height: 900px;} 
+   .b {height: auto;}
+ }
+ @media screen and (min-width: 992px) {
+    .c {height: 1000px;} 
+   .b {height: auto;}
+ }

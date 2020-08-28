@@ -1,42 +1,42 @@
 <form [formGroup]="formulario" class="form">
-    <h1 class="form_titulo">Formulario de usuario</h1>
-    <label class="form_dato">Nombre </label>
-    <input type="text" formControlName="nombre" placeholder="Ingrese su nombre" autocomplete="off" required />
-    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
-        <div *ngIf="nombre.errors.required"> Nombre es requerido </div>
-      </div>
-    <label class="form_dato">Apellido</label>
-    <input type="text" formControlName="apellido" placeholder="Ingrese su apellido" autocomplete="off" required />
-    <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger">
-        <div *ngIf="apellido.errors.required"> Apellido es requerido </div>
-      </div>
-    <label class="form_dato">Dni</label>
-    <input type="text" formControlName="dni" placeholder="Ingrese su dni" pattern="[0-9]{8}" autocomplete="off" required />
-    <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">
-        <div *ngIf="dni.errors.required"> Dni es requerido </div>
-        
-      </div>
-    <label class="form_dato">Fecha de Nacimiento</label>
-    <input type="date" formControlName="fec_nacim" autocomplete="off"/>
-    <label class="form_dato">Numero de Telefono</label>
-    <input type="tel" formControlName="telefono" placeholder="Ingrese su numero telefonico" autocomplete="off" />
-    <label class="form_dato">Sexo</label>
-    <div class="form_check">
-        <label class="form_dato"> Hombre </label>
-        <input type="radio" formControlName="genero" autocomplete="off"/>
-        <label class="form_dato"> Mujer </label>
-        <input type="radio" formControlName="genero" autocomplete="off"/>
-        <label class="form_dato"> Otro </label>
-        <input type="radio" formControlName="genero" autocomplete="off"/>
-    </div>
-    <label class="form_dato">Foto</label>
-    <div class="foto">
-        <input type="file" formControlName="foto" />
-        <i (click)="reset_foto()">X</i>
-    </div>
-    
-    <div class="botones">
-        <button type="submit" (click)="acept()" [disabled]="formulario.invalid">ACEPTAR</button>
-        <button type="button" (click)="cancel()">CANCELAR</button>
-    </div>
+  <h1 class="form_titulo">Formulario de usuario</h1>
+  <label class="form_dato">Nombre </label>
+  <input type="text" formControlName="nombre" placeholder="Ingrese su nombre" autocomplete="off" required />
+  <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+    <div *ngIf="nombre.errors.required"> Nombre es requerido </div>
+  </div>
+  <label class="form_dato">Apellido</label>
+  <input type="text" formControlName="apellido" placeholder="Ingrese su apellido" autocomplete="off" required />
+  <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger">
+    <div *ngIf="apellido.errors.required"> Apellido es requerido </div>
+  </div>
+  <label class="form_dato">Dni</label>
+  <input type="text" formControlName="dni" placeholder="Ingrese su dni" pattern="[0-9]{8}" autocomplete="off"
+    required />
+  <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">
+    <div *ngIf="dni.errors.required"> Dni es requerido </div>
+  </div>
+  <label class="form_dato">Fecha de Nacimiento</label>
+  <input type="date" formControlName="fec_nacim" autocomplete="off" />
+  <label class="form_dato">Numero de Telefono</label>
+  <input type="tel" formControlName="telefono" placeholder="Ingrese su numero telefonico" autocomplete="off" />
+  <label class="form_dato">Sexo</label>
+  <div class="form_check">
+    <label class="form_dato"> Hombre </label>
+    <input type="radio" formControlName="genero" autocomplete="off" />
+    <label class="form_dato"> Mujer </label>
+    <input type="radio" formControlName="genero" autocomplete="off" />
+    <label class="form_dato"> Otro </label>
+    <input type="radio" formControlName="genero" autocomplete="off" />
+  </div>
+  <label class="form_dato">Foto</label>
+  <div class="foto">
+    <input type="file" formControlName="foto" />
+    <i (click)="reset_foto()">X</i>
+  </div>
+
+  <div class="botones">
+    <button type="submit" (click)="acept()" [disabled]="formulario.invalid">ACEPTAR</button>
+    <button type="button" (click)="cancel()">CANCELAR</button>
+  </div>
 </form>
