@@ -5,11 +5,25 @@
     --color_tres:#08d9d6;
     --color_cuatro:#ff2e63;
     --color_cinco:#eaeaea;
+    --color_cyan-50:#E0F7FA;
+    --color_cyan-100:#B2EBF2;
+    --color_cyan-200:#80DEEA;
+    --color_cyan-300:#4DD0E1;
+    --color_cyan-400:#26C6DA;
+    --color_cyan-500:#00BCD4;
+    --color_cyan-600:#00ACC1;
+    --color_cyan-700:#0097A7;
+    --color_cyan-800:#00838F;
+    --color_cyan-900:#006064;
+    --color_cyan-a100:#84FFFF;
+    --color_cyan-a200:#18FFFF;
+    --color_cyan-a300:#00E5FF;
+    --color_cyan-a400:#00B8D4;
 }
 *{
     box-sizing: border-box;
     margin:0px;
   }
-html{
-    font-size: 14px;
-}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

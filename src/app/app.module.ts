@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from "ngx-cookie-service";
 import { ProfileComponent } from './profile/profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     BrowserModule,
     FontAwesomeModule,
+    BrowserAnimationsModule,
   ],
   providers: [UsersService, 
     MessagesService,

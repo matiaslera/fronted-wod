@@ -1,47 +1,22 @@
-<!-- <nav class="navbar navbar-dark bg-secondary">
-    <ul class="navbar-nav mr-2">
-        <li *ngIf="userIsLogged()" class="nav-item active"><a class="nav-link" href="#">
-            Home <i class="fa fa-home fa-lg"></i> 
-        </a></li>
-        <li *ngIf="!userIsLogged()" class="nav-item active nav-link">  WOD <i class="fa fa-tools fa-lg"></i> 
-        </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-        <li *ngIf="!userIsLogged()" class="nav-item active"><a class="nav-link" routerLink="../registar">
-            Registrarse <i class="fa fa-user fa-lg"></i> 
-        </a></li>
-    </ul>
-    <ul class="navbar-nav ml-2">
-        <li *ngIf="!userIsLogged()" class="nav-item active"><a class="nav-link" routerLink="../ingresar">
-            Ingresar <i class="fa fa-sign-in-alt fa-lg"></i> 
-        </a></li>
-    </ul>
-    <ul *ngIf="userIsLogged()" class="navbar-nav ml-auto">
-        <li class="nav-item active"> <a class="nav-link" (click)="exit()">
-            Salir <i class="fa fa-sign-out-alt"></i>
-        </a></li>
-    </ul>
-</nav>
- -->
- <nav class="cabecera">
+<nav class="cabecera">
     <div class="">
         <div *ngIf="userIsLogged()" class=""><a class="" href="#">
-            Home <i class="fa fa-home fa-lg"></i> 
-        </a></div>
-        <div *ngIf="!userIsLogged()" class="">  WOD <i class="fa fa-tools fa-lg"></i> 
+                Home <i class="fa fa-home fa-lg"></i>
+            </a></div>
+        <div *ngIf="!userIsLogged()" class=""> WOD <i class="fa fa-tools fa-lg"></i>
         </div>
     </div>
     <div class="enlace">
         <div *ngIf="!userIsLogged()" class=""><a class="" routerLink="../registar">
-            REGISTRARSE <i class="fa fa-user fa-lg"></i> 
-        </a></div>
+                REGISTRARSE <i class="fa fa-user fa-lg"></i>
+            </a></div>
         <div *ngIf="!userIsLogged()" class=""><a class="" routerLink="../ingresar">
-            INGRESAR  <i class="fas fa-sign-in-alt"></i>
-        </a></div>
+                INGRESAR <i class="fas fa-sign-in-alt"></i>
+            </a></div>
     </div>
     <div *ngIf="userIsLogged()" class="">
         <div class=""> <a class="" (click)="exit()">
-            Salir <i class="fa fa-sign-out-alt"></i>
-        </a></div>
+                Salir <i class="fa fa-sign-out-alt"></i>
+            </a></div>
     </div>
 </nav>

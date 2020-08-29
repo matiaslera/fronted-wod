@@ -36,15 +36,6 @@ export class LoginComponent implements OnInit {
     else{
       alert("FILL ALL FIELDS")
     }
-   /*  const user = {email: this.usuario, password: this.contrasenia};
-    this.servicioUsuario.login(user).subscribe( data => {
-      this.servicioUsuario.setToken(data.token);
-      this.router.navigateByUrl('perfil');
-    },
-    error => {
-      console.log(error);
-    }
-    ); */
   }
  
 } 
