@@ -16,6 +16,7 @@ import { CookieService } from "ngx-cookie-service";
 import { ProfileComponent } from './profile/profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MaterialModule } from './material.module'
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [UsersService, 
     MessagesService,

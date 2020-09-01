@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -12,18 +11,26 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$frontend-wod-primary: mat-palette($mat-cyan);
-$frontend-wod-second: mat-palette($mat-cyan, A200, A100, A400);
+$frontend-wod-primary: mat-palette($mat-blue-grey,700);/* 
+$frontend-wod-accent: mat-palette($mat-cyan, A200, A100, A400); */
+$frontend-wod-accent: mat-palette($mat-cyan, 200,300);
 
 // The warn palette is optional (defaults to red).
-$frontend-wod-three: mat-palette($mat-blue);
+$frontend-wod-warn: mat-palette($mat-red,900);
 $frontend-wod-four: mat-palette($mat-indigo);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$frontend-wod-theme: mat-light-theme($frontend-wod-primary, $frontend-wod-second, $frontend-wod-three, $frontend-wod-four);
-
+/* $frontend-wod-theme: mat-light-theme((
+    color: (
+      primary: $frontend-wod-primary,
+      accent: $frontend-wod-accent,
+      warn: $frontend-wod-warn,
+   /*    four:$frontend-wod-four,    
+    )
+)); */
+$frontend-wod-theme: mat-light-theme($frontend-wod-primary, $frontend-wod-accent, $frontend-wod-warn);
+$frontend-wod-theme: mat-dark-theme($frontend-wod-primary, $frontend-wod-accent, $frontend-wod-warn);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($frontend-wod-theme);
-
