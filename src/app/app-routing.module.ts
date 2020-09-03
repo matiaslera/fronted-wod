@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: "404", component: NotfoundComponent, pathMatch: "full" },
   { path: "registar", component: RegisterComponent, pathMatch: "full" },
   { path: "perfil", component: ProfileComponent, pathMatch: "full" },
+  { path: "home", component: AppComponent, pathMatch: "full" },
   /* { path: '**', redirectTo: '404', pathMatch: 'full' }, */
 ];
 

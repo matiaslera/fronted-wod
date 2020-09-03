@@ -9,10 +9,11 @@
     padding: 1rem;
     margin-top: 0em;
 }
-a{
+button{
+    background-color: transparent;
     color: var(--color_cinco);
     text-decoration:none;
-    cursor:none;
+    margin: 0.1rem;
 }
 .enlace{
     display: flex;

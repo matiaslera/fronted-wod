@@ -1,35 +1,43 @@
-.a{
-    width:100%;
-    height: auto;
-}
-.box{
-    display: flex;
-    flex-flow: row nowrap;
-    align-content: center;
-    width: 100%;
-}
-.b{
-    display: flex;
-    flex-direction: column;
-    align-self:flex-start;
-    width: 18%;
-}
-.c{
-    display: flex;
-    min-width: 82%;
-    width: 100%;
-    /* width: 1700px; */
-    height: 881px;
-    min-height: 80%;
-    max-height: 900px; 
-    align-self:flex-end;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(248, 239, 228);
-}
 
-@media screen and (max-width: 360px) {
-     .c {height: 591px;} 
-    .b {height: 591px;}
+.container{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+ .color_fondo{
+     background-color: white;
+ }
+ .example-radio-group {
+    display: block;
+    border: 1px solid #555;
+    margin: 20px;
+    padding: 10px;
   }
+
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--color_uno);
+    border: none;
+    display: flex;
+    background-color: transparent;
+    border: 1px solid var(--color_uno);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+  }
+  
+  .openbtn:hover {
+    background-color: var(--color_uno);
+    color: var(--color_cinco);
+  }
+@media screen and (max-width: 360px) {
+  .c {
+    height: 591px;
+  }
+  .b {
+    height: 591px;
+  }
+}

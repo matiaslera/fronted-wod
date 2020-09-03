@@ -1,6 +1,5 @@
-.barra_lat {
+ .barra_lat {
     height: 100%;
-    width: 0;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -37,33 +36,8 @@
     font-size: 1.2em;
     display: flex;
     justify-content: space-around;
-}
-  /*Boton y su contenedor*/
-  .openbtn {
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--color_uno);
-    border: none;
-    display: flex;
-    background-color: transparent;
-    border: 1px solid var(--color_uno);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-  }
-  
-  .openbtn:hover {
-    background-color: var(--color_uno);
-    color: var(--color_cinco);
-  }
-  
-  #main {
-    transition: margin-left .5s;
-    padding: 8px;
-    display: flex;
-    align-self: flex-start;
-  }
+} 
+
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-width: 450px) {

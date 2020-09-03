@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersService } from './services/users.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
   constructor(private user:UsersService){
 
   }
-  
+  mode = new FormControl('over');
   barraLat(){
     return this.user.barra_lateral
   }

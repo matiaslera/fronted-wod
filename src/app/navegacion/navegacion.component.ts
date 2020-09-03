@@ -16,17 +16,14 @@ export class NavegacionComponent implements OnInit {
   userIsLogged():boolean{
     return this.servicioUsuario.logueado
   }
-/* Set the width of the sidebar to 250px (show it) */
-  openNav() {
+  /* openNav() {
    var x= document.getElementById("mySidebar")
   x.style.width = "180px";
   x.style.minWidth = "18%";
-  /* x.style.marginLeft = "200px"; */
   var y =document.getElementById("main")
     y.style.display="none"
 }
 
-/* Set the width of the sidebar to 0 (hide it) */
   closeNav() {
     var x =document.getElementById("mySidebar")
     var y =document.getElementById("main")
@@ -34,5 +31,5 @@ export class NavegacionComponent implements OnInit {
   x.style.minWidth = "0";
   x.style.marginLeft= "0";
     y.style.display="flex" 
-}
+} */
 }

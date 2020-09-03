@@ -1,8 +1,29 @@
-<app-header ></app-header>
+<app-header></app-header>
 <!-- <div class="a"><app-header></app-header> </div>
 <div class="box">
     <div *ngIf="barraLat()" class="b"> <app-navegacion></app-navegacion> </div>
     <div class="c"> <router-outlet></router-outlet> </div>
 </div>
-
  -->
+<!--  <mat-sidenav-container class="container">
+    <mat-sidenav mode="side" opened class="color_fondo"> <app-navegacion></app-navegacion> </mat-sidenav>
+    <mat-sidenav-content class="color_fondo"><router-outlet></router-outlet></mat-sidenav-content>
+  </mat-sidenav-container>
+ -->
+<mat-sidenav-container class="container" >
+    <mat-sidenav #sidenav [mode]="mode.value">
+        <app-navegacion></app-navegacion>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <p><button type="button" class="openbtn " (click)="sidenav.toggle()">☰ MENU</button> </p>
+        <p>
+            <mat-radio-group class="example-radio-group" [formControl]="mode">
+                <label>Mode:</label>
+                <mat-radio-button value="over">Over</mat-radio-button>
+                <mat-radio-button value="side">Side</mat-radio-button>
+                <mat-radio-button value="push">Push</mat-radio-button>
+            </mat-radio-group>
+        </p>
+    </mat-sidenav-content>

@@ -29,10 +29,10 @@
     <mat-icon>construction</mat-icon>
     <span class="espacio"></span>
     <div *ngIf="!userIsLogged()">
-        <button mat-icon-button class="example-icon favorite-icon">REGISTRARSE
+        <button mat-icon-button class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
             <mat-icon>person_add</mat-icon>
         </button>
-        <button mat-icon-button class="example-icon">INGRESAR
+        <button mat-icon-button class="example-icon" routerLink="../ingresar">INGRESAR
             <mat-icon>login</mat-icon>
         </button></div>
     <div *ngIf="userIsLogged()">
