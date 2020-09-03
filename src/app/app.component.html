@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header ></app-header>
 <!-- <div class="a"><app-header></app-header> </div>
 <div class="box">
     <div *ngIf="barraLat()" class="b"> <app-navegacion></app-navegacion> </div>
@@ -11,12 +11,11 @@
   </mat-sidenav-container>
  -->
 <mat-sidenav-container class="container" >
-    <mat-sidenav #sidenav [mode]="mode.value">
+    <mat-sidenav class="background" #sidenav mode="side">
         <app-navegacion></app-navegacion>
-
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content color="accent"  class="color_fondo">
         <p><button type="button" class="openbtn " (click)="sidenav.toggle()">☰ MENU</button> </p>
         <p>
             <mat-radio-group class="example-radio-group" [formControl]="mode">

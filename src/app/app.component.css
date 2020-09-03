@@ -4,6 +4,8 @@
     bottom: 0;
     left: 0;
     right: 0;
+    height: 100%;
+    width: 100%;
 }
  .color_fondo{
      background-color: white;
@@ -16,10 +18,8 @@
   }
 
   .openbtn {
-    font-size: 20px;
     cursor: pointer;
     color: var(--color_uno);
-    border: none;
     display: flex;
     background-color: transparent;
     border: 1px solid var(--color_uno);
@@ -27,11 +27,16 @@
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
+    margin:0.2em 0.2em;
   }
   
   .openbtn:hover {
     background-color: var(--color_uno);
     color: var(--color_cinco);
+  }
+
+  .background{
+      background-color: #455a64;
   }
 @media screen and (max-width: 360px) {
   .c {
