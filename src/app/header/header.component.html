@@ -22,17 +22,17 @@
 </nav>
  -->
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" *ngIf="userIsLogged()">
+    <button  class="example-icon" *ngIf="userIsLogged()">
         <mat-icon>menu</mat-icon>
     </button>
     <span>WOD </span>
     <mat-icon>construction</mat-icon>
     <span class="espacio"></span>
     <div *ngIf="!userIsLogged()">
-        <button mat-icon-button class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
+        <button  class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
             <mat-icon>person_add</mat-icon>
         </button>
-        <button mat-icon-button class="example-icon" routerLink="../ingresar">INGRESAR
+        <button  class="example-icon" routerLink="../ingresar">INGRESAR
             <mat-icon>login</mat-icon>
         </button></div>
     <div *ngIf="userIsLogged()">

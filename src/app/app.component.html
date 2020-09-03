@@ -15,14 +15,15 @@
         <app-navegacion></app-navegacion>
     </mat-sidenav>
 
-    <mat-sidenav-content color="accent"  class="color_fondo">
+    <mat-sidenav-content   class="color_fondo">
         <p><button type="button" class="openbtn " (click)="sidenav.toggle()">☰ MENU</button> </p>
-        <p>
+       <!--  <p>
             <mat-radio-group class="example-radio-group" [formControl]="mode">
                 <label>Mode:</label>
                 <mat-radio-button value="over">Over</mat-radio-button>
                 <mat-radio-button value="side">Side</mat-radio-button>
                 <mat-radio-button value="push">Push</mat-radio-button>
             </mat-radio-group>
-        </p>
+        </p> -->
+        <router-outlet></router-outlet> 
     </mat-sidenav-content>
