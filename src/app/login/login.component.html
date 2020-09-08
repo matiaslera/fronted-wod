@@ -1,26 +1,27 @@
 <div class="contenedor">
-    <div class="login-key">
-        <div class=" titulo"> Iniciar Sesion </div> <i class="fas fa-key"></i>
-    </div>
-
-    <form [formGroup]="formulario" (ngSubmit)="login()" class="login-form">
-        <label class="form-control-label">USUARIO</label>
-        <input type="text" class="form-control" formControlName="usuario" autocomplete="off"
-            placeholder="ingrese el usuario" required>
-        <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="alert">
-            <div *ngIf="usuario.errors.required">  Usuario requerido
-            </div>
+    
+        <div class="login-key">
+            <div class=" titulo"> Iniciar Sesion </div> <i class="fas fa-key"></i>
         </div>
 
-        <label class="form-control-label">CONTRASEÑA</label>
-        <input type="password" class="form-control" formControlName="contrasenia" autocomplete="off"
-            placeholder="ingrese la contraseña">
-        <div *ngIf="contrasenia.invalid && (contrasenia.dirty || contrasenia.touched)" class="alert">
-            <div *ngIf="contrasenia.errors.required">  Contraseña requerida
+        <form [formGroup]="formulario" (ngSubmit)="login()" class="login-form">
+            <label class="form-control-label">USUARIO</label>
+            <input type="text" class="form-control" formControlName="usuario" autocomplete="off"
+                placeholder="ingrese el usuario" required>
+            <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="alert">
+                <div *ngIf="usuario.errors.required"> Usuario requerido
+                </div>
             </div>
-            <div *ngIf="contrasenia.errors.minlength">  La contraseña debe contener 4 caracter
+
+            <label class="form-control-label">CONTRASEÑA</label>
+            <input type="password" class="form-control" formControlName="contrasenia" autocomplete="off"
+                placeholder="ingrese la contraseña">
+            <div *ngIf="contrasenia.invalid && (contrasenia.dirty || contrasenia.touched)" class="alert">
+                <div *ngIf="contrasenia.errors.required"> Contraseña requerida
+                </div>
+                <div *ngIf="contrasenia.errors.minlength"> La contraseña debe contener 4 caracter
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn-ingresar" [disabled]="formulario.invalid">INGRESAR</button>
-    </form>
+            <button type="submit" class="btn-ingresar" [disabled]="formulario.invalid">INGRESAR</button>
+        </form>
 </div>

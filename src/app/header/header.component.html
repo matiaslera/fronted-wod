@@ -1,42 +1,15 @@
-<!-- <nav class="cabecera">
-    <div class="">
-        <div *ngIf="userIsLogged()" class=""><a class="" href="#">
-                Home <i class="fa fa-home fa-lg"></i>
-            </a></div>
-        <div *ngIf="!userIsLogged()" class=""> WOD <i class="fa fa-tools fa-lg"></i>
-        </div>
-    </div>
-    <div class="enlace">
-        <div *ngIf="!userIsLogged()" class=""><a class="" routerLink="../registar">
-                REGISTRARSE <i class="fa fa-user fa-lg"></i>
-            </a></div>
-        <div *ngIf="!userIsLogged()" class=""><a class="" routerLink="../ingresar">
-                INGRESAR <i class="fas fa-sign-in-alt"></i>
-            </a></div>
-    </div>
-    <div *ngIf="userIsLogged()" class="">
-        <div class=""> <a class="" (click)="exit()">
-                Salir <i class="fa fa-sign-out-alt"></i>
-            </a></div>
-    </div>
-</nav>
- -->
 <mat-toolbar color="primary">
-    <button  class="example-icon" *ngIf="userIsLogged()">
-        <mat-icon>menu</mat-icon>
-    </button>
     <span>WOD </span>
     <mat-icon>construction</mat-icon>
     <span class="espacio"></span>
-    <div *ngIf="!userIsLogged()">
-        <button  class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
+    <div class="botones" *ngIf="!userIsLogged()">
+        <button class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
             <mat-icon>person_add</mat-icon>
         </button>
-        <button  class="example-icon" routerLink="../ingresar">INGRESAR
+        <button class="example-icon" routerLink="../ingresar">INGRESAR
             <mat-icon>login</mat-icon>
         </button></div>
     <div *ngIf="userIsLogged()">
-        <a (click)="exit()"> Salir <mat-icon>exit_to_app</mat-icon>
-        </a>
+        <a (click)="exit()"> Salir <mat-icon>exit_to_app</mat-icon>  </a>
     </div>
 </mat-toolbar>

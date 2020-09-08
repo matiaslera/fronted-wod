@@ -9,6 +9,10 @@
     padding: 1rem;
     margin-top: 0em;
 }
+.botones{
+    display: flex;
+    justify-content: space-evenly;
+}
 button{
     background-color: transparent;
     color: var(--color_cinco);

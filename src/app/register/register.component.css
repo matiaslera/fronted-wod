@@ -5,13 +5,20 @@
    box-shadow: 0 3px 6px  #eaeaea, 0 3px 6px  #08d9d6;
    display: flex;
    flex-flow: column nowrap;
+   margin: 11em auto 10.5em auto;
+   min-width: 250px;
+   max-width: 600px;
  }
-
+ 
 .form_titulo {
-    padding: 0.7em;
+    padding: 0.2em;
     display: flex;
     justify-content: center;
     color: var(--color_tres);
+    text-align: center;
+    font-size: 2em;
+    letter-spacing: 2px;
+    font-weight: bold;
   }
  
   .form_dato{
@@ -138,10 +145,9 @@
 }
 
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 320px) {
   .form {padding: 1.4em;
   font-size: 1em;
-  margin-top: 5px;
   } 
 .form_titulo{ font-size: 1.4em;}
   .form_dato{
@@ -150,4 +156,15 @@
   .botones button{
     font-size: 0.7em;
   }
+}
+
+@media screen and (max-width: 560px) {
+  .form {padding: 1.6em;
+  font-size: 1em;
+  margin: 7em 2em;
+  } 
+  .form_titulo{
+      font-size: 1.5em;
+  }
+
 }

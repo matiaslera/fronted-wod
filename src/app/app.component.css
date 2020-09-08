@@ -4,18 +4,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100%;
-    width: 100%;
 }
  .color_fondo{
-     background-color: white;
+     background-color: rgb(255, 194, 194);
  }
- .example-radio-group {
-    display: block;
-    border: 1px solid #555;
-    margin: 20px;
-    padding: 10px;
-  }
 
   .openbtn {
     cursor: pointer;
