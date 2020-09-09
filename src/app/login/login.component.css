@@ -45,7 +45,6 @@
     color: var(--color_tres,#08d9d6); 
     font-weight: bold;
     letter-spacing: 1px;
-    display: flex;
     margin-top: 1rem;
 }
 .form-control{
@@ -86,8 +85,13 @@
     text-align: center;
     background-color:var(--color_cuatro);
     color: var(--color_uno);
+    border: 0.2em solid black;
+    border-radius: 0.5em;
 }
 
+.label-inf{
+    margin-top:0.8em ;
+}
 @media screen and (max-width: 320px) {
     .contenedor {padding: 1.6em;
     font-size: 1em;

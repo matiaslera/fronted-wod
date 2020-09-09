@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
+import { AuthUserService } from '../services/auth/auth-user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  public user$: Observable<any> = this.authSvc.afAuth.user;
+  public login=true
+  constructor(public router: Router, private authSvc: AuthUserService) {}
 
-  constructor( private servicioUsuario:UsersService, public router: Router) {  
+  ngOnInit() {
+    
   }
 
-  ngOnInit(): void {
-    this.userIsLogged()
+  async exit() {
+    try {
+      await this.authSvc.logout();
+      this.router.navigate(['/ingresar']);
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  userIsLogged():boolean{
-    return this.servicioUsuario.logueado
-  }
-
-  exit(){
-    this.servicioUsuario.logueado =false
-    this.servicioUsuario.barra_lateral=false
-    this.userIsLogged()
-    this.router.navigateByUrl('ingresar');
-  }
- 
 }

@@ -7,17 +7,20 @@ import { HeaderComponent } from './header/header.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from './services/users.service';
 import { MessagesService } from './services/messages.service';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CookieService } from "ngx-cookie-service";
+import { CookieService } from 'ngx-cookie-service';
 import { ProfileComponent } from './profile/profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule } from './material.module'
-
+import { MaterialModule } from './material.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+import { AuthUserService } from './services/auth/auth-user.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import {MaterialModule } from './material.module'
     LoginComponent,
     RegisterComponent,
     NotfoundComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,10 +42,10 @@ import {MaterialModule } from './material.module'
     FontAwesomeModule,
     BrowserAnimationsModule,
     MaterialModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
-  providers: [UsersService, 
-    MessagesService,
-    CookieService],
-  bootstrap: [AppComponent]
+  providers: [UsersService, MessagesService, CookieService,AuthUserService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

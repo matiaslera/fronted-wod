@@ -7,6 +7,7 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
+import { AuthUserService } from '../services/auth/auth-user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public servicioUsuario: UsersService,
     public router: Router,
-    private formularioFB: FormBuilder
+    private formularioFB: FormBuilder,
+    private authSvc: AuthUserService
   ) {
     this.formulario = this.formularioFB.group({
       usuario: ['', Validators.required],
@@ -36,14 +38,18 @@ export class LoginComponent implements OnInit {
     return this.formulario.get('contrasenia');
   }
 
-  login() {
-    this.servicioUsuario.logueado = true;
-    this.router.navigateByUrl('perfil');
-    this.servicioUsuario.barra_lateral = true;
-    if (this.formulario.valid) {
-      console.log(this.formulario.value);
-    } else {
-      alert('FILL ALL FIELDS');
+  async login() {
+    const {usuario,contrasenia } = this.formulario.value
+    try{
+      const user=await this.authSvc.login(usuario,contrasenia)
+      if(user){
+        this.router.navigate(['/perfil']);
+      }
     }
+    catch(error){
+      console.log(error)
+    }
+    
+   
   }
 }

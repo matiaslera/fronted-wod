@@ -1,4 +1,4 @@
-<form class="form">
+<!-- <form class="form" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
   <h1 class="form_titulo">Crea una cuenta gratis</h1>
   <label class="form_dato">EMAIL</label>
   <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="Ingrese su Email"
@@ -13,7 +13,45 @@
   <input type="password" [(ngModel)]="confirmarContrasenia" [ngModelOptions]="{standalone: true}"
     placeholder="Ingrese de nuevo su contraseña" autocomplete="off" required />
   <div class="botones">
-    <button (click)="register()">REGISTRARSE COMO CLIENTE</button>
-    <button (click)="register()">REGISTRARSE COMO PROFESIONAL</button>
+    <button id="bt1">REGISTRARSE COMO CLIENTE</button>
+    <button id="bt2">REGISTRARSE COMO PROFESIONAL</button>
   </div>
+ 
+</form> -->
+
+<form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()">
+  <h1 class="form_titulo">Crea una cuenta gratis</h1>
+  <label class="form_dato">EMAIL</label>
+  <input type="email" formControlName="youEmail" placeholder="Ingrese su Email" autocomplete="off" required />
+  <div *ngIf="youEmail.invalid && (youEmail.dirty || youEmail.touched)" class="alert">
+    <div *ngIf="youEmail.errors.required"> Email requerido </div>
+    <div *ngIf="youEmail.errors.email"> Email es incorrecto </div>
+  </div>
+  <label class="form_dato">USUARIO</label>
+  <input type="text" formControlName="usuario" placeholder="Ingrese su usuario" autocomplete="off" required />
+  <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="alert">
+    <div *ngIf="usuario.errors.required"> Usuario requerido </div>
+  </div>
+  <label class="form_dato">CONTRASEÑA</label>
+  <input type="password" formControlName="contrasenia" placeholder="Ingrese su contraseña" autocomplete="off"
+    required />
+  <div *ngIf="contrasenia.invalid && (contrasenia.dirty || contrasenia.touched)" class="alert">
+    <div *ngIf="contrasenia.errors.required"> Contraseña requerido </div>
+    <div *ngIf="contrasenia.errors.minlength">Minimo 6 caracteres </div>
+  </div>
+  <label class="form_dato">CONFIRMAR CONTRASEÑA</label>
+  <input type="password" formControlName="confirmarContrasenia" placeholder="Ingrese de nuevo su contraseña"
+    autocomplete="off" required />
+  <div *ngIf="confirmarContrasenia.invalid && (confirmarContrasenia.dirty || confirmarContrasenia.touched)"
+    class="alert">
+    <div *ngIf="confirmarContrasenia.errors.required"> Contraseña requerido </div>
+    <div *ngIf="confirmarContrasenia.errors.minlength">Minimo 6 caracteres </div>
+    <div *ngIf="confirmarContrasenia.errors.notEquivalent">No son iguales</div>
+  </div>
+  <div class="botones">
+    <button type="submit" id="btn1" [disabled]="formulario.invalid">REGISTRARSE COMO CLIENTE</button>
+    <button type="submit" id="btn2" [disabled]="formulario.invalid">REGISTRARSE COMO PROFESIONAL</button>
+  </div>
+  <span class="label-inf">Tiene una cuenta <a class="form-control-label" [routerLink]="['/ingresar']">
+      Ingresar</a></span>
 </form>

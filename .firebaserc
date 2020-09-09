@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "workofday-873ba": {
+      "hosting": {
+        "frontend-wod": [
+          "workofday-873ba"
+        ]
+      }
+    }
+  }
+}

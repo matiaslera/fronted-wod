@@ -1,15 +1,18 @@
 <mat-toolbar color="primary">
+    <div></div>
     <span>WOD </span>
     <mat-icon>construction</mat-icon>
+    <span *ngIf="user$ | async as user">{{user?.email}}</span>
     <span class="espacio"></span>
-    <div class="botones" *ngIf="!userIsLogged()">
-        <button class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
-            <mat-icon>person_add</mat-icon>
-        </button>
-        <button class="example-icon" routerLink="../ingresar">INGRESAR
-            <mat-icon>login</mat-icon>
-        </button></div>
-    <div *ngIf="userIsLogged()">
-        <a (click)="exit()"> Salir <mat-icon>exit_to_app</mat-icon>  </a>
+        <ng-template #login class="botones">
+            <button class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
+                <mat-icon>person_add</mat-icon>
+            </button>
+            <button class="example-icon" routerLink="../ingresar">INGRESAR
+                <mat-icon>login</mat-icon>
+            </button>
+        </ng-template>
+    <div *ngIf="user$ | async as user; else login">
+        <a *ngIf="user" (click)="exit()"> Salir <mat-icon>exit_to_app</mat-icon> </a>
     </div>
 </mat-toolbar>

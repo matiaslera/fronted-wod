@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   { path: 'ingresar', component: LoginComponent, pathMatch: "full",
@@ -16,8 +15,9 @@ const routes: Routes = [
 },
   { path: "404", component: NotfoundComponent, pathMatch: "full" },
   { path: "registar", component: RegisterComponent, pathMatch: "full" },
-  { path: "perfil", component: ProfileComponent, pathMatch: "full" },
+  { path: "perfil", component: ProfileComponent, pathMatch: "full", canActivate: [AngularFireAuthGuard], },
   { path: "home", component: AppComponent, pathMatch: "full" },
+  
   /* { path: '**', redirectTo: '404', pathMatch: 'full' }, */
 ];
 
