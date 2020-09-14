@@ -29,6 +29,9 @@ button:hover{
     flex-wrap: wrap;
     font-weight: bold;
 }
+.user{
+    margin: auto 0.5em;
+}
 /*Angular Material*/
 .espacio {
     flex : 1  1 auto;

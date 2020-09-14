@@ -16,16 +16,16 @@ import { AuthUserService } from '../services/auth/auth-user.service';
 })
 export class LoginComponent implements OnInit {
   formulario: FormGroup;
+  noInicioSesion;
 
   constructor(
-    public servicioUsuario: UsersService,
     public router: Router,
     private formularioFB: FormBuilder,
     private authSvc: AuthUserService
   ) {
     this.formulario = this.formularioFB.group({
-      usuario: ['', Validators.required],
-      contrasenia: ['', [Validators.required, Validators.minLength(4)]],
+      usuario: ['',[Validators.required,Validators.email]],
+      contrasenia: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -39,17 +39,18 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
-    const {usuario,contrasenia } = this.formulario.value
-    try{
-      const user=await this.authSvc.login(usuario,contrasenia)
-      if(user){
+    const { usuario, contrasenia } = this.formulario.value;
+    try {
+      const user = await this.authSvc.login(usuario, contrasenia);
+      if (user) {
         this.router.navigate(['/perfil']);
       }
+      else{
+        this.noInicioSesion="No inicio sesion, reintente"
+        console.log( this.noInicioSesion)
+      }
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-    }
-    
-   
   }
 }

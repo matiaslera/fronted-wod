@@ -2,7 +2,6 @@
     <div></div>
     <span>WOD </span>
     <mat-icon>construction</mat-icon>
-    <span *ngIf="user$ | async as user">{{user?.email}}</span>
     <span class="espacio"></span>
         <ng-template #login class="botones">
             <button class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
@@ -13,6 +12,7 @@
             </button>
         </ng-template>
     <div *ngIf="user$ | async as user; else login">
+        <span class="user">{{user?.email}}</span>
         <a *ngIf="user" (click)="exit()"> Salir <mat-icon>exit_to_app</mat-icon> </a>
     </div>
 </mat-toolbar>
