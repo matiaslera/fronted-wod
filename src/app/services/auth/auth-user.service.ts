@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+
 import { auth } from 'firebase/app';
 import { User } from 'firebase';
 import { first } from 'rxjs/operators';
-import { Subject } from 'rxjs/internal/Subject';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
