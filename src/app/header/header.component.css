@@ -32,6 +32,13 @@ button:hover{
 .user{
     margin: auto 0.5em;
 }
+.icon{
+    display: flex;
+    align-items: center;
+}
+.logueado{
+    display: flex;
+}
 /*Angular Material*/
 .espacio {
     flex : 1  1 auto;

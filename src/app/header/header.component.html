@@ -4,15 +4,15 @@
     <mat-icon>construction</mat-icon>
     <span class="espacio"></span>
         <ng-template #login class="botones">
-            <button class="example-icon favorite-icon" routerLink="../registar">REGISTRARSE
+            <button class="icon favorite-icon" routerLink="../registar">REGISTRARSE
                 <mat-icon>person_add</mat-icon>
             </button>
-            <button class="example-icon" routerLink="../ingresar">INGRESAR
+            <button class="icon" routerLink="../ingresar">INGRESAR
                 <mat-icon>login</mat-icon>
             </button>
         </ng-template>
-    <div *ngIf="user$ | async as user; else login">
+    <div *ngIf="user$ | async as user; else login" class="logueado">
         <span class="user">{{user?.email}}</span>
-        <a *ngIf="user" (click)="exit()"> Salir <mat-icon>exit_to_app</mat-icon> </a>
+        <a *ngIf="user" (click)="exit()" class="icon"> Salir <mat-icon>exit_to_app</mat-icon> </a>
     </div>
 </mat-toolbar>

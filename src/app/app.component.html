@@ -6,6 +6,6 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="color_fondo">
-        <p *ngIf="barraLat()"><button type="button" class="openbtn" (click)="sidenav.toggle()">☰ MENU</button> </p>
+        <p *ngIf="user$ | async"><button type="button" class="openbtn" (click)="sidenav.toggle()">☰ MENU</button> </p>
         <router-outlet></router-outlet>
     </mat-sidenav-content>

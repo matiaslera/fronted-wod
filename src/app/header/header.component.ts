@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   public user$: Observable<any> = this.authSvc.afAuth.user;
-  public login=true
   constructor(public router: Router, private authSvc: AuthUserService) {}
 
   ngOnInit() {

@@ -3,14 +3,19 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { User } from 'firebase';
 import { first } from 'rxjs/operators';
+import { Subject } from 'rxjs/internal/Subject';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthUserService {
   public user: User;
+  public logueado: boolean;
 
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth) {
+    this.logueado = false;
+  }
 
   async login(email: string, password: string) {
     try {
@@ -18,6 +23,7 @@ export class AuthUserService {
         email,
         password
       );
+      this.logueado = true;
       return resultado;
     } catch (error) {
       console.log(error);
@@ -55,6 +61,7 @@ export class AuthUserService {
   async logout() {
     try {
       await this.afAuth.signOut();
+      this.logueado = false;
     } catch (error) {
       console.log(error);
     }
@@ -63,13 +70,13 @@ export class AuthUserService {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
 
-  async deleteUser(credential){
+  async deleteUser(credential) {
     try {
-      this.volverAutenticar(credential)
+      this.volverAutenticar(credential);
       var user = await this.userCurrent();
       user.delete();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -92,11 +99,10 @@ export class AuthUserService {
       console.log(error);
     }
   }
-  
 
   async updateEmail(nuevoEmail: string, credential) {
     try {
-      this.volverAutenticar(credential)
+      this.volverAutenticar(credential);
       var user = await this.userCurrent();
       user.updateEmail(nuevoEmail);
     } catch (error) {
@@ -104,9 +110,9 @@ export class AuthUserService {
     }
   }
 
-  async updatePassword(nuevaContraseña: string,credential) {
+  async updatePassword(nuevaContraseña: string, credential) {
     try {
-      this.volverAutenticar(credential)
+      this.volverAutenticar(credential);
       var user = await this.userCurrent();
       user.updatePassword(nuevaContraseña);
     } catch (error) {
@@ -114,9 +120,9 @@ export class AuthUserService {
     }
   }
 
-  async resetPassword(email:string){
+  async resetPassword(email: string) {
     try {
-      this.afAuth.sendPasswordResetEmail(email)
+      this.afAuth.sendPasswordResetEmail(email);
     } catch (error) {
       console.log(error);
     }
@@ -152,10 +158,10 @@ export class AuthUserService {
     }
   }
 
-  async volverAutenticar(credencial:auth.AuthCredential){
+  async volverAutenticar(credencial: auth.AuthCredential) {
     try {
       var user = await this.userCurrent();
-      user.reauthenticateWithCredential(credencial)
+      user.reauthenticateWithCredential(credencial);
     } catch (error) {
       console.log(error);
     }
