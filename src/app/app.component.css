@@ -1,4 +1,3 @@
-
 .container{
     top: 0;
     bottom: 0;
@@ -31,11 +30,3 @@
   .background{
       background-color: #455a64;
   }
-@media screen and (max-width: 360px) {
-  .c {
-    height: 591px;
-  }
-  .b {
-    height: 591px;
-  }
-}

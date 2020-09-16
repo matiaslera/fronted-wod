@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { AuthUserService } from './services/auth/auth-user.service';
+import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AuthUserService } from './services/auth/auth-user.service';
     RegisterComponent,
     NotfoundComponent,
     ProfileComponent,
+    ProfileUpdateComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../domain/user';
 
 
 @Component({
@@ -8,13 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  usuario=new Usuario()
+  constructor() {
+    this.usuario.apellido="gomez"
+    this.usuario.nombre="pepe"
+    this.usuario.alias="pepe_gomez"
+    this.usuario.email="pepe@hotmail.com"
+    this.usuario.dni=3658465
+    this.usuario.telefono=154789456
+    this.usuario.direccion="av siempre viva 123"
+   }
 
   ngOnInit(): void {
-    this.getUserLogged()
-  }
-
-  getUserLogged() {
     
   }
+
+
 }

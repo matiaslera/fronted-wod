@@ -1,24 +1,30 @@
-
 <div class="box">
-	<div class="perfil">
-		<!-- SIDEBAR USERPIC -->
-		<img src="../../assets/perfil01.jpg" class="imag" alt="">
-		<!-- END SIDEBAR USERPIC -->
-		<!-- SIDEBAR USER TITLE -->
-		<div class="profile-usertitle">
-			<div class="profile-usertitle-name ">  </div>
-			<div class="profile-usertitle-job">
-				Oscarcito20 <br>
-				San Jose, Frias 5001 <br>
-				43251678 <br>
-				oscarcito_gutierrez@gmail.com <br>
+	<mat-card class="perfil">
+		<img mat-card-image src="../../assets/perfil01.jpg" class="imag" alt="">
+		<mat-card-content class="perfil__label-cont">
+			<div class="perfil__linea">
+				<label class="perfil__label">Usuario: </label>
+				<label class="perfil__label-dato">{{usuario.alias}}</label>
 			</div>
-		</div>
-
-		<div class="profile-userbuttons">
-			<button type="button">Modificar</button>
-			<button type="button">Chat</button>
-		</div>
-
-	</div>
+			<div class="perfil__linea">
+				<label class="perfil__label">Email: </label>
+				<label class="perfil__label-dato">{{usuario.email}}</label>
+			</div>
+			<div class="perfil__linea" >   
+				<label class="perfil__label">Direccion: </label>
+				<label class="perfil__label-dato">{{usuario.direccion}}</label>
+			</div>
+			<div class="perfil__linea">
+				<label class="perfil__label">Telefono: </label>
+				<label class="perfil__label-dato">{{usuario.telefono}}</label>
+			</div>
+		</mat-card-content>
+		<mat-card-actions class="profile-userbuttons">
+			<button mat-raised-button color="accent" class="btn">Modificar</button>
+			<button mat-raised-button color="accent"  class="btn">Chat</button>
+		</mat-card-actions>
+	</mat-card>
 </div>
+<app-profile-update>
+	
+</app-profile-update>
