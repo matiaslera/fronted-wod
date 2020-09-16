@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../services/users.service';
 import { AuthUserService } from '../services/auth/auth-user.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { AuthUserService } from '../services/auth/auth-user.service';
 })
 export class NavegacionComponent implements OnInit {
 
-  constructor(private servicioUsuario:UsersService, private authSvc:AuthUserService) { }
+  constructor( private authSvc:AuthUserService) { }
 
   ngOnInit(): void {
     console.log("ejecutando ando")

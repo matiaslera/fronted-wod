@@ -3,16 +3,18 @@
     <span>WOD </span>
     <mat-icon>construction</mat-icon>
     <span class="espacio"></span>
-        <ng-template #login class="botones">
-            <button class="icon favorite-icon" routerLink="../registar">REGISTRARSE
-                <mat-icon>person_add</mat-icon>
-            </button>
-            <button class="icon" routerLink="../ingresar">INGRESAR
-                <mat-icon>login</mat-icon>
-            </button>
-        </ng-template>
+    <ng-template #login class="botones">
+        <button class="icon" routerLink="../registar">REGISTRARSE
+            <mat-icon>person_add</mat-icon>
+        </button>
+        <button class="icon" routerLink="../ingresar">INGRESAR
+            <mat-icon>login</mat-icon>
+        </button>
+    </ng-template>
     <div *ngIf="user$ | async as user; else login" class="logueado">
         <span class="user">{{user?.email}}</span>
-        <a *ngIf="user" (click)="exit()" class="icon"> Salir <mat-icon>exit_to_app</mat-icon> </a>
+        <button *ngIf="user" class="icon" (click)="exit()">Salir
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
     </div>
 </mat-toolbar>

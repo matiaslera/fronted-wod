@@ -1,34 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../services/users.service';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthUserService } from '../services/auth/auth-user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-
-  formulario: FormGroup = this.formularioFB.group({
-    usuario: ['', Validators.required],
-    youEmail: ['', [Validators.required, Validators.email]],
-    contrasenia: ['', [Validators.required, Validators.minLength(6)]],
-    confirmarContrasenia: [
-      '',
-      [Validators.required, Validators.minLength(4)],
-    ] },
-    {validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia'),
-  });
-  constructor(
-    public servicioUsuario: UsersService,
-    private formularioFB: FormBuilder,
-    public router: Router,
-    private authSvc:AuthUserService,
-  ) {
-    
-  }
+  formulario: FormGroup = this.formularioFB.group(
+    {
+      usuario: ['', Validators.required],
+      youEmail: ['', [Validators.required, Validators.email]],
+      contrasenia: ['', [Validators.required, Validators.minLength(6)]],
+      confirmarContrasenia: [
+        '',
+        [Validators.required, Validators.minLength(4)],
+      ],
+    },
+    { validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia') }
+  );
+  constructor( private formularioFB: FormBuilder,public router: Router,  private authSvc: AuthUserService) {}
 
   ngOnInit(): void {}
 
@@ -46,31 +44,28 @@ export class RegisterComponent implements OnInit {
   }
 
   async registerClient() {
-    const{youEmail,contrasenia} = this.formulario.value
-    try{
-      const user= this.authSvc.register(youEmail,contrasenia)
-      if(user){
-        this.router.navigate(['/perfil'])
+    const { youEmail, contrasenia } = this.formulario.value;
+    try {
+      const user = this.authSvc.register(youEmail, contrasenia);
+      if (user) {
+        this.router.navigate(['/perfil']);
       }
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-    }
-   
+
     console.log('se ingreso como Cliente');
-    
   }
 
   async registerProf() {
-    const{youEmail,contrasenia} = this.formulario.value
-    try{
-      const user= this.authSvc.register(youEmail,contrasenia)
-      if(user){
-        this.router.navigate(['/perfil'])
+    const { youEmail, contrasenia } = this.formulario.value;
+    try {
+      const user = this.authSvc.register(youEmail, contrasenia);
+      if (user) {
+        this.router.navigate(['/perfil']);
       }
-    }
-    catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
     console.log('se ingreso como Profesional');
   }
@@ -87,17 +82,16 @@ export class RegisterComponent implements OnInit {
     };
   }
 
-  onSubmit(){
-    var act=document.activeElement.id
+  onSubmit() {
+    var act = document.activeElement.id;
     console.log(document.activeElement.id);
-    if (act == "btn1") {
-      alert("you have clicked on submit 1");
-      this.registerClient()
+    if (act == 'btn1') {
+      alert('you have clicked on submit 1');
+      this.registerClient();
     }
-    if (act == "btn2") {
-      this.registerProf()
-      alert("you have clicked on submit 2");
+    if (act == 'btn2') {
+      this.registerProf();
+      alert('you have clicked on submit 2');
     }
   }
-
 }

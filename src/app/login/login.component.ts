@@ -15,7 +15,7 @@ import { AuthUserService } from '../services/auth/auth-user.service';
 })
 export class LoginComponent implements OnInit {
   formulario: FormGroup;
-  noInicioSesion;
+  noInicioSesion =false
 
   constructor(
     public router: Router,
@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/perfil']);
       }
       else{
-        this.noInicioSesion="No inicio sesion, reintente"
-        console.log( this.noInicioSesion)
+        this.noInicioSesion=true
       }
     } catch (error) {
       console.log(error);

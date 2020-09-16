@@ -8,8 +8,6 @@ import { NavegacionComponent } from './navegacion/navegacion.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UsersService } from './services/users.service';
-import { MessagesService } from './services/messages.service';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -45,7 +43,7 @@ import { AuthUserService } from './services/auth/auth-user.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
-  providers: [UsersService, MessagesService, CookieService,AuthUserService],
+  providers: [CookieService,AuthUserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

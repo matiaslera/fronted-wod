@@ -40,14 +40,15 @@
     justify-content: center;
     flex-direction: column;
 }
-.form-control-label{
+.form__label{
     font-size: 0.8em;
     color: var(--color_tres,#08d9d6); 
     font-weight: bold;
     letter-spacing: 1px;
-    margin-top: 1rem;
+    margin-top: 1em;
+    margin-bottom: 0.1em;
 }
-.form-control{
+.form__imput{
     display: block;
     width: 100%;
     border-radius: 0.5rem;
@@ -82,11 +83,13 @@
     box-shadow: 0 1px 3px var(--color_cyan-100), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 .alert{
-    text-align: center;
     background-color:var(--color_cuatro);
     color: var(--color_uno);
     border: 0.2em solid black;
     border-radius: 0.5em;
+    margin: 0.3em 0;
+    display: flex;
+    justify-content: center;
 }
 
 .label-inf{

@@ -18,6 +18,7 @@ button{
     color: var(--color_cinco);
     text-decoration:none;
     margin: 0.1rem;
+    font-size: 1.1em;
 }
 button:hover{
     border: 0.1em solid white;
@@ -43,3 +44,19 @@ button:hover{
 .espacio {
     flex : 1  1 auto;
  }
+
+ @media screen and (max-width: 290px) {
+    .mat-toolbar.mat-primary  {
+      width: 335px;
+    }
+    button{
+        font-size: 0.6em;
+    }
+  }
+
+  @media screen and (max-width: 580px) {
+   
+    button{
+        font-size: 0.8em;
+    }
+  }
