@@ -1,1 +1,91 @@
-<p>profile-update works!</p>
+<mat-card class="perfil">
+    <form [formGroup]="formulario" class="card__lat">
+        <mat-card-content class="perfil__label-cont">
+            <div class="perfil__linea ">
+                <label class="perfil__label">Nombre: </label>
+                <input type="text">
+            </div>
+            <div class="perfil__linea">
+                <label class="perfil__label">Apellido: </label>
+                <input type="text">
+            </div>
+            <div class="perfil__linea">
+                <label class="perfil__label">Usuario: </label>
+                <input type="text">
+            </div>
+            <div class="perfil__linea">
+                <label class="perfil__label">Fecha de Nacimiento: </label>
+                <input type="date">
+            </div>
+        </mat-card-content>
+        <mat-card-content class="perfil__label-cont">
+            <div class="perfil__linea">
+                <label class="perfil__label">Nacionalidad: </label>
+                <input type="text">
+            </div>
+            <div class="perfil__linea">
+                <label class="perfil__label">Calle: </label>
+                <input type="text">
+            </div>
+            <div class="perfil__linea">
+                <label class="perfil__label">Ciudad: </label>
+                <input type="text">
+            </div>
+            <div class="perfil__linea">
+                <label class="perfil__label">Provincia: </label>
+                <input type="text">
+            </div>
+        </mat-card-content>
+        <mat-card-content class="perfil__label-cont">
+            <div class="perfil__linea">
+                <label class="perfil__label">Email: </label>
+                <input matInput type="email">
+            </div>
+            <div class="perfil__linea">
+                <label class="perfil__label">Telefono: </label>
+                <input matInput>
+            </div>
+        </mat-card-content>
+    </form>
+    <mat-card-actions class="perfil__acc">
+        <button mat-raised-button color="accent" class="btn" (click)="accept()">Aceptar</button>
+        <button mat-raised-button color="accent" class="btn" (click)="cancelar.emit(false)">Cancelar</button>
+    </mat-card-actions>
+</mat-card>
+
+<!-- <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()">
+    <h1 class="form__titulo">Crea una cuenta gratis</h1>
+    <label class="form__label">EMAIL</label>
+    <input type="email" formControlName="youEmail" placeholder="Ingrese su Email" autocomplete="off" required />
+    <div *ngIf="youEmail.invalid && (youEmail.dirty || youEmail.touched)" class="alert">
+      <div *ngIf="youEmail.errors.required"> Email requerido </div>
+      <div *ngIf="youEmail.errors.email"> Email es incorrecto </div>
+    </div>
+    <label class="form__label">USUARIO</label>
+    <input type="text" formControlName="usuario" placeholder="Ingrese su usuario" autocomplete="off" required />
+    <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="alert">
+      <div *ngIf="usuario.errors.required"> Usuario requerido </div>
+    </div>
+    <label class="form__label">CONTRASEÑA</label>
+    <input type="password" formControlName="contrasenia" placeholder="Ingrese su contraseña" autocomplete="off"
+      required />
+    <div *ngIf="contrasenia.invalid && (contrasenia.dirty || contrasenia.touched)" class="alert">
+      <div *ngIf="contrasenia.errors.required"> Contraseña requerido </div>
+      <div *ngIf="contrasenia.errors.minlength">Minimo 6 caracteres </div>
+    </div>
+    <label class="form__label">CONFIRMAR CONTRASEÑA</label>
+    <input type="password" formControlName="confirmarContrasenia" placeholder="Ingrese de nuevo su contraseña"
+      autocomplete="off" required />
+    <div *ngIf="confirmarContrasenia.invalid && (confirmarContrasenia.dirty || confirmarContrasenia.touched)"
+      class="alert">
+      <div *ngIf="confirmarContrasenia.errors.required"> Contraseña requerido </div>
+      <div *ngIf="confirmarContrasenia.errors.minlength">Minimo 6 caracteres </div>
+      <div *ngIf="confirmarContrasenia.errors.notEquivalent">No son iguales</div>
+    </div>
+    <div class="botones">
+      <button type="submit" id="btn1" [disabled]="formulario.invalid">REGISTRARSE COMO CLIENTE</button>
+      <button type="submit" id="btn2" [disabled]="formulario.invalid">REGISTRARSE COMO PROFESIONAL</button>
+    </div>
+    <span class="label-inf">Tenés una cuenta? <a class="form__label" [routerLink]="['/ingresar']">
+        Ingresar</a></span>
+  </form> -->

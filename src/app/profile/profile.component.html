@@ -20,11 +20,12 @@
 			</div>
 		</mat-card-content>
 		<mat-card-actions class="profile-userbuttons">
-			<button mat-raised-button color="accent" class="btn">Modificar</button>
+			<button mat-raised-button color="accent" class="btn" (click)="modify()">Modificar</button>
 			<button mat-raised-button color="accent"  class="btn">Chat</button>
 		</mat-card-actions>
 	</mat-card>
 </div>
-<app-profile-update>
-	
-</app-profile-update>
+<div class="box" *ngIf="actualizar">
+	<app-profile-update (cancelar)="cancel($event)">
+	</app-profile-update>
+</div>

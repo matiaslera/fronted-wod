@@ -10,6 +10,7 @@ import { Usuario } from '../domain/user';
 export class ProfileComponent implements OnInit {
 
   usuario=new Usuario()
+  actualizar:boolean
   constructor() {
     this.usuario.apellido="gomez"
     this.usuario.nombre="pepe"
@@ -21,8 +22,14 @@ export class ProfileComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    this.actualizar=false
   }
 
+  modify(){
+    this.actualizar=true
+  }
 
+  cancel(condicion){
+    this.actualizar=condicion
+  }
 }
