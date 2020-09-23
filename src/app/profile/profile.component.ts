@@ -1,42 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../domain/user';
 import { AuthUserService } from '../services/auth/auth-user.service';
-
+import { Observable } from 'rxjs';
+import { User } from 'firebase';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
 
-  usuario=new Usuario()
-  actualizar:boolean
-  constructor(public serviceUser:AuthUserService) {
-    this.usuario.apellido="gomez"
-    this.usuario.nombre="pepe"
-    this.usuario.alias="pepe_gomez"
-    this.usuario.email="pepe@hotmail.com"
-    this.usuario.dni=3658465
-    this.usuario.telefono=154789456
-    this.usuario.direccion="av siempre viva 123"
-   }
+  public user$: Observable<any> = this.serviceUser.angularAuth.user; //esta conectado o no
+  usuario:User
+  fotoUrl:string;
+  actualizar: boolean;
+  constructor(public serviceUser: AuthUserService) {
+  }
 
   ngOnInit(): void {
-    this.actualizar=false
+    this.actualizar = false;
+    this.cargarUser();
+    this.foto()
   }
 
-  modify(){
-    this.actualizar=true
+  modify() {
+    this.actualizar = true;
   }
 
-  cancel(condicion){
-    this.actualizar=condicion
+  cancel(condicion) {
+    this.actualizar = condicion;
   }
 
-  async getUser(){
+  async cargarUser() {
     try {
-      return await this.serviceUser.userCurrent()
+      this.usuario = await this.serviceUser.angularAuth.currentUser
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async foto(){
+    const usuario = await this.serviceUser.angularAuth.currentUser
+    try {
+      if((usuario.photoURL)==null){
+        this.fotoUrl= "../../assets/perfil01.jpg"
+      }else{
+      this.fotoUrl= this.usuario.photoURL}
     } catch (error) {
       console.log(error)
     }

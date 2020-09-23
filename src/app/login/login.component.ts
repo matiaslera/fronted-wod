@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
     const { usuario, contrasenia } = this.formulario.value;
     try {
       await this.authSvc.login(usuario, contrasenia);
+      this.router.navigate(['/perfil']);
     } catch (error) {
       console.log(error);
     }
@@ -49,11 +50,7 @@ export class LoginComponent implements OnInit {
   async accessGoogle() {
     try {
       await this.authSvc.loginWithGoogle();
-      this.authSvc.logueado;
-      console.log('esta logueado:', this.authSvc.logueado);
-      if (this.authSvc.initApp()) {
         this.router.navigate(['/perfil']);
-      }
     } catch (error) {
       console.log(error);
     }

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public user$: Observable<any> = this.authSvc.afAuth.user;
+  public user$: Observable<any> = this.authSvc.angularAuth.user;
   constructor(public router: Router, private authSvc: AuthUserService) {}
 
   ngOnInit() {

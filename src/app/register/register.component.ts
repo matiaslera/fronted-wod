@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthUserService } from '../services/auth/auth-user.service';
 
@@ -26,7 +21,11 @@ export class RegisterComponent implements OnInit {
     },
     { validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia') }
   );
-  constructor( private formularioFB: FormBuilder,public router: Router,  private authSvc: AuthUserService) {}
+  constructor(
+    private formularioFB: FormBuilder,
+    public router: Router,
+    private auth: AuthUserService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -46,21 +45,22 @@ export class RegisterComponent implements OnInit {
   async registerClient() {
     const { youEmail, contrasenia } = this.formulario.value;
     try {
-      const user = this.authSvc.register(youEmail, contrasenia);
+      const user = this.auth.register(youEmail, contrasenia);
+      this.auth.cliente = true;
       if (user) {
         this.router.navigate(['/perfil']);
       }
     } catch (error) {
       console.log(error);
     }
-
     console.log('se ingreso como Cliente');
   }
 
   async registerProf() {
     const { youEmail, contrasenia } = this.formulario.value;
     try {
-      const user = this.authSvc.register(youEmail, contrasenia);
+      const user = this.auth.register(youEmail, contrasenia);
+      this.auth.tecnico = true;
       if (user) {
         this.router.navigate(['/perfil']);
       }
@@ -86,12 +86,10 @@ export class RegisterComponent implements OnInit {
     var act = document.activeElement.id;
     console.log(document.activeElement.id);
     if (act == 'btn1') {
-      alert('you have clicked on submit 1');
       this.registerClient();
     }
     if (act == 'btn2') {
       this.registerProf();
-      alert('you have clicked on submit 2');
     }
   }
 }

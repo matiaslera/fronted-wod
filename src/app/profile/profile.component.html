@@ -1,22 +1,22 @@
-<!-- <div class="box">
-	<mat-card class="perfil">
-		<img mat-card-image src="../../assets/perfil01.jpg" class="imag" alt="">
-		<mat-card-content class="perfil__label-cont" *ngIf="getUser() | async as user">
-			<div class="perfil__linea">
+<div class="box">
+	<mat-card class="perfil" >
+		<img   src="{{fotoUrl}}" class="imag" alt="No se encontro imagen">
+		<mat-card-content class="perfil__label-cont">
+			<div class="perfil__linea" *ngIf="user$ | async as user">
 				<label class="perfil__label">Nombre: </label>
-				<label class="perfil__label-dato">{{getUser()?.displayName}}</label>
+				<label class="perfil__label-dato">{{user?.displayName}}</label>
 			</div>
-			<div class="perfil__linea">
+			<div class="perfil__linea"*ngIf="user$ | async as user">
 				<label class="perfil__label">Email: </label>
-				<label class="perfil__label-dato">{{getUser()?.email}}</label>
+				<label class="perfil__label-dato">{{user?.email}}</label>
 			</div>
-			<div class="perfil__linea" >   
+			<div class="perfil__linea" *ngIf="user$ | async as user">   
 				<label class="perfil__label">Direccion: </label>
-				<label class="perfil__label-dato">{{usuario.direccion}}</label>
+				<!-- <label class="perfil__label-dato">{{user?.direccion}}</label> -->
 			</div>
 			<div class="perfil__linea">
 				<label class="perfil__label">Telefono: </label>
-				<label class="perfil__label-dato">{{usuario.telefono}}</label>
+				<!-- <label class="perfil__label-dato">{{user?.telefono}}</label> -->
 			</div>
 		</mat-card-content>
 		<mat-card-actions class="profile-userbuttons">
@@ -28,10 +28,10 @@
 <div class="box" *ngIf="actualizar">
 	<app-profile-update (cancelar)="cancel($event)">
 	</app-profile-update>
-</div> -->
-<div class="registrdo">
-	Holaaaaaaaaa estas registrado
-	<div class="perfil__label-cont" *ngIf="getUser() | async as user">
-	</div>
 </div>
-
+<!-- <div class="registrdo">
+	Holaaaaaaaaa estas registrado
+	<label class="">{{user?.email}}</label>
+	<label class="">{{user?.displayName}}</label>
+</div>
+ -->
