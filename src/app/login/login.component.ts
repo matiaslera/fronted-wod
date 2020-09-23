@@ -15,7 +15,7 @@ import { AuthUserService } from '../services/auth/auth-user.service';
 })
 export class LoginComponent implements OnInit {
   formulario: FormGroup;
-  noInicioSesion =false
+  noInicioSesion = false;
 
   constructor(
     public router: Router,
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authSvc: AuthUserService
   ) {
     this.formulario = this.formularioFB.group({
-      usuario: ['',[Validators.required,Validators.email]],
+      usuario: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -40,12 +40,19 @@ export class LoginComponent implements OnInit {
   async login() {
     const { usuario, contrasenia } = this.formulario.value;
     try {
-      const user = await this.authSvc.login(usuario, contrasenia);
-      if (user) {
+      await this.authSvc.login(usuario, contrasenia);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async accessGoogle() {
+    try {
+      await this.authSvc.loginWithGoogle();
+      this.authSvc.logueado;
+      console.log('esta logueado:', this.authSvc.logueado);
+      if (this.authSvc.initApp()) {
         this.router.navigate(['/perfil']);
-      }
-      else{
-        this.noInicioSesion=true
       }
     } catch (error) {
       console.log(error);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../domain/user';
+import { AuthUserService } from '../services/auth/auth-user.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class ProfileComponent implements OnInit {
 
   usuario=new Usuario()
   actualizar:boolean
-  constructor() {
+  constructor(public serviceUser:AuthUserService) {
     this.usuario.apellido="gomez"
     this.usuario.nombre="pepe"
     this.usuario.alias="pepe_gomez"
@@ -31,5 +32,13 @@ export class ProfileComponent implements OnInit {
 
   cancel(condicion){
     this.actualizar=condicion
+  }
+
+  async getUser(){
+    try {
+      return await this.serviceUser.userCurrent()
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

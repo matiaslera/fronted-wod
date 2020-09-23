@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   async exit() {
     try {
-      await this.authSvc.logout();
+      await this.authSvc.logOut();
       this.router.navigate(['/ingresar']);
     } catch (error) {
       console.log(error);

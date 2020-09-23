@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
 
     imports:[
@@ -16,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         MatRadioModule,
         MatInputModule,
         MatFormFieldModule,
+        MatCardModule,
     ],
 
     exports:[
@@ -26,6 +28,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         MatRadioModule,
         MatInputModule,
         MatFormFieldModule,
+        MatCardModule,
     ]
 })
 

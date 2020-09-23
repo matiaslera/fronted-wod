@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'frontend-wod';
   public user$: Observable<any> = this.user.afAuth.user;
   constructor(private user: AuthUserService) {
+    console.log('cambio del usuario:', this.user$)
   }
 
   ngOnInit() {
