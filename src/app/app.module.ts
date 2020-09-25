@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +18,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { AuthUserService } from './services/auth/auth-user.service';
 import { ProfileUpdateComponent } from './profile-update/profile-update.component';
+import { ResetPassComponent } from './compLogin/reset-pass/reset-pass.component';
+import { LoginComponent } from './compLogin/login/login.component';
+import { RegisterComponent } from './compLogin/register/register.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProfileUpdateComponent } from './profile-update/profile-update.componen
     NotfoundComponent,
     ProfileComponent,
     ProfileUpdateComponent,
+    ResetPassComponent,
   ],
   imports: [
     BrowserModule,

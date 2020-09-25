@@ -76,7 +76,7 @@
 .alert{
   text-align: center;
     background-color:var(--color_cuatro);
-    color: var(--color_uno);
+    color: var(--color_cinco);
     border: 0.2em solid black;
     border-radius: 0.5em;
 }

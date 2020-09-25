@@ -21,14 +21,18 @@
             <div *ngIf="contrasenia.errors.required"> Contraseña requerida </div>
             <div *ngIf="contrasenia.errors.minlength"> La contraseña debe contener 6 caracter</div>
         </div>
+        <div class="margin-top">
         <button #btn type="submit" class="btn-ingresar" [disabled]="formulario.invalid">INGRESAR</button>
         <div *ngIf=noInicioSesion class="alert"> No inicio sesion, reintente nuevamente</div>
         <div *ngIf="btn.invalid && (btn.dirty || btn.touched)" class="alert">
             Error: Ingrese los valores correspondiente
-            </div>
+        </div>
+    </div>
     </form>
     <button color="accent" class="google btn-ingresar" (click)="accessGoogle()"><span class="google-texto">Ingresar
             con</span> </button>
     <span class="label-inf">Deseas crear una cuenta?<a class="form__label" routerLink="/registar">
             Registrarse</a></span>
+    <span class="label-inf">Olvido su contraseña?<a class="form__label" routerLink="/resetear">
+            Haz click</a></span>
 </div>

@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { auth } from 'firebase/app';
-import { first } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/domain/user';
 import { Router } from '@angular/router';
+import { User, auth } from 'firebase/app';
+import { first } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { isUndefined, isNullOrUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthUserService {
-  public logueado: boolean;
   public tecnico: boolean;
   public cliente: boolean;
+  usuario: User;
 
   constructor(public angularAuth: AngularFireAuth, private router: Router) {
-    this.logueado = false;
     this.tecnico = false;
     this.cliente = false;
   }
@@ -27,7 +25,9 @@ export class AuthUserService {
       if (this.angularAuth.currentUser) {
         this.angularAuth.signOut();
       }
-      await this.angularAuth.signInWithEmailAndPassword(email, password);
+      const user = await this.angularAuth.signInWithEmailAndPassword( email, password);
+      this.usuario = null;
+      this.usuario = (await user).user;
     } catch (error) {
       console.log(error);
       var errorCode = error.code;
@@ -41,9 +41,12 @@ export class AuthUserService {
     }
   }
 
-  async register(email: string, password: string) {
+  async register(email: string, password: string,name:string) {
     try {
-      await this.angularAuth.createUserWithEmailAndPassword(email, password);
+      const user = await this.angularAuth.createUserWithEmailAndPassword( email, password);
+      this.updateName(name)
+      this.usuario = null;
+      this.usuario = (await user).user;
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -58,7 +61,7 @@ export class AuthUserService {
 
   async sendEmailVerification() {
     try {
-      await (await this.angularAuth.currentUser).sendEmailVerification();
+      (await this.angularAuth.currentUser).sendEmailVerification();
       alert('Email de Verificacion enviado!');
     } catch (error) {
       console.log(error);
@@ -72,48 +75,20 @@ export class AuthUserService {
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode == 'auth/invalid-email') {
-        alert(errorMessage);
+        alert("La direccion de email esta mal escrita");
       } else if (errorCode == 'auth/user-not-found') {
-        alert(errorMessage);
+        alert("El usuario no fue encontrado, reintente");
       }
       console.log(error);
     }
   }
 
-  async initApp() {
-    try {
-      this.angularAuth.onAuthStateChanged(function (user) {
-        if (user) {
-          // User is signed in.
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          console.log('Nombre:', displayName);
-          console.log('Email:', email);
-          console.log('Email verificado:', emailVerified);
-          console.log('Foto:', photoURL);
-          console.log('Es anonimo:', isAnonymous);
-          console.log('Uid :', uid);
-          console.log('Provedor:', providerData);
-        }
-      });
-    } catch (error) {}
-  }
-
   async logOut() {
     try {
       await this.angularAuth.signOut();
-      this.logueado = false;
     } catch (error) {
       console.log(error);
     }
-  }
-  getCurretUser() {
-    return this.angularAuth.authState.pipe(first()).toPromise();
   }
 
   async deleteUser(credential) {
@@ -127,10 +102,10 @@ export class AuthUserService {
   }
 
   async updateName(nombre: string) {
+    const user=await this.angularAuth.currentUser
     try {
-      var user = await this.userCurrent();
       user.updateProfile({
-        displayName: nombre,
+        displayName:nombre
       });
     } catch (error) {
       console.log(error);
@@ -144,6 +119,8 @@ export class AuthUserService {
         provider.addScope('profile');
         provider.addScope('email');
         const resultado = this.angularAuth.signInWithPopup(provider);
+        this.usuario = null;
+        this.usuario = (await resultado).user;
         // The signed-in user info
         console.log('nombre del usuario', (await resultado).user.displayName);
         console.log('email del usuario', (await resultado).user.email);
@@ -193,6 +170,10 @@ export class AuthUserService {
     }
   }
 
+  getCurretUser() {
+    return this.angularAuth.authState.pipe(first()).toPromise();
+  }
+
   async userCurrent() {
     try {
       return this.angularAuth.currentUser;
@@ -200,6 +181,7 @@ export class AuthUserService {
       console.log(error);
     }
   }
+
   async userActual() {
     try {
       this.angularAuth.onAuthStateChanged(function (user) {
@@ -212,7 +194,6 @@ export class AuthUserService {
           var isAnonymous = user.isAnonymous;
           var uid = user.uid;
           var providerData = user.providerData;
-          // ...
         } else {
           console.log('esta sin entrar');
         }
@@ -229,5 +210,29 @@ export class AuthUserService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async initApp() {
+    try {
+      this.angularAuth.onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          console.log('Nombre:', displayName);
+          console.log('Email:', email);
+          console.log('Email verificado:', emailVerified);
+          console.log('Foto:', photoURL);
+          console.log('Es anonimo:', isAnonymous);
+          console.log('Uid :', uid);
+          console.log('Provedor:', providerData);
+        }
+      });
+    } catch (error) {}
   }
 }

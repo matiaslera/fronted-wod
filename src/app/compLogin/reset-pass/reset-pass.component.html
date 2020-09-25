@@ -1,0 +1,15 @@
+<div class="contenedor">
+
+    <div class="login-key">
+        <div class=" titulo"> Recuperar tu cuenta </div>
+    </div>
+    <div class="login-form">
+        <label class="form__label">Introduce el correo electrónico para recuperar la cuenta.</label>
+        <input type="email" class="form__imput" autocomplete="off" placeholder="ingrese el email" required
+            [(ngModel)]="email">
+        <button type="button" class="btn-ingresar" (click)="recuperar()">Recuperar</button>
+        <div *ngIf="nota" class="label-inf">
+            Se ha enviado a su correo un codigo para restaurar la cuenta, revise su cuenta.
+        </div>
+    </div>
+</div>

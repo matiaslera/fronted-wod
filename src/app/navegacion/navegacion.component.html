@@ -1,4 +1,5 @@
-<div *ngIf="true">
+<div *ngIf="user$ | async">
+<div *ngIf="cliente">
   <div  class="barra_lat">
     <div class="linea"><a routerLink="perfil"> Perfil</a> <i class="far fa-user icon"></i> </div>
     <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon"> </i> </div>
@@ -18,4 +19,6 @@
     <div class="linea"><a href="#">Trabajo Finalizado</a> <i class="fas fa-toolbox icon"> </i> </div>
     <div class="linea"><a href="#"> Turnos</a> <i class="fas fa-file-contract icon"></i></div>
   </div>
+</div>
+
 </div>

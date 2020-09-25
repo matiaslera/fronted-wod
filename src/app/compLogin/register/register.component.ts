@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthUserService } from '../services/auth/auth-user.service';
+import { Observable } from 'rxjs';
+import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +10,14 @@ import { AuthUserService } from '../services/auth/auth-user.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  public user$: Observable<any> = this.auth.angularAuth.user;
   formulario: FormGroup = this.formularioFB.group(
     {
-      usuario: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
       youEmail: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarContrasenia: [
-        '',
-        [Validators.required, Validators.minLength(4)],
-      ],
+      confirmarContrasenia: ['', [Validators.required, Validators.minLength(4)],],
     },
     { validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia') }
   );
@@ -29,8 +29,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  get usuario() {
-    return this.formulario.get('usuario');
+  get nombre() {
+    return this.formulario.get('nombre');
+  }
+  get apellido() {
+    return this.formulario.get('apellido');
   }
   get youEmail() {
     return this.formulario.get('youEmail');
@@ -41,33 +44,35 @@ export class RegisterComponent implements OnInit {
   get contrasenia() {
     return this.formulario.get('contrasenia');
   }
-
-  async registerClient() {
+  register(){
     const { youEmail, contrasenia } = this.formulario.value;
-    try {
-      const user = this.auth.register(youEmail, contrasenia);
-      this.auth.cliente = true;
-      if (user) {
-        this.router.navigate(['/perfil']);
-      }
-    } catch (error) {
-      console.log(error);
+    this.auth.register(youEmail, contrasenia,this.matchWorlds());
+    if (this.user$) {
+      this.router.navigate(['/perfil']);
     }
+  }
+  async registerClient() {
+    try {
+      this.register()
+      this.auth.cliente = true;
+    } catch (error) {
+      console.log(error); }
     console.log('se ingreso como Cliente');
   }
 
   async registerProf() {
-    const { youEmail, contrasenia } = this.formulario.value;
     try {
-      const user = this.auth.register(youEmail, contrasenia);
+      this.register()
       this.auth.tecnico = true;
-      if (user) {
-        this.router.navigate(['/perfil']);
-      }
     } catch (error) {
-      console.log(error);
-    }
+      console.log(error);}
     console.log('se ingreso como Profesional');
+  }
+
+   matchWorlds(){
+    const { nombre, apellido } = this.formulario.value;
+    var resultado = nombre + " " + apellido
+    return resultado
   }
 
   matchingPasswords(password: string, passwordConfirmation: string) {

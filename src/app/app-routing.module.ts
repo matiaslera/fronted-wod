@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AuthUserService } from './services/auth/auth-user.service';
+import { ResetPassComponent } from './compLogin/reset-pass/reset-pass.component';
+import { LoginComponent } from './compLogin/login/login.component';
+import { RegisterComponent } from './compLogin/register/register.component';
 
 const routes: Routes = [
   { path: 'ingresar', component: LoginComponent, pathMatch: "full",
@@ -16,8 +17,9 @@ const routes: Routes = [
 },
   { path: "404", component: NotfoundComponent, pathMatch: "full" },
   { path: "registar", component: RegisterComponent, pathMatch: "full" },
-  { path: "perfil", component: ProfileComponent, pathMatch: "full" },
+  { path: "perfil", component: ProfileComponent, pathMatch: "full",canActivate: [AngularFireAuthGuard] },
   { path: "home", component: AppComponent, pathMatch: "full" },
+  { path: "resetear", component: ResetPassComponent, pathMatch: "full" },
   
   /* { path: '**', redirectTo: '404', pathMatch: 'full' }, */
 ];

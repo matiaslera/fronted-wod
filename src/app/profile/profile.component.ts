@@ -35,14 +35,14 @@ export class ProfileComponent implements OnInit {
 
   async cargarUser() {
     try {
-      this.usuario = await this.serviceUser.angularAuth.currentUser
+     this.usuario = await this.serviceUser.usuario
     } catch (error) {
       console.log(error)
     }
   }
 
   async foto(){
-    const usuario = await this.serviceUser.angularAuth.currentUser
+    const usuario = await this.serviceUser.usuario
     try {
       if((usuario.photoURL)==null){
         this.fotoUrl= "../../assets/perfil01.jpg"
