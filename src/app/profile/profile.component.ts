@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
     const usuario = await this.serviceUser.usuario
     try {
       if((usuario.photoURL)==null){
-        this.fotoUrl= "../../assets/perfil01.jpg"
+        this.fotoUrl= urlLocal
       }else{
       this.fotoUrl= this.usuario.photoURL}
     } catch (error) {
@@ -53,3 +53,5 @@ export class ProfileComponent implements OnInit {
     }
   }
 }
+
+export const urlLocal= "../../assets/perfil01.jpg"

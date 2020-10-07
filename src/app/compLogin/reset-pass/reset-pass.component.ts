@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
-import { not } from '@angular/compiler/src/output/output_ast';
 import { Observable, throwError } from 'rxjs';
-import { error } from 'protractor';
 
 @Component({
   selector: 'app-reset-pass',

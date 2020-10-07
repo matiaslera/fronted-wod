@@ -51,7 +51,7 @@ export class AuthUserService {
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode == 'auth/weak-password') {
-        alert('The password es demasiado debil.');
+        alert('La password es demasiado debil.');
       } else {
         alert(errorMessage);
       }

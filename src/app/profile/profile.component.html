@@ -1,16 +1,16 @@
-<div class="box">
+<div class="box" *ngIf="user$ | async as user else load">
 	<mat-card class="perfil" >
 		<img   src="{{fotoUrl}}" class="imag" alt="No se encontro imagen">
 		<mat-card-content class="perfil__label-cont">
-			<div class="perfil__linea" *ngIf="user$ | async as user">
+			<div class="perfil__linea" >
 				<label class="perfil__label">Nombre: </label>
 				<label class="perfil__label-dato">{{user?.displayName}}</label>
 			</div>
-			<div class="perfil__linea"*ngIf="user$ | async as user">
+			<div class="perfil__linea">
 				<label class="perfil__label">Email: </label>
 				<label class="perfil__label-dato">{{user?.email}}</label>
 			</div>
-			<div class="perfil__linea" *ngIf="user$ | async as user">   
+			<div class="perfil__linea" >   
 				<label class="perfil__label">Direccion: </label>
 				<!-- <label class="perfil__label-dato">{{user?.direccion}}</label> -->
 			</div>
@@ -29,3 +29,7 @@
 	<app-profile-update (cancelar)="cancel($event)">
 	</app-profile-update>
 </div>
+
+<ng-template #load style="color:black">
+Cargando....
+</ng-template>
