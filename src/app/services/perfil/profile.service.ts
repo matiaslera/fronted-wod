@@ -6,92 +6,86 @@ import { REST_SERVER_URL } from '../routes';
 import { isUndefined } from 'util';
 import { of } from 'rxjs/internal/observable/of';
 import { User } from 'firebase';
+import { Cliente } from 'src/app/domain/cliente';
+import { Profesional } from 'src/app/domain/profesional';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
+  profesionales: Profesional[];
+  clientes: Cliente[];
+  esCliente: boolean;
+  usuario: User;
 
-  profesionales:Usuario[]
-  clientes:Usuario[]
-  esCliente:boolean
-  usuario: User
-
-  constructor(private httpCLient: HttpClient,private authServ:AuthUserService) { 
-    this.update()
-    this.tipo()
+  constructor( private httpCLient: HttpClient) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  /*Leer un cliente*/
+  async getIdCliente(id: Number) {
+    const cliente = await this.httpCLient
+      .get<Cliente>(REST_SERVER_URL + '/getId_cli/' + id)
+      .toPromise();
+    return Cliente.fromJson(cliente);
   }
-
-  /*Creacion de un usuario*/
-  
-  /*Modificacion de un usuario*/
-  
-  /*Actualizar un dato del usuario*/
-
-  /*Eliminar un usuario o su dato*/ 
-  async getFullProfile(id:String ) {
-    return of (await this.httpCLient.get<Usuario>(REST_SERVER_URL + '/perfil_completo/' +id).toPromise())
+  /*Leer todos los clientes*/
+  async getClientes(): Promise<Cliente[]> {
+    const clientes = await this.httpCLient
+      .get<Cliente[]>(REST_SERVER_URL + '/get_cli')
+      .toPromise();
+    return clientes.map((user) => Cliente.fromJson(user));
   }
-
-  async getProfesionales(): Promise<Usuario[]> {
-     const profesionales2= (await this.httpCLient.get<Usuario[]>(REST_SERVER_URL + '/profesionales').toPromise())
-    return  profesionales2.map((pres) => Usuario.fromJson(pres))
+  /*Actualizar de un cliente*/
+  async actualizarCliente(cliente: Cliente) {
+    await this.httpCLient
+      .put(REST_SERVER_URL + '/update_cliente/' + cliente.id, cliente.toJSON())
+      .toPromise();
   }
-
-  async getClientes( ): Promise<Usuario[]> {
-      const clientes2= await this.httpCLient.get<Usuario[]>(REST_SERVER_URL + '/clientes').toPromise()
-     return clientes2.map((pres) => Usuario.fromJson(pres))
+  /*Creacion de un cliente*/
+  async crearCliente(cliente: Cliente) {
+    await this.httpCLient
+      .post(REST_SERVER_URL + '/create_cliente/' + cliente.id, cliente.toJSON())
+      .toPromise();
   }
-  async update(){
-    this.clientes=await this.getClientes()
-    this.profesionales=await this.getProfesionales()
-   // console.log(this.clientes.length)
-   // console.log(this.profesionales.length)
+  /*Eliminar un cliente*/
+  async eliminarCliente(cliente: Cliente) {
+    await this.httpCLient
+      .delete(REST_SERVER_URL + '/delete_cliente/' + cliente.id, cliente.toJSON())
+      .toPromise();
   }
-
-/* async getProf(): Promise<Usuario> {
-    return (await this.httpCLient.get<Usuario>(REST_SERVER_URL + '/profesional/'+this.getUser().id).toPromise())
- }
-
- async getCliente(): Promise<Usuario> {
- return (await this.httpCLient.get<Usuario>(REST_SERVER_URL + '/cliente/'+this.getUser().id).toPromise())
-}  */
-
- async getProfesional(id:number){
-  const json= await this.httpCLient.get<Usuario>(REST_SERVER_URL + '/profesional/'+id).toPromise();
-  console.log(json)
-  return   Usuario.fromJson(json)
- }
-
-  tipo(){
-    if(!isUndefined(this.clientes)){
-    /*  var listCli =this.clientes.filter(a=>a.id==this.user.getUser().id) 
-      if(listCli.length!==0){
-     this.esCliente=true
-    }  */
-    }
-    if(!isUndefined(this.profesionales)){
-      /*  var listPro =this.profesionales.filter(a=>a.id==this.user.getUser().id) 
-       if(listPro.length!==0){
-         this.esCliente=false
-    
-        }  */
-    }
-   }
-  
-   esProfesional():boolean{
-     return !this.esCliente
-   }
-
-   numClientes():number{
-          return this.profesionales.length
-   }
-
-   numProfe():number{
-    return  this.clientes.length
-  }
+/*Leer un Profesional*/
+async getIdProfesional(id: Number) {
+  const profesional = await this.httpCLient
+    .get<Profesional>(REST_SERVER_URL + '/getId_prof/' + id)
+    .toPromise();
+  return Profesional.fromJson(profesional);
+}
+/*Leer todos los Profesionals*/
+async getProfesionals(): Promise<Profesional[]> {
+  const profesionals = await this.httpCLient
+    .get<Profesional[]>(REST_SERVER_URL + '/get_pros')
+    .toPromise();
+  return profesionals.map((user) => Profesional.fromJson(user));
+}
+/*Actualizar de un Profesional*/
+async actualizarProfesional(profesional: Profesional) {
+  await this.httpCLient
+    .put(REST_SERVER_URL + '/update_profesional/', profesional.toJson())
+    .toPromise();
+}
+/*Creacion de un Profesional*/
+async crearProfesional(profesional: Profesional) {
+  await this.httpCLient
+    .post(REST_SERVER_URL + '/create_profesional/', profesional.toJson())
+    .toPromise();
+}
+/*Eliminar un Profesional*/
+async eliminarProfesional(profesional: Profesional) {
+  await this.httpCLient
+    .delete(REST_SERVER_URL + '/delete_profesional/' + profesional.id, profesional.toJson())
+    .toPromise();
+}
 
 }

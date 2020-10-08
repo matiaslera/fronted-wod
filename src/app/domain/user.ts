@@ -1,19 +1,15 @@
 export class Usuario {
-  alias: string;
-  nombre: string;
-  apellido: string;
-  email: string;
-  dni: number;
-  telefono: number;
-  direccion: string;
-
+	
   static fromJson(usuarioJSON): Usuario {
     return Object.assign(new Usuario(), usuarioJSON);
   }
 
-  constructor() {}
+  constructor(public uid?:string,public nombre?:string,
+    public apellido?:string,public email?:string,public dni?:number,
+    public fechaDeNacimiento?:Date,public telefono?:number, public fotoUrl?:string,
+    public proveedor?:string) {}
 }
-
+/* 
 export interface User {
   uid: string;
   email: string;
@@ -21,3 +17,4 @@ export interface User {
   displayName?: string;
   myCustomData?: string;
 }
+ */
