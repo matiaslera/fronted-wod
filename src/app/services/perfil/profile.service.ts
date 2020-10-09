@@ -40,19 +40,21 @@ export class ProfileService {
   /*Actualizar de un cliente*/
   async actualizarCliente(cliente: Cliente) {
     await this.httpCLient
-      .put(REST_SERVER_URL + '/update_cliente/' + cliente.id, cliente.toJSON())
+      .put(REST_SERVER_URL + '/update_cliente' + cliente.id, cliente.toJSON())
       .toPromise();
   }
   /*Creacion de un cliente*/
   async crearCliente(cliente: Cliente) {
+    console.log(cliente)
+    console.log(cliente.toJSON())
     await this.httpCLient
-      .post(REST_SERVER_URL + '/create_cliente/' + cliente.id, cliente.toJSON())
+      .post(REST_SERVER_URL + '/create_cliente', cliente.toJSON())
       .toPromise();
   }
   /*Eliminar un cliente*/
   async eliminarCliente(cliente: Cliente) {
     await this.httpCLient
-      .delete(REST_SERVER_URL + '/delete_cliente/' + cliente.id, cliente.toJSON())
+      .delete(REST_SERVER_URL + '/delete_cliente' + cliente.id, cliente.toJSON())
       .toPromise();
   }
 /*Leer un Profesional*/
@@ -72,19 +74,19 @@ async getProfesionals(): Promise<Profesional[]> {
 /*Actualizar de un Profesional*/
 async actualizarProfesional(profesional: Profesional) {
   await this.httpCLient
-    .put(REST_SERVER_URL + '/update_profesional/', profesional.toJson())
+    .put(REST_SERVER_URL + '/update_profesional', profesional.toJson())
     .toPromise();
 }
 /*Creacion de un Profesional*/
 async crearProfesional(profesional: Profesional) {
   await this.httpCLient
-    .post(REST_SERVER_URL + '/create_profesional/', profesional.toJson())
+    .post(REST_SERVER_URL + '/create_profesional', profesional.toJson())
     .toPromise();
 }
 /*Eliminar un Profesional*/
 async eliminarProfesional(profesional: Profesional) {
   await this.httpCLient
-    .delete(REST_SERVER_URL + '/delete_profesional/' + profesional.id, profesional.toJson())
+    .delete(REST_SERVER_URL + '/delete_profesional' + profesional.id, profesional.toJson())
     .toPromise();
 }
 

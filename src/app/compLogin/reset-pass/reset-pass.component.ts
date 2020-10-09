@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-pass',
@@ -9,17 +10,14 @@ import { Observable, throwError } from 'rxjs';
 })
 export class ResetPassComponent implements OnInit {
   email: string;
-  nota: boolean;
   error: Observable<any>;
-  constructor(private auth: AuthUserService) {
-    this.nota = false;
-  }
+  constructor(private auth: AuthUserService,public router: Router) {}
 
   ngOnInit(): void {}
 
   async recuperar() {
-      await this.auth.sendPasswordReset(this.email).
-      then( (valor) => this.nota=false,(valor)=>{this.nota=true, this.error=valor})
+      await this.auth.sendPasswordReset(this.email)
+      this.router.navigate(['/login']);
   }
 
 }

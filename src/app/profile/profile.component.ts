@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { User } from 'firebase';
 import { isNullOrUndefined } from 'util';
 
+function mostrarError(component, error) {
+  const errorMessage = (error.status === 0) ? 'No hay conexión con el backend, revise si el servidor remoto está levantado.' : error.error
+  component.errors.push(errorMessage)
+}
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,15 +19,17 @@ export class ProfileComponent implements OnInit {
 
   public user$: Observable<any> = this.serviceUser.angularAuth.user; //esta conectado o no
   usuario:User
-  fotoUrl:string;
+  fotoUrl:string="";
   actualizar: boolean;
-  constructor(public serviceUser: AuthUserService) {
-  }
+  errors = []
+
+  constructor(public serviceUser: AuthUserService) {}
 
   ngOnInit(): void {
     this.actualizar = false;
     this.cargarUser();
     this.foto()
+    /*tengo que cargar el uid del usuario para pasarlo a mysql*/ 
   }
 
   modify() {
@@ -38,18 +45,20 @@ export class ProfileComponent implements OnInit {
      this.usuario = await this.serviceUser.usuario
     } catch (error) {
       console.log(error)
+      mostrarError(this,error)
     }
   }
 
   async foto(){
     const usuario = await this.serviceUser.usuario
     try {
-      if((usuario.photoURL)==null){
+      if((usuario.photoURL)==null || this.fotoUrl !==""){
         this.fotoUrl= urlLocal
       }else{
       this.fotoUrl= this.usuario.photoURL}
     } catch (error) {
       console.log(error)
+      mostrarError(this,error)
     }
   }
 }

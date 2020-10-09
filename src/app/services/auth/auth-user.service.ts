@@ -23,11 +23,10 @@ export class AuthUserService {
   async login(email: string, password: string) {
     try {
       if (this.angularAuth.currentUser) {
-        this.angularAuth.signOut();
-      }
+        this.angularAuth.signOut(); }
       const user = await this.angularAuth.signInWithEmailAndPassword( email, password);
       this.usuario = null;
-      this.usuario = (await user).user;
+      this.usuario =  user.user;
     } catch (error) {
       console.log(error);
       var errorCode = error.code;
@@ -46,7 +45,8 @@ export class AuthUserService {
       const user = await this.angularAuth.createUserWithEmailAndPassword( email, password);
       this.updateName(name)
       this.usuario = null;
-      this.usuario = (await user).user;
+      this.usuario = user.user;
+      console.log("este es el usuario",this.usuario)
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;

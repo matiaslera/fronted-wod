@@ -3,7 +3,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
+import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { Cliente } from 'src/app/domain/cliente';
+import { Profesional } from 'src/app/domain/profesional';
+import { Usuario, Tipo } from 'src/app/domain/user';
 
+function mostrarError(component, error) {
+  const errorMessage =
+    error.status === 0
+      ? 'No hay conexión con el backend, revise si el servidor remoto está levantado.'
+      : error.error;
+  component.errors.push(errorMessage);
+}
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,21 +22,22 @@ import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 })
 export class RegisterComponent implements OnInit {
   public user$: Observable<any> = this.auth.angularAuth.user;
+  cliente: Cliente;
+  profesional: Profesional;
+  errors = [];
   formulario: FormGroup = this.formularioFB.group(
     {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       youEmail: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarContrasenia: ['', [Validators.required, Validators.minLength(4)],],
+      confirmarContrasenia: ['',[Validators.required, Validators.minLength(4)],
+      ],
     },
     { validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia') }
   );
-  constructor(
-    private formularioFB: FormBuilder,
-    public router: Router,
-    private auth: AuthUserService
-  ) {}
+  constructor(private formularioFB: FormBuilder,public router: Router,
+    private auth: AuthUserService,private perfilSer: ProfileService) {}
 
   ngOnInit(): void {}
 
@@ -44,35 +56,58 @@ export class RegisterComponent implements OnInit {
   get contrasenia() {
     return this.formulario.get('contrasenia');
   }
-  register(){
+  async register() {
     const { youEmail, contrasenia } = this.formulario.value;
-    this.auth.register(youEmail, contrasenia,this.matchWorlds());
+    await this.auth.register(youEmail, contrasenia, this.matchWorlds());
     if (this.user$) {
       this.router.navigate(['/perfil']);
     }
   }
   async registerClient() {
     try {
-      this.register()
-      this.auth.cliente = true;
+      this.register();
+      this.crearCliente();
+      console.log("cliente creado",this.cliente)
+      await this.perfilSer.crearCliente(this.cliente);
     } catch (error) {
-      console.log(error); }
+      console.log(error);
+      mostrarError(this, error);
+    }
     console.log('se ingreso como Cliente');
   }
 
+  crearCliente() {
+    var user = this.crearUser(Tipo.CLIENTE)
+    this.cliente = new Cliente();
+    this.cliente.usuario = user;
+  }
   async registerProf() {
     try {
-      this.register()
-      this.auth.tecnico = true;
+      this.register();
     } catch (error) {
-      console.log(error);}
+      console.log(error);
+      mostrarError(this, error);
+    }
     console.log('se ingreso como Profesional');
   }
+  crearProfesional() {
+    var user = this.crearUser(Tipo.PROFESIONAL)
+    this.profesional = new Profesional();
+    this.profesional.usuario = user;
+  }
 
-   matchWorlds(){
+  crearUser(tipo:Tipo){
+    let user = new Usuario();
+    user.email = this.formulario.get('youEmail').value;
+    user.nombre = this.formulario.get('nombre').value;
+    user.apellido = this.formulario.get('apellido').value;
+    user.tipo=tipo
+    return user
+  }
+  matchWorlds() {
     const { nombre, apellido } = this.formulario.value;
-    var resultado = nombre + " " + apellido
-    return resultado
+    var resultado = nombre + ' ' + apellido;
+    return resultado;
   }
 
   matchingPasswords(password: string, passwordConfirmation: string) {
@@ -98,3 +133,95 @@ export class RegisterComponent implements OnInit {
     }
   }
 }
+/**
+ * class Celiaco {
+  descripcion = 'Celiaco'
+
+  esSubsanada(usuario: Usuario): boolean {
+    return true
+  }
+}
+
+class Diabetico {
+  descripcion = 'Diabetico'
+
+  esSubsanada(usuario: Usuario): boolean {
+    return usuario.tieneRutina(ACTIVA) || usuario.pesoMenorA(70)
+  }
+}
+
+class Hipertenso {
+  descripcion = 'Hipertenso'
+
+  esSubsanada(usuario: Usuario): boolean {
+    return usuario.tieneRutina(INTENSA)
+  }
+}
+
+class Vegano {
+  descripcion = 'Vegano'
+
+  esSubsanada(usuario: Usuario): boolean {
+    return usuario.cantidadDeAlimentosPreferidos(GrupoAlimenticio.HORTALIZAS_FRUTAS_SEMILLAS, 2)
+  }
+}
+
+class Vegetariano {
+  descripcion = 'Vegetariano'
+
+  esSubsanada(usuario: Usuario): boolean {
+    return usuario.esMenorDe(30) || !usuario.cantidadDeAlimentosPreferidos(GrupoAlimenticio.ACEITES_GRASAS_AZUCARES, 1)
+  }
+}
+
+export const condicionFromJSON = (condicion: string) => {
+  if (condicion === 'Celiaco') { return CELIACO }
+  if (condicion === 'Diabetico') { return DIABETICO }
+  if (condicion === 'Hipertenso') { return HIPERTENSO }
+  if (condicion === 'Vegano') { return VEGANO }
+  if (condicion === 'Vegetariano') { return VEGETARIANO }
+}
+
+export const condicionToJSON = (condicion: Condicion) => {
+  return {
+    type: condicion.descripcion,
+    condicionAlimenticia: condicion.descripcion
+  }
+}
+
+export enum GrupoAlimenticio {
+  HORTALIZAS_FRUTAS_SEMILLAS,
+  CEREALES_LEGUMBRES_DERIVADOS,
+  LACTEOS_DERIVADOS,
+  CARNES_PESCADO_HUEVO,
+  ACEITES_GRASAS_AZUCARES
+}
+
+export const grupoAlimenticioFromString = (grupo: string) => {
+  if (grupo === 'HORTALIZAS_FRUTAS_SEMILLAS') {
+    return GrupoAlimenticio.HORTALIZAS_FRUTAS_SEMILLAS
+  }
+  if (grupo === 'CEREALES_LEGUMBRES_DERIVADOS') {
+    return GrupoAlimenticio.CEREALES_LEGUMBRES_DERIVADOS
+  }
+  if (grupo === 'LACTEOS_DERIVADOS') {
+    return GrupoAlimenticio.LACTEOS_DERIVADOS
+  }
+  if (grupo === 'CARNES_PESCADO_HUEVO') {
+    return GrupoAlimenticio.CARNES_PESCADO_HUEVO
+  }
+  if (grupo === 'ACEITES_GRASAS_AZUCARES') {
+    return GrupoAlimenticio.ACEITES_GRASAS_AZUCARES
+  }
+}
+
+export type Condicion = Celiaco | Diabetico | Hipertenso | Vegano | Vegetariano
+
+export const CELIACO = new Celiaco()
+export const DIABETICO = new Diabetico()
+export const HIPERTENSO = new Hipertenso()
+export const VEGANO = new Vegano()
+export const VEGETARIANO = new Vegetariano()
+
+export const Condiciones = [CELIACO, DIABETICO, HIPERTENSO, VEGANO, VEGETARIANO]
+ */
