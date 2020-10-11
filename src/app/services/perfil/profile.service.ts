@@ -15,8 +15,10 @@ import { Profesional } from 'src/app/domain/profesional';
 export class ProfileService {
   profesionales: Profesional[];
   clientes: Cliente[];
-  esCliente: boolean;
-  usuario: User;
+  cliente:Cliente=null;
+  profesional:Profesional=null;
+  esCliente: boolean=false;
+  esProfesional: boolean=false;
 
   constructor( private httpCLient: HttpClient) {
   }
@@ -29,6 +31,12 @@ export class ProfileService {
       .get<Cliente>(REST_SERVER_URL + '/getId_cli/' + id)
       .toPromise();
     return Cliente.fromJson(cliente);
+  }
+  async getCliente(email: Usuario) {
+    const clienteFind = await this.httpCLient
+      .get<Cliente>(REST_SERVER_URL + '/get_emailCli',email.toJSON())
+      .toPromise();
+    return Cliente.fromJson(clienteFind);
   }
   /*Leer todos los clientes*/
   async getClientes(): Promise<Cliente[]> {
@@ -50,6 +58,8 @@ export class ProfileService {
     await this.httpCLient
       .post(REST_SERVER_URL + '/create_cliente', cliente.toJSON())
       .toPromise();
+      this.esCliente=true
+      this.cliente=cliente
   }
   /*Eliminar un cliente*/
   async eliminarCliente(cliente: Cliente) {
@@ -74,20 +84,24 @@ async getProfesionals(): Promise<Profesional[]> {
 /*Actualizar de un Profesional*/
 async actualizarProfesional(profesional: Profesional) {
   await this.httpCLient
-    .put(REST_SERVER_URL + '/update_profesional', profesional.toJson())
+    .put(REST_SERVER_URL + '/update_profesional', profesional.toJSON())
     .toPromise();
 }
 /*Creacion de un Profesional*/
 async crearProfesional(profesional: Profesional) {
   await this.httpCLient
-    .post(REST_SERVER_URL + '/create_profesional', profesional.toJson())
+    .post(REST_SERVER_URL + '/create_profesional', profesional.toJSON())
     .toPromise();
 }
 /*Eliminar un Profesional*/
 async eliminarProfesional(profesional: Profesional) {
   await this.httpCLient
-    .delete(REST_SERVER_URL + '/delete_profesional' + profesional.id, profesional.toJson())
+    .delete(REST_SERVER_URL + '/delete_profesional' + profesional.id, profesional.toJSON())
     .toPromise();
 }
 
+}
+
+class JsonEmail{
+  email:String
 }

@@ -15,7 +15,7 @@ export class Profesional {
     return Object.assign(new Profesional(), usuarioJSON);
   }
 
-  toJson(): any {
+  toJSON(): any {
     return {
       ...this,
       //agregar datos que no quiero enviar

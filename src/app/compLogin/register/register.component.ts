@@ -59,9 +59,6 @@ export class RegisterComponent implements OnInit {
   async register() {
     const { youEmail, contrasenia } = this.formulario.value;
     await this.auth.register(youEmail, contrasenia, this.matchWorlds());
-    if (this.user$) {
-      this.router.navigate(['/perfil']);
-    }
   }
   async registerClient() {
     try {
@@ -69,6 +66,9 @@ export class RegisterComponent implements OnInit {
       this.crearCliente();
       console.log("cliente creado",this.cliente)
       await this.perfilSer.crearCliente(this.cliente);
+      if (this.user$) {
+        this.router.navigate(['/perfil']);
+      }
     } catch (error) {
       console.log(error);
       mostrarError(this, error);

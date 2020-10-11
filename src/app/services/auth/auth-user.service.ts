@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { Router } from '@angular/router';
 import { User, auth } from 'firebase/app';
 import { first } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -13,9 +12,9 @@ import { isUndefined, isNullOrUndefined } from 'util';
 export class AuthUserService {
   public tecnico: boolean;
   public cliente: boolean;
-  usuario: User;
+  usuario: User =null;
 
-  constructor(public angularAuth: AngularFireAuth, private router: Router) {
+  constructor(public angularAuth: AngularFireAuth) {
     this.tecnico = false;
     this.cliente = false;
   }
@@ -44,7 +43,6 @@ export class AuthUserService {
     try {
       const user = await this.angularAuth.createUserWithEmailAndPassword( email, password);
       this.updateName(name)
-      this.usuario = null;
       this.usuario = user.user;
       console.log("este es el usuario",this.usuario)
     } catch (error) {
