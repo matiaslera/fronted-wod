@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Usuario } from 'src/app/domain/user';
+import { Injectable, Type } from '@angular/core';
+import { Usuario, UserFB } from 'src/app/domain/user';
 import { HttpClient } from '@angular/common/http';
-import { AuthUserService } from '../auth/auth-user.service';
 import { REST_SERVER_URL } from '../routes';
-import { isUndefined } from 'util';
 import { of } from 'rxjs/internal/observable/of';
 import { User } from 'firebase';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
 
+//export Type const TIPO =Cliente|Profesional
+export type Condicion=Cliente|Profesional
 @Injectable({
   providedIn: 'root',
 })
@@ -19,6 +19,7 @@ export class ProfileService {
   profesional:Profesional=null;
   esCliente: boolean=false;
   esProfesional: boolean=false;
+  tipo:Condicion
 
   constructor( private httpCLient: HttpClient) {
   }
@@ -32,11 +33,18 @@ export class ProfileService {
       .toPromise();
     return Cliente.fromJson(cliente);
   }
-  async getCliente(email: Usuario) {
-    const clienteFind = await this.httpCLient
-      .get<Cliente>(REST_SERVER_URL + '/get_emailCli',email.toJSON())
+  async getIdUltimoCli() {
+    const id_ultimo= await this.httpCLient
+      .get<number>(REST_SERVER_URL + '/get_id_ultimo')
       .toPromise();
-    return Cliente.fromJson(clienteFind);
+    return  id_ultimo
+  }
+  async getEmailCli(user:UserFB) {
+    var as='asas'
+    const usuario= await this.httpCLient
+      .post<UserFB>(REST_SERVER_URL + '/get_email_cli',as)
+      .toPromise();
+    return UserFB.fromJson(usuario)
   }
   /*Leer todos los clientes*/
   async getClientes(): Promise<Cliente[]> {
@@ -45,6 +53,7 @@ export class ProfileService {
       .toPromise();
     return clientes.map((user) => Cliente.fromJson(user));
   }
+  
   /*Actualizar de un cliente*/
   async actualizarCliente(cliente: Cliente) {
     await this.httpCLient
@@ -58,8 +67,6 @@ export class ProfileService {
     await this.httpCLient
       .post(REST_SERVER_URL + '/create_cliente', cliente.toJSON())
       .toPromise();
-      this.esCliente=true
-      this.cliente=cliente
   }
   /*Eliminar un cliente*/
   async eliminarCliente(cliente: Cliente) {
@@ -100,8 +107,4 @@ async eliminarProfesional(profesional: Profesional) {
     .toPromise();
 }
 
-}
-
-class JsonEmail{
-  email:String
 }

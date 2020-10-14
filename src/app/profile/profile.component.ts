@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../domain/user';
+import { UserFB,  } from '../domain/user';
 import { AuthUserService } from '../services/auth/auth-user.service';
 import { Observable } from 'rxjs';
 import { User } from 'firebase';
-import { isNullOrUndefined } from 'util';
+
 import { ProfileService } from '../services/perfil/profile.service';
 import { Profesional } from '../domain/profesional';
 import { Cliente } from '../domain/cliente';
@@ -31,10 +31,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.actualizar = false;
-    this.cargarUser();
-    
-    console.log("usuario service current user",)
-    console.log("usuario service solo user",this.authServ.angularAuth.user)
+    //this.cargarUser();
+    this.recuperarUserFB()
     console.log("usuario bd",this.usuarioBD)
     this.foto()
     /*tengo que cargar el uid del usuario para pasarlo a mysql*/ 
@@ -50,16 +48,23 @@ export class ProfileComponent implements OnInit {
 
   async cargarUser() {
     try {
-      var user=new Usuario()
-      var a=await this.authServ.angularAuth.currentUser
-      var b=await this.authServ.angularAuth.user
-      user.email=a.email
-      
-     this.usuario =  await this.authServ.angularAuth.currentUser
-     //this.usuarioBD = await this.perfilSer.getCliente(this.perfilSer.cliente.usuario.email)
-     let usuarioBD2=await this.perfilSer.getCliente(user)
-     this.usuarioBD.usuario.uid=this.usuario.uid
-     //await this.perfilSer.actualizarCliente(usuarioBD2)
+      console.log("asadasda")
+    } catch (error) {
+      console.log(error)
+      mostrarError(this,error)
+    }
+  }
+  async recuperarUserFB() {
+    try {
+      var usuario=new UserFB()
+      await this.authServ.angularAuth.onAuthStateChanged( function(user) {
+        if (user) {
+         usuario.email=user.email
+         usuario.providerId=user.providerId
+         usuario.uid=user.uid
+        } 
+      })
+      console.log(usuario)
     } catch (error) {
       console.log(error)
       mostrarError(this,error)

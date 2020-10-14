@@ -22,7 +22,7 @@ function mostrarError(component, error) {
 })
 export class RegisterComponent implements OnInit {
   public user$: Observable<any> = this.auth.angularAuth.user;
-  cliente: Cliente;
+  cliente: Cliente = new Cliente()
   profesional: Profesional;
   errors = [];
   formulario: FormGroup = this.formularioFB.group(
@@ -63,9 +63,7 @@ export class RegisterComponent implements OnInit {
   async registerClient() {
     try {
       this.register();
-      this.crearCliente();
-      console.log("cliente creado",this.cliente)
-      await this.perfilSer.crearCliente(this.cliente);
+      await this.perfilSer.crearCliente(await this.crearCliente());
       if (this.user$) {
         this.router.navigate(['/perfil']);
       }
@@ -76,10 +74,11 @@ export class RegisterComponent implements OnInit {
     console.log('se ingreso como Cliente');
   }
 
-  crearCliente() {
+  async crearCliente() {
+    const id=await this.perfilSer.getIdUltimoCli()
     var user = this.crearUser(Tipo.CLIENTE)
-    this.cliente = new Cliente();
     this.cliente.usuario = user;
+    return this.cliente
   }
   async registerProf() {
     try {
