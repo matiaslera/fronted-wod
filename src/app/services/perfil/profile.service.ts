@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Usuario, UserFB } from 'src/app/domain/user';
 import { HttpClient } from '@angular/common/http';
 import { REST_SERVER_URL } from '../routes';
@@ -17,9 +17,10 @@ export class ProfileService {
   clientes: Cliente[];
   cliente:Cliente=null;
   profesional:Profesional=null;
-  esCliente: boolean=false;
   esProfesional: boolean=false;
-  tipo:Condicion
+  esCliente: boolean=false;
+  usuarioBD:Cliente|Profesional
+  usurioFB:UserFB
 
   constructor( private httpCLient: HttpClient) {
   }
@@ -39,10 +40,9 @@ export class ProfileService {
       .toPromise();
     return  id_ultimo
   }
-  async getEmailCli(user:UserFB) {
-    var as='asas'
+  async getEmail(user:UserFB) {
     const usuario= await this.httpCLient
-      .post<UserFB>(REST_SERVER_URL + '/get_email_cli',as)
+      .post<UserFB>(REST_SERVER_URL + '/get_email',user.toJSON())
       .toPromise();
     return UserFB.fromJson(usuario)
   }
@@ -62,8 +62,6 @@ export class ProfileService {
   }
   /*Creacion de un cliente*/
   async crearCliente(cliente: Cliente) {
-    console.log(cliente)
-    console.log(cliente.toJSON())
     await this.httpCLient
       .post(REST_SERVER_URL + '/create_cliente', cliente.toJSON())
       .toPromise();

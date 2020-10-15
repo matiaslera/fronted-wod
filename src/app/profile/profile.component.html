@@ -1,6 +1,7 @@
 <div class="box" *ngIf="user$ | async as user else load">
 	<mat-card class="perfil" >
-		<img   src="{{fotoUrl}}" class="imag" alt="No se encontro imagen">
+		<img  *ngIf="foto()" src="{{usuarioFire?.photoURL}}" class="imag" alt="No se encontro imagen">
+		<img  *ngIf="!foto()" src="../../assets/perfil01.jpg" class="imag" alt="No se encontro imagen">
 		<mat-card-content class="perfil__label-cont">
 			<div class="perfil__linea" >
 				<label class="perfil__label">Nombre: </label>
@@ -10,13 +11,13 @@
 				<label class="perfil__label">Email: </label>
 				<label class="perfil__label-dato">{{user?.email}}</label>
 			</div>
-			<div class="perfil__linea" >   
+			<!-- <div class="perfil__linea" >   
 				<label class="perfil__label">Direccion: </label>
-				<!-- <label class="perfil__label-dato">{{user?.direccion}}</label> -->
-			</div>
+				<label class="perfil__label-dato">{{user?.direccion}}</label> 
+			</div> -->
 			<div class="perfil__linea">
 				<label class="perfil__label">Telefono: </label>
-				<!-- <label class="perfil__label-dato">{{user?.telefono}}</label> -->
+				<label class="perfil__label-dato">{{usuarioBDatos.usuario.telefono}}</label>
 			</div>
 		</mat-card-content>
 		<mat-card-actions class="profile-userbuttons">

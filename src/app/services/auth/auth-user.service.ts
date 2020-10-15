@@ -50,7 +50,10 @@ export class AuthUserService {
       var errorMessage = error.message;
       if (errorCode == 'auth/weak-password') {
         alert('La password es demasiado debil.');
-      } else {
+      }if (errorCode == "auth/network-request-failed"){
+        alert('Error, no tenemos conexion con el servidor')
+      }
+       else {
         alert(errorMessage);
       }
       console.log(error);

@@ -5,7 +5,7 @@ export class Cliente {
   constructor(public id?: number, public usuario?: Usuario) {}
 
   static fromJson(usuarioJSON): Cliente {
-    return Object.assign(new Cliente(), usuarioJSON);
+    return Object.assign(new Cliente(), usuarioJSON,{usuario:Usuario.fromJson(usuarioJSON.usuario)});
     //,{ usuario: User.fromJSON(tareaJSON.asignadoA) }
   }
 

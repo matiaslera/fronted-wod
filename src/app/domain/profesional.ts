@@ -12,7 +12,7 @@ export class Profesional {
   ) {}
 
   static fromJson(usuarioJSON): Profesional {
-    return Object.assign(new Profesional(), usuarioJSON);
+    return Object.assign(new Profesional(), usuarioJSON,{usuario:Usuario.fromJson(usuarioJSON.usuario)});
   }
 
   toJSON(): any {

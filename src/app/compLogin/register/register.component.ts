@@ -58,6 +58,7 @@ export class RegisterComponent implements OnInit {
   }
   async register() {
     const { youEmail, contrasenia } = this.formulario.value;
+    this.perfilSer.usurioFB.email=youEmail
     await this.auth.register(youEmail, contrasenia, this.matchWorlds());
   }
   async registerClient() {

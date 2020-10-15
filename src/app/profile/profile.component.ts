@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserFB,  } from '../domain/user';
+import { MatSnackBar } from '@angular/material/snack-bar'
+import {  Tipo, UserFB,  } from '../domain/user';
 import { AuthUserService } from '../services/auth/auth-user.service';
 import { Observable } from 'rxjs';
 import { User } from 'firebase';
@@ -12,7 +13,7 @@ function mostrarError(component, error) {
   const errorMessage = (error.status === 0) ? 'No hay conexión con el backend, revise si el servidor remoto está levantado.' : error.error
   component.errors.push(errorMessage)
 }
-export type Tipo = Cliente | Profesional 
+export type Calificacion = Cliente | Profesional 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -21,20 +22,31 @@ export type Tipo = Cliente | Profesional
 export class ProfileComponent implements OnInit {
 
   public user$: Observable<any> = this.authServ.angularAuth.user; //esta conectado o no
-  usuario:User
-  usuarioBD: Cliente|Profesional
-  fotoUrl:string="";
-  actualizar: boolean;
-  errors = []
+  usuarioFire:User
+  usuarioFull: Calificacion
+  usuarioBDatos:Calificacion
+  usuarioFB=new UserFB()
+  actualizar: boolean = false;
+  errors = [];
+  constructor(public authServ: AuthUserService,public perfilSer: ProfileService, private snackBar: MatSnackBar) {}
 
-  constructor(public authServ: AuthUserService,public perfilSer: ProfileService) {}
-
-  ngOnInit(): void {
-    this.actualizar = false;
-    //this.cargarUser();
-    this.recuperarUserFB()
-    console.log("usuario bd",this.usuarioBD)
+  async ngOnInit(): Promise<void> {
+    this.usuarioFB=this.perfilSer.usurioFB
+    this.usuarioFull= await this.perfilSer.getEmail(this.usuarioFB)
+    this.usuarioFire=this.authServ.usuario
+    if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
+      this.usuarioBDatos=new Cliente()
+      this.usuarioBDatos = await this.perfilSer.getIdCliente(this.usuarioFull.id)
+    }
+    if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
+      this.usuarioBDatos=new Profesional()
+      this.usuarioBDatos = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
+    }
+    this.recuperarUserCP()
     this.foto()
+    console.log(this.usuarioFB)
+    console.log(this.usuarioFull)
+    console.log(this.authServ.usuario)
     /*tengo que cargar el uid del usuario para pasarlo a mysql*/ 
   }
 
@@ -46,42 +58,25 @@ export class ProfileComponent implements OnInit {
     this.actualizar = condicion;
   }
 
-  async cargarUser() {
+  async recuperarUserCP() {
     try {
-      console.log("asadasda")
-    } catch (error) {
-      console.log(error)
-      mostrarError(this,error)
-    }
-  }
-  async recuperarUserFB() {
-    try {
-      var usuario=new UserFB()
-      await this.authServ.angularAuth.onAuthStateChanged( function(user) {
-        if (user) {
-         usuario.email=user.email
-         usuario.providerId=user.providerId
-         usuario.uid=user.uid
-        } 
-      })
-      console.log(usuario)
+      /* await this.authServ.angularAuth.onAuthStateChanged( user=>{
+      this.usuarioFB.email=user.email
+      this.usuarioFB.providerId=user.providerId
+      this.usuarioFB.uid=user.uid}) */
+    
+      console.log(this.usuarioBDatos)
     } catch (error) {
       console.log(error)
       mostrarError(this,error)
     }
   }
 
-  async foto(){
-    const usuario = await this.authServ.usuario
-    try {
-      if((usuario.photoURL)==null || this.fotoUrl !==""){
-        this.fotoUrl= urlLocal
-      }else{
-      this.fotoUrl= this.usuario.photoURL}
-    } catch (error) {
-      console.log(error)
-      mostrarError(this,error)
+  foto():boolean{
+    if (this.authServ.usuario.photoURL===null){
+      return false
     }
+    return true
   }
 }
 
