@@ -9,6 +9,7 @@ import { Observable, from, Subscription } from 'rxjs';
 })
 export class AppComponent {
   title = 'frontend-wod';
+  apertura:boolean=false;
   public user$: Observable<any> = this.user.angularAuth.user;
   constructor(private user: AuthUserService) {
     console.log('cambio del usuario:', this.user$)

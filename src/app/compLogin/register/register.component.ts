@@ -23,7 +23,7 @@ function mostrarError(component, error) {
 export class RegisterComponent implements OnInit {
   public user$: Observable<any> = this.auth.angularAuth.user;
   cliente: Cliente = new Cliente()
-  profesional: Profesional;
+  profesional: Profesional= new Profesional();
   errors = [];
   formulario: FormGroup = this.formularioFB.group(
     {
@@ -85,6 +85,10 @@ export class RegisterComponent implements OnInit {
   async registerProf() {
     try {
       this.register();
+      await this.perfilSer.crearProfesional(await this.crearProfesional());
+      if (this.user$) {
+        this.router.navigate(['/perfil']);
+      }
     } catch (error) {
       console.log(error);
       mostrarError(this, error);
@@ -93,8 +97,8 @@ export class RegisterComponent implements OnInit {
   }
   crearProfesional() {
     var user = this.crearUser(Tipo.PROFESIONAL)
-    this.profesional = new Profesional();
-    this.profesional.usuario = user;
+    this.profesional.usuario=user;
+    return this.profesional
   }
 
   crearUser(tipo:Tipo){

@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           }
           if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
             this.perfilSer.cliente.next(false)
-            this.perfilSer.profesional.next(false)
+            this.perfilSer.profesional.next(true)
             this.usuarioBDatos=new Profesional()
             this.perfilSer.usuarioBD = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
             console.log( this.perfilSer.usuarioBD);

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthUserService } from '../services/auth/auth-user.service';
 import { Observable } from 'rxjs';
+import { ProfileService } from '../services/perfil/profile.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   public user$: Observable<any> = this.authSvc.angularAuth.user;
-  constructor(public router: Router, private authSvc: AuthUserService) {}
+  @Output() salida=new EventEmitter<string>()
+  constructor(public router: Router, private authSvc: AuthUserService,public perfilSer: ProfileService) {}
 
   ngOnInit() {
     
@@ -18,6 +20,10 @@ export class HeaderComponent implements OnInit {
 
   async exit() {
     try {
+      this.perfilSer.cliente.next(false)
+      this.perfilSer.profesional.next(false)
+     // this.salida=
+     ////(messageEvent)="receiveMessage($event)"
       await this.authSvc.logOut();
       this.router.navigate(['/ingresar']);
     } catch (error) {

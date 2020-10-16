@@ -1,8 +1,8 @@
-<app-header></app-header>
+<app-header  ></app-header>
 
 <mat-sidenav-container class="container">
-    <mat-sidenav class="background" #sidenav mode="side">
-        <app-navegacion></app-navegacion>
+    <mat-sidenav  #sidenav mode="side" opened="{{apertura}}" class="background">
+        <app-navegacion ></app-navegacion>
     </mat-sidenav>
 
     <mat-sidenav-content class="color_fondo">
