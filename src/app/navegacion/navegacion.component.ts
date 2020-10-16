@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthUserService } from '../services/auth/auth-user.service';
 import { Observable } from 'rxjs';
-import { async } from '@angular/core/testing';
 import { ProfileService } from '../services/perfil/profile.service';
+
 
 @Component({
   selector: 'app-navegacion',
@@ -11,26 +11,15 @@ import { ProfileService } from '../services/perfil/profile.service';
 })
 export class NavegacionComponent implements OnInit {
   public user$: Observable<any> = this.user.angularAuth.user;
-  cliente: boolean=false
-  tecnico: boolean=false
+  esCliente: Observable<boolean> = this.perfilSer.esCliente
+  esTecnico:Observable<boolean> = this.perfilSer.esProfesional
+  errors = [];
   constructor(private user: AuthUserService,public perfilSer: ProfileService) {
   }
 
-  ngOnInit(): void {
-    console.log('ejecutando ando');
-    this.typeUser();
+  async ngOnInit(): Promise<void> {
+    console.log("cliente: ",this.esCliente)
+    console.log("profesional: ",this.esTecnico)
   }
 
-  async typeUser() {
-    try {
-      if (this.user$ && this.perfilSer.esCliente) {
-        this.cliente = true
-      }
-      if (this.user$ && this.perfilSer.esProfesional){
-        this.tecnico=true
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }

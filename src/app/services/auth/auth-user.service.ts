@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { User, auth } from 'firebase/app';
 import { first } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
 import { isUndefined, isNullOrUndefined } from 'util';
 
 @Injectable({
@@ -31,8 +30,12 @@ export class AuthUserService {
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode === 'auth/wrong-password') {
-        alert('Contraseña incorrecta.');
-      } else {
+        alert('Usuario o contraseña incorrecta.');
+      } 
+      if(errorCode ==="auth/user-not-found"){
+        alert('Usuario o contraseña incorrecta.');
+      }
+      else {
         alert(errorMessage);
       }
       console.log(error);

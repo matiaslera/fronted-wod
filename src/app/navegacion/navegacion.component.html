@@ -1,5 +1,5 @@
 <div *ngIf="user$ | async">
-<div *ngIf="cliente">
+<div *ngIf="esCliente | async">
   <div  class="barra_lat">
     <div class="linea"><a routerLink="perfil"> Perfil</a> <i class="far fa-user icon"></i> </div>
     <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon"> </i> </div>
@@ -11,7 +11,7 @@
 
 </div>
 
-<div *ngIf="tecnico">
+<div *ngIf="esTecnico | async">
   <div  class="barra_lat">
     <div class="linea"><a routerLink="perfil"> Perfil</a> <i class="far fa-user icon"></i></div>
     <div class="linea"><a href="#">Chat</a> <i class="far fa-comment icon"> </i> </div>

@@ -6,7 +6,7 @@ import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
-import { Usuario, Tipo } from 'src/app/domain/user';
+import { Usuario, Tipo, UserFB } from 'src/app/domain/user';
 
 function mostrarError(component, error) {
   const errorMessage =
@@ -58,7 +58,9 @@ export class RegisterComponent implements OnInit {
   }
   async register() {
     const { youEmail, contrasenia } = this.formulario.value;
-    this.perfilSer.usurioFB.email=youEmail
+    var usuarioFire=new UserFB()
+    usuarioFire.email=youEmail
+    this.perfilSer.usurioFB=usuarioFire
     await this.auth.register(youEmail, contrasenia, this.matchWorlds());
   }
   async registerClient() {
@@ -76,7 +78,6 @@ export class RegisterComponent implements OnInit {
   }
 
   async crearCliente() {
-    const id=await this.perfilSer.getIdUltimoCli()
     var user = this.crearUser(Tipo.CLIENTE)
     this.cliente.usuario = user;
     return this.cliente

@@ -6,26 +6,36 @@ import { of } from 'rxjs/internal/observable/of';
 import { User } from 'firebase';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 
 //export Type const TIPO =Cliente|Profesional
 export type Condicion=Cliente|Profesional
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
   profesionales: Profesional[];
   clientes: Cliente[];
-  cliente:Cliente=null;
-  profesional:Profesional=null;
-  esProfesional: boolean=false;
-  esCliente: boolean=false;
-  usuarioBD:Cliente|Profesional
+  usuarioBD:Condicion;
   usurioFB:UserFB
+  cliente: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  profesional: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   constructor( private httpCLient: HttpClient) {
   }
 
   ngOnInit(): void {}
+
+  get esCliente() {
+    return this.cliente.asObservable()
+  }
+
+  get esProfesional():Observable<boolean>{
+    return this.profesional.asObservable()
+  }
 
   /*Leer un cliente*/
   async getIdCliente(id: Number) {

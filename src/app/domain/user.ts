@@ -1,3 +1,6 @@
+import { Cliente } from './cliente';
+import { Profesional } from './profesional';
+
 export class Usuario {
 	
   constructor(public uid?:string,public nombre?:string,public tipo?:Tipo,
@@ -31,12 +34,5 @@ export class UserFB{
     return{...this}
   }
 }
-/* 
-export interface User {
-  uid: string;
-  email: string;
-  photoURL?: string;
-  displayName?: string;
-  myCustomData?: string;
-}
- */
+
+export type Calificacion = Cliente | Profesional 
