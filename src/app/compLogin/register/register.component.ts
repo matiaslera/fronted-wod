@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
       this.register();
       await this.perfilSer.crearCliente(await this.crearCliente());
       if (this.user$) {
-        this.router.navigate(['/perfil']);
+        this.router.navigate(['/bienvenido']);
       }
     } catch (error) {
       console.log(error);
@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
       this.register();
       await this.perfilSer.crearProfesional(await this.crearProfesional());
       if (this.user$) {
-        this.router.navigate(['/perfil']);
+        this.router.navigate(['/bienvenido']);
       }
     } catch (error) {
       console.log(error);

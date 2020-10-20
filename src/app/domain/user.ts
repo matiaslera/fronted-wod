@@ -5,7 +5,7 @@ export class Usuario {
 	
   constructor(public uid?:string,public nombre?:string,public tipo?:Tipo,
     public apellido?:string,public email?:string,public dni?:number,
-    public telefono?:number, public fotoUrl?:string,
+    public telefono?:number, public fotoUrl?:string,public fechaDeNacimiento?:Date,public nacionalidad?:string,
     public proveedor?:string) {}
 
     static fromJson(usuarioJSON): Usuario {

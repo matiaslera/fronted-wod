@@ -24,8 +24,8 @@ export class HeaderComponent implements OnInit {
       this.perfilSer.cliente.next(false)
       this.perfilSer.profesional.next(false)
       this.salida.emit(this.message)
-     // this.salida=
-     ////(messageEvent)="receiveMessage($event)"
+      this.perfilSer.usurioFB=null
+      this.perfilSer.usuarioBD=null
       await this.authSvc.logOut();
       this.router.navigate(['/ingresar']);
     } catch (error) {

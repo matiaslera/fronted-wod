@@ -6,9 +6,6 @@ import { Observable } from 'rxjs';
 import { User } from 'firebase';
 
 import { ProfileService } from '../services/perfil/profile.service';
-import { Profesional } from '../domain/profesional';
-import { Cliente } from '../domain/cliente';
-import { constants } from 'buffer';
 
 function mostrarError(component, error) {
   const errorMessage = (error.status === 0) ? 'No hay conexión con el backend, revise si el servidor remoto está levantado.' : error.error
@@ -23,9 +20,8 @@ function mostrarError(component, error) {
 export class ProfileComponent implements OnInit {
 
   public user$: Observable<any> = this.authServ.angularAuth.user; //esta conectado o no
-  usuarioFire:User
-  usuarioFull: Calificacion
   usuarioBDatos:Calificacion// =this.perfilSer.usuarioBD
+  usuarioFire:User
   usuarioFB=new UserFB()
   actualizar: boolean = false;
   errors = [];
@@ -46,10 +42,11 @@ export class ProfileComponent implements OnInit {
   }
 
   foto():boolean{
-    if (this.authServ.usuario.photoURL===null){
+    return this.authServ.usuario.photoURL!==null
+  /*   if (this.authServ.usuario.photoURL===null){
       return false
     }
-    return true
+    return true */
   }
 }
 

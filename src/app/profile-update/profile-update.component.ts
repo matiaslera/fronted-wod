@@ -1,6 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Cliente } from '../domain/cliente';
+import { Profesional } from '../domain/profesional';
+import { Calificacion, Tipo, Usuario } from '../domain/user';
 import { AuthUserService } from '../services/auth/auth-user.service';
+import { ProfileService } from '../services/perfil/profile.service';
 
 @Component({
   selector: 'app-profile-update',
@@ -10,6 +14,8 @@ import { AuthUserService } from '../services/auth/auth-user.service';
 export class ProfileUpdateComponent implements OnInit {
 
   @Output() cancelar = new EventEmitter<boolean>();
+  cliente: Cliente= new Cliente()
+  profesional: Profesional= new Profesional()
   formulario: FormGroup = this.formularioFB.group(
     {
       usuario: ['', Validators.required],
@@ -18,26 +24,65 @@ export class ProfileUpdateComponent implements OnInit {
       confirmarContrasenia: ['',[Validators.required, Validators.minLength(4)],],
     },
   );
-  constructor(private formularioFB: FormBuilder, private authSvc: AuthUserService) { }
+
+  formulario2: FormGroup = this.formularioFB.group(
+    {
+      nacionalidad: ['', Validators.required],
+      telefono: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(16)]],
+      nacimiento: ['', [Validators.required]],
+    },
+  );
+
+  constructor(private formularioFB: FormBuilder,public perfilSer: ProfileService,) { }
 
   ngOnInit(): void {
+    if(this.perfilSer.cliente){
+      this.cliente=new Cliente()
+      this.cliente=this.perfilSer.usuarioBD
+      console.log(this.cliente)
+    }
+    if(this.perfilSer.profesional){
+      this.profesional= new Profesional()
+      this.profesional=this.perfilSer.usuarioBD
+      console.log(this.profesional)
+    }
   }
 
-  get usuario() {
-    return this.formulario.get('usuario');
+  get nacionalidad() {
+    return this.formulario2.get('nacionalidad');
   }
-  get youEmail() {
-    return this.formulario.get('youEmail');
+  get telefono() {
+    return this.formulario2.get('telefono');
   }
-  get confirmarContrasenia() {
-    return this.formulario.get('confirmarContrasenia');
+  get nacimiento() {
+    return this.formulario2.get('nacimiento');
   }
   get contrasenia() {
     return this.formulario.get('contrasenia');
   }
   
-  accept(){
-    console.log("aceptado")
+  updateDireccion(){
+    console.log("actualizando direccion")
+  }
+
+  updateDato(){
+    if(this.perfilSer.usuarioBD.usuario.tipo===Tipo.CLIENTE){
+      console.log("antes",this.cliente)
+      this.cliente.usuario.nacionalidad=this.formulario2.get('nacionalidad').value
+      this.cliente.usuario.fechaDeNacimiento=this.formulario2.get('nacimiento').value
+      this.cliente.usuario.telefono=this.formulario2.get('telefono').value
+      this.perfilSer.actualizarCliente(this.cliente)
+      console.log("despues",this.cliente)
+    }
+    if(this.perfilSer.usuarioBD.usuario.tipo===Tipo.PROFESIONAL){
+      console.log("antes",this.profesional)
+      this.profesional.usuario.nacionalidad=this.formulario2.get('nacionalidad').value
+      this.profesional.usuario.fechaDeNacimiento=this.formulario2.get('nacimiento').value
+      this.profesional.usuario.telefono=this.formulario2.get('telefono').value
+      this.perfilSer.actualizarProfesional(this.profesional)
+      console.log("despues",this.profesional)
+    }
+    console.log("actualizando datos")
   }
 
   cancel(){
@@ -45,85 +90,17 @@ export class ProfileUpdateComponent implements OnInit {
   }
 
 
- /*  formulario: FormGroup = this.formularioFB.group(
-    {
-      usuario: ['', Validators.required],
-      youEmail: ['', [Validators.required, Validators.email]],
-      contrasenia: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarContrasenia: [
-        '',
-        [Validators.required, Validators.minLength(4)],
-      ],
-    },
-    { validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia') }
-  );
-  constructor( private formularioFB: FormBuilder,public router: Router,  private authSvc: AuthUserService) {}
-
-  ngOnInit(): void {}
-
-  get usuario() {
-    return this.formulario.get('usuario');
-  }
-  get youEmail() {
-    return this.formulario.get('youEmail');
-  }
-  get confirmarContrasenia() {
-    return this.formulario.get('confirmarContrasenia');
-  }
-  get contrasenia() {
-    return this.formulario.get('contrasenia');
-  }
-
-  async registerClient() {
-    const { youEmail, contrasenia } = this.formulario.value;
-    try {
-      const user = this.authSvc.register(youEmail, contrasenia);
-      if (user) {
-        this.router.navigate(['/perfil']);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-    console.log('se ingreso como Cliente');
-  }
-
-  async registerProf() {
-    const { youEmail, contrasenia } = this.formulario.value;
-    try {
-      const user = this.authSvc.register(youEmail, contrasenia);
-      if (user) {
-        this.router.navigate(['/perfil']);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    console.log('se ingreso como Profesional');
-  }
-
-  matchingPasswords(password: string, passwordConfirmation: string) {
-    return (group: FormGroup) => {
-      let passwordInput = group.controls[password],
-        passwordConfirmationInput = group.controls[passwordConfirmation];
-      if (passwordInput.value !== passwordConfirmationInput.value) {
-        return passwordConfirmationInput.setErrors({ notEquivalent: true });
-      } else {
-        return passwordConfirmationInput.setErrors(null);
-      }
-    };
-  }
-
   onSubmit() {
     var act = document.activeElement.id;
     console.log(document.activeElement.id);
     if (act == 'btn1') {
       alert('you have clicked on submit 1');
-      this.registerClient();
+     // this.registerClient();
     }
     if (act == 'btn2') {
-      this.registerProf();
+     // this.registerProf();
       alert('you have clicked on submit 2');
     }
-  } */
+  } 
 
 }

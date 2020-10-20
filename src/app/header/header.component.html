@@ -12,7 +12,7 @@
         </button>
     </ng-template>
     <div *ngIf="user$ | async as user; else login" class="logueado">
-        <span class="user">{{user?.email}}</span>
+        <span class="user">{{user?.displayName}}</span>
         <button *ngIf="user" class="icon" (click)="exit()">Salir
             <mat-icon>exit_to_app</mat-icon>
         </button>

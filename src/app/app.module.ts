@@ -21,6 +21,7 @@ import { ProfileUpdateComponent } from './profile-update/profile-update.componen
 import { ResetPassComponent } from './compLogin/reset-pass/reset-pass.component';
 import { LoginComponent } from './compLogin/login/login.component';
 import { RegisterComponent } from './compLogin/register/register.component';
+import { WelcomeComponent } from './compLogin/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RegisterComponent } from './compLogin/register/register.component';
     ProfileComponent,
     ProfileUpdateComponent,
     ResetPassComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

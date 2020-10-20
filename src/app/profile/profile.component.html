@@ -5,19 +5,19 @@
 		<mat-card-content class="perfil__label-cont">
 			<div class="perfil__linea" >
 				<label class="perfil__label">Nombre: </label>
-				<label class="perfil__label-dato">{{user?.displayName}}</label>
+				<label class="perfil__label-dato">{{usuarioBDatos.usuario?.nombre}}</label>
+			</div>
+			<div class="perfil__linea" >   
+				<label class="perfil__label">Apellido: </label>
+				<label class="perfil__label-dato">{{usuarioBDatos.usuario?.apellido}}</label> 
 			</div>
 			<div class="perfil__linea">
 				<label class="perfil__label">Email: </label>
 				<label class="perfil__label-dato">{{user?.email}}</label>
 			</div>
-			<!-- <div class="perfil__linea" >   
-				<label class="perfil__label">Direccion: </label>
-				<label class="perfil__label-dato">{{user?.direccion}}</label> 
-			</div> -->
 			<div class="perfil__linea">
 				<label class="perfil__label">Telefono: </label>
-				<label class="perfil__label-dato">{{usuarioBDatos.usuario.telefono}}</label>
+				<label class="perfil__label-dato" >{{usuarioBDatos.usuario.telefono > 0 ?usuarioBDatos.usuario.telefono : '-'}}</label>
 			</div>
 		</mat-card-content>
 		<mat-card-actions class="profile-userbuttons">

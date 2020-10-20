@@ -8,6 +8,7 @@ import { AuthUserService } from './services/auth/auth-user.service';
 import { ResetPassComponent } from './compLogin/reset-pass/reset-pass.component';
 import { LoginComponent } from './compLogin/login/login.component';
 import { RegisterComponent } from './compLogin/register/register.component';
+import { WelcomeComponent } from './compLogin/welcome/welcome.component';
 
 const routes: Routes = [
   { path: 'ingresar', component: LoginComponent, pathMatch: "full",
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: "perfil", component: ProfileComponent, pathMatch: "full"},
   { path: "home", component: AppComponent, pathMatch: "full" },
   { path: "resetear", component: ResetPassComponent, pathMatch: "full" },
-  
+  { path: "bienvenido", component: WelcomeComponent, pathMatch: "full" },
   /* { path: '**', redirectTo: '404', pathMatch: 'full' }, */
 ];
 

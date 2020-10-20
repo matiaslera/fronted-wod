@@ -67,7 +67,7 @@ export class ProfileService {
   /*Actualizar de un cliente*/
   async actualizarCliente(cliente: Cliente) {
     await this.httpCLient
-      .put(REST_SERVER_URL + '/update_cliente' + cliente.id, cliente.toJSON())
+      .put(REST_SERVER_URL + '/update_cliente/' + cliente.id, cliente.toJSON())
       .toPromise();
   }
   /*Creacion de un cliente*/

@@ -3,6 +3,7 @@
   display: flex;
   flex-flow: column wrap;
   margin: 0 3em;
+  background-color: white;
 }
 .card__lat {
   display: flex;

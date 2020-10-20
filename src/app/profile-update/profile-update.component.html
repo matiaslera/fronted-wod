@@ -1,54 +1,52 @@
 <mat-card class="perfil">
-    <form [formGroup]="formulario" class="card__lat">
-        <mat-card-content class="perfil__label-cont">
-            <div class="perfil__linea ">
-                <label class="perfil__label">Nombre: </label>
-                <input type="text">
+    <mat-card-content class="perfil__label-cont">
+        <form [formGroup]="formulario" (ngSubmit)="updateDireccion()">.
+            <div class="card__lat">
+                <div class="perfil__linea">
+                    <label class="perfil__label">Provincia: </label>
+                    <input type="text">
+                </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Ciudad: </label>
+                    <input type="text">
+                </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Calle: </label>
+                    <input type="text">
+                </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Piso/Departamento: </label>
+                    <input type="text">
+                </div>
             </div>
+            <mat-card-actions class="perfil__acc">
+                <button mat-raised-button color="accent" class="btn" (click)="updateDireccion()">Actualizar Direccion
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+    <mat-card-content class="perfil__label-cont">
+        <form [formGroup]="formulario2" (ngSubmit)="updateDato()">
+            <div class="card__lat">
             <div class="perfil__linea">
-                <label class="perfil__label">Apellido: </label>
-                <input type="text">
-            </div>
-            <div class="perfil__linea">
-                <label class="perfil__label">Usuario: </label>
-                <input type="text">
+                <label class="perfil__label">Nacionalidad: </label>
+                <input type="text" formControlName="nacionalidad">
             </div>
             <div class="perfil__linea">
                 <label class="perfil__label">Fecha de Nacimiento: </label>
-                <input type="date">
-            </div>
-        </mat-card-content>
-        <mat-card-content class="perfil__label-cont">
-            <div class="perfil__linea">
-                <label class="perfil__label">Nacionalidad: </label>
-                <input type="text">
-            </div>
-            <div class="perfil__linea">
-                <label class="perfil__label">Calle: </label>
-                <input type="text">
-            </div>
-            <div class="perfil__linea">
-                <label class="perfil__label">Ciudad: </label>
-                <input type="text">
-            </div>
-            <div class="perfil__linea">
-                <label class="perfil__label">Provincia: </label>
-                <input type="text">
-            </div>
-        </mat-card-content>
-        <mat-card-content class="perfil__label-cont">
-            <div class="perfil__linea">
-                <label class="perfil__label">Email: </label>
-                <input matInput type="email">
+                <input type="date" formControlName="nacimiento">
             </div>
             <div class="perfil__linea">
                 <label class="perfil__label">Telefono: </label>
-                <input matInput>
+                <input type="tel" formControlName="telefono">
             </div>
-        </mat-card-content>
-    </form>
+        </div>
+            <mat-card-actions class="perfil__acc">
+                <button mat-raised-button color="accent" class="btn" (click)="updateDato()">Actualizar Datos </button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
     <mat-card-actions class="perfil__acc">
-        <button mat-raised-button color="accent" class="btn" (click)="accept()">Aceptar</button>
         <button mat-raised-button color="accent" class="btn" (click)="cancelar.emit(false)">Cancelar</button>
     </mat-card-actions>
 </mat-card>
