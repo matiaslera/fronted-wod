@@ -12,6 +12,7 @@ import { ProfileService } from '../services/perfil/profile.service';
 export class HeaderComponent implements OnInit {
   public user$: Observable<any> = this.authSvc.angularAuth.user;
   @Output() salida=new EventEmitter<string>()
+  message: string = "se cierra sesion"
   constructor(public router: Router, private authSvc: AuthUserService,public perfilSer: ProfileService) {}
 
   ngOnInit() {
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
     try {
       this.perfilSer.cliente.next(false)
       this.perfilSer.profesional.next(false)
+      this.salida.emit(this.message)
      // this.salida=
      ////(messageEvent)="receiveMessage($event)"
       await this.authSvc.logOut();
@@ -29,5 +31,9 @@ export class HeaderComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  sendMessage() {
+    this.salida.emit(this.message)
   }
 }

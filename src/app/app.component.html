@@ -1,7 +1,7 @@
-<app-header  ></app-header>
+<app-header (salida)="receiveMessage($event)" ></app-header>
 
 <mat-sidenav-container class="container">
-    <mat-sidenav  #sidenav mode="side" opened="{{apertura}}" class="background">
+    <mat-sidenav  #sidenav mode="side" class="background">
         <app-navegacion ></app-navegacion>
     </mat-sidenav>
 

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthUserService } from './services/auth/auth-user.service';
-import { Observable, from, Subscription } from 'rxjs';
+import { Observable,  } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,21 @@ import { Observable, from, Subscription } from 'rxjs';
 })
 export class AppComponent {
   title = 'frontend-wod';
-  apertura:boolean=false;
+  mensaje:string
   public user$: Observable<any> = this.user.angularAuth.user;
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  
   constructor(private user: AuthUserService) {
     console.log('cambio del usuario:', this.user$)
   }
 
   ngOnInit() {
+  }
+
+  receiveMessage($event) {
+    this.mensaje = $event
+    console.log(this.mensaje)
+    this.sidenav.close()
   }
 
 }
