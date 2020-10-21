@@ -16,14 +16,31 @@ export class ProfileComponent implements OnInit {
   public user$: Observable<any> = this.authServ.angularAuth.user; //esta conectado o no
   usuarioBDatos:Calificacion// =this.perfilSer.usuarioBD
   usuarioFire:User
-  usuarioFB=new UserFB()
   actualizar: boolean = false;
   errors = [];
-  constructor(public authServ: AuthUserService,public perfilSer: ProfileService, private snackBar: MatSnackBar) {}
+  constructor(public authServ: AuthUserService,public perfilSer: ProfileService, private snackBar: MatSnackBar) {
+    if(this.authServ.getTipo()==="CLIENTE"){
+      this.usuarioBDatos =this.authServ.getCurrentCliente()
+      console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
+    }
+    if(this.authServ.getTipo()==="PROFESIONAL"){
+      this.usuarioBDatos =this.authServ.getCurrentProfesional()
+      console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
+    }
+  }
 
-  async ngOnInit(): Promise<void> {
-    this.usuarioFB=this.perfilSer.usurioFB
-    this.usuarioBDatos=this.perfilSer.usuarioBD
+   ngOnInit():void {
+    //this.usuarioFB=this.perfilSer.usurioFB
+    
+    /* if(this.authServ.getTipo()==="CLIENTE"){
+      this.usuarioBDatos =this.authServ.getCurrentCliente()
+      console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
+    }
+    if(this.authServ.getTipo()==="PROFESIONAL"){
+      this.usuarioBDatos =this.authServ.getCurrentProfesional()
+      console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
+    } */
+    //this.usuarioBDatos=this.perfilSer.usuarioBD
     console.log(this.usuarioBDatos)
   }
 
@@ -36,7 +53,10 @@ export class ProfileComponent implements OnInit {
   }
 
   foto():boolean{
-    return this.authServ.usuario.photoURL!==null
+    if(this.usuarioBDatos.usuario){
+      return false
+    }
+    return this.usuarioBDatos.usuario.fotoUrl!==null 
   /*   if (this.authServ.usuario.photoURL===null){
       return false
     }

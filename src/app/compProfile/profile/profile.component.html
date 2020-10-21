@@ -1,7 +1,7 @@
 <div class="box" *ngIf="user$ | async as user else load">
 	<mat-card class="perfil" >
-		<img  *ngIf="foto()" src="{{usuarioFire?.photoURL}}" class="imag" alt="No se encontro imagen">
-		<img  *ngIf="!foto()" src="../../assets/perfil01.jpg" class="imag" alt="No se encontro imagen">
+		<img *ngIf="foto()" src="{{usuarioFire?.photoURL}}" class="imag" alt="No se encontro imagen">
+		<img *ngIf="!foto()" src="../../assets/perfil01.jpg" class="imag" alt="No se encontro imagen">
 		<mat-card-content class="perfil__label-cont">
 			<div class="perfil__linea" >
 				<label class="perfil__label">Nombre: </label>

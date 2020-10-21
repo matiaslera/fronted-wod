@@ -17,7 +17,9 @@ export class NavegacionComponent implements OnInit {
   constructor(private user: AuthUserService,public perfilSer: ProfileService) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.perfilSer.cliente.next(this.user.getTipo()==="CLIENTE")
+    this.perfilSer.profesional.next(this.user.getTipo()==="PROFESIONAL")
     console.log("cliente: ",this.esCliente)
     console.log("profesional: ",this.esTecnico)
   }

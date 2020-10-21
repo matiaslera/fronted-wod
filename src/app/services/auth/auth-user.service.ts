@@ -3,7 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { User, auth } from 'firebase/app';
 import { first } from 'rxjs/operators';
-import { isUndefined, isNullOrUndefined } from 'util';
+import { Cliente } from 'src/app/domain/cliente';
+import { Profesional } from 'src/app/domain/profesional';
+import { Usuario } from 'src/app/domain/user';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,7 @@ import { isUndefined, isNullOrUndefined } from 'util';
 export class AuthUserService {
   public tecnico: boolean;
   public cliente: boolean;
-  usuario: User =null;
+  usuario: User
 
   constructor(public angularAuth: AngularFireAuth) {
     this.tecnico = false;
@@ -90,6 +92,9 @@ export class AuthUserService {
   async logOut() {
     try {
       await this.angularAuth.signOut();
+    localStorage.removeItem("calificacion");
+    localStorage.removeItem("currentProfesional");
+    localStorage.removeItem("currentCliente");
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +103,7 @@ export class AuthUserService {
   async deleteUser(credential) {
     try {
       this.volverAutenticar(credential);
-      var user = await this.userCurrent();
+      var user = await this.angularAuth.currentUser;
       user.delete();
     } catch (error) {
       console.log(error);
@@ -117,7 +122,7 @@ export class AuthUserService {
   }
   async loginWithGoogle() {
     try {
-      if (!isNullOrUndefined(this.angularAuth.user)) {
+      if (this.angularAuth.user !== null && this.angularAuth.user !== undefined ) {
         /*Accedo con popup*/
         var provider = new auth.GoogleAuthProvider();
         provider.addScope('profile');
@@ -157,7 +162,7 @@ export class AuthUserService {
   async updateEmail(nuevoEmail: string, credential) {
     try {
       this.volverAutenticar(credential);
-      var user = await this.userCurrent();
+      var user = await this.angularAuth.currentUser;
       user.updateEmail(nuevoEmail);
     } catch (error) {
       console.log(error);
@@ -167,7 +172,7 @@ export class AuthUserService {
   async updatePassword(nuevaContraseña: string, credential) {
     try {
       this.volverAutenticar(credential);
-      var user = await this.userCurrent();
+      var user = await this.angularAuth.currentUser;
       user.updatePassword(nuevaContraseña);
     } catch (error) {
       console.log(error);
@@ -176,14 +181,6 @@ export class AuthUserService {
 
   getCurretUser() {
     return this.angularAuth.authState.pipe(first()).toPromise();
-  }
-
-  async userCurrent() {
-    try {
-      return this.angularAuth.currentUser;
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   async userActual() {
@@ -209,7 +206,7 @@ export class AuthUserService {
 
   async volverAutenticar(credencial: auth.AuthCredential) {
     try {
-      var user = await this.userCurrent();
+      var user = await this.angularAuth.currentUser;
       user.reauthenticateWithCredential(credencial);
     } catch (error) {
       console.log(error);
@@ -239,4 +236,79 @@ export class AuthUserService {
       });
     } catch (error) {}
   }
+
+ setCliente(user: Cliente): void {
+    let user_string = JSON.stringify(user);
+    localStorage.setItem("currentCliente", user_string);
+  }
+  setProfesional(user: Profesional): void {
+    let user_string = JSON.stringify(user);
+    localStorage.setItem("currentProfesional", user_string);
+  }
+  setTipo(token: string): void {
+    localStorage.setItem("calificacion", token);
+  }
+  getTipo() {
+    return localStorage.getItem("calificacion");
+  }
+  getCurrentCliente(): Cliente {
+    let user_string = localStorage.getItem("currentCliente");
+    if (user_string != null && user_string != undefined) {
+      let user: Cliente = JSON.parse(user_string);
+      return user;
+    } else {
+      return null;
+    }
+  }
+  getCurrentProfesional(): Profesional {
+    let user_string = localStorage.getItem("currentProfesional");
+    if (user_string != null && user_string != undefined) {
+      let user: Profesional = JSON.parse(user_string);
+      return user;
+    } else {
+      return null;
+    }
+  }
+  rememberMe(user: Usuario, recordarme: boolean): void {
+    if (recordarme) {
+      let user_string = JSON.stringify(user);
+      localStorage.setItem("rememberMe", user_string);
+    } else {
+      localStorage.removeItem("rememberMe");
+    }
+  }
+  getRememberMe(): Usuario {
+    let user_string = localStorage.getItem("rememberMe");
+    if (user_string != null && user_string != undefined) {
+      let user: Usuario = JSON.parse(user_string);
+      return user;
+    } else {
+      return null;
+    }
+  }
+
+/*
+    return this.authService
+        .login(this.formGroup.value)
+        .subscribe(
+          data => {
+            this.authService.setUser(data.username);
+            this.authService.setToken(data.id);
+            this.authService.rememberMe(data.username, this.recordarme)
+            this.authService.onLogin();
+            this.isError = false;
+          },
+          message => {
+            if (message.status === 0) {
+              this.errorMessage = "Error de conexion con el servidor"
+            } else {
+              this.errorMessage = message.error
+            }
+            this.onIsError()
+          }
+        );
+    } else {
+      this.formSubmitIntento = true
+    }
+ */
 }

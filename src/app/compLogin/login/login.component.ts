@@ -35,21 +35,6 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     console.log('ejecutando ando');
-    /* this.usuarioFB=this.perfilSer.usurioFB
-    this.usuarioFull= await this.perfilSer.getEmail(this.usuarioFB)
-    this.usuarioFire=this.authSvc.usuario
-    if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
-      this.cliente=true
-      this.tecnico=false
-      this.usuarioBDatos=new Cliente()
-      this.usuarioBDatos = await this.perfilSer.getIdCliente(this.usuarioFull.id)
-    }
-    if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
-      this.tecnico=true
-      this.cliente=false
-      this.usuarioBDatos=new Profesional()
-      this.usuarioBDatos = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
-    } */
   }
 
   get usuario() {
@@ -72,6 +57,8 @@ export class LoginComponent implements OnInit {
             this.perfilSer.profesional.next(false)
             this.usuarioBDatos=new Cliente()
             this.perfilSer.usuarioBD = await this.perfilSer.getIdCliente(this.usuarioFull.id)
+            this.authSvc.setCliente(await this.perfilSer.getIdCliente(this.usuarioFull.id))
+            this.authSvc.setTipo("CLIENTE")
             console.log( this.perfilSer.usuarioBD);
           }
           if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
@@ -79,6 +66,8 @@ export class LoginComponent implements OnInit {
             this.perfilSer.profesional.next(true)
             this.usuarioBDatos=new Profesional()
             this.perfilSer.usuarioBD = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
+            this.authSvc.setProfesional(await this.perfilSer.getIdProfesional(this.usuarioFull.id))
+            this.authSvc.setTipo("PROFESIONAL")
             console.log( this.perfilSer.usuarioBD);
           }
           console.log(this.usuarioFull);
@@ -99,21 +88,5 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  async accederBaseDatos(){
-    /* if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
-      this.perfilSer.esCliente=true
-      this.perfilSer.esProfesional=false
-      this.usuarioBDatos=new Cliente()
-      this.perfilSer.usuarioBD = await this.perfilSer.getIdCliente(this.usuarioFull.id)
-      console.log( this.perfilSer.usuarioBD);
-    }
-    if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
-      this.perfilSer.esProfesional=true
-      this.perfilSer.esCliente=false
-      this.usuarioBDatos=new Profesional()
-      this.perfilSer.usuarioBD = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
-      console.log( this.perfilSer.usuarioBD);
-    } */
-    console.log(this.usuarioFull);
-  }
+
 }
