@@ -1,10 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Cliente } from '../domain/cliente';
-import { Profesional } from '../domain/profesional';
-import { Calificacion, Tipo, Usuario } from '../domain/user';
-import { AuthUserService } from '../services/auth/auth-user.service';
-import { ProfileService } from '../services/perfil/profile.service';
+import { Cliente } from 'src/app/domain/cliente';
+import { Profesional } from 'src/app/domain/profesional';
+import { Tipo } from 'src/app/domain/user';
+import { ProfileService } from 'src/app/services/perfil/profile.service';
 
 @Component({
   selector: 'app-profile-update',
@@ -33,7 +32,7 @@ export class ProfileUpdateComponent implements OnInit {
     },
   );
 
-  constructor(private formularioFB: FormBuilder,public perfilSer: ProfileService,) { }
+  constructor(private formularioFB: FormBuilder,public perfilSer: ProfileService) { }
 
   ngOnInit(): void {
     if(this.perfilSer.cliente){
@@ -89,7 +88,6 @@ export class ProfileUpdateComponent implements OnInit {
     
   }
 
-
   onSubmit() {
     var act = document.activeElement.id;
     console.log(document.activeElement.id);
@@ -102,5 +100,4 @@ export class ProfileUpdateComponent implements OnInit {
       alert('you have clicked on submit 2');
     }
   } 
-
 }

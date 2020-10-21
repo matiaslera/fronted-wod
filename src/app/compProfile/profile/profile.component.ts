@@ -1,21 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar'
-import {  Calificacion, Tipo, UserFB,  } from '../domain/user';
-import { AuthUserService } from '../services/auth/auth-user.service';
-import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'firebase';
-
-import { ProfileService } from '../services/perfil/profile.service';
-
-function mostrarError(component, error) {
-  const errorMessage = (error.status === 0) ? 'No hay conexión con el backend, revise si el servidor remoto está levantado.' : error.error
-  component.errors.push(errorMessage)
-}
+import { Observable } from 'rxjs';
+import { Calificacion, UserFB } from 'src/app/domain/user';
+import { AuthUserService } from 'src/app/services/auth/auth-user.service';
+import { ProfileService } from 'src/app/services/perfil/profile.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
 

@@ -9,8 +9,9 @@ export class Usuario {
     public proveedor?:string) {}
 
     static fromJson(usuarioJSON): Usuario {
-      return Object.assign(new Usuario(), usuarioJSON,{tipo:usuarioJSON.tipo=="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL});
+      return Object.assign(new Usuario(), usuarioJSON);
       //{tipo:usuarioJSON.tipo=="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL}
+      //,{tipo:usuarioJSON.tipo=="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL}
     }
   
     toJSON():any{

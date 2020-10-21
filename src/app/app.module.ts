@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { ProfileComponent } from './profile/profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
@@ -17,11 +16,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { AuthUserService } from './services/auth/auth-user.service';
-import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 import { ResetPassComponent } from './compLogin/reset-pass/reset-pass.component';
 import { LoginComponent } from './compLogin/login/login.component';
 import { RegisterComponent } from './compLogin/register/register.component';
 import { WelcomeComponent } from './compLogin/welcome/welcome.component';
+import { ProfileUpdateComponent } from './compProfile/profile-update/profile-update.component';
+import { ProfileComponent } from './compProfile/profile/profile.component';
+
 
 @NgModule({
   declarations: [

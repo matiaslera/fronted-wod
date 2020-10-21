@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { ProfileComponent } from './profile/profile.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { AuthUserService } from './services/auth/auth-user.service';
 import { ResetPassComponent } from './compLogin/reset-pass/reset-pass.component';
 import { LoginComponent } from './compLogin/login/login.component';
 import { RegisterComponent } from './compLogin/register/register.component';
 import { WelcomeComponent } from './compLogin/welcome/welcome.component';
+import { ProfileComponent } from './compProfile/profile/profile.component';
+
 
 const routes: Routes = [
   { path: 'ingresar', component: LoginComponent, pathMatch: "full",
