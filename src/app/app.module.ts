@@ -22,6 +22,14 @@ import { RegisterComponent } from './compLogin/register/register.component';
 import { WelcomeComponent } from './compLogin/welcome/welcome.component';
 import { ProfileUpdateComponent } from './compProfile/profile-update/profile-update.component';
 import { ProfileComponent } from './compProfile/profile/profile.component';
+import { NewPresupuestoComponent } from './compJob/new-presupuesto/new-presupuesto.component';
+import { ListTrabajosComponent } from './compJob/list-trabajos/list-trabajos.component';
+import { JobComponent } from './compJob/job/job.component';
+import { JobDetallesComponent } from './compJob/job-detalles/job-detalles.component';
+import { JobRespuestaComponent } from './compJob/job-respuesta/job-respuesta.component';
+import { JobContatarComponent } from './compJob/job-contatar/job-contatar.component';
+import { JobFinalizadoComponent } from './compJob/job-finalizado/job-finalizado.component';
+import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.component';
 
 
 @NgModule({
@@ -36,6 +44,14 @@ import { ProfileComponent } from './compProfile/profile/profile.component';
     ProfileUpdateComponent,
     ResetPassComponent,
     WelcomeComponent,
+    NewPresupuestoComponent,
+    ListTrabajosComponent,
+    JobComponent,
+    JobDetallesComponent,
+    JobRespuestaComponent,
+    JobContatarComponent,
+    JobFinalizadoComponent,
+    JobPendienteComponent,
   ],
   imports: [
     BrowserModule,
