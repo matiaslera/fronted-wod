@@ -1,1 +1,33 @@
-<p>job works!</p>
+<div class="container">
+    <div class="cardContainer">
+        <mat-card >
+    
+            <mat-card-header>
+                <img height="100rem" width="100rem" src={{imagen}} />
+            </mat-card-header>
+    
+            <!-- <mat-card-content>
+                <mat-card-title>
+                    {{consulta.problema}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    Especialidad:
+                    {{consulta.especialidad}}
+                </mat-card-subtitle>
+                <mat-icon mat-list-icon>map</mat-icon>
+                {{consulta.direccion}}
+            </mat-card-content> -->
+            <!--mat-card-content>
+                <mat-card-title>
+                    $ {{consulta.monto}}
+                </mat-card-title>
+    
+            </mat-card-content---->
+        
+    
+            <button class="btn btn-outline-primary" type="submit" *ngIf="esConsulta" (click)="ver()">VER</button>
+    
+        </mat-card>
+    
+    </div>
+    </div>

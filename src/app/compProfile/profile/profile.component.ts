@@ -19,6 +19,9 @@ export class ProfileComponent implements OnInit {
   actualizar: boolean = false;
   errors = [];
   constructor(public authServ: AuthUserService,public perfilSer: ProfileService, private snackBar: MatSnackBar) {
+  }
+
+   ngOnInit():void {
     if(this.authServ.getTipo()==="CLIENTE"){
       this.usuarioBDatos =this.authServ.getCurrentCliente()
       console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
@@ -27,20 +30,6 @@ export class ProfileComponent implements OnInit {
       this.usuarioBDatos =this.authServ.getCurrentProfesional()
       console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
     }
-  }
-
-   ngOnInit():void {
-    //this.usuarioFB=this.perfilSer.usurioFB
-    
-    /* if(this.authServ.getTipo()==="CLIENTE"){
-      this.usuarioBDatos =this.authServ.getCurrentCliente()
-      console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
-    }
-    if(this.authServ.getTipo()==="PROFESIONAL"){
-      this.usuarioBDatos =this.authServ.getCurrentProfesional()
-      console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
-    } */
-    //this.usuarioBDatos=this.perfilSer.usuarioBD
     console.log(this.usuarioBDatos)
   }
 

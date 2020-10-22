@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "home", component: AppComponent, pathMatch: "full" },
   { path: "resetear", component: ResetPassComponent, pathMatch: "full" },
   { path: "bienvenido", component: WelcomeComponent, pathMatch: "full" },
-  { path: "nuevoPresupuesto", component: NewPresupuestoComponent, pathMatch: "full" },
+  { path: "searchPresupuesto", component: NewPresupuestoComponent, pathMatch: "full" },
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, 
 ];

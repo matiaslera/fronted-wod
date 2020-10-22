@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Presupuesto } from 'src/app/domain/presupuesto';
 
 @Component({
   selector: 'app-job-finalizado',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobFinalizadoComponent implements OnInit {
 
-  constructor() { }
+  
+  trabajos: Presupuesto[] = []
+  imagen= "../../assets/terminado.jpg"
+  constructor(/* public trabajoServices: PresupuestoService */) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getTrabajos()
+    console.log(this.trabajos)
+  }
+
+  async getTrabajos(){
+    try{
+   // this.trabajos=await  this.trabajoServices.trabajosTerminado()
+  } catch{
+     console.log('error en cargar lista')
+   }
+  }
+
+  noTieneTrabajos(){
+    return this.trabajos.length ===0
   }
 
 }

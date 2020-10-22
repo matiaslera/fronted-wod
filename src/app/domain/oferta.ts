@@ -1,3 +1,5 @@
+import { Presupuesto } from './presupuesto'
+
 export class Oferta {
 
    constructor(public id?:number, public comentario?:string, public fechaCreada?:Date, public monto?:number, public idProfesional?:number, 
@@ -16,3 +18,7 @@ export class Oferta {
         }
     }
 }
+export interface DialogJob {
+    presupuesto: Presupuesto;
+    oferta: Oferta;
+  }
