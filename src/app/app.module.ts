@@ -30,6 +30,7 @@ import { JobRespuestaComponent } from './compJob/job-respuesta/job-respuesta.com
 import { JobContatarComponent } from './compJob/job-contatar/job-contatar.component';
 import { JobFinalizadoComponent } from './compJob/job-finalizado/job-finalizado.component';
 import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.component';
+import { PopupPresupuestoComponent } from './compJob/popup-presupuesto/popup-presupuesto.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.com
     JobContatarComponent,
     JobFinalizadoComponent,
     JobPendienteComponent,
+    PopupPresupuestoComponent,
   ],
   imports: [
     BrowserModule,

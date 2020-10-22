@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
 
 @Component({
   selector: 'app-new-presupuesto',
@@ -21,7 +23,7 @@ export class NewPresupuestoComponent implements OnInit {
  /*  problemas:Presupuesto[]; */
 
   constructor(private builder: FormBuilder,/*  private presService:PresupuestoService ,*/private profileService: ProfileService,
-   /*  public dialog: MatDialog  */) { }
+     public dialog: MatDialog  ) { }
 
   ngOnInit(): void {
     this.getPresupuestos()
@@ -51,8 +53,8 @@ export class NewPresupuestoComponent implements OnInit {
     });
   
   }
- /*  create(){
-    const dialogRef = this.dialog.open(AddPresupuestoComponent, {
+  create(){
+    const dialogRef = this.dialog.open(PopupPresupuestoComponent, {
       height: '600px',
       width: '700px',
       data: {especialidad:this.busquedaForm.get('especialidad').value,
@@ -61,7 +63,8 @@ export class NewPresupuestoComponent implements OnInit {
   }
 
   esCliente():boolean{
-    this.profileService.tipo()
-    return this.profileService.esCliente
-  } */
+    return true
+  //  this.profileService.tipo()
+    //return this.profileService.esCliente
+  } 
 }
