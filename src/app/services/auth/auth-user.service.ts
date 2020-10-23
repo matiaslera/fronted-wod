@@ -91,10 +91,10 @@ export class AuthUserService {
 
   async logOut() {
     try {
-      await this.angularAuth.signOut();
     localStorage.removeItem("calificacion");
     localStorage.removeItem("currentProfesional");
     localStorage.removeItem("currentCliente");
+    await this.angularAuth.signOut();
     } catch (error) {
       console.log(error);
     }

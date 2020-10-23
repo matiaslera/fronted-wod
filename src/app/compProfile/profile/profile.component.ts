@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     }
     if(this.authServ.getTipo()==="PROFESIONAL"){
       this.usuarioBDatos =this.authServ.getCurrentProfesional()
-      console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
+      console.log("estoy en LOCAL STORAGE- PROFESIONAL:",this.usuarioBDatos)
     }
     console.log(this.usuarioBDatos)
   }
