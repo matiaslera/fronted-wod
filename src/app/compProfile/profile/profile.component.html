@@ -1,15 +1,15 @@
 <div class="box" *ngIf="user$ | async as user else load">
-	<mat-card class="perfil" >
+	<mat-card class="perfil">
 		<img *ngIf="foto()" src="{{usuarioFire?.photoURL}}" class="imag" alt="No se encontro imagen">
 		<img *ngIf="!foto()" src="../../assets/perfil01.jpg" class="imag" alt="No se encontro imagen">
 		<mat-card-content class="perfil__label-cont">
-			<div class="perfil__linea" >
+			<div class="perfil__linea">
 				<label class="perfil__label">Nombre: </label>
 				<label class="perfil__label-dato">{{usuarioBDatos.usuario?.nombre}}</label>
 			</div>
-			<div class="perfil__linea" >   
+			<div class="perfil__linea">
 				<label class="perfil__label">Apellido: </label>
-				<label class="perfil__label-dato">{{usuarioBDatos.usuario?.apellido}}</label> 
+				<label class="perfil__label-dato">{{usuarioBDatos.usuario?.apellido}}</label>
 			</div>
 			<div class="perfil__linea">
 				<label class="perfil__label">Email: </label>
@@ -17,20 +17,22 @@
 			</div>
 			<div class="perfil__linea">
 				<label class="perfil__label">Telefono: </label>
-				<label class="perfil__label-dato" >{{usuarioBDatos.usuario.telefono > 0 ?usuarioBDatos.usuario.telefono : '-'}}</label>
+				<label
+					class="perfil__label-dato">{{usuarioBDatos.usuario.telefono > 0 ?usuarioBDatos.usuario.telefono : '-'}}</label>
 			</div>
 		</mat-card-content>
 		<mat-card-actions class="profile-userbuttons">
 			<button mat-raised-button color="accent" class="btn" (click)="modify()">Modificar</button>
-			<button mat-raised-button color="accent"  class="btn">Chat</button>
+			<button mat-raised-button color="accent" class="btn" (click)="verDato()">Ver Datos</button>
+			<button mat-raised-button color="accent" class="btn">Chat</button>
 		</mat-card-actions>
 	</mat-card>
 </div>
-<div class="box" *ngIf="actualizar">
-	<app-profile-update (cancelar)="cancel($event)">
-	</app-profile-update>
-</div>
+
+<app-profile-update [actualizar]="actualizar" (cancelar)="cancel($event)">
+</app-profile-update>
+
 
 <ng-template #load style="color:black">
-Cargando....
+	Cargando....
 </ng-template>

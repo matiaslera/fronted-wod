@@ -5,7 +5,6 @@ import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { Calificacion, Tipo, UserFB } from 'src/app/domain/user';
 import { Observable } from 'rxjs';
-import { User } from 'firebase';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
 
@@ -47,6 +46,7 @@ export class LoginComponent implements OnInit {
     var usurioLogeado = new UserFB()
     const { usuario, contrasenia } = this.formulario.value;
     usurioLogeado.email=usuario
+    debugger
     try {
       await this.authSvc.login(usuario, contrasenia);
       await this.authSvc.angularAuth.onAuthStateChanged(async user=>{

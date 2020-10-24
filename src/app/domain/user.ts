@@ -9,7 +9,7 @@ export class Usuario {
     public proveedor?:string) {}
 
     static fromJson(usuarioJSON): Usuario {
-      return Object.assign(new Usuario(), usuarioJSON,{tipo:usuarioJSON.tipo==="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL});
+      return Object.assign(new Usuario(), usuarioJSON,{tipo:usuarioJSON.tipo==="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL},{fechaDeNacimiento:this.fechaFromJSON(usuarioJSON.fechaDeNacimiento.dayOfMonth,usuarioJSON.fechaDeNacimiento.monthValue,usuarioJSON.fechaDeNacimiento.year)});
       //{tipo:usuarioJSON.tipo=="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL}
       //,{tipo:usuarioJSON.tipo=="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL}
     }
@@ -18,6 +18,17 @@ export class Usuario {
       return{
         ...this
       }
+    }
+
+    static fechaFromJSON(day:string,month:string,year:string): Date {
+      console.log(day)
+      console.log(month)
+      console.log(year)
+      const res = new Date()
+      res.setDate(Number(day))
+      res.setMonth(Number(month))
+      res.setFullYear(Number(year))
+      return res
     }
 }
 
@@ -37,3 +48,4 @@ export class UserFB{
 }
 
 export type Calificacion = Cliente | Profesional 
+

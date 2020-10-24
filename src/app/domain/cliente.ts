@@ -5,16 +5,18 @@ export class Cliente {
   constructor(public id?: number, public usuario?: Usuario) {}
 
   static fromJson(usuarioJSON): Cliente {
-    return Object.assign(new Cliente(), usuarioJSON,{usuario:Usuario.fromJson(usuarioJSON.usuario)});
+    return Object.assign(new Cliente(), usuarioJSON, {
+      usuario: Usuario.fromJson(usuarioJSON.usuario),
+    });
     //,{ usuario: User.fromJSON(tareaJSON.asignadoA) }
   }
 
   toJSON(): any {
     return {
-        ...this,
-        //asignatario: null,
-        //asignadoA: this.asignatario ? this.asignatario.nombre : ''
-    }
-}
-
+      ...this,
+      usuario: this.usuario.toJSON(),
+      //asignatario: null,
+      //asignadoA: this.asignatario ? this.asignatario.nombre : ''
+    };
+  }
 }

@@ -10,12 +10,21 @@
     justify-content: center;
     flex-flow: row wrap;
   }
-  
-  .perfil__label-cont {
+
+  .card__lat-colum{
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
-    margin: 0 1.5em;
+  }
+  
+  .perfil__label-cont {
+    display: flex;
+    color: var(--color_uno);
+    justify-content: center;
+    flex-flow: column wrap;
+    margin: 0 0.5em;
+    font-weight: 600;
+    font-size: 1.3em;
   }
   
   .perfil__linea {

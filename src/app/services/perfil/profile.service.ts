@@ -66,6 +66,7 @@ export class ProfileService {
   
   /*Actualizar de un cliente*/
   async actualizarCliente(cliente: Cliente) {
+    console.log(cliente.toJSON())
     await this.httpCLient
       .put(REST_SERVER_URL + '/update_cliente/' + cliente.id, cliente.toJSON())
       .toPromise();
@@ -79,7 +80,7 @@ export class ProfileService {
   /*Eliminar un cliente*/
   async eliminarCliente(cliente: Cliente) {
     await this.httpCLient
-      .delete(REST_SERVER_URL + '/delete_cliente' + cliente.id, cliente.toJSON())
+      .delete(REST_SERVER_URL + '/delete_cliente/' + cliente.id)
       .toPromise();
   }
 /*Leer un Profesional*/
@@ -111,7 +112,7 @@ async crearProfesional(profesional: Profesional) {
 /*Eliminar un Profesional*/
 async eliminarProfesional(profesional: Profesional) {
   await this.httpCLient
-    .delete(REST_SERVER_URL + '/delete_profesional' + profesional.id, profesional.toJSON())
+    .delete(REST_SERVER_URL + '/delete_profesional/' + profesional.id, profesional.toJSON())
     .toPromise();
 }
 

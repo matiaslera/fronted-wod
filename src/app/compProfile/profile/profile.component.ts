@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   public user$: Observable<any> = this.authServ.angularAuth.user; //esta conectado o no
   usuarioBDatos:Calificacion// =this.perfilSer.usuarioBD
   usuarioFire:User
-  actualizar: boolean = false;
+  actualizar: number=0;
   errors = [];
   constructor(public authServ: AuthUserService,public perfilSer: ProfileService, private snackBar: MatSnackBar) {
   }
@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
    ngOnInit():void {
     if(this.authServ.getTipo()==="CLIENTE"){
       this.usuarioBDatos =this.authServ.getCurrentCliente()
+      this. foto()
       console.log("estoy en LOCAL STORAGE- CLIENTE:",this.usuarioBDatos)
     }
     if(this.authServ.getTipo()==="PROFESIONAL"){
@@ -34,7 +35,11 @@ export class ProfileComponent implements OnInit {
   }
 
   modify() {
-    this.actualizar = true;
+    this.actualizar = 2
+  }
+
+  verDato(){
+    this.actualizar=1
   }
 
   cancel(condicion) {
