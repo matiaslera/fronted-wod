@@ -26,7 +26,7 @@
                 </mat-card-actions>
             </form>
         </mat-card-content>
-        <mat-card-content class="perfil__label-cont">
+        <mat-card-content *ngIf="esCliente()" class="perfil__label-cont">
             <form [formGroup]="formDomicilio" (ngSubmit)="updateDireccion()">.
                 <div class="card__lat">
                     <div class="perfil__linea">
@@ -65,7 +65,7 @@
             <div class="card__lat-colum">
                 <div class="perfil__linea">
                     <label class="perfil__label">Dni: </label> <label class="perfil__label-cont">
-                        {{usuarioBD.usuario.dni}}</label>
+                        {{usuarioBD.usuario.dni > 100 ?usuarioBD.usuario.dni : '-'}}</label>
                 </div>
                 <div class="perfil__linea">
                     <label class="perfil__label">Nacionalidad: </label> <label
@@ -77,27 +77,27 @@
                 </div>
                 <div class="perfil__linea">
                     <label class="perfil__label">Telefono: </label> <label class="perfil__label-cont">
-                        {{usuarioBD.usuario.telefono}}</label>
+                        {{usuarioBD.usuario.telefono > 1000? usuarioBD.usuario.telefono : '-'}}</label>
                 </div>
             </div>
         </mat-card-content>
-        <mat-card-content class="perfil__label-cont">
-                <div class="card__lat-colum">
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Provincia: </label>
+        <mat-card-content *ngIf="esCliente()" class="perfil__label-cont">
+            <div class="card__lat-colum">
+                <div class="perfil__linea">
+                    <label class="perfil__label">Provincia: </label>
 
-                    </div>
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Ciudad: </label>
-
-                    </div>
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Calle: </label>
-                    </div>
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Piso/Departamento: </label>
-                    </div>
                 </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Ciudad: </label>
+
+                </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Calle: </label>
+                </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Piso/Departamento: </label>
+                </div>
+            </div>
         </mat-card-content>
         <mat-card-actions class="perfil__acc">
             <button mat-raised-button color="accent" class="btn" (click)="cancelar.emit(false)">Cancelar</button>

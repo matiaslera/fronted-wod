@@ -45,7 +45,7 @@
   
   .perfil__label {
     text-align: center;
-    font-size: 1.6em;
+    font-size: 1em;
     color: var(--color_cyan-700, #08d9d6);
     font-weight: bold;
     letter-spacing: 1px;
@@ -57,10 +57,11 @@
   /*Perfil Botones*/
   .perfil__acc {
     text-align: center;
-    margin: 0.8em;
+    margin: 0.8em 0 0 0;
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
+    padding: 0;
   }
   
   .perfil__acc .btn {
