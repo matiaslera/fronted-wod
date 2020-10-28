@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Trabajo } from 'src/app/domain/trabajo';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
 
 @Component({
@@ -11,18 +13,16 @@ import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuest
 })
 export class NewPresupuestoComponent implements OnInit {
 
-
+    problemas:Trabajo[]; 
   /* basePresupuestos: Presupuesto[]; */
   busquedaForm = this.builder.group({
     problema: ['', Validators.required],
     especialidad: ['', Validators.required],
   });
-  
   especialidad: string[] = ["Electricidad", "Plomeria", "Herreria","Gasista","Carpinteria","Pintor","Armado en Seco"];
 
- /*  problemas:Presupuesto[]; */
 
-  constructor(private builder: FormBuilder,/*  private presService:PresupuestoService ,*/private profileService: ProfileService,
+  constructor(private builder: FormBuilder,  private presService:TrabajoService ,private profileService: ProfileService,
      public dialog: MatDialog  ) { }
 
   ngOnInit(): void {
@@ -42,7 +42,8 @@ export class NewPresupuestoComponent implements OnInit {
   }
 
   async getPresupuestos(){
-     //this.problemas=await this.presService.presupuesto()
+     this.problemas=await this.presService.trabajosFinalizados()
+     console.log(this.problemas)
   }
 
 

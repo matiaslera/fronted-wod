@@ -12,7 +12,10 @@ export class  Oferta {
   ) {}
 
   static fromJson(ofertaJSON): Oferta {
-    return Object.assign(new Oferta(), ofertaJSON);
+    return Object.assign(new Oferta(), ofertaJSON,{fechaCreada:ofertaJSON.fechaCreada !== null ? this.fechaFromJSON(
+      ofertaJSON.fechaCreada.dayOfMonth,
+      ofertaJSON.fechaCreada.monthValue,
+      ofertaJSON.fechaCreada.year): null,} );
   }
 
   toJSON(): any {
@@ -21,6 +24,17 @@ export class  Oferta {
       //asignatario: null,
       //asignadoA: this.asignatario ? this.asignatario.nombre : ''
     };
+  }
+
+  static fechaFromJSON(day: string, month: string, year: string): Date {
+    console.log(day);
+    console.log(month);
+    console.log(year);
+    const res = new Date();
+    res.setDate(Number(day));
+    res.setMonth(Number(month));
+    res.setFullYear(Number(year));
+    return res;
   }
 }
 export interface DialogJob {

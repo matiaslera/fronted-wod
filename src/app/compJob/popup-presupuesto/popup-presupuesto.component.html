@@ -1,1 +1,31 @@
-<p>popup-presupuesto works!</p>
+<form [formGroup]="busquedaForm" (ngSubmit)="enviarConsulta()">
+
+    <div class="form-group">
+        <label>  <strong>Especialidad: </strong></label>
+        <input type="text" class="form-control" formControlName="especialidad"  placeholder="Especialidad">
+      </div>
+
+      <div class="form-group">
+        <label ><strong>Problema: </strong></label>
+        <input type="text" class="form-control"  formControlName="problema" placeholder="titulo del problema" >
+      </div>
+
+    <div class="form-group">
+        <label><strong>Direccion: </strong></label>
+        <input type="text" class="form-control" formControlName="direccion"  placeholder="Direccion">
+      </div>
+
+      <label > <strong>Descripcion: </strong></label>
+    <div class="form-group">
+      <textarea class="form-control" rows="3" formControlName="descripcion" placeholder="Introduce la descripcion del problema"></textarea>
+    </div>
+
+    <label for="ejemplo_archivo_1">Adjuntar un archivo</label>
+    <div class="form-group">
+      <input type="file" id="ejemplo_archivo_1">
+    </div>
+  </form>
+
+  <button type="submit" class="btn btn-outline-primary"  (click)="cancelar()">Cancelar</button>  &nbsp; 
+    <button type="submit" class="btn btn-outline-primary" (click)="enviarConsulta()" >Enviar Consulta </button> &nbsp;
+ 

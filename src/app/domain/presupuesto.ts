@@ -3,24 +3,29 @@ import { Oferta } from './oferta';
 
 export class Presupuesto {
   constructor(
-    public _id?: number,
-    public _nombre?: string,
-    public _especialidad?: string,
-    public _fecha?: Date,
-    public _direccion?: Direccion,
-    public _descripcion?: string,
-    public _notas?: string,
-    public _monto?: number,
-    public _realizado?: boolean,
-    public _ofertas?: Oferta[]
+    public nombre?: string,
+    public especialidad?: string,
+    public descripcion?: string,
+    public notas?: string,
+    public direccion?: Direccion,
+    public fechaCreacion?: Date,
+    public ofertas?: Oferta[]
   ) {}
 
   static fromJson(problemJSON): Presupuesto {
-    return Object.assign(new Presupuesto(), problemJSON, {
-      _ofertas: problemJSON.ofertas.map((oferta) =>
-        Oferta.fromJson(oferta)
-      ),
-    });
+    console.log("este es el json",problemJSON)
+    return Object.assign(
+      new Presupuesto(),
+      problemJSON,
+      {
+        ofertas:problemJSON.ofertas !== null ?this.listJson(problemJSON.ofertas):null
+      },
+       { direccion:problemJSON.direccion===undefined?null: Direccion.fromJson(problemJSON.direccion) } 
+    );
+  }
+  
+  static listJson(ofertas): Oferta[]{
+    return ofertas.map((oferta) => Oferta.fromJson(oferta))
   }
 
   toJSON(): any {
@@ -28,4 +33,9 @@ export class Presupuesto {
       ...this,
     };
   }
+
 }
+
+/* export const condicionesFromJSON = (condiciones): Oferta[] => {
+  return condiciones.map(condicion => this.fromJson(condicion))
+} */
