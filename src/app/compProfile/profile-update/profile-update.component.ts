@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cliente } from 'src/app/domain/cliente';
+import { Direccion } from 'src/app/domain/direccion';
 import { Profesional } from 'src/app/domain/profesional';
 import { Calificacion, Tipo, Usuario } from 'src/app/domain/user';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
@@ -21,18 +22,17 @@ export class ProfileUpdateComponent implements OnInit {
   cliente: Cliente = new Cliente();
   profesional: Profesional = new Profesional();
   formDomicilio: FormGroup = this.formularioFB.group({
-    usuario: ['', Validators.required],
-    youEmail: ['', [Validators.required, Validators.email]],
-    contrasenia: ['', [Validators.required, Validators.minLength(6)]],
-    confirmarContrasenia: ['', [Validators.required, Validators.minLength(4)]],
+    provincia: ['', Validators.required],
+    ciudad: ['', [Validators.required]],
+    codPostal: ['', [Validators.required]],
+    calle: ['', [Validators.required]],
+    numero:[''],
+    pisoDep:[''],
   });
 
   formDatos: FormGroup = this.formularioFB.group({
     nacionalidad: ['', Validators.required],
-    telefono: [
-      '',
-      [Validators.required, Validators.minLength(6), Validators.maxLength(16)],
-    ],
+    telefono: ['',[Validators.required, Validators.minLength(6), Validators.maxLength(16)],],
     nacimiento: [''],
     dni: [''],
   });
@@ -67,8 +67,35 @@ export class ProfileUpdateComponent implements OnInit {
   get dni() {
     return this.formDatos.get('dni');
   }
-
-  updateDireccion() {
+  get provincia() {
+    return this.formDomicilio.get('provincia');
+  }
+  get ciudad() {
+    return this.formDomicilio.get('ciudad');
+  }
+  get codPostal() {
+    return this.formDomicilio.get('codPostal');
+  }
+  get calle() {
+    return this.formDomicilio.get('calle');
+  }
+  get altura() {
+    return this.formDomicilio.get('altura');
+  }
+  get pisoDep() {
+    return this.formDomicilio.get('pisoDep');
+  }
+  
+  async updateDireccion() {
+    if (this.esCliente()) {
+      this.formDireccion()
+      this.perfilSer.actualizarCliente(this.cliente);
+      localStorage.removeItem('currentCliente');;
+      this.authServ.setCliente( await this.perfilSer.getIdCliente(this.cliente.id) );
+      this.usuarioBD = this.authServ.getCurrentCliente();
+      this.update.emit('listo');
+      this.mensaje('se actualizo la direccion correctamente');
+    }
     console.log('actualizando direccion');
   }
 
@@ -123,6 +150,18 @@ export class ProfileUpdateComponent implements OnInit {
     this.userUpdate.fechaDeNacimiento = this.formDatos.get('nacimiento').value;
     this.userUpdate.telefono = this.formDatos.get('telefono').value;
     this.userUpdate.dni = this.formDatos.get('dni').value;
+  }
+  
+  formDireccion(){
+    var dire = new Direccion()
+    dire.provincia = this.formDomicilio.get('provincia').value;
+    dire.ciudad = this.formDomicilio.get('ciudad').value;
+    dire.codPostal = this.formDomicilio.get('codPostal').value;
+    dire.calle = this.formDomicilio.get('calle').value;
+    dire.altura = this.formDomicilio.get('numero').value;
+    dire.pisoDep =  this.formDomicilio.get('pisoDep').value;
+    this.cliente.domicilio=dire
+    this.updateCliente()
   }
 
   mensaje(errorType: string) {

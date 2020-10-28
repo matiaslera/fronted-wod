@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
 .box {
   height: auto;
   margin: 1em;
@@ -98,7 +100,7 @@ td {
 
 /* demo styles */
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
 
 section {
   background: -webkit-linear-gradient(left, #25c481, #25b7c4);

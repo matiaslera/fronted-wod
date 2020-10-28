@@ -28,22 +28,30 @@
         </mat-card-content>
         <mat-card-content *ngIf="esCliente()" class="perfil__label-cont">
             <form [formGroup]="formDomicilio" (ngSubmit)="updateDireccion()">.
-                <div class="card__lat">
+                <div class="card__lat-colum">
                     <div class="perfil__linea">
                         <label class="perfil__label">Provincia: </label>
-                        <input type="text">
+                        <input type="text" formControlName="provincia">
                     </div>
                     <div class="perfil__linea">
                         <label class="perfil__label">Ciudad: </label>
-                        <input type="text">
+                        <input type="text" formControlName="ciudad">
+                    </div>
+                    <div class="perfil__linea">
+                        <label class="perfil__label">Cod Postal: </label>
+                        <input type="number" formControlName="codPostal">
                     </div>
                     <div class="perfil__linea">
                         <label class="perfil__label">Calle: </label>
-                        <input type="text">
+                        <input type="text" formControlName="calle">
+                    </div>
+                    <div class="perfil__linea">
+                        <label class="perfil__label">Numero: </label>
+                        <input type="number" formControlName="numero">
                     </div>
                     <div class="perfil__linea">
                         <label class="perfil__label">Piso/Departamento: </label>
-                        <input type="text">
+                        <input type="text" formControlName="pisoDep">
                     </div>
                 </div>
                 <mat-card-actions class="perfil__acc">
@@ -85,14 +93,18 @@
             <div class="card__lat-colum">
                 <div class="perfil__linea">
                     <label class="perfil__label">Provincia: </label>
-
                 </div>
                 <div class="perfil__linea">
                     <label class="perfil__label">Ciudad: </label>
-
+                </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Cod Postal: </label>
                 </div>
                 <div class="perfil__linea">
                     <label class="perfil__label">Calle: </label>
+                </div>
+                <div class="perfil__linea">
+                    <label class="perfil__label">Numero: </label>
                 </div>
                 <div class="perfil__linea">
                     <label class="perfil__label">Piso/Departamento: </label>
