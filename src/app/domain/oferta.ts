@@ -4,10 +4,9 @@ export class  Oferta {
   constructor(
     public id?: number,
     public comentario?: string,
-    public fechaCreada?: Date,
-    public monto?: number,
+    public fechaCreacion?: Date,
+    public montoAprox?: number,
     public idProfesional?: number,
-    public nombreApellido?: string,
     public especialidad?: string
   ) {}
 

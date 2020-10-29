@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Trabajo } from 'src/app/domain/trabajo';
+import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
@@ -9,63 +10,79 @@ import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuest
 @Component({
   selector: 'app-new-presupuesto',
   templateUrl: './new-presupuesto.component.html',
-  styleUrls: ['./new-presupuesto.component.css']
+  styleUrls: ['./new-presupuesto.component.css'],
 })
 export class NewPresupuestoComponent implements OnInit {
-
-    problemas:Trabajo[]; 
-  /* basePresupuestos: Presupuesto[]; */
+  problemas: Trabajo[];
   busquedaForm = this.builder.group({
     problema: ['', Validators.required],
     especialidad: ['', Validators.required],
   });
-  especialidad: string[] = ["Electricidad", "Plomeria", "Herreria","Gasista","Carpinteria","Pintor","Armado en Seco"];
+  especialidad: string[] = [
+    'Electricidad',
+    'Plomeria',
+    'Herreria',
+    'Gasista',
+    'Carpinteria',
+    'Pintor',
+    'Armado en Seco',
+  ];
 
-
-  constructor(private builder: FormBuilder,  private presService:TrabajoService ,private profileService: ProfileService,
-     public dialog: MatDialog  ) { }
+  constructor(
+    private builder: FormBuilder,
+    private presService: TrabajoService,
+    public authServ: AuthUserService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.getPresupuestos()
+    this.getPresupuestos();
   }
 
-  async buscar(){
-    try {
-      //await this.presService.busqueda(this.busquedaForm.value)
-      //this.problemas=this.presService.basePresupuestos
-    }
-    catch (e) {
-      e.error
-    }
+  buscar() {
+    var palabra = this.busquedaForm.get('problema').value;
+    var especial = this.busquedaForm.get('especialidad').dirty;
     console.log(this.busquedaForm.value);
-    
+    this.problemas = this.problemas.filter((trabajo) => this.contiene(trabajo, palabra));
+    if (especial) {
+      this.problemas = this.problemas.filter(
+        (trabajo) => trabajo.presupuesto.especialidad === this.busquedaForm.get('especialidad').value
+      );
+    }
   }
 
-  async getPresupuestos(){
-     this.problemas=await this.presService.trabajosFinalizados()
-     console.log(this.problemas)
+  contiene(trabajo: Trabajo, palabra: string): boolean {
+    palabra = palabra.toLowerCase();
+    return ( trabajo.presupuesto.nombre.toLowerCase().includes(palabra) ||
+      trabajo.presupuesto.descripcion.toLowerCase().includes(palabra)
+    );
+    //||receta.presupuesto.ofertas.some(ingrediente => ingrediente.alimento.nombre.toLowerCase().includes(palabra))
   }
 
+  async getPresupuestos() {
+    this.problemas = await this.presService.trabajosFinalizados();
+    console.log(this.problemas);
+  }
 
-  clear(){
+  async clear() {
     this.busquedaForm.patchValue({
       problema: '',
       especialidad: '',
     });
-  
+    await this.getPresupuestos();
   }
-  create(){
+  create() {
     const dialogRef = this.dialog.open(PopupPresupuestoComponent, {
       height: '600px',
       width: '700px',
-      data: {especialidad:this.busquedaForm.get('especialidad').value,
-        problema:  this.busquedaForm.get('problema').value} })
-  
+      data: {
+        especialidad: this.busquedaForm.get('especialidad').value,
+        problema: this.busquedaForm.get('problema').value,
+      },
+    });
   }
 
-  esCliente():boolean{
-    return true
-  //  this.profileService.tipo()
-    //return this.profileService.esCliente
-  } 
+  esCliente(): boolean {
+    return this.authServ.getTipo() === 'CLIENTE';
+  }
 }

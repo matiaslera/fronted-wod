@@ -25,21 +25,17 @@ export class Usuario {
       },
       {
         fechaDeNacimiento:
-          usuarioJSON.fechaDeNacimiento !== null ? this.fechaFromJSON(
+          usuarioJSON.fechaDeNacimiento !== null
+            ? this.fechaFromJSON(
                 usuarioJSON.fechaDeNacimiento.dayOfMonth,
                 usuarioJSON.fechaDeNacimiento.monthValue,
-                usuarioJSON.fechaDeNacimiento.year)
+                usuarioJSON.fechaDeNacimiento.year
+              )
             : null,
       }
     );
     //{tipo:usuarioJSON.tipo=="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL}
     //,{tipo:usuarioJSON.tipo=="CLIENTE"?Tipo.CLIENTE:Tipo.PROFESIONAL}
-  }
-
-  toJSON(): any {
-    return {
-      ...this,
-    };
   }
 
   static fechaFromJSON(day: string, month: string, year: string): Date {
@@ -51,6 +47,12 @@ export class Usuario {
     res.setMonth(Number(month));
     res.setFullYear(Number(year));
     return res;
+  }
+
+  toJSON(): any {
+    return {
+      ...this,
+    };
   }
 }
 

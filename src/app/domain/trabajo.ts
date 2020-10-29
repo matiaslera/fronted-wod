@@ -20,17 +20,11 @@ export class Trabajo {
       {fechaFinalizacion:problemJSON.fechaFinalizacion !== null ? this.fechaFromJSON(
         problemJSON.fechaFinalizacion.dayOfMonth,
         problemJSON.fechaFinalizacion.monthValue,
-        problemJSON.fechaFinalizacion.year)
-    : null,} // {_ofertas: problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)),}
+        problemJSON.fechaFinalizacion.year): null},
+      {estado:this.estadoFromJSON(problemJSON.estado)} // {_ofertas: problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)),}
     );
   }
-
-  toJSON(): any {
-    return {
-      ...this,
-    };
-  }
-
+  
   static fechaFromJSON(day: string, month: string, year: string): Date {
     console.log(day);
     console.log(month);
@@ -41,6 +35,24 @@ export class Trabajo {
     res.setFullYear(Number(year));
     return res;
   }
+
+  static estadoFromJSON(estado: string) {
+    if (estado === 'PUBLICADO') {
+      return Estado.PUBLICADO;
+    }
+    if (estado === 'CONTRATADO') {
+      return Estado.CONTRATADO;
+    }
+    if (estado === 'FINALIZADO') {
+      return Estado.FINALIZADO;
+    }
+  }
+  toJSON(): any {
+    return {
+      ...this,
+    };
+  }
+
 }
 
 export enum Estado {
