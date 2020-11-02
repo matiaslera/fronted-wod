@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { Calificacion, UserFB } from 'src/app/domain/user';
@@ -20,7 +19,6 @@ export class ProfileComponent implements OnInit {
   constructor(
     public authServ: AuthUserService,
     public perfilSer: ProfileService,
-    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {

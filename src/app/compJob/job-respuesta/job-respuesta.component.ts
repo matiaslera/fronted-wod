@@ -31,7 +31,7 @@ export class JobRespuestaComponent implements OnInit {
   }
 
   cargarData(){
-    this.ofertaJob.fechaCreada=new Date()
+    //this.ofertaJob.fechaCreada=new Date()
     /* this.ofertaJob.especialidad=this.user.getUser().especialidad
     this.ofertaJob.nombreApellido= this.user.getUser().nombreyApellido
     this.ofertaJob.idProfesional=this.user.getUserLoggedId() */

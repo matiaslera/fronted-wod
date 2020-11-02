@@ -13,7 +13,8 @@ import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuest
   styleUrls: ['./new-presupuesto.component.css'],
 })
 export class NewPresupuestoComponent implements OnInit {
-  problemas: Trabajo[];
+  problemas: Trabajo[]=[];
+  job:Trabajo;
   busquedaForm = this.builder.group({
     problema: ['', Validators.required],
     especialidad: ['', Validators.required],
@@ -60,8 +61,10 @@ export class NewPresupuestoComponent implements OnInit {
   }
 
   async getPresupuestos() {
+    this.job=await this.presService.unTrabajo()
+    console.log(this.job)
     this.problemas = await this.presService.trabajosFinalizados();
-    console.log(this.problemas);
+    console.log(this.problemas)
   }
 
   async clear() {
@@ -75,6 +78,8 @@ export class NewPresupuestoComponent implements OnInit {
     const dialogRef = this.dialog.open(PopupPresupuestoComponent, {
       height: '600px',
       width: '700px',
+      hasBackdrop: false,
+      panelClass: 'custom-dialog-container',
       data: {
         especialidad: this.busquedaForm.get('especialidad').value,
         problema: this.busquedaForm.get('problema').value,

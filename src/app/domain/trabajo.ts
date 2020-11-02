@@ -1,3 +1,4 @@
+import { Oferta } from './oferta';
 import { Presupuesto } from './presupuesto';
 
 export class Trabajo {
@@ -16,14 +17,27 @@ export class Trabajo {
     return Object.assign(
       new Trabajo(),
       problemJSON,
-      {presupuesto:Presupuesto.fromJson(problemJSON.presupuesto)},
-      {fechaFinalizacion:problemJSON.fechaFinalizacion !== null ? this.fechaFromJSON(
+     {presupuesto:Presupuesto.fromJson(problemJSON.presupuesto)},
+     {fechaFinalizacion: this.fechaFromJSON(
         problemJSON.fechaFinalizacion.dayOfMonth,
         problemJSON.fechaFinalizacion.monthValue,
-        problemJSON.fechaFinalizacion.year): null},
-      {estado:this.estadoFromJSON(problemJSON.estado)} // {_ofertas: problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)),}
+        problemJSON.fechaFinalizacion.year)},
+      {estado:this.estadoFromJSON(problemJSON.estado)}, 
+       //{ofertas: problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)),}
     );
   }
+  /**problemJSON.fechaFinalizacion !== null ?
+   * fechaFinalizacion:
+chronology: {id: "ISO", calendarType: "iso8601"}
+dayOfMonth: 2
+dayOfWeek: "SUNDAY"
+dayOfYear: 33
+era: "CE"
+leapYear: true
+month: "FEBRUARY"
+monthValue: 2
+year: 2020
+   */
   
   static fechaFromJSON(day: string, month: string, year: string): Date {
     console.log(day);
