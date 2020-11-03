@@ -35,11 +35,19 @@ export class TrabajoService {
 
   /*Conseguir trabajos publicados */
   async trabajoPublicado(id:number): Promise<Trabajo[]> {
-    console.log(id)
     const trabajos = await this.httpCLient
     .get<Trabajo[]>(REST_SERVER_URL + '/query_made/'+id)
     .toPromise();
     console.log(trabajos)
   return trabajos.map((job) => Trabajo.fromJson(job));
+  }
+
+  /*Conseguir un trabajo completo, con sus detalles */
+  async trabajoFull(id:number){
+    const job = await this.httpCLient
+      .get<Trabajo>(REST_SERVER_URL + '/job_completo/'+id)
+      .toPromise();
+    return Trabajo.fromJson(job);
+
   }
 }

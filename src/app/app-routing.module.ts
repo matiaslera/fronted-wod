@@ -12,6 +12,8 @@ import { ProfileComponent } from './compProfile/profile/profile.component';
 import { NewPresupuestoComponent } from './compJob/new-presupuesto/new-presupuesto.component';
 import { ListTrabajosComponent } from './compJob/list-trabajos/list-trabajos.component';
 import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.component';
+import { JobDetallesComponent } from './compJob/job-detalles/job-detalles.component';
+import { JobRespuestaComponent } from './compJob/job-respuesta/job-respuesta.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: "bienvenido", component: WelcomeComponent, pathMatch: "full" },
   { path: "searchPresupuesto", component: NewPresupuestoComponent, pathMatch: "full" },
   { path: "misPresupuestos", component: JobPendienteComponent, pathMatch: "full" },
+  {path: 'jobDetalles/:id', component: JobDetallesComponent,pathMatch: "full" },
+  {path: 'jobAnswer/:id', component: JobRespuestaComponent,pathMatch:"full"},
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, 
 ];

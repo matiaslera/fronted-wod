@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Oferta } from 'src/app/domain/oferta';
 import { Presupuesto } from 'src/app/domain/presupuesto';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
 
 @Component({
@@ -15,7 +16,7 @@ export class JobDetallesComponent implements OnInit {
 
   jobData: Presupuesto=new Presupuesto()
   id
-  constructor(/* private jobService: PresupuestoService, */ private route: ActivatedRoute,private router: Router,public dialog: MatDialog,private user:ProfileService) { }
+  constructor( private jobService: TrabajoService,  private route: ActivatedRoute,private router: Router,public dialog: MatDialog,private user:ProfileService) { }
 
   ngOnInit():void {
     this.route.params.subscribe(routeParams => {
@@ -24,8 +25,8 @@ export class JobDetallesComponent implements OnInit {
   } 
 
   async loadJob(id){
-   // this.jobData = await this.jobService.trabajoCompleto(id)
-   // console.log(this.jobData)
+    this.jobData = await this.jobService.trabajoFull(id)
+    console.log(this.jobData)
   }
 
   contratar(ofertaSeleccionada:Oferta){

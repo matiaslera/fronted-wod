@@ -15,7 +15,7 @@
                 <mat-icon mat-list-icon>map</mat-icon>
                 {{consulta.presupuesto.direccion.calle}} {{consulta.presupuesto.direccion.altura}}
             </mat-card-content>
-            <button mat-raised-button color="accent" class="btn" type="submit" *ngIf="!esConsulta" (click)="ver()">VER</button>
+            <a mat-raised-button [routerLink]="['../jobDetalles', consulta.id]" color="accent" class="btn" *ngIf="!esConsulta">VER</a>
         </mat-card>
 
     </div>

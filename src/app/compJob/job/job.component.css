@@ -30,7 +30,7 @@ mat-card-title {
   flex-flow: column wrap;
 }
 
-button {
+a {
     height: 2.5em;
     width: 8em;
     justify-content: center;

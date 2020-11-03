@@ -3,7 +3,7 @@
       <mat-divider></mat-divider>
          <h2 *ngIf="noTieneTrabajos() ">  NO TIENE NINGUN PRESUPUESTO CARGADO </h2>
       <div *ngIf="esCliente()">
-        <div *ngFor="let elemento of trabajos" [routerLink]="['../jobDetails', elemento.id]" > 
+        <div *ngFor="let elemento of trabajos"> 
          <app-job [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-job>
        </div>
       </div>
@@ -11,6 +11,6 @@
        <div *ngFor="let elemento of trabajos" [routerLink]="['../jobAnswer', elemento.id]"> 
         <app-job [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-job>
       </div>
-    </div> -->
+    </div>  [routerLink]="['../jobDetalles', elemento.id]"-->
     </table>
     </div>
