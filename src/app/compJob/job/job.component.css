@@ -31,11 +31,19 @@ mat-card-title {
 }
 
 a {
-    height: 2.5em;
-    width: 8em;
-    justify-content: center;
-    display: flex;
-    align-self: center;
+  height: 2.5em;
+  width: 8em;
+  justify-content: center;
+  display: flex;
+  align-self: center;
+}
+
+button {
+  height: 2.5em;
+  width: 8em;
+  justify-content: center;
+  display: flex;
+  align-self: center;
 }
 .profile-userbuttons .btn {
   margin: 0.4em;

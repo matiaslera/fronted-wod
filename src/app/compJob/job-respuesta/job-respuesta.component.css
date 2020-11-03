@@ -1,0 +1,98 @@
+.container {
+  color: black;
+  margin: 0.5rem;
+}
+
+/*Car de titulo*/
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+/*Label contenido*/
+.perfil__linea textarea {
+  width: 600px;
+}
+
+.perfil__linea input {
+  padding: 6px 8px;
+  margin: 2px 0;
+}
+
+.perfil {
+  border: 1px solid var(--color_cyan-700);
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 3em;
+  background-color: white;
+}
+.card__lat {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+.card__lat-colum {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+}
+
+.perfil__label-cont {
+  display: flex;
+  color: var(--color_uno);
+  justify-content: center;
+  flex-flow: column wrap;
+  margin: 0 0.5em;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.perfil__linea {
+  display: flex;
+  margin: 0 1.5em;
+  align-items: baseline;
+  flex-flow: row wrap;
+  color: black;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid var(--color_cyan-200);
+}
+
+input:focus {
+  border-bottom: transparent;
+}
+
+.perfil__label {
+  text-align: center;
+  font-size: 1em;
+  color: var(--color_cyan-700, #08d9d6);
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
+  display: flex;
+}
