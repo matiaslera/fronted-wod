@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Presupuesto } from 'src/app/domain/presupuesto';
-import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
+import { Trabajo } from 'src/app/domain/trabajo';
+import { JobDetallesComponent } from '../job-detalles/job-detalles.component';
 
 @Component({
   selector: 'app-job',
@@ -11,9 +11,8 @@ import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuest
 })
 export class JobComponent implements OnInit {
 
-  
   @Input() esConsulta: Boolean
-  @Input() consulta: Presupuesto
+  @Input() consulta: Trabajo
   @Input() imagen:String
   constructor(/* private jobService: PresupuestoService, */ private route: ActivatedRoute,private router: Router,public dialog: MatDialog) { }
 
@@ -21,7 +20,7 @@ export class JobComponent implements OnInit {
   }
 
   ver(){
-    const dialogRef = this.dialog.open(PopupPresupuestoComponent, {
+    const dialogRef = this.dialog.open(JobDetallesComponent, {
       height: '600px',
       width: '700px',
       data: {presupuesto:this.consulta} })

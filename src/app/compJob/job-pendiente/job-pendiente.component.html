@@ -1,14 +1,14 @@
 <div class="container">
     <table>
-      <!--   <h4 *ngIf="noTieneTrabajos() ">  NO TIENE CARGADO NINGUN PRESUPUESTO</h4>
+         <h2 *ngIf="noTieneTrabajos() ">  NO TIENE NINGUN PRESUPUESTO CARGADO </h2>
       <div *ngIf="esCliente()">
         <div *ngFor="let elemento of trabajos" [routerLink]="['../jobDetails', elemento.id]" > 
-         <app-trabajo [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-trabajo>
+         <app-job [consulta]="elemento" [imagen]="imagen" [ ]="false"></app-job>
        </div>
       </div>
-      <div *ngIf="esProfesional()">
+      <!--div *ngIf="esProfesional()">
        <div *ngFor="let elemento of trabajos" [routerLink]="['../jobAnswer', elemento.id]"> 
-        <app-trabajo [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-trabajo>
+        <app-job [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-job>
       </div>
     </div> -->
     </table>

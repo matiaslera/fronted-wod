@@ -12,14 +12,16 @@ export class TrabajoService {
   /*Devuelve los trabajos finalizados */
   async trabajosFinalizados(): Promise<Trabajo[]> {
     //debugger
-    const trabajos = await this.httpCLient.get<Trabajo[]>(REST_SERVER_URL + '/job_final').toPromise();
-    return trabajos.map(job => Trabajo.fromJson(job)); 
+    const trabajos = await this.httpCLient
+      .get<Trabajo[]>(REST_SERVER_URL + '/job_final')
+      .toPromise();
+    return trabajos.map((job) => Trabajo.fromJson(job));
     //return await this.httpCLient.get<Trabajo[]>(REST_SERVER_URL + '/job_final').toPromise();
   }
 
   /*Crear una consulta, trabajo */
-  async crearTrabajo(trabajo:Trabajo){
-    console.log("este es el trabajo", trabajo)
+  async crearTrabajo(trabajo: Trabajo) {
+    console.log('este es el trabajo', trabajo);
     await this.httpCLient
       .post(REST_SERVER_URL + '/create_job', trabajo.toJSON())
       .toPromise();
@@ -28,6 +30,16 @@ export class TrabajoService {
     const job = await this.httpCLient
       .get<Trabajo>(REST_SERVER_URL + '/job')
       .toPromise();
-    return Trabajo.fromJson(job)
+    return Trabajo.fromJson(job);
+  }
+
+  /*Conseguir trabajos publicados */
+  async trabajoPublicado(id:number): Promise<Trabajo[]> {
+    console.log(id)
+    const trabajos = await this.httpCLient
+    .get<Trabajo[]>(REST_SERVER_URL + '/query_made/'+id)
+    .toPromise();
+    console.log(trabajos)
+  return trabajos.map((job) => Trabajo.fromJson(job));
   }
 }

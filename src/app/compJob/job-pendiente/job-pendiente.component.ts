@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Presupuesto } from 'src/app/domain/presupuesto';
+import { Cliente } from 'src/app/domain/cliente';
+import { Profesional } from 'src/app/domain/profesional';
+import { Trabajo } from 'src/app/domain/trabajo';
 import { Usuario } from 'src/app/domain/user';
+import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 
 @Component({
   selector: 'app-job-pendiente',
@@ -11,18 +15,22 @@ import { ProfileService } from 'src/app/services/perfil/profile.service';
 export class JobPendienteComponent implements OnInit {
 
   usuario: Usuario= new Usuario
-  trabajos: Presupuesto[]=[];
+  trabajos: Trabajo[]=[];
+  cliente:Cliente
+  profesional:Profesional
   imagen= "../../assets/pendiente.jpg"
-  constructor(/* public trabajosServices: PresupuestoService */private profileService: ProfileService) {
-    this.updateTrabajos()
-   }
-
+  constructor( public trabajosServices: TrabajoService, private profileService: ProfileService, public authServ: AuthUserService) {
+  }
+  
   ngOnInit():void {
+    this.updateTrabajos()
   }
 
   async getTrabajosClientes(){
     try{
-    //this.trabajos=await  this.trabajosServices.consultas()
+      debugger
+    this.cliente=  this.authServ.getCurrentCliente();
+    this.trabajos=await  this.trabajosServices.trabajoPublicado(this.cliente.id)
     console.log(this.trabajos)    
   } catch{
      console.log('error en cargar lista clientes')
@@ -49,23 +57,18 @@ export class JobPendienteComponent implements OnInit {
       console.log('es profesional: ',this.esProfesional())
       this.getTrabajosTecnicos()
     }else{     
-      console.log('es cliente: ', this.esProfesional())
+      console.log('es cliente: ', this.esCliente())
       this.getTrabajosClientes()
     }
   }
 
   esCliente():boolean{
-    return false
-    ///this.profileService.tipo()
-   // return this.profileService.esCliente
+   return this.authServ.getTipo() === 'CLIENTE'
   }
 
   esProfesional():boolean{
-     
-      if (this.profileService.esCliente){
-        return false
-      }
-      return true
+    console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.authServ.getCurrentProfesional());
+     return this.authServ.getTipo() === 'PROFESIONAL' 
   }
 
 }
