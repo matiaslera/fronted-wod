@@ -28,10 +28,9 @@ export class JobPendienteComponent implements OnInit {
 
   async getTrabajosClientes(){
     try{
-      debugger
     this.cliente=  this.authServ.getCurrentCliente();
     this.trabajos=await  this.trabajosServices.trabajoPublicado(this.cliente.id)
-    console.log(this.trabajos)    
+    //console.log(this.trabajos)    
   } catch{
      console.log('error en cargar lista clientes')
    }
@@ -39,6 +38,7 @@ export class JobPendienteComponent implements OnInit {
 
   async getTrabajosTecnicos(){
     try{
+      this.trabajos=[]
       //this.usuario =(await this.profileService.getProf())
       console.log(this.trabajos)    
       console.log( this.usuario)

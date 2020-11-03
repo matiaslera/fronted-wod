@@ -1,3 +1,6 @@
 .container{
     color: black;
+    margin: 0.5em;
+    justify-content: center;
+    display: flex;
 }

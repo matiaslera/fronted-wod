@@ -1,33 +1,22 @@
 <div class="container">
     <div class="cardContainer">
-        <mat-card >
-    
+        <mat-card>
             <mat-card-header>
                 <img height="100rem" width="100rem" src={{imagen}} />
             </mat-card-header>
-    
-            <!-- <mat-card-content>
+            <mat-card-content>
                 <mat-card-title>
-                    {{consulta.problema}}
+                    {{consulta.presupuesto.nombre}}
                 </mat-card-title>
                 <mat-card-subtitle>
                     Especialidad:
-                    {{consulta.especialidad}}
+                    {{consulta.presupuesto.especialidad}}
                 </mat-card-subtitle>
                 <mat-icon mat-list-icon>map</mat-icon>
-                {{consulta.direccion}}
-            </mat-card-content> -->
-            <!--mat-card-content>
-                <mat-card-title>
-                    $ {{consulta.monto}}
-                </mat-card-title>
-    
-            </mat-card-content---->
-        
-    
-            <button class="btn btn-outline-primary" type="submit" *ngIf="esConsulta" (click)="ver()">VER</button>
-    
+                {{consulta.presupuesto.direccion.calle}} {{consulta.presupuesto.direccion.altura}}
+            </mat-card-content>
+            <button mat-raised-button color="accent" class="btn" type="submit" *ngIf="!esConsulta" (click)="ver()">VER</button>
         </mat-card>
-    
+
     </div>
-    </div>
+</div>

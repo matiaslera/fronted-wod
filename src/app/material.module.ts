@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog'
+import {MatDividerModule} from '@angular/material/divider'
 @NgModule({
 
     imports:[
@@ -22,6 +23,7 @@ import {MatDialogModule} from '@angular/material/dialog'
         MatCardModule,
         MatSnackBarModule,
         MatDialogModule,
+        MatDividerModule,
     ],
 
     exports:[
@@ -35,6 +37,7 @@ import {MatDialogModule} from '@angular/material/dialog'
         MatCardModule,
         MatSnackBarModule,
         MatDialogModule,
+        MatDividerModule,
     ]
 })
 

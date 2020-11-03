@@ -18,10 +18,10 @@ export class Trabajo {
       new Trabajo(),
       problemJSON,
      {presupuesto:Presupuesto.fromJson(problemJSON.presupuesto)},
-     {fechaFinalizacion: this.fechaFromJSON(
+     {fechaFinalizacion: problemJSON.fechaFinalizacion!==null? this.fechaFromJSON(
         problemJSON.fechaFinalizacion.dayOfMonth,
         problemJSON.fechaFinalizacion.monthValue,
-        problemJSON.fechaFinalizacion.year)},
+        problemJSON.fechaFinalizacion.year): null},
       {estado:this.estadoFromJSON(problemJSON.estado)}, 
        //{ofertas: problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)),}
     );
