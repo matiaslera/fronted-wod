@@ -1,55 +1,69 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Oferta } from 'src/app/domain/oferta';
 import { Presupuesto } from 'src/app/domain/presupuesto';
+import { Trabajo } from 'src/app/domain/trabajo';
+import { AuthUserService } from 'src/app/services/auth/auth-user.service';
+import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
+import { JobComponent } from '../job/job.component';
 
 @Component({
   selector: 'app-job-respuesta',
   templateUrl: './job-respuesta.component.html',
-  styleUrls: ['./job-respuesta.component.css']
+  styleUrls: ['./job-respuesta.component.css'],
 })
 export class JobRespuestaComponent implements OnInit {
+  ofertaJob: Oferta = new Oferta();
+  jobData: Trabajo = new Trabajo();
+  id: number;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<JobComponent>,
+    public authServ: AuthUserService,
+    private snackBar: MatSnackBar,
+    private trabajoSer: TrabajoService,
+  ) {}
 
-  ofertaJob: Oferta = new Oferta
-  jobData: Presupuesto= new Presupuesto
-  id:number
-  constructor(private router: Router, private route: ActivatedRoute/* private jobService: PresupuestoService,private user:LoginService */) { }
-
-  ngOnInit():void {
-    this.route.params.subscribe(routeParams => {
-      this.id=routeParams.id
-      console.log(routeParams.id)
-      this.loadJob(routeParams.id)      
-    })
-    this.cargarData()
-    console.log(this.ofertaJob)
+  ngOnInit(): void {
+    console.log(this.data.presupuesto);
+    console.log(this.data.presupuesto.id);
+    console.log(this.data.presupuesto.estado);
+    console.log(this.data.presupuesto.presupuesto.nombre);
+    console.log(this.data.presupuesto.presupuesto.descripcion);
   }
 
-  async loadJob(id){
-    //this.jobData = await this.jobService.trabajoCompleto(id)
-    console.log(this.jobData)
+  get trabajo(){
+    return this.data.presupuesto
+  }
+  get presupuesto(){
+    return this.data.presupuesto.presupuesto
   }
 
-  cargarData(){
-    //this.ofertaJob.fechaCreada=new Date()
-    /* this.ofertaJob.especialidad=this.user.getUser().especialidad
-    this.ofertaJob.nombreApellido= this.user.getUser().nombreyApellido
-    this.ofertaJob.idProfesional=this.user.getUserLoggedId() */
-  }
-
-  async aceptar(){
-    try{
-      this.loadJob(this.id)
-      //this.jobService.answerConsulta(this.ofertaJob,this.id)
-      this.router.navigate(['home/trabajoPendiente'])
-      console.log('se a enviado la respuesta del trabajo ', )
-    }catch(e){
-      console.log('no se puedo enviar la oferta ', e)
+  async aceptar() {
+    try {
+      this.ofertaJob.idProfesional
+      this.ofertaJob.especialidad=this.data.presupuesto.presupuesto.especialidad
+      this.trabajoSer.nuevaOferta(this.ofertaJob,this.data.presupuesto.id)
+      this.mensaje('se a enviado la respuesta del trabajo ')
+      console.log('se a enviado la respuesta del trabajo ');
+    } catch (e) {
+      console.log('no se puedo enviar la oferta ', e);
     }
+    this.dialogRef.close();
   }
 
-  cancelar(){
-    this.router.navigate(['home/trabajoPendiente'])
+  cancelar() {
+    console.log('este dialog se esta cerrando');
+    this.dialogRef.close();
   }
 
+  mensaje(errorType: string) {
+    this.snackBar.open(errorType, 'x', {
+      duration: 3000,
+    });
+  }
 }

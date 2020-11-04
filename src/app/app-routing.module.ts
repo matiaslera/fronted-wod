@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: "searchPresupuesto", component: NewPresupuestoComponent, pathMatch: "full" },
   { path: "misPresupuestos", component: JobPendienteComponent, pathMatch: "full" },
   {path: 'jobDetalles/:id', component: JobDetallesComponent,pathMatch: "full" },
-  {path: 'jobAnswer/:id', component: JobRespuestaComponent,pathMatch:"full"},
+  {path: 'jobRespuesta/:id', component: JobRespuestaComponent,pathMatch:"full"},
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, 
 ];

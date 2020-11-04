@@ -2,16 +2,18 @@
   <div class="card">
     <div class="card-body">
       <h2 class="card-title">INFORMACION DEL PRESUPUESTO CONSULTADO</h2>
-      <!-- 
-            <h5 class="card-text">Nombre: {{jobData.problema}}</h5>
-            <h5 class="card-text">Especialidad: {{jobData.especialidad}}</h5>
-            <h5 class="card-text">Direccion: {{jobData.direccion}}</h5>
-            <h5 class="card-subtitle">Fecha de Creacion: {{jobData.fecha }} </h5>
-            <h5> <p class="card-text">Descripcion: {{jobData.descripcion}}</p>
-          <p class="card-text">Notas: {{jobData.notas}}</p></h5> -->
+            <h5 class="card-text">Nombre: {{jobData.presupuesto.nombre}}</h5>
+            <h5 class="card-text">Especialidad: {{jobData.presupuesto.especialidad}}</h5>
+            <h5 class="card-text">Provincia: {{jobData.presupuesto.direccion.provincia}}</h5>
+            <h5 class="card-text">Ciudad: {{jobData.presupuesto.direccion.ciudad}}</h5>
+            <h5 class="card-text">Calle: {{jobData.presupuesto.direccion.calle}}</h5>
+            <h5 class="card-text">Altura: {{jobData.presupuesto.direccion.altura}}</h5>
+            <h5 class="card-subtitle">Fecha de Creacion: {{jobData.presupuesto.fechaCreacion | date: 'dd/MM/yyyy' }} </h5>
+            <h5> <p class="card-text">Descripcion: {{jobData.presupuesto.descripcion}}</p>
+          <p class="card-text">Notas: {{jobData.presupuesto.notas}}</p></h5>  
     </div>
   </div>
-  
+
   <section>
     <div class="tbl-header">
       <table>
@@ -29,18 +31,18 @@
     <div class="tbl-content">
       <table>
         <tbody>
-          <!-- <tr *ngFor="let oferta of jobData.ofertas" class="animate-repeat">
-            <td>{{oferta.nombreApellido}}</td>
+           <tr *ngFor="let oferta of jobData.presupuesto.ofertas" class="animate-repeat">
+            <!-- <td>{{oferta.nombreApellido}}</td>
             <td>user{{oferta.idProfesional - 1}}</td>
             <td>{{oferta.monto}}</td>
             <td>{{oferta.fechaCreacion| date: 'dd/MM/yyyy' }}</td> 
             <td> <button type="button" class="btn btn-default" (click)="contratar(oferta)">
               <mat-icon>gavel</mat-icon>
-            </button>
+            </button> 
             <button type="button" class="btn btn-default" [routerLink]= "['./chat',userName()]" routerLinkActive="active">
               <mat-icon> chat</mat-icon></button>
-            </td>
-          </tr> -->
+            </td>-->
+          </tr> 
         </tbody>
       </table>
     </div>

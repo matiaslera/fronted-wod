@@ -1,27 +1,31 @@
 <div class="container">
   <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">INFORMACION DE LA OFERTA DE TRABAJO</h3>
-      <!--h5 class="card-title">Nombre: {{jobData.problema}}</h5>
-            <h5 class="card-subtitle mb-2 text-muted">Especialidad: {{jobData.especialidad}}</h5>
-            <h5 class="card-subtitle mb-2 text-muted">Direccion: {{jobData.direccion}}</h5>
-            <h5 class="card-subtitle mb-2 text-muted">Fecha de Creacion: {{ofertaJob.fechaCreada | date: 'dd/MM/yyyy'}} </h5>
-          <p class="card-text">Descripcion: {{jobData.descripcion}}</p>
-          <p class="card-text">Notas: {{jobData.notas}}</p> -->
+    <div class="card-body" *ngIf="data as job">
+      <h1 class="card-title">INFORMACION DEL TRABAJO</h1>
+      <h3 class="card-subtitle">Nombre: {{presupuesto.nombre}}</h3>
+      <h3 class="card-subtitle">Especialidad: {{presupuesto.especialidad}}</h3>
+      <h3 class="card-subtitle">Calle: {{presupuesto.direccion.calle}}</h3>
+      <h3 class="card-subtitle">Numero: {{presupuesto.direccion.altura}}</h3>
+      <h3 class="card-subtitle">Fecha de Creacion:
+        {{presupuesto.fechaCreacion | date: 'dd/MM/yyyy'}} </h3>
+      <h3 class="card-subtitle">Descripcion: {{presupuesto.descripcion}}</h3>
+      <h3 class="card-subtitle">Notas: {{presupuesto.notas}}</h3>
     </div>
   </div>
 
   <form class="card__lat-colum">
     <div class="perfil__linea">
       <label class="perfil__label"><strong>Comentario: </strong></label>
-      <textarea class="form-control" rows="3" placeholder="Introduce un comentario" [(ngModel)]="ofertaJob.comentario"
+      <textarea rows="4" placeholder="Ej: El trabajo a realizar es..." [(ngModel)]="ofertaJob.comentario"
         [ngModelOptions]="{standalone: true}"></textarea>
     </div>
     <div class="perfil__linea">
       <label class="perfil__label"><strong>Monto: </strong></label>
-      <input type="number" class="form-control" [(ngModel)]="ofertaJob.monto" [ngModelOptions]="{standalone: true}">
+      <input type="number" [(ngModel)]="ofertaJob.montoAprox" [ngModelOptions]="{standalone: true}">
     </div>
-    <button type="submit" mat-raised-button type="submit" color="accent" class="btn" (click)="aceptar()">Aceptar</button> &nbsp;
-    <button type="submit" mat-raised-button type="submit" color="accent" class="btn" (click)="cancelar()">Volver</button>
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+      (click)="aceptar()">Aceptar</button> &nbsp;
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+      (click)="cancelar()">Volver</button>
   </form>
 </div>

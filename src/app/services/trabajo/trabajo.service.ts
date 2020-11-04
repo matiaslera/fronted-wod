@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Oferta } from 'src/app/domain/oferta';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { REST_SERVER_URL } from '../routes';
 
@@ -34,20 +35,27 @@ export class TrabajoService {
   }
 
   /*Conseguir trabajos publicados */
-  async trabajoPublicado(id:number): Promise<Trabajo[]> {
+  async trabajoPublicado(id: number): Promise<Trabajo[]> {
     const trabajos = await this.httpCLient
-    .get<Trabajo[]>(REST_SERVER_URL + '/query_made/'+id)
-    .toPromise();
-    console.log(trabajos)
-  return trabajos.map((job) => Trabajo.fromJson(job));
+      .get<Trabajo[]>(REST_SERVER_URL + '/query_made/' + id)
+      .toPromise();
+    console.log(trabajos);
+    return trabajos.map((job) => Trabajo.fromJson(job));
   }
 
   /*Conseguir un trabajo completo, con sus detalles */
-  async trabajoFull(id:number){
+  async trabajoFull(id: number) {
     const job = await this.httpCLient
-      .get<Trabajo>(REST_SERVER_URL + '/job_completo/'+id)
+      .get<Trabajo>(REST_SERVER_URL + '/job_completo/' + id)
       .toPromise();
     return Trabajo.fromJson(job);
+  }
 
+  /*Crear una oferta nueva, tiene el id del trabajo */
+  async nuevaOferta(ofertaJob: Oferta, id: number) {
+    console.log('este es la oferta', ofertaJob);
+    await this.httpCLient
+      .post(REST_SERVER_URL + '/create_oferta/'+id, ofertaJob.toJSON())
+      .toPromise();
   }
 }
