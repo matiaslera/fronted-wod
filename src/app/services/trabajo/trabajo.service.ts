@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Oferta } from 'src/app/domain/oferta';
+import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { REST_SERVER_URL } from '../routes';
 
@@ -55,7 +56,16 @@ export class TrabajoService {
   async nuevaOferta(ofertaJob: Oferta, id: number) {
     console.log('este es la oferta', ofertaJob);
     await this.httpCLient
-      .post(REST_SERVER_URL + '/create_oferta/'+id, ofertaJob.toJSON())
+      .post(REST_SERVER_URL + '/create_oferta/' + id, ofertaJob.toJSON())
       .toPromise();
+  }
+
+  /*Devuelve los trabajos especializado, envia un profesional */
+  async trabajoPorEsp(profesional: Profesional) {
+    console.log('este es la oferta', profesional);
+    const trabajos = await this.httpCLient
+      .post<Trabajo[]>(REST_SERVER_URL + '/job_especialidad' , profesional.toJSON())
+      .toPromise();
+  return trabajos.map((job) => Trabajo.fromJson(job));
   }
 }

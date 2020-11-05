@@ -17,20 +17,37 @@ export class JobPendienteComponent implements OnInit {
   usuario: Usuario= new Usuario
   trabajos: Trabajo[]=[];
   cliente:Cliente
-  profesional:Profesional
+  profesional:Profesional = new Profesional()
+  opcion:string;
+  especialidad: string[] = [
+    'Electricidad',
+    'Plomeria',
+    'Herreria',
+    'Gasista',
+    'Carpinteria',
+    'Pintor',
+    'Armado en Seco',
+  ];
   imagen= "../../assets/pendiente.jpg"
-  constructor( public trabajosServices: TrabajoService, private profileService: ProfileService, public authServ: AuthUserService) {
+  constructor( public trabajosServices: TrabajoService, public authServ: AuthUserService,public perfilServ: ProfileService) {
   }
   
-  ngOnInit():void {
+  async ngOnInit():Promise<void> {
+    if (this.authServ.getTipo() === 'CLIENTE') {
+      this.cliente = await this.perfilServ.getIdCliente(parseInt(this.authServ.getId(),10)) ;
+      console.log('estoy en LOCAL STORAGE- CLIENTE:');
+    }
+    if (this.authServ.getTipo() === 'PROFESIONAL') {
+     this.profesional = await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
+      console.log('estoy en LOCAL STORAGE- PROFESIONAL:');
+    }
     this.updateTrabajos()
   }
 
   async getTrabajosClientes(){
     try{
-    this.cliente=  this.authServ.getCurrentCliente();
-    this.trabajos=await  this.trabajosServices.trabajoPublicado(this.cliente.id)
-    //console.log(this.trabajos)    
+    this.cliente= await this.perfilServ.getIdCliente(parseInt(this.authServ.getId(),10)) ;
+    this.trabajos=await  this.trabajosServices.trabajoPublicado(this.cliente.id) 
   } catch{
      console.log('error en cargar lista clientes')
    }
@@ -38,10 +55,9 @@ export class JobPendienteComponent implements OnInit {
 
   async getTrabajosTecnicos(){
     try{
-      this.trabajos=[]
-      //this.usuario =(await this.profileService.getProf())
+      this.profesional= await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
+      this.trabajos=await this.trabajosServices.trabajoPorEsp(this.profesional)
       console.log(this.trabajos)    
-      console.log( this.usuario)
     //this.trabajos=await  this.trabajosServices.especialidad(this.usuario)
   } catch{
      console.log('error en cargar lista de tecnicos')
@@ -53,10 +69,14 @@ export class JobPendienteComponent implements OnInit {
   }
 
   updateTrabajos(){
-    if(this.esProfesional()){
-      console.log('es profesional: ',this.esProfesional())
+    console.log('es profesional: ',this.esProfesional(),"tiene profesion: ",this.profesional.profesion!==undefined )
+    console.log(this.profesional)
+    if(this.esProfesional()&& (this.profesional.profesion!==undefined )){
+      console.log('es profesional: ',this.esProfesional(),"tiene profesion: ",this.profesional.profesion!==undefined )
+      console.log(this.profesional.profesion)
       this.getTrabajosTecnicos()
-    }else{     
+    }
+    if(this.esCliente()){     
       console.log('es cliente: ', this.esCliente())
       this.getTrabajosClientes()
     }
@@ -67,8 +87,22 @@ export class JobPendienteComponent implements OnInit {
   }
 
   esProfesional():boolean{
-    console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.authServ.getCurrentProfesional());
      return this.authServ.getTipo() === 'PROFESIONAL' 
   }
 
+  async tieneProfesion(){
+    debugger
+    this.profesional= await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
+    console.log(this.profesional.profesion!==null )
+    return this.profesional.profesion!==null 
+  }
+
+  async aceptar(){
+    console.log(this.profesional.id)
+    this.profesional= await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
+    this.profesional.profesion=this.opcion
+    this.perfilServ.actualizarProfesional(this.profesional)
+  }
+ // this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
+   //   this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
 }

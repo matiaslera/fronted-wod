@@ -245,11 +245,17 @@ export class AuthUserService {
     let user_string = JSON.stringify(user);
     localStorage.setItem("currentProfesional", user_string);
   }
+  setId(id:string){
+    localStorage.setItem("id", id);
+  }
   setTipo(token: string): void {
     localStorage.setItem("calificacion", token);
   }
   getTipo() {
     return localStorage.getItem("calificacion");
+  }
+  getId(){
+    return localStorage.getItem("id");
   }
   getCurrentCliente(): Cliente {
     let user_string = localStorage.getItem("currentCliente");

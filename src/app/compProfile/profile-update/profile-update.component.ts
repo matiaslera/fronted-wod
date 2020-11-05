@@ -44,13 +44,13 @@ export class ProfileUpdateComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.authServ.getTipo() === 'CLIENTE') {
-      this.usuarioBD = this.authServ.getCurrentCliente();
+      this.usuarioBD = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
       console.log('estoy en LOCAL STORAGE- CLIENTE:', this.usuarioBD);
     }
     if (this.authServ.getTipo() === 'PROFESIONAL') {
-      this.usuarioBD = this.authServ.getCurrentProfesional();
+      this.usuarioBD = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
       console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBD);
     }
   }
@@ -90,8 +90,8 @@ export class ProfileUpdateComponent implements OnInit {
     if (this.esCliente()) {
       this.formDireccion()
       this.perfilSer.actualizarCliente(this.cliente);
-      localStorage.removeItem('currentCliente');;
-      this.authServ.setCliente( await this.perfilSer.getIdCliente(this.cliente.id) );
+      //localStorage.removeItem('currentCliente');;
+      //this.authServ.setCliente( await this.perfilSer.getIdCliente(this.cliente.id) );
       this.usuarioBD = this.authServ.getCurrentCliente();
       this.update.emit('listo');
       this.mensaje('se actualizo la direccion correctamente');
@@ -104,18 +104,19 @@ export class ProfileUpdateComponent implements OnInit {
     if (this.esCliente()) {
       this.updateCliente();
       this.perfilSer.actualizarCliente(this.cliente);
-      localStorage.removeItem('currentCliente');;
-      this.authServ.setCliente(  await this.perfilSer.getIdCliente(this.cliente.id) );
-      this.usuarioBD = this.authServ.getCurrentCliente();
+      //localStorage.removeItem('currentCliente');;
+      //await this.authServ.setCliente(  await this.perfilSer.getIdCliente(this.cliente.id) );
+      this.usuarioBD =await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10))
       this.update.emit('listo');
       this.mensaje('se actualizo los datos correctamente');
     }
     if (this.esProfesional()) {
       this.updateProfesional();
+      console.log(this.profesional)
       this.perfilSer.actualizarProfesional(this.profesional);
-      localStorage.removeItem('currentProfesional');
-      this.authServ.setProfesional(await this.perfilSer.getIdProfesional(this.profesional.id) );
-      this.usuarioBD = this.authServ.getCurrentProfesional();
+      //localStorage.removeItem('currentProfesional');
+      //await this.authServ.setProfesional(await this.perfilSer.getIdProfesional(this.profesional.id) );
+      this.usuarioBD =await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
       this.update.emit('listo');
       this.mensaje('se actualizo los datos correctamente');
     }
@@ -137,8 +138,10 @@ export class ProfileUpdateComponent implements OnInit {
     this.cliente.usuario.apellido = this.usuarioBD.usuario.apellido;
   }
 
-  updateProfesional() {
+  async updateProfesional() {
+    var profesional2 =await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
     this.profesional.usuario = this.userUpdate;
+    this.profesional.profesion=profesional2.profesion
     this.profesional.id = this.usuarioBD.id;
     this.profesional.usuario.email = this.usuarioBD.usuario.email;
     this.profesional.usuario.nombre = this.usuarioBD.usuario.nombre;

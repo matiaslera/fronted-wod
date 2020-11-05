@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
+import { Trabajo } from 'src/app/domain/trabajo';
 import { Oferta } from 'src/app/domain/oferta';
 import { Presupuesto } from 'src/app/domain/presupuesto';
-import { Trabajo } from 'src/app/domain/trabajo';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
-import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
 
 @Component({

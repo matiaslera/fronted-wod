@@ -98,10 +98,10 @@ async getProfesionals(): Promise<Profesional[]> {
   return profesionals.map((user) => Profesional.fromJson(user));
 }
 /*Actualizar de un Profesional*/
-async actualizarProfesional(profesional: Profesional) {
-  await this.httpCLient
-    .put(REST_SERVER_URL + '/update_profesional', profesional.toJSON())
-    .toPromise();
+async actualizarProfesional(profesional: Profesional): Promise<void>{
+  console.log("ES PROFESIONAL toJSON "+profesional.toJSON)
+ // console.log("ES PROFESIONAL toJSON() "+profesional.toJSON())
+  await this.httpCLient.put<Profesional>(REST_SERVER_URL + '/update_profesional', profesional.toJSON()).toPromise();
 }
 /*Creacion de un Profesional*/
 async crearProfesional(profesional: Profesional) {
@@ -110,9 +110,9 @@ async crearProfesional(profesional: Profesional) {
     .toPromise();
 }
 /*Eliminar un Profesional*/
-async eliminarProfesional(profesional: Profesional) {
+async eliminarProfesional(profesional: Profesional): Promise<void> {
   await this.httpCLient
-    .delete(REST_SERVER_URL + '/delete_profesional/' + profesional.id, profesional.toJSON())
+    .delete<Profesional>(REST_SERVER_URL + '/delete_profesional/' + profesional.id, profesional.toJSON())
     .toPromise();
 }
 

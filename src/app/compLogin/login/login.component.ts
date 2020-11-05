@@ -55,18 +55,20 @@ export class LoginComponent implements OnInit {
           if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
             this.perfilSer.cliente.next(true)
             this.perfilSer.profesional.next(false)
-            this.usuarioBDatos=new Cliente()
-            this.perfilSer.usuarioBD = await this.perfilSer.getIdCliente(this.usuarioFull.id)
-            this.authSvc.setCliente(await this.perfilSer.getIdCliente(this.usuarioFull.id))
+            //this.usuarioBDatos=new Cliente()
+            //this.perfilSer.usuarioBD = await this.perfilSer.getIdCliente(this.usuarioFull.id)
+            //this.authSvc.setCliente(await this.perfilSer.getIdCliente(this.usuarioFull.id))
+            this.authSvc.setId(this.usuarioFull.id.toString())
             this.authSvc.setTipo("CLIENTE")
             console.log( this.perfilSer.usuarioBD);
           }
           if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
             this.perfilSer.cliente.next(false)
             this.perfilSer.profesional.next(true)
-            this.usuarioBDatos=new Profesional()
-            this.perfilSer.usuarioBD = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
-            this.authSvc.setProfesional(await this.perfilSer.getIdProfesional(this.usuarioFull.id))
+           // this.usuarioBDatos=new Profesional()
+            //this.perfilSer.usuarioBD = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
+            //this.authSvc.setProfesional(await this.perfilSer.getIdProfesional(this.usuarioFull.id))
+            this.authSvc.setId(this.usuarioFull.id.toString())
             this.authSvc.setTipo("PROFESIONAL")
             console.log( this.perfilSer.usuarioBD);
           }

@@ -21,14 +21,16 @@ export class ProfileComponent implements OnInit {
     public perfilSer: ProfileService,
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.authServ.getTipo() === 'CLIENTE') {
-      this.usuarioBDatos = this.authServ.getCurrentCliente();
+      //this.usuarioBDatos = this.authServ.getCurrentCliente();
+      this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
       this.foto();
       console.log('estoy en LOCAL STORAGE- CLIENTE:', this.usuarioBDatos);
     }
     if (this.authServ.getTipo() === 'PROFESIONAL') {
-      this.usuarioBDatos = this.authServ.getCurrentProfesional();
+     // this.usuarioBDatos = this.authServ.getCurrentProfesional();
+     this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
       console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBDatos);
     }
     console.log(this.usuarioBDatos);
@@ -57,14 +59,19 @@ export class ProfileComponent implements OnInit {
     return true */
   }
 
-  updateDatos(event) {
+  async updateDatos(event) {
     console.log(event);
     if (event === 'listo') {
+      console.log("entre a updatear")
       if (this.authServ.getTipo() === 'CLIENTE') {
-        this.usuarioBDatos = this.authServ.getCurrentCliente();
+        //this.usuarioBDatos = this.authServ.getCurrentCliente();
+        this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
+        console.log(this.usuarioBDatos)
       }
       if (this.authServ.getTipo() === 'PROFESIONAL') {
-        this.usuarioBDatos = this.authServ.getCurrentProfesional();
+       // this.usuarioBDatos = this.authServ.getCurrentProfesional();
+       this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
+       console.log(this.usuarioBDatos)
       }
     } else {
       console.log(event);

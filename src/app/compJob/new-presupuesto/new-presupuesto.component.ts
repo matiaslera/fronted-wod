@@ -13,8 +13,8 @@ import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuest
   styleUrls: ['./new-presupuesto.component.css'],
 })
 export class NewPresupuestoComponent implements OnInit {
-  problemas: Trabajo[]=[];
-  job:Trabajo;
+  problemas: Trabajo[] = [];
+  job: Trabajo;
   busquedaForm = this.builder.group({
     problema: ['', Validators.required],
     especialidad: ['', Validators.required],
@@ -44,27 +44,32 @@ export class NewPresupuestoComponent implements OnInit {
     var palabra = this.busquedaForm.get('problema').value;
     var especial = this.busquedaForm.get('especialidad').dirty;
     console.log(this.busquedaForm.value);
-    this.problemas = this.problemas.filter((trabajo) => this.contiene(trabajo, palabra));
+    this.problemas = this.problemas.filter((trabajo) =>
+      this.contiene(trabajo, palabra)
+    );
     if (especial) {
       this.problemas = this.problemas.filter(
-        (trabajo) => trabajo.presupuesto.especialidad === this.busquedaForm.get('especialidad').value
+        (trabajo) =>
+          trabajo.presupuesto.especialidad ===
+          this.busquedaForm.get('especialidad').value
       );
     }
   }
 
   contiene(trabajo: Trabajo, palabra: string): boolean {
     palabra = palabra.toLowerCase();
-    return ( trabajo.presupuesto.nombre.toLowerCase().includes(palabra) ||
+    return (
+      trabajo.presupuesto.nombre.toLowerCase().includes(palabra) ||
       trabajo.presupuesto.descripcion.toLowerCase().includes(palabra)
     );
     //||receta.presupuesto.ofertas.some(ingrediente => ingrediente.alimento.nombre.toLowerCase().includes(palabra))
   }
 
   async getPresupuestos() {
-    this.job=await this.presService.unTrabajo()
-    console.log(this.job)
+    this.job = await this.presService.unTrabajo();
+    console.log(this.job);
     this.problemas = await this.presService.trabajosFinalizados();
-    console.log(this.problemas)
+    console.log(this.problemas);
   }
 
   async clear() {
