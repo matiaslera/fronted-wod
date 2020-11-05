@@ -12,7 +12,7 @@ export class Cliente {
     return Object.assign(
       new Cliente(),usuarioJSON,
       {usuario: Usuario.fromJson(usuarioJSON.usuario)},
-      { direccion: Direccion.fromJson(usuarioJSON.direccion) }
+      { domicilio: Direccion.fromJson(usuarioJSON.direccion) }
     );
     //,{ usuario: User.fromJSON(tareaJSON.asignadoA) }
   }

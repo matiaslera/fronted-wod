@@ -20,7 +20,7 @@
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Usuario</th>
+            <th>Apellido</th>
             <th>Monto</th>
             <th>Fecha Creada</th>
             <th>Acciones</th>
@@ -32,16 +32,16 @@
       <table>
         <tbody>
            <tr *ngFor="let oferta of jobData.presupuesto.ofertas" class="animate-repeat">
-            <!-- <td>{{oferta.nombreApellido}}</td>
-            <td>user{{oferta.idProfesional - 1}}</td>
-            <td>{{oferta.monto}}</td>
+            <td>{{oferta.nombreProf}}</td>
+            <td>{{oferta.apellidoProf}}</td>
+            <td>{{oferta.montoAprox}}</td>
             <td>{{oferta.fechaCreacion| date: 'dd/MM/yyyy' }}</td> 
             <td> <button type="button" class="btn btn-default" (click)="contratar(oferta)">
               <mat-icon>gavel</mat-icon>
             </button> 
             <button type="button" class="btn btn-default" [routerLink]= "['./chat',userName()]" routerLinkActive="active">
               <mat-icon> chat</mat-icon></button>
-            </td>-->
+            </td>
           </tr> 
         </tbody>
       </table>

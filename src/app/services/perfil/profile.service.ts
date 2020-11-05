@@ -54,6 +54,7 @@ export class ProfileService {
     const usuario= await this.httpCLient
       .post<UserFB>(REST_SERVER_URL + '/get_email',user.toJSON())
       .toPromise();
+      console.log(usuario)
     return UserFB.fromJson(usuario)
   }
   /*Leer todos los clientes*/

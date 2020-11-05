@@ -15,7 +15,7 @@ import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 export class JobPendienteComponent implements OnInit {
 
   usuario: Usuario= new Usuario
-  trabajos: Trabajo[]=[];
+  trabajos: Trabajo[]=[]
   cliente:Cliente
   profesional:Profesional = new Profesional()
   opcion:string;
@@ -46,8 +46,8 @@ export class JobPendienteComponent implements OnInit {
 
   async getTrabajosClientes(){
     try{
-    this.cliente= await this.perfilServ.getIdCliente(parseInt(this.authServ.getId(),10)) ;
-    this.trabajos=await  this.trabajosServices.trabajoPublicado(this.cliente.id) 
+    this.trabajos=await this.trabajosServices.trabajoPublicado(this.cliente.id) 
+    console.log(this.trabajos)
   } catch{
      console.log('error en cargar lista clientes')
    }
@@ -55,10 +55,8 @@ export class JobPendienteComponent implements OnInit {
 
   async getTrabajosTecnicos(){
     try{
-      this.profesional= await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
       this.trabajos=await this.trabajosServices.trabajoPorEsp(this.profesional)
       console.log(this.trabajos)    
-    //this.trabajos=await  this.trabajosServices.especialidad(this.usuario)
   } catch{
      console.log('error en cargar lista de tecnicos')
    }
@@ -72,12 +70,9 @@ export class JobPendienteComponent implements OnInit {
     console.log('es profesional: ',this.esProfesional(),"tiene profesion: ",this.profesional.profesion!==undefined )
     console.log(this.profesional)
     if(this.esProfesional()&& (this.profesional.profesion!==undefined )){
-      console.log('es profesional: ',this.esProfesional(),"tiene profesion: ",this.profesional.profesion!==undefined )
-      console.log(this.profesional.profesion)
       this.getTrabajosTecnicos()
     }
     if(this.esCliente()){     
-      console.log('es cliente: ', this.esCliente())
       this.getTrabajosClientes()
     }
   }

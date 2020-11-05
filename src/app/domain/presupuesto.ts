@@ -17,10 +17,9 @@ export class Presupuesto {
     return Object.assign(
       new Presupuesto(),
       problemJSON,
-      {
-        ofertas:problemJSON.ofertas !== null ?this.listJson(problemJSON.ofertas):null
-      },
-       { direccion:problemJSON.direccion===undefined?null: Direccion.fromJson(problemJSON.direccion) } 
+      {ofertas:problemJSON.ofertas !== null ?this.listJson(problemJSON.ofertas):null },
+       { direccion:problemJSON.direccion===undefined?null: Direccion.fromJson(problemJSON.direccion) },
+       {ofertas: problemJSON.ofertas? problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)):null,} 
     );
   }
   

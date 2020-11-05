@@ -1,10 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Oferta } from 'src/app/domain/oferta';
-import { Presupuesto } from 'src/app/domain/presupuesto';
+import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
@@ -20,20 +18,20 @@ export class JobRespuestaComponent implements OnInit {
   ofertaJob: Oferta = new Oferta();
   jobData: Trabajo = new Trabajo();
   id: number;
+  profesional:Profesional= new Profesional()
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<JobComponent>,
     public authServ: AuthUserService,
     private snackBar: MatSnackBar,
     private trabajoSer: TrabajoService,
+    public profileServ:ProfileService,
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log(this.data.presupuesto);
     console.log(this.data.presupuesto.id);
-    console.log(this.data.presupuesto.estado);
-    console.log(this.data.presupuesto.presupuesto.nombre);
-    console.log(this.data.presupuesto.presupuesto.descripcion);
+    this.profesional = await this.profileServ.getIdProfesional(parseInt(this.authServ.getId(),10))
   }
 
   get trabajo(){
@@ -45,7 +43,9 @@ export class JobRespuestaComponent implements OnInit {
 
   async aceptar() {
     try {
-      this.ofertaJob.idProfesional
+      this.ofertaJob.idProfesional = this.profesional.id
+      this.ofertaJob.nombreProf= this.profesional.usuario.nombre
+      this.ofertaJob.apellidoProf = this.profesional.usuario.apellido
       this.ofertaJob.especialidad=this.data.presupuesto.presupuesto.especialidad
       this.trabajoSer.nuevaOferta(this.ofertaJob,this.data.presupuesto.id)
       this.mensaje('se a enviado la respuesta del trabajo ')

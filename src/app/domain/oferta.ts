@@ -7,14 +7,16 @@ export class  Oferta {
     public fechaCreacion?: Date,
     public montoAprox?: number,
     public idProfesional?: number,
-    public especialidad?: string
+    public especialidad?: string,
+    public nombreProf?:string,
+    public apellidoProf?:string,
   ) {}
 
   static fromJson(ofertaJSON): Oferta {
-    return Object.assign(new Oferta(), ofertaJSON,{fechaCreada:ofertaJSON.fechaCreada !== null ? this.fechaFromJSON(
-      ofertaJSON.fechaCreada.dayOfMonth,
-      ofertaJSON.fechaCreada.monthValue,
-      ofertaJSON.fechaCreada.year): null,} );
+    return Object.assign(new Oferta(), ofertaJSON,{fechaCreacion:ofertaJSON.fechaCreacion !== null ? this.fechaFromJSON(
+      ofertaJSON.fechaCreacion.dayOfMonth,
+      ofertaJSON.fechaCreacion.monthValue,
+      ofertaJSON.fechaCreacion.year): null,} );
   }
 
   toJSON(): any {

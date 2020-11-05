@@ -38,13 +38,13 @@
     <div class="tbl-content">
       <table>
         <tbody>
-            <tr *ngFor="let problema of problemas">
-          <td>{{problema.presupuesto.nombre}}</td>
-          <td>{{problema.presupuesto.especialidad }}</td>
-          <td>{{problema.fechaFinalizacion| date: 'dd/MM/yyyy' }}</td>
-          <td>{{problema.montoFinal | currency: 'USD' }}</td>
-          <td>{{problema.presupuesto.descripcion }}</td>
-        </tr>
+          <tr *ngFor="let problema of problemas">
+            <td>{{problema.presupuesto.nombre}}</td>
+            <td>{{problema.presupuesto.especialidad }}</td>
+            <td>{{problema.fechaFinalizacion| date: 'dd/MM/yyyy' }}</td>
+            <td>{{problema.montoFinal | currency: 'USD' }}</td>
+            <td>{{problema.presupuesto.descripcion }}</td>
+          </tr>
         </tbody>
       </table>
     </div>

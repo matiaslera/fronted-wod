@@ -94,6 +94,7 @@ export class AuthUserService {
     localStorage.removeItem("calificacion");
     localStorage.removeItem("currentProfesional");
     localStorage.removeItem("currentCliente");
+    localStorage.removeItem("id");
     await this.angularAuth.signOut();
     } catch (error) {
       console.log(error);

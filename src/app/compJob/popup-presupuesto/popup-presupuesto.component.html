@@ -2,7 +2,9 @@
   <form [formGroup]="busquedaForm" (ngSubmit)="enviarConsulta()" class="card__lat-colum">
     <div class="perfil__linea">
       <label class="perfil__label"> <strong>Especialidad: </strong></label>
-      <input type="text" formControlName="especialidad" placeholder="ingrese la Especialidad">
+      <select class="search_label-dato" formControlName="especialidad" required>
+        <option [value]="item" *ngFor="let item of especialidad">{{item}}</option>
+      </select>
     </div>
     <div class="perfil__linea">
       <label class="perfil__label"><strong>Nombre: </strong></label>

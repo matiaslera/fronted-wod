@@ -33,12 +33,20 @@ export class PopupPresupuestoComponent implements OnInit {
     numero: ['', Validators.required],
     pisoDep: ['', Validators.required],
   });
+  especialidad: string[] = [
+    'Electricidad',
+    'Plomeria',
+    'Herreria',
+    'Gasista',
+    'Carpinteria',
+    'Pintor',
+    'Armado en Seco',
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<NewPresupuestoComponent>,
     private builder: FormBuilder,
     private presupuetoSer: TrabajoService,
-    private profileService: ProfileService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public authServ: AuthUserService,
     private snackBar: MatSnackBar
@@ -46,17 +54,12 @@ export class PopupPresupuestoComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    if (this.authServ.getTipo() === 'CLIENTE') {
-      this.usuarioBDatos = this.authServ.getCurrentCliente();
-    }
-    if (this.authServ.getTipo() === 'PROFESIONAL') {
-      this.usuarioBDatos = this.authServ.getCurrentProfesional();}
     this.updateFrom();
   }
 
   updateFrom() {
     this.busquedaForm.patchValue({
-      idCreador: this.usuarioBDatos.id,
+      idCreador:  parseInt(this.authServ.getId(),10),
       problema: this.data.problema,
       especialidad: this.data.especialidad,
     });

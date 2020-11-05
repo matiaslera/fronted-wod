@@ -46,12 +46,12 @@ export class LoginComponent implements OnInit {
     var usurioLogeado = new UserFB()
     const { usuario, contrasenia } = this.formulario.value;
     usurioLogeado.email=usuario
-    debugger
     try {
       await this.authSvc.login(usuario, contrasenia);
       await this.authSvc.angularAuth.onAuthStateChanged(async user=>{
         if(user){
           this.usuarioFull=await this.perfilSer.getEmail(usurioLogeado)
+          debugger
           if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
             this.perfilSer.cliente.next(true)
             this.perfilSer.profesional.next(false)

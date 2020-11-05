@@ -23,7 +23,6 @@ export class Trabajo {
         problemJSON.fechaFinalizacion.monthValue,
         problemJSON.fechaFinalizacion.year): null},
       {estado:this.estadoFromJSON(problemJSON.estado)}, 
-       //{ofertas: problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)),}
     );
   }
   /**problemJSON.fechaFinalizacion !== null ?

@@ -3,6 +3,7 @@
     <mat-divider></mat-divider>
     <h2 *ngIf="noTieneTrabajos()"> NO TIENE NINGUN PRESUPUESTO CARGADO </h2>
     <div *ngIf="esCliente()">
+      entre
       <div *ngFor="let elemento of trabajos">
         <app-job [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-job>
       </div>
