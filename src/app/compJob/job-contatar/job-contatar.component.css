@@ -1,0 +1,52 @@
+.container {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+
+/*Botones */
+.perfil__acc {
+  text-align: center;
+  margin: 0.8em 0 0 0;
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  padding: 0;
+}
+
+.perfil__acc .btn {
+  margin: 0.4em;
+  min-width: 60%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.btn:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/*Card*/
+mat-card {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 2rem;
+  background-color: var(--color_cinco);
+  color: black;
+}
+mat-card-content {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+mat-card-title {
+  margin-right: 2rem;
+  background-color: transparent;
+  color: black;
+}
+
+mat-toolbar{
+    background-color: transparent;
+    color: black;
+}

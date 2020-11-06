@@ -1,4 +1,5 @@
 import { Presupuesto } from './presupuesto';
+import { Trabajo } from './trabajo';
 
 export class  Oferta {
   constructor(
@@ -39,6 +40,6 @@ export class  Oferta {
   }
 }
 export interface DialogJob {
-  presupuesto: Presupuesto;
+  presupuesto: Trabajo;
   oferta: Oferta;
 }

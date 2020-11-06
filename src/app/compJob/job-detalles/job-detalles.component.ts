@@ -7,6 +7,7 @@ import { Oferta } from 'src/app/domain/oferta';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
 import { Profesional } from 'src/app/domain/profesional';
+import { JobContatarComponent } from '../job-contatar/job-contatar.component';
 
 @Component({
   selector: 'app-job-detalles',
@@ -31,9 +32,11 @@ export class JobDetallesComponent implements OnInit {
   }
 
   contratar(ofertaSeleccionada:Oferta){
-    const dialogRef = this.dialog.open(PopupPresupuestoComponent, {
+    const dialogRef = this.dialog.open(JobContatarComponent, {
       height: '600px',
       width: '700px',
+      hasBackdrop: false,
+      panelClass: 'custom-dialog-container',
       data: {presupuesto:this.jobData,
         oferta:ofertaSeleccionada} })
    // this.router.navigate(['home/contrato'])

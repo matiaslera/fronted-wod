@@ -8,31 +8,35 @@
     </div>
     <div class="perfil__linea">
       <label class="perfil__label"><strong>Nombre: </strong></label>
-      <input type="text" formControlName="problema" placeholder="titulo del problema">
+      <input type="text" formControlName="problema" placeholder="Ej: Colocar luces" required>
     </div>
     <div class="perfil__linea">
       <label class="perfil__label"> <strong>Descripcion: </strong></label>
-      <textarea rows="3" formControlName="descripcion" placeholder="Introduce la descripcion del problema"></textarea>
+      <textarea rows="3" formControlName="descripcion" placeholder="Ej:Quiero colocarle luces led a una habitacion" required></textarea>
+    </div>
+    <div class="perfil__linea">
+      <label class="perfil__label"> <strong>Notas: </strong></label>
+      <textarea rows="2" formControlName="notas" placeholder="Ej: Solo puedo por la mañana" ></textarea>
     </div>
     <div class="perfil__linea">
       <label class="perfil__label">Provincia: </label>
-      <input type="text" formControlName="provincia">
+      <input type="text" formControlName="provincia" placeholder="Ej: Buenos Aires" required>
     </div>
     <div class="perfil__linea">
       <label class="perfil__label">Ciudad: </label>
-      <input type="text" formControlName="ciudad">
+      <input type="text" formControlName="ciudad" placeholder="Ej: Zarate" required >
     </div>
     <div class="perfil__linea">
       <label class="perfil__label">Cod Postal: </label>
-      <input type="number" formControlName="codPostal">
+      <input type="number" formControlName="codPostal" required >
     </div>
     <div class="perfil__linea">
       <label class="perfil__label">Calle: </label>
-      <input type="text" formControlName="calle">
+      <input type="text" formControlName="calle" required>
     </div>
     <div class="perfil__linea">
       <label class="perfil__label">Numero: </label>
-      <input type="number" formControlName="numero">
+      <input type="number" formControlName="numero" required>
     </div>
     <div class="perfil__linea">
       <label class="perfil__label">Piso/Departamento: </label>

@@ -7,7 +7,6 @@ import { Presupuesto } from 'src/app/domain/presupuesto';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { Calificacion } from 'src/app/domain/user';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
-import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { NewPresupuestoComponent } from '../new-presupuesto/new-presupuesto.component';
 
@@ -32,6 +31,7 @@ export class PopupPresupuestoComponent implements OnInit {
     calle: ['', Validators.required],
     numero: ['', Validators.required],
     pisoDep: ['', Validators.required],
+    notas:[''],
   });
   especialidad: string[] = [
     'Electricidad',
@@ -76,6 +76,7 @@ export class PopupPresupuestoComponent implements OnInit {
     this.presupuesto.nombre=this.busquedaForm.get('problema').value
     this.presupuesto.descripcion=this.busquedaForm.get('descripcion').value
     this.presupuesto.especialidad=this.busquedaForm.get('especialidad').value
+    this.presupuesto.notas=this.busquedaForm.get('notas').value
     this.presupuesto.direccion=this.dire
     this.presupuesto.fechaCreacion=new Date()
     this.consulta.presupuesto=this.presupuesto
