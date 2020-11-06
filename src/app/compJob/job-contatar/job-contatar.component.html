@@ -8,15 +8,16 @@
         queda en su responsabilidad contratar sus servicios. <br></p>
     </mat-card-content>
     <mat-card-content>
-      <h5 class="card-text"> <strong>Nombre:</strong> {{presupuesto.nombre}}<br></h5>
-      <h5 class="card-text"><strong>Provincia:</strong> {{presupuesto.direccion.provincia}}</h5>
-      <h5 class="card-text"><strong>Ciudad:</strong> {{presupuesto.direccion.ciudad}}</h5>
-      <h5 class="card-text"><strong>Calle:</strong> {{presupuesto.direccion.calle}}</h5>
-      <h5 class="card-text"> <strong>Altura:</strong> {{presupuesto.direccion.altura}}</h5>
-      <h5 class="card-text"><strong>Fecha de Creacion:</strong>{{presupuesto.fechaCreacion| date: 'dd/MM/yyyy'}}</h5>
-      <h5 class="card-text"><strong>Notas: </strong> {{presupuesto.notas}} </h5>
-      <h5 class="card-text"><strong>Comentarios: </strong> {{oferta.comentario}} </h5>
-      <h5 class="card-text"><strong>Precio: $</strong> {{oferta.montoAprox}} </h5>
+      <h4 class="card-text"> <strong>Nombre: </strong> {{presupuesto.nombre}}<br></h4>
+      <h4 class="card-text"><strong>Provincia: </strong> {{presupuesto.direccion.provincia}}</h4>
+      <h4 class="card-text"><strong>Ciudad: </strong> {{presupuesto.direccion.ciudad}}</h4>
+      <h4 class="card-text"><strong>Calle: </strong> {{presupuesto.direccion.calle}}</h4>
+      <h4 class="card-text"> <strong>Altura: </strong> {{presupuesto.direccion.altura}}</h4>
+      <h4 class="card-text"><strong>Fecha de Creacion: </strong>{{presupuesto.fechaCreacion| date: 'dd/MM/yyyy'}}</h4>
+      <h4 class="card-text"><strong>Notas: </strong> {{presupuesto.notas}} </h4>
+      <h4 class="card-text"><strong>Comentarios: </strong> {{oferta.comentario}} </h4>
+      <h4 class="card-text"><strong>Precio: </strong> ${{oferta.montoAprox}} </h4>
+      <strong>Fecha de Trabajo: </strong> <input type="date" min="{{datemin|date:'yyyy-MM-dd'}}">
     </mat-card-content>
     <mat-card-actions class="perfil__acc">
       <button type="submit" mat-raised-button type="submit" color="accent" class="btn"

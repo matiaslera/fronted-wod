@@ -72,5 +72,6 @@ export enum Estado {
   PUBLICADO,
   CONTRATADO,
   FINALIZADO,
+  CANCELADO
 }
 

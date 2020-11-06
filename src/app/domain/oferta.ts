@@ -23,6 +23,7 @@ export class  Oferta {
   toJSON(): any {
     return {
       ...this,
+      fechaCreacion:this.fechaCreacion.getFullYear()+"/"+ this.fechaCreacion.getMonth()+"/"+Presupuesto.dateDayJson(this.fechaCreacion.getDate())  ,
       //asignatario: null,
       //asignadoA: this.asignatario ? this.asignatario.nombre : ''
     };

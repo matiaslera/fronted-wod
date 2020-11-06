@@ -14,6 +14,7 @@
     </div>
   </div>
 
+  <h2 class="card-title">INFORMACION DE LAS OFERTAS RECIBIDAS</h2>
   <section>
     <div class="tbl-header">
       <table>
@@ -36,10 +37,10 @@
             <td>{{oferta.apellidoProf}}</td>
             <td>{{oferta.montoAprox}}</td>
             <td>{{oferta.fechaCreacion| date: 'dd/MM/yyyy' }}</td> 
-            <td> <button type="button" class="btn btn-default" (click)="contratar(oferta)">
+            <td> <button type="button" class="btn btn-default" (click)="contratar(oferta)" title="Contratar">
               <mat-icon>gavel</mat-icon>
             </button> 
-            <button type="button" class="btn btn-default" [routerLink]= "['./chat',userName()]" routerLinkActive="active">
+            <button type="button" class="btn btn-default" [routerLink]= "['./chat',userName()]" routerLinkActive="active" title="Chatear">
               <mat-icon> chat</mat-icon></button>
             </td>
           </tr> 

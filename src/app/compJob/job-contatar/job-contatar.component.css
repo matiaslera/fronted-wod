@@ -49,4 +49,5 @@ mat-card-title {
 mat-toolbar{
     background-color: transparent;
     color: black;
+    height: auto;
 }
