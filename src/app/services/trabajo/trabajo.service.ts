@@ -72,6 +72,15 @@ export class TrabajoService {
   /*Contratar un trabajo, enviar el trabajo editado*/
   async contratar(job: Trabajo) {
     console.log('este es el trabajo modificado, contratado', job, job.toJSON(),JSON.stringify(job));
-     await this.httpCLient.put(REST_SERVER_URL + '/job_contratado' , job.toJSON()).toPromise();;
+    await this.httpCLient.put(REST_SERVER_URL + '/job_contratado' , job.toJSON()).toPromise();;
+  }
+  
+  /*Traer los trabajos pendientes */
+  async trabajoContatado(id: number): Promise<Trabajo[]> {
+    const trabajos = await this.httpCLient
+    .get<Trabajo[]>(REST_SERVER_URL + '/job_contratado/' + id)
+    .toPromise();
+    console.log(trabajos);
+    return trabajos.map((job) => Trabajo.fromJson(job));
   }
 }

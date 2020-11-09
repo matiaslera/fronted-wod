@@ -18,6 +18,8 @@ export class Presupuesto {
       new Presupuesto(),
       problemJSON,
       {ofertas:problemJSON.ofertas !== null ?this.listJson(problemJSON.ofertas):null },
+      {fechaCreacion: problemJSON.fechaCreacion!=="null"? this.fechaFromJSON(
+        problemJSON.fechaCreacion): null},
        { direccion:problemJSON.direccion===undefined?null: Direccion.fromJson(problemJSON.direccion) },
        {ofertas: problemJSON.ofertas? problemJSON.ofertas.map((oferta) => Oferta.fromJson(oferta)):null,} 
     );
@@ -36,6 +38,15 @@ export class Presupuesto {
       return '0'+day
     }
     return day
+  }
+
+  static fechaFromJSON(fecha: string): Date {
+    const data = fecha.split('/')
+    const res = new Date()
+    res.setDate(Number(data[0]))
+    res.setMonth(Number(data[1]))
+    res.setFullYear(Number(data[2]))
+    return res
   }
 
   toJSON(): any {

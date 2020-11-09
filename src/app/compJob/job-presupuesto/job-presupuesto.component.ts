@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cliente } from 'src/app/domain/cliente';
+import { Oferta } from 'src/app/domain/oferta';
 import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { Usuario } from 'src/app/domain/user';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
+import { JobComponent } from '../job/job.component';
 
 @Component({
-  selector: 'app-job-pendiente',
-  templateUrl: './job-pendiente.component.html',
-  styleUrls: ['./job-pendiente.component.css']
+  selector: 'app-job-presupuesto',
+  templateUrl: './job-presupuesto.component.html',
+  styleUrls: ['./job-presupuesto.component.css']
 })
-export class JobPendienteComponent implements OnInit {
+export class JobPresupuestoComponent implements OnInit {
 
   usuario: Usuario= new Usuario
   trabajos: Trabajo[]=[]
@@ -46,7 +50,7 @@ export class JobPendienteComponent implements OnInit {
 
   async getTrabajosClientes(){
     try{
-    this.trabajos=await this.trabajosServices.trabajoContatado(this.cliente.id) 
+    this.trabajos=await this.trabajosServices.trabajoPublicado(this.cliente.id) 
     console.log(this.trabajos)
   } catch{
      console.log('error en cargar lista clientes')

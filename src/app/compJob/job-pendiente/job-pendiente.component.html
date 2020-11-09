@@ -4,19 +4,19 @@
     <h2 *ngIf="noTieneTrabajos()"> NO TIENE NINGUN PRESUPUESTO CARGADO </h2>
     <div *ngIf="esCliente()">
       <div *ngFor="let elemento of trabajos">
-        <app-job [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-job>
+        <app-job [consulta]="elemento" [imagen]="imagen" [estado]="pendiente"></app-job>
       </div>
     </div>
-    <div *ngIf="esProfesional()">
+    <!-- <div *ngIf="esProfesional()">
       <div *ngIf="profesional.profesion else noTiene">
         <div *ngFor="let elemento of trabajos">
-          <app-job [consulta]="elemento" [imagen]="imagen" [esConsulta]="false"></app-job>
+          <app-job [consulta]="elemento" [imagen]="imagen" [estado]="pendiente"></app-job>
         </div>
       </div>
-    </div>
+    </div> -->
   </table>
 </div>
-<ng-template #noTiene style="color:black">
+<!-- <ng-template #noTiene style="color:black">
   <div>
     NO TIENE CARGADO SU ESPECIALIDAD, DESEA ACTUALIZARLA?
     <div class="perfil__linea">
@@ -28,4 +28,4 @@
     <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
       (click)="aceptar()">Aceptar</button>
   </div>
-</ng-template>
+</ng-template> -->

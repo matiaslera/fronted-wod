@@ -14,31 +14,19 @@ export class Trabajo {
   ) {}
 
   static fromJson(problemJSON): Trabajo {
+    console.log("este es el error", problemJSON)
     return Object.assign(
       new Trabajo(),
       problemJSON,
+      
      {presupuesto:Presupuesto.fromJson(problemJSON.presupuesto)},
-     {fechaFinalizacion: problemJSON.fechaFinalizacion!==null? this.fechaFromJSON(
-        problemJSON.fechaFinalizacion.dayOfMonth,
-        problemJSON.fechaFinalizacion.monthValue,
-        problemJSON.fechaFinalizacion.year): null},
+     {fechaFinalizacion: problemJSON.fechaFinalizacion!=="null"? this.fechaFromJSON(
+        problemJSON.fechaFinalizacion): null},
       {estado:this.estadoFromJSON(problemJSON.estado)}, 
     );
   }
-  /**problemJSON.fechaFinalizacion !== null ?
-   * fechaFinalizacion:
-chronology: {id: "ISO", calendarType: "iso8601"}
-dayOfMonth: 2
-dayOfWeek: "SUNDAY"
-dayOfYear: 33
-era: "CE"
-leapYear: true
-month: "FEBRUARY"
-monthValue: 2
-year: 2020
-   */
   
-  static fechaFromJSON(day: string, month: string, year: string): Date {
+/*   static fechaFromJSON(day: string, month: string, year: string): Date {
     console.log(day);
     console.log(month);
     console.log(year);
@@ -47,6 +35,15 @@ year: 2020
     res.setMonth(Number(month));
     res.setFullYear(Number(year));
     return res;
+  }
+ */
+  static fechaFromJSON(fecha: string): Date {
+    const data = fecha.split('/')
+    const res = new Date()
+    res.setDate(Number(data[0]))
+    res.setMonth(Number(data[1]))
+    res.setFullYear(Number(data[2]))
+    return res
   }
 
   static estadoFromJSON(estado: string) {

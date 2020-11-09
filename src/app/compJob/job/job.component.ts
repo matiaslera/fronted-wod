@@ -10,7 +10,7 @@ import { JobRespuestaComponent } from '../job-respuesta/job-respuesta.component'
   styleUrls: ['./job.component.css'],
 })
 export class JobComponent implements OnInit {
-  @Input() esConsulta: Boolean;
+  @Input() estado: String;
   @Input() consulta: Trabajo;
   @Input() imagen: String;
   constructor(
@@ -39,4 +39,6 @@ export class JobComponent implements OnInit {
   esProfesional(): boolean {
     return this.authServ.getTipo() === 'PROFESIONAL';
   }
+
+  
 }
