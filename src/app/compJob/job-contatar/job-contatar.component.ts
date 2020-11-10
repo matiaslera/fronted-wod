@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogJob, Oferta } from 'src/app/domain/oferta';
 import { Profesional } from 'src/app/domain/profesional';
-import { Estado } from 'src/app/domain/trabajo';
+import { Estado, Trabajo } from 'src/app/domain/trabajo';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { JobDetallesComponent } from '../job-detalles/job-detalles.component';
@@ -15,9 +15,11 @@ import { PayJobComponent } from '../pay-job/pay-job.component';
   styleUrls: ['./job-contatar.component.css'],
 })
 export class JobContatarComponent implements OnInit {
+
   datemin = new Date();
   profesional: Profesional = new Profesional();
   estado:string
+  job:Trabajo
   constructor(
     public dialogRef: MatDialogRef<JobDetallesComponent>,
     private perfil: ProfileService,
@@ -27,11 +29,16 @@ export class JobContatarComponent implements OnInit {
     public dialog: MatDialog,
   ) {}
 
-  ngOnInit(): void {
-    this.updateData();
+  async ngOnInit(): Promise<void> {
     console.log('data:', this.data);
     console.log('oferta:', this.data.oferta);
     console.log('presupuesto:', this.data.presupuesto);
+    this.job=await this.trabajoServ.trabajoFull(this.data.presupuesto.id)
+    console.log("este es el trabajo",this.job)
+    this.updateData();
+    console.log("sinContratar", this.sinContratar())
+    console.log("estaContratado", this.estaContratado())
+    console.log("estaFinalizado", this.estaFinalizado())
   }
 
   get presupuesto() {
@@ -66,13 +73,13 @@ export class JobContatarComponent implements OnInit {
   }
 
   sinContratar() {
-    return  this.data.presupuesto.estado===Estado.PUBLICADO;
+    return  this.job.estado===Estado.PUBLICADO;
   }
   estaContratado() {
-    return this.data.presupuesto.estado===Estado.CONTRATADO;
+    return this.job.estado===Estado.CONTRATADO;
   }
   estaFinalizado() {
-    return this.data.presupuesto.estado===Estado.FINALIZADO;
+    return this.job.estado===Estado.FINALIZADO 
   }
 
   async finalizar() {

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Presupuesto } from 'src/app/domain/presupuesto';
+import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
+import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { JobContatarComponent } from '../job-contatar/job-contatar.component';
 
@@ -15,6 +17,7 @@ import { JobContatarComponent } from '../job-contatar/job-contatar.component';
 export class JobFinalizadoComponent implements OnInit {
 
   problemas: Trabajo[] = [];
+  profesional:Profesional=new Profesional()
   job: Trabajo;
   estado:String;
   busquedaForm = this.builder.group({
@@ -36,6 +39,7 @@ export class JobFinalizadoComponent implements OnInit {
     private trabajoServices: TrabajoService,
     public authServ: AuthUserService,
     public dialog: MatDialog,
+    private perfilServ: ProfileService,
     ) { }
 
   ngOnInit() {
@@ -48,6 +52,10 @@ export class JobFinalizadoComponent implements OnInit {
     if(this.esCliente()){
       this.problemas = await this.trabajoServices.trabajosFinalizadosDe(parseInt(this.authServ.getId(),10))
       console.log(this.problemas);
+    }
+    if(this.esProfesional()){
+      this.profesional=await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
+      this.problemas=this.profesional.trabajos
     }
   }
 
@@ -99,5 +107,9 @@ export class JobFinalizadoComponent implements OnInit {
 
   esCliente(): boolean {
     return this.authServ.getTipo() === 'CLIENTE';
+  }
+
+  esProfesional(): boolean {
+    return this.authServ.getTipo() === 'PROFESIONAL';
   }
 }
