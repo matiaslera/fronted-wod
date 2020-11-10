@@ -1,0 +1,42 @@
+<div class="texto">
+    Si el trabajo finalizo, elija un metodo de pago para finalizar el trabajo. <br>
+    Una vez finalizado el pago, la notificacion sera recibida por el tecnico. <br>
+    Usted debe pagar ${{data.presupuesto.montoFinal}}
+</div>
+<div class="botones perfil__acc">
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn" (click)="mercadoPago()">Mercardo
+        Pago</button>
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="transferencia()">Tranferencia Bancaria</button>
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="finalizar()">Efectivo</button>
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="cancelar()">Cancelar</button>
+</div>
+
+<div class="container">
+    <div *ngIf="metodoPago===2">
+        <div class="perfil__linea">
+            <label class="perfil__label">CBU: </label>
+            <label class="perfil__label-dato">5646546544</label>
+        </div>
+        <div class="perfil__linea">
+            <label class="perfil__label">ALIAS:</label>
+            <label class="perfil__label-dato"> JATA.ABNA.DOTA</label>
+        </div>
+        <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+            (click)="finalizar()">Finalizar</button>
+    </div>
+    <div *ngIf="metodoPago===1">
+        <div class="perfil__linea">
+            <label class="perfil__label">CBU:</label>
+            <label class="perfil__label-dato"> 848484080484</label>
+        </div>
+        <div class="perfil__linea">
+            <label class="perfil__label">ALIAS: </label>
+            <label class="perfil__label-dato">848484080484</label>
+        </div>
+        <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+            (click)="finalizar()">Finalizar</button>
+    </div>
+</div>

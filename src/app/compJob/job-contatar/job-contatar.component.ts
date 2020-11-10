@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogJob, Oferta } from 'src/app/domain/oferta';
 import { Profesional } from 'src/app/domain/profesional';
@@ -7,6 +7,7 @@ import { Estado } from 'src/app/domain/trabajo';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { JobDetallesComponent } from '../job-detalles/job-detalles.component';
+import { PayJobComponent } from '../pay-job/pay-job.component';
 
 @Component({
   selector: 'app-job-contatar',
@@ -16,12 +17,14 @@ import { JobDetallesComponent } from '../job-detalles/job-detalles.component';
 export class JobContatarComponent implements OnInit {
   datemin = new Date();
   profesional: Profesional = new Profesional();
+  estado:string
   constructor(
     public dialogRef: MatDialogRef<JobDetallesComponent>,
     private perfil: ProfileService,
     private trabajoServ: TrabajoService,
     @Inject(MAT_DIALOG_DATA) public data: DialogJob,
     private snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +85,16 @@ export class JobContatarComponent implements OnInit {
     }
     console.log('The dialog rechazo finalizar la consulta');
     this.dialogRef.close();
+  }
+
+  pagar(){
+    this.dialog.open(PayJobComponent, {
+      height: '400px',
+      width: '650px',
+      hasBackdrop: false,
+      panelClass: 'custom-dialog-container',
+      data: { presupuesto: this.data.presupuesto,estado:this.estado },
+    });
   }
   
   mensaje(errorType: string) {

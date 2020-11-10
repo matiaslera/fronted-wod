@@ -1,0 +1,56 @@
+.container {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/*Botones */
+.perfil__acc {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 0;
+}
+
+.perfil__acc .btn {
+  margin: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.btn:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/*Texto*/
+.texto{
+  color: black;
+  font-size: 1.2em;
+  margin: 0.2em 0
+}
+
+/*Datos*/
+.perfil__linea {
+  display: flex;
+  margin: 0.8em 1.5em;
+  align-items: baseline;
+  flex-flow: column wrap;
+}
+.perfil__label {
+  text-align: center;
+  font-size: 1.6em;
+  color: var(--color_cyan-700, #08d9d6);
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
+}
+
+.perfil__label-dato {
+  color: var(--color_uno, #252a34);
+  font-weight: 600;
+  font-size: 1.3em;
+  padding: 0.2em;
+}

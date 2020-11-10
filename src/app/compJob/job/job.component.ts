@@ -5,6 +5,7 @@ import { Trabajo } from 'src/app/domain/trabajo';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { JobContatarComponent } from '../job-contatar/job-contatar.component';
 import { JobRespuestaComponent } from '../job-respuesta/job-respuesta.component';
+import { PayJobComponent } from '../pay-job/pay-job.component';
 
 @Component({
   selector: 'app-job',
@@ -44,7 +45,13 @@ export class JobComponent implements OnInit {
 
   
   pagar(){
-    
+    this.dialog.open(PayJobComponent, {
+      height: '400px',
+      width: '650px',
+      hasBackdrop: false,
+      panelClass: 'custom-dialog-container',
+      data: { presupuesto: this.consulta,estado:this.estado },
+    });
   }
 
   estaContratado(){

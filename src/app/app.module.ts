@@ -32,7 +32,7 @@ import { JobFinalizadoComponent } from './compJob/job-finalizado/job-finalizado.
 import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.component';
 import { PopupPresupuestoComponent } from './compJob/popup-presupuesto/popup-presupuesto.component';
 import { JobPresupuestoComponent } from './compJob/job-presupuesto/job-presupuesto.component';
-
+import { PayJobComponent } from './compJob/pay-job/pay-job.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { JobPresupuestoComponent } from './compJob/job-presupuesto/job-presupues
     JobPendienteComponent,
     PopupPresupuestoComponent,
     JobPresupuestoComponent,
+    PayJobComponent
   ],
   imports: [
     BrowserModule,
