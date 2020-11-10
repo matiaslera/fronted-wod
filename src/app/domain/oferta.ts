@@ -18,12 +18,28 @@ export class  Oferta {
       ofertaJSON.fechaCreacion): null}, );
   }
 
+  static fechaToJSON(fecha: Date) {
+    const local=fecha.toLocaleDateString('es-AR')
+    const data = local.split('/')
+    const dia =this.dateDayJson(data[0])
+    const mes=this.dateDayJson(data[1])
+    return data[2]+"/"+ mes+"/"+dia
+  }
+  static dateDayJson(day): string{
+    const number = parseInt(day,10)
+    console.log(number)
+    if(number<10){
+      console.log( '0'+day)
+      return '0'+day
+    }
+    return day
+  }
+
   toJSON(): any {
     return {
       ...this,
-      fechaCreacion:this.fechaCreacion.getFullYear()+"/"+ this.fechaCreacion.getMonth()+"/"+Presupuesto.dateDayJson(this.fechaCreacion.getDate())  ,
-      //asignatario: null,
-      //asignadoA: this.asignatario ? this.asignatario.nombre : ''
+      //fechaCreacion:this.fechaCreacion.getFullYear()+"/"+ this.fechaCreacion.getMonth()+"/"+this.fechaCreacion.getDate(),
+      fechaCreacion:Oferta.fechaToJSON(this.fechaCreacion)
     };
   }
 

@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
@@ -30,7 +31,7 @@ export class JobPresupuestoComponent implements OnInit {
     'Armado en Seco',
   ];
   imagen= "../../assets/pendiente.jpg"
-  constructor( public trabajosServices: TrabajoService, public authServ: AuthUserService,public perfilServ: ProfileService) {
+  constructor( public trabajosServices: TrabajoService, public authServ: AuthUserService,public perfilServ: ProfileService,public router: Router) {
   }
   
   async ngOnInit():Promise<void> {
@@ -98,6 +99,7 @@ export class JobPresupuestoComponent implements OnInit {
     this.profesional= await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
     this.profesional.profesion=this.opcion
     this.perfilServ.actualizarProfesional(this.profesional)
+    this.router.navigate['misPresupuesto']
   }
  // this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
    //   this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))

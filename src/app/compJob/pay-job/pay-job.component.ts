@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { DialogJob } from 'src/app/domain/oferta';
 import { Profesional } from 'src/app/domain/profesional';
 import { Estado } from 'src/app/domain/trabajo';
@@ -21,6 +22,7 @@ export class PayJobComponent implements OnInit {
     private perfil: ProfileService,
     private trabajoServ: TrabajoService,
     @Inject(MAT_DIALOG_DATA) public data: DialogJob,
+    public router: Router,
     private snackBar: MatSnackBar
   ) {}
 
@@ -61,7 +63,10 @@ export class PayJobComponent implements OnInit {
   async finalizar() {
     try {
       this.data.presupuesto.estado = Estado.FINALIZADO;
-      await this.trabajoServ.contratar(this.data.presupuesto);
+      this.profesional.trabajos.push(this.data.presupuesto)
+      await this.trabajoServ.update(this.data.presupuesto);
+      this.perfil.actualizarProfesional(this.profesional);
+      this.router.navigate(['/jobPendientes'])
       this.mensaje('Se ha finalizado el trabajo');
     } catch (e) {
       e.error;

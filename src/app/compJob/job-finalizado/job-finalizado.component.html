@@ -1,53 +1,52 @@
-<div class="box" *ngIf="noTieneTrabajos()">
-      <h4  class="box">  NO TIENE NINGUN TRABAJO FINALIZADO</h4>
+<div class="box">
+  <div class="search_header">
+    <h2 class="search_title">Buscar Presupuesto</h2>
+    <form [formGroup]="busquedaForm" (ngSubmit)="buscar()" class="search_form">
+      <div class="search_linea">
+        <label class="search_label">Especialidad:</label>
+        <select class="search_label-dato" formControlName="especialidad" required>
+          <option [value]="item" *ngFor="let item of especialidad">{{item}}</option>
+        </select>
+      </div>
+      <div class="search_linea">
+        <label class="search_label">Presupuesto:</label>
+        <input type="text" class="search_label-dato" formControlName="problema"
+          placeholder="Ingrese el presupuesto para buscar" required>
+      </div>
+    </form>
   </div>
-
-  <div class="box" *ngIf="!noTieneTrabajos()">
-    <div class="search_header">
-      <h2 class="search_title">Buscar Presupuesto</h2>
-      <form [formGroup]="busquedaForm" (ngSubmit)="buscar()" class="search_form">
-        <div class="search_linea">
-          <label class="search_label">Especialidad:</label>
-          <select class="search_label-dato" formControlName="especialidad" required>
-            <option [value]="item" *ngFor="let item of especialidad">{{item}}</option>
-          </select>
-        </div>
-        <div class="search_linea">
-          <label class="search_label">Presupuesto:</label>
-          <input type="text" class="search_label-dato" formControlName="problema"
-            placeholder="Ingrese el presupuesto para buscar" required>
-        </div>
-      </form>
+  <div class="search_btn">
+    <button mat-raised-button color="accent" class="btn" (click)="buscar()">Buscar</button> &nbsp;
+    <button mat-raised-button color="accent" class="btn" (click)="clear()">Limpiar Campos </button> &nbsp;
+  </div>
+  <section *ngIf="!noTieneTrabajos()">
+    <div class="tbl-header">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Especialidad</th>
+            <th>Fecha </th>
+            <th>Monto</th>
+            <th>Descripcion</th>
+          </tr>
+        </thead>
+      </table>
     </div>
-    <div class="search_btn">
-      <button mat-raised-button color="accent" class="btn" (click)="buscar()">Buscar</button> &nbsp;
-      <button mat-raised-button color="accent" class="btn" (click)="clear()">Limpiar Campos </button> &nbsp;
+    <div class="tbl-content">
+      <table>
+        <tbody>
+          <tr *ngFor="let problema of problemas" (click)="detalle(problema)">
+            <td>{{problema.presupuesto.nombre}}</td>
+            <td>{{problema.presupuesto.especialidad }}</td>
+            <td>{{problema.fechaFinalizacion| date: 'dd/MM/yyyy' }}</td>
+            <td>{{problema.montoFinal | currency: 'USD' }}</td>
+            <td>{{problema.presupuesto.descripcion }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <section>
-      <div class="tbl-header">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Especialidad</th>
-              <th>Fecha </th>
-              <th>Monto</th>
-              <th>Descripcion</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="tbl-content">
-        <table>
-          <tbody>
-            <tr *ngFor="let problema of problemas">
-              <td>{{problema.presupuesto.nombre}}</td>
-              <td>{{problema.presupuesto.especialidad }}</td>
-              <td>{{problema.fechaFinalizacion| date: 'dd/MM/yyyy' }}</td>
-              <td>{{problema.montoFinal | currency: 'USD' }}</td>
-              <td>{{problema.presupuesto.descripcion }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+  </section>
+  <div class="box" *ngIf="noTieneTrabajos()">
+    <h4 class="box"> NO TIENE NINGUN TRABAJO FINALIZADO</h4>
+  </div>

@@ -45,8 +45,10 @@ export class JobFinalizadoComponent implements OnInit {
   }
 
   async getTrabajos(){
-    this.problemas = await this.trabajoServices.trabajosFinalizadosDe(parseInt(this.authServ.getId(),10))
-    console.log(this.problemas);
+    if(this.esCliente()){
+      this.problemas = await this.trabajoServices.trabajosFinalizadosDe(parseInt(this.authServ.getId(),10))
+      console.log(this.problemas);
+    }
   }
 
   noTieneTrabajos(){

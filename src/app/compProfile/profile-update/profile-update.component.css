@@ -31,25 +31,24 @@
     display: flex;
     margin: 0 1.5em;
     align-items: baseline;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     color: black;
   }
   
   input {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 6px 10px;
+    margin: 0.01em 0;
     border: none;
     border-bottom: 2px solid var(--color_cyan-200);
   }
   
   .perfil__label {
-    text-align: center;
     font-size: 1em;
     color: var(--color_cyan-700, #08d9d6);
     font-weight: bold;
     letter-spacing: 1px;
-    margin-top: 1em;
+    margin-top: 0.4em;
     margin-bottom: 0.1em;
     display: flex;
   }

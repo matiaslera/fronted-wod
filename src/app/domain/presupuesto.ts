@@ -13,7 +13,7 @@ export class Presupuesto {
   ) {}
 
   static fromJson(problemJSON): Presupuesto {
-    console.log("este es el json",problemJSON)
+    console.log("este es el json del presupuesto:",problemJSON)
     return Object.assign(
       new Presupuesto(),
       problemJSON,
@@ -30,7 +30,6 @@ export class Presupuesto {
   }
 
   static dateDayJson(day): string{
-    console.log(day)
     const number = parseInt(day,10)
     console.log(number)
     if(number<10){
@@ -42,17 +41,29 @@ export class Presupuesto {
 
   static fechaFromJSON(fecha: string): Date {
     const data = fecha.split('/')
+    console.log("este es el date:",data)
     const res = new Date()
-    res.setDate(Number(data[0]))
+    res.setDate(Number(data[2]))
     res.setMonth(Number(data[1]))
-    res.setFullYear(Number(data[2]))
+    res.setFullYear(Number(data[0]))
+    console.log("esta es la fecha", res)
     return res
+  }
+
+  static fechaToJSON(fecha: Date) {
+    const local=fecha.toLocaleDateString('es-AR')
+    const data = local.split('/')
+    const dia =this.dateDayJson(data[0])
+    const mes=this.dateDayJson(data[1])
+    return data[2]+"/"+ mes+"/"+dia
   }
 
   toJSON(): any {
     return {
       ...this,
-      fechaCreacion:this.fechaCreacion.getFullYear()+"/"+ this.fechaCreacion.getMonth()+"/"+Presupuesto.dateDayJson(this.fechaCreacion.getDate())  ,
+      fechaCreacion:Presupuesto.fechaToJSON(this.fechaCreacion)
+      //fechaCreacion:this.fechaCreacion.getFullYear()+"/"+ this.fechaCreacion.getMonth()+"/"+this.fechaCreacion.getDate()
+      //fechaCreacion:this.fechaCreacion.getFullYear()+"/"+ this.fechaCreacion.getMonth()+"/"+Presupuesto.dateDayJson(this.fechaCreacion.getDate())  ,
     };
   }
 

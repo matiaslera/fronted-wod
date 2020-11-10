@@ -83,6 +83,11 @@ export class TrabajoService {
     console.log('este es el trabajo modificado, contratado', job, job.toJSON(),JSON.stringify(job));
     await this.httpCLient.put(REST_SERVER_URL + '/job_contratado' , job.toJSON()).toPromise();;
   }
+
+  /*Updatear trabajo */
+  async update(job: Trabajo) {
+    await this.httpCLient.put(REST_SERVER_URL + '/job_update' , job.toJSON()).toPromise();;
+  }
   
   /*Traer los trabajos pendientes */
   async trabajoContatado(id: number): Promise<Trabajo[]> {

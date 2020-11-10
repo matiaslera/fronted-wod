@@ -42,7 +42,7 @@ export class JobContatarComponent implements OnInit {
     return this.data.oferta;
   }
   async updateData() {
-   if(this.estaContratado())
+   if(this.estaContratado() || this.estaFinalizado())
    {this.profesional= await this.perfil.getIdProfesional(this.data.presupuesto.idProfesional)}
   }
 
@@ -77,9 +77,11 @@ export class JobContatarComponent implements OnInit {
 
   async finalizar() {
     try {
-      this.data.presupuesto.estado= Estado.FINALIZADO
-      await this.trabajoServ.contratar(this.data.presupuesto);
-      console.log('The dialog ya esta finalizado el trabajo');
+      this.data.presupuesto.estado = Estado.FINALIZADO;
+      this.profesional.trabajos.push(this.data.presupuesto)
+      this.perfil.actualizarProfesional(this.profesional)
+      await this.trabajoServ.update(this.data.presupuesto);
+      this.mensaje('Se ha finalizado el trabajo');
     } catch (e) {
       e.error;
     }

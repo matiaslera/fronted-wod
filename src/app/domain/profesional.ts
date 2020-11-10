@@ -1,3 +1,4 @@
+import { Trabajo } from './trabajo';
 import { Usuario } from './user';
 
 export class Profesional {
@@ -9,7 +10,7 @@ export class Profesional {
     public experienciaLaboral?: string,
     public zonaDeTrabajo?: string,
     public guardia?: boolean,
-    public trabajos?:string[],
+    public trabajos?:Trabajo[],
   ) {}
 
   static fromJson(usuarioJSON): Profesional {

@@ -1,4 +1,3 @@
-import { Oferta } from './oferta';
 import { Presupuesto } from './presupuesto';
 
 export class Trabajo {
@@ -14,11 +13,10 @@ export class Trabajo {
   ) {}
 
   static fromJson(problemJSON): Trabajo {
-    console.log("este es el error", problemJSON)
+    console.log("este es el json de trabajo:", problemJSON)
     return Object.assign(
       new Trabajo(),
       problemJSON,
-      
      {presupuesto:Presupuesto.fromJson(problemJSON.presupuesto)},
      {fechaFinalizacion: problemJSON.fechaFinalizacion!=="null"? this.fechaFromJSON(
         problemJSON.fechaFinalizacion): null},
@@ -40,11 +38,29 @@ export class Trabajo {
   static fechaFromJSON(fecha: string): Date {
     const data = fecha.split('/')
     const res = new Date()
-    res.setDate(Number(data[0]))
+    res.setDate(Number(data[2]))
     res.setMonth(Number(data[1]))
-    res.setFullYear(Number(data[2]))
+    res.setFullYear(Number(data[0]))
     return res
   }
+
+  static fechaToJSON(fecha: Date) {
+    const local=fecha.toLocaleDateString('es-AR')
+    const data = local.split('/')
+    const dia =this.dateDayJson(data[0])
+    const mes=this.dateDayJson(data[1])
+    return data[2]+"/"+ mes+"/"+dia
+  }
+  static dateDayJson(day): string{
+    const number = parseInt(day,10)
+    console.log(number)
+    if(number<10){
+      console.log( '0'+day)
+      return '0'+day
+    }
+    return day
+  }
+
 
   static estadoFromJSON(estado: string) {
     if (estado === 'PUBLICADO') {
@@ -58,8 +74,11 @@ export class Trabajo {
     }
   }
   toJSON(): any {
+    console.log(this.fechaFinalizacion.getFullYear()+"/"+ this.fechaFinalizacion.getMonth()+"/"+this.fechaFinalizacion.getDate())
     return {
       ...this,
+      fechaFinalizacion:Trabajo.fechaToJSON(this.fechaFinalizacion)
+      //fechaFinalizacion:this.fechaFinalizacion.getFullYear()+"/"+ this.fechaFinalizacion.getMonth()+"/"+this.fechaFinalizacion.getDate()
     };
   }
 
