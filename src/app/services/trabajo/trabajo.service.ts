@@ -21,6 +21,15 @@ export class TrabajoService {
     return trabajos.map((job) => Trabajo.fromJson(job));
     //return await this.httpCLient.get<Trabajo[]>(REST_SERVER_URL + '/job_final').toPromise();
   }
+ /*Devuelve los trabajos finalizados,  de un cliente */
+  async trabajosFinalizadosDe(id:number): Promise<Trabajo[]> {
+    //debugger
+    const trabajos = await this.httpCLient
+    .get<Trabajo[]>(REST_SERVER_URL + '/job_finalizado/'+id)
+    .toPromise();
+    return trabajos.map((job) => Trabajo.fromJson(job));
+    //return await this.httpCLient.get<Trabajo[]>(REST_SERVER_URL + '/job_final').toPromise();
+  }
   
   /*Crear una consulta, trabajo */
   async crearTrabajo(trabajo: Trabajo) {

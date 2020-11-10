@@ -15,6 +15,7 @@ import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.com
 import { JobDetallesComponent } from './compJob/job-detalles/job-detalles.component';
 import { JobRespuestaComponent } from './compJob/job-respuesta/job-respuesta.component';
 import { JobPresupuestoComponent } from './compJob/job-presupuesto/job-presupuesto.component';
+import { JobFinalizadoComponent } from './compJob/job-finalizado/job-finalizado.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: "searchPresupuesto", component: NewPresupuestoComponent, pathMatch: "full" },
   { path: "misPresupuestos", component: JobPresupuestoComponent, pathMatch: "full" },
   { path: "jobPendientes", component: JobPendienteComponent, pathMatch: "full" },
+  { path: "jobFinalizado", component: JobFinalizadoComponent, pathMatch: "full" },
   {path: 'jobDetalles/:id', component: JobDetallesComponent,pathMatch: "full" },
  // {path: 'jobRespuesta/:id', component: JobRespuestaComponent,pathMatch:"full"},
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },

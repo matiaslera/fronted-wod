@@ -2,7 +2,7 @@
     <div class="cardContainer">
         <mat-card>
             <mat-card-header>
-                <img height="100rem" width="100rem" src={{imagen}} />
+                <img height="100rem" width="100rem" src={{imagen}} />     
             </mat-card-header>
             <mat-card-content>
                 <mat-card-title>
@@ -15,9 +15,14 @@
                 <mat-icon mat-list-icon>map</mat-icon>
                 {{consulta.presupuesto.direccion.calle}} {{consulta.presupuesto.direccion.altura}}
             </mat-card-content>
-            <a mat-raised-button [routerLink]="['../jobDetalles', consulta.id]" color="accent" class="btn" *ngIf="esCliente()">VER</a>
-            <a mat-raised-button [routerLink]="['../jobDetalles', consulta.id]" color="accent" class="btn" *ngIf="esCliente()">INFO</a>
-            <button mat-raised-button color="accent" class="btn" *ngIf="esProfesional()" (click)="respuesta()">RESPONDER</button>
+            <div *ngIf="esCliente()" class="orden">
+                <a mat-raised-button [routerLink]="['../jobDetalles', consulta.id]" color="accent" class="btn" *ngIf="estaPublicado()">DETALLES</a>
+                <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado()" (click)="info()">INFO</button>
+                <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado()" (click)="pagar()">PAGAR</button>
+            </div>
+            <div *ngIf="esProfesional()">
+                <button mat-raised-button color="accent" class="btn"  (click)="respuesta()">RESPONDER</button>
+            </div>
         </mat-card>
 
     </div>

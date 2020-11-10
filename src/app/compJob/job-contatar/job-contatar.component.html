@@ -29,34 +29,36 @@
 
 </div>
 
-
 <div class="container" *ngIf="estaContratado()">
   <mat-card>
     <mat-toolbar>
-      INFORMACION DEL TRABAJO
-    </mat-toolbar><br>
-    <mat-card-content>
-      <p>informacion acerca del trabajo en curso<br>
-        <br></p>
-    </mat-card-content>
-  </mat-card><br>
-
+      INFORMACION DEL TRABAJO CONTRATADO
+    </mat-toolbar>
+  </mat-card>
   <mat-card>
     <mat-card-content>
       <ul>
-        <!--  <h5>  <p class="card-text"> <strong>Nombre:</strong> {{presupuesto.problema}}<br></p>
-            <p class="card-text"> <strong>Direccion: </strong>{{presupuesto.direccion}}<br></p>
-            <p class="card-text"><strong>Fecha de Creacion:</strong> {{presupuesto.fecha| date: 'dd/MM/yyyy' }}<br></p>
-         <p class="card-text"><strong>Descripcion: </strong>{{presupuesto.descripcion}}<br></p>
-          <p class="card-text"><strong>Notas: </strong> {{presupuesto.notas}} <br></p>
-          <p class="card-text"><strong>Precio: $</strong> {{presupuesto.monto}} <br></p>
-          <p class="card-text"><strong>Profesional a cargo:</strong> {{profesional.nombreyApellido}} </p> </h5> -->
-
+        <h4 class="card-text"> <strong>Nombre: </strong> {{presupuesto.nombre}}<br></h4>
+        <h4 class="card-text"><strong>Descripcion: </strong> {{presupuesto.descripcion}} </h4>
+        <h4 class="card-text"><strong>Fecha de Creacion: </strong>{{presupuesto.fechaCreacion| date: 'dd/MM/yyyy'}}</h4>
+        <h4 class="card-text"><strong>Especialidad: </strong> {{presupuesto.especialidad}} </h4>
+        <h4 class="card-text"><strong>Precio: </strong> ${{data.presupuesto.montoFinal}} </h4>
+        <h4><strong>Direccion</strong> </h4>
+        <h4 class="card-text"><strong>Provincia: </strong> {{presupuesto.direccion.provincia}}</h4>
+        <h4 class="card-text"><strong>Ciudad: </strong> {{presupuesto.direccion.ciudad}}</h4>
+        <h4 class="card-text"><strong>Calle: </strong> {{presupuesto.direccion.calle}}</h4>
+        <h4 class="card-text"> <strong>Altura: </strong> {{presupuesto.direccion.altura}}</h4>
+        <h4><strong>Profesional a cargo</strong> </h4>
+        <h4 class="card-text"><strong>Nombre: </strong> {{profesional.usuario.nombre}} </h4>
+        <h4 class="card-text"><strong>Apellido: </strong> {{profesional.usuario.apellido}} </h4>
+        <h4 class="card-text"><strong>Email: </strong> {{profesional.usuario.email}} </h4>
       </ul>
     </mat-card-content>
-    <mat-card-actions>
-      <button type="submit" class="btn btn-outline-primary" (click)="finalizar()">Finalizar</button> &nbsp;
-      <button type="submit" class="btn btn-outline-primary" (click)="cancelar()">Volver</button>
+    <mat-card-actions class="perfil__acc">
+      <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="finalizar()">Finalizar</button> &nbsp;
+      <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="cancelar()">Volver</button>
     </mat-card-actions>
   </mat-card>
 </div>
@@ -73,19 +75,25 @@
   </mat-card><br>
   <mat-card>
     <mat-card-content>
-      <!--  <ul>
-          <h5>  <p class="card-text"> <strong>Nombre:</strong> {{presupuesto.problema}}<br></p>
-            <p class="card-text"> <strong>Direccion: </strong>{{presupuesto.direccion}}<br></p>
-            <p class="card-text"><strong>Fecha de Creacion:</strong> {{presupuesto.fecha| date: 'dd/MM/yyyy' }}<br></p>
-         <p class="card-text"><strong>Descripcion: </strong>{{presupuesto.direccion}}</p>
-          <p class="card-text"><strong>Comentarios: </strong> {{presupuesto.comentario}} </p>
-          <p class="card-text"><strong>Notas: </strong> {{presupuesto.notas}} </p>
-          <p class="card-text"><strong>Precio: $</strong> {{presupuesto.monto}} </p> </h5>
-          <p class="card-text"><strong>Nombre del Tecnico: $</strong> {{presupuesto.monto}} </p> </h5>
-      </ul> -->
+      <ul>
+        <h4 class="card-text"> <strong>Nombre: </strong> {{presupuesto.nombre}}<br></h4>
+        <h4 class="card-text"><strong>Descripcion: </strong> {{presupuesto.descripcion}} </h4>
+        <h4 class="card-text"><strong>Fecha de Creacion: </strong>{{presupuesto.fechaCreacion| date: 'dd/MM/yyyy'}}</h4>
+        <h4 class="card-text"><strong>Especialidad: </strong> {{presupuesto.especialidad}} </h4>
+        <h4 class="card-text"><strong>Precio: </strong> ${{data.presupuesto.montoFinal}} </h4>
+        <h4><strong>Direccion</strong> </h4>
+        <h4 class="card-text"><strong>Provincia: </strong> {{presupuesto.direccion.provincia}}</h4>
+        <h4 class="card-text"><strong>Ciudad: </strong> {{presupuesto.direccion.ciudad}}</h4>
+        <h4 class="card-text"><strong>Calle: </strong> {{presupuesto.direccion.calle}}</h4>
+        <h4 class="card-text"> <strong>Altura: </strong> {{presupuesto.direccion.altura}}</h4>
+        <h4><strong>Profesional a cargo</strong> </h4>
+        <h4 class="card-text"><strong>Nombre: </strong> {{profesional.usuario.nombre}} </h4>
+        <h4 class="card-text"><strong>Apellido: </strong> {{profesional.usuario.apellido}} </h4>
+        <h4 class="card-text"><strong>Email: </strong> {{profesional.usuario.email}} </h4>
+      </ul>
     </mat-card-content>
-    <mat-card-actions>
-      <button type="submit" class="btn btn-outline-primary" (click)="cancelar()">Volver</button>
+    <mat-card-actions class="perfil__acc">
+      <button type="submit" mat-raised-button color="accent" class="btn" (click)="cancelar()">Volver</button>
     </mat-card-actions>
   </mat-card>
 

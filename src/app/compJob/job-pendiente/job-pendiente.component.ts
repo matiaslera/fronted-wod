@@ -17,6 +17,7 @@ export class JobPendienteComponent implements OnInit {
   usuario: Usuario= new Usuario
   trabajos: Trabajo[]=[]
   cliente:Cliente
+  pendiente:String="pendiente"
   profesional:Profesional = new Profesional()
   opcion:string;
   especialidad: string[] = [

@@ -2,9 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogJob, Oferta } from 'src/app/domain/oferta';
-import { Presupuesto } from 'src/app/domain/presupuesto';
+import { Profesional } from 'src/app/domain/profesional';
 import { Estado } from 'src/app/domain/trabajo';
-import { Usuario } from 'src/app/domain/user';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { JobDetallesComponent } from '../job-detalles/job-detalles.component';
@@ -15,9 +14,8 @@ import { JobDetallesComponent } from '../job-detalles/job-detalles.component';
   styleUrls: ['./job-contatar.component.css'],
 })
 export class JobContatarComponent implements OnInit {
-  //oferta: Oferta;
   datemin = new Date();
-  profesional: Usuario = new Usuario();
+  profesional: Profesional = new Profesional();
   constructor(
     public dialogRef: MatDialogRef<JobDetallesComponent>,
     private perfil: ProfileService,
@@ -33,24 +31,16 @@ export class JobContatarComponent implements OnInit {
     console.log('presupuesto:', this.data.presupuesto);
   }
 
-  async updateData() {
-    //this.oferta = this.data.oferta;
-    console.log(this.presupuesto);
-    if (this.estaContratado()) {
-      return true; /// this.profesional = await this.perfil.getProfesional(this.presupuesto.idProfesional)
-    }
-    if (this.estaFinalizado()) {
-      return false;
-      //  this.profesional = await this.perfil.getProfesional(this.presupuesto.idProfesional)
-    }
-  }
-
   get presupuesto() {
     return this.data.presupuesto.presupuesto;
   }
 
   get oferta() {
     return this.data.oferta;
+  }
+  async updateData() {
+   if(this.estaContratado())
+   {this.profesional= await this.perfil.getIdProfesional(this.data.presupuesto.idProfesional)}
   }
 
   cancelar() {
@@ -72,26 +62,20 @@ export class JobContatarComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  estaContratado() {
-    return false;
-    //return this.presupuesto.contratado && !this.presupuesto.realizado
-  }
-
-  estaFinalizado() {
-    return false;
-    //return this.presupuesto.contratado && this.presupuesto.realizado
-  }
-
   sinContratar() {
-    return true;
-    //  return !this.presupuesto.contratado && !this.presupuesto.realizado
+    return  this.data.presupuesto.estado===Estado.PUBLICADO;
+  }
+  estaContratado() {
+    return this.data.presupuesto.estado===Estado.CONTRATADO;
+  }
+  estaFinalizado() {
+    return this.data.presupuesto.estado===Estado.FINALIZADO;
   }
 
   async finalizar() {
     try {
-      /*  this.presupuesto.contratado =true
-       this.presupuesto.realizado =true
-      await this.preService.finalizar(this.presupuesto) */
+      this.data.presupuesto.estado= Estado.FINALIZADO
+      await this.trabajoServ.contratar(this.data.presupuesto);
       console.log('The dialog ya esta finalizado el trabajo');
     } catch (e) {
       e.error;
@@ -99,7 +83,6 @@ export class JobContatarComponent implements OnInit {
     console.log('The dialog rechazo finalizar la consulta');
     this.dialogRef.close();
   }
-
   
   mensaje(errorType: string) {
     this.snackBar.open(errorType, 'x', {

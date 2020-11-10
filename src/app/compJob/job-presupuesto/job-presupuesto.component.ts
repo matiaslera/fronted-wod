@@ -1,15 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cliente } from 'src/app/domain/cliente';
-import { Oferta } from 'src/app/domain/oferta';
 import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { Usuario } from 'src/app/domain/user';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
-import { JobComponent } from '../job/job.component';
 
 @Component({
   selector: 'app-job-presupuesto',
@@ -21,6 +17,7 @@ export class JobPresupuestoComponent implements OnInit {
   usuario: Usuario= new Usuario
   trabajos: Trabajo[]=[]
   cliente:Cliente
+  publicado:String="publicado"
   profesional:Profesional = new Profesional()
   opcion:string;
   especialidad: string[] = [
