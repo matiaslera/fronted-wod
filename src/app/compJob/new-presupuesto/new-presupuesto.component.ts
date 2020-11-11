@@ -62,7 +62,6 @@ export class NewPresupuestoComponent implements OnInit {
       trabajo.presupuesto.nombre.toLowerCase().includes(palabra) ||
       trabajo.presupuesto.descripcion.toLowerCase().includes(palabra)
     );
-    //||receta.presupuesto.ofertas.some(ingrediente => ingrediente.alimento.nombre.toLowerCase().includes(palabra))
   }
 
   async getPresupuestos() {

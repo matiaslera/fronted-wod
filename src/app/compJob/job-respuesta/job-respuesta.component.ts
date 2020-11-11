@@ -32,6 +32,7 @@ export class JobRespuestaComponent implements OnInit {
     console.log(this.data.presupuesto);
     console.log(this.data.presupuesto.id);
     this.profesional = await this.profileServ.getIdProfesional(parseInt(this.authServ.getId(),10))
+    this.jobData= await this.trabajoSer.trabajoFull(this.data.presupuesto.id) 
   }
 
   get trabajo(){
@@ -59,6 +60,10 @@ export class JobRespuestaComponent implements OnInit {
   cancelar() {
     console.log('este dialog se esta cerrando');
     this.dialogRef.close();
+  }
+
+  respondido(){
+   return this.jobData.presupuesto.ofertas.filter((oferta)=>oferta.idProfesional=== parseInt(this.authServ.getId(), 10)).length>0
   }
 
   mensaje(errorType: string) {

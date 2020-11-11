@@ -19,11 +19,12 @@ export class  Oferta {
   }
 
   static fechaToJSON(fecha: Date) {
+    if(fecha!==undefined){
     const local=fecha.toLocaleDateString('es-AR')
     const data = local.split('/')
     const dia =this.dateDayJson(data[0])
     const mes=this.dateDayJson(data[1])
-    return data[2]+"/"+ mes+"/"+dia
+    return data[2]+"/"+ mes+"/"+dia}
   }
   static dateDayJson(day): string{
     const number = parseInt(day,10)

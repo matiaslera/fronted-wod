@@ -23,9 +23,10 @@
       <label class="perfil__label"><strong>Monto: </strong></label>
       <input type="number" [(ngModel)]="ofertaJob.montoAprox" [ngModelOptions]="{standalone: true}">
     </div>
-    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+    <button type="submit" *ngIf="!respondido()" mat-raised-button type="submit" color="accent" class="btn"
       (click)="aceptar()">Aceptar</button> &nbsp;
     <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
       (click)="cancelar()">Volver</button>
+      <div  class="perfil__label" *ngIf="respondido()">Usted respondio esta oferta de trabajo</div>
   </form>
 </div>

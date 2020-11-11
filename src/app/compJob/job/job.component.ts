@@ -42,7 +42,6 @@ export class JobComponent implements OnInit {
       data: { presupuesto: this.consulta,estado:this.estado },
     });
   }
-
   
   pagar(){
     this.dialog.open(PayJobComponent, {
