@@ -1,4 +1,4 @@
-<div class="contenedor">
+<div class="contenedor" *ngIf="!user$">
   <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()">
     <h1 class="form__titulo">Crea una cuenta gratis</h1>
     <label class="form__label">NOMBRE</label>
@@ -36,6 +36,28 @@
     <div class="botones">
       <button type="submit" id="btn1" [disabled]="formulario.invalid">REGISTRARSE COMO CLIENTE</button>
       <button type="submit" id="btn2" [disabled]="formulario.invalid">REGISTRARSE COMO PROFESIONAL</button>
+    </div>
+    <span class="label-inf">Tenés una cuenta? <a class="form__label" [routerLink]="['/ingresar']">
+        Ingresar</a></span>
+  </form>
+</div>
+
+<div class="contenedor" *ngIf="user$">
+  <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()">
+    <h1 class="form__titulo">Crea una cuenta gratis</h1>
+    <label class="form__label">NOMBRE</label>
+    <input type="text" formControlName="nombre" placeholder="Ingrese su nombre" autocomplete="off" required />
+    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
+      <div *ngIf="nombre.errors.required"> Nombre requerido </div>
+    </div>
+    <label class="form__label">APELLIDO</label>
+    <input type="text" formControlName="apellido" placeholder="Ingrese su apellido" autocomplete="off" required />
+    <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert">
+      <div *ngIf="apellido.errors.required"> Apellido requerido </div>
+    </div>
+    <div class="botones">
+      <button type="submit" id="btn1">REGISTRARSE COMO CLIENTE</button>
+      <button type="submit" id="btn2">REGISTRARSE COMO PROFESIONAL</button>
     </div>
     <span class="label-inf">Tenés una cuenta? <a class="form__label" [routerLink]="['/ingresar']">
         Ingresar</a></span>

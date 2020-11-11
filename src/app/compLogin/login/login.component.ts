@@ -55,9 +55,6 @@ export class LoginComponent implements OnInit {
           if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
             this.perfilSer.cliente.next(true)
             this.perfilSer.profesional.next(false)
-            //this.usuarioBDatos=new Cliente()
-            //this.perfilSer.usuarioBD = await this.perfilSer.getIdCliente(this.usuarioFull.id)
-            //this.authSvc.setCliente(await this.perfilSer.getIdCliente(this.usuarioFull.id))
             this.authSvc.setId(this.usuarioFull.id.toString())
             this.authSvc.setTipo("CLIENTE")
             console.log( this.perfilSer.usuarioBD);
@@ -65,9 +62,6 @@ export class LoginComponent implements OnInit {
           if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
             this.perfilSer.cliente.next(false)
             this.perfilSer.profesional.next(true)
-           // this.usuarioBDatos=new Profesional()
-            //this.perfilSer.usuarioBD = await this.perfilSer.getIdProfesional(this.usuarioFull.id)
-            //this.authSvc.setProfesional(await this.perfilSer.getIdProfesional(this.usuarioFull.id))
             this.authSvc.setId(this.usuarioFull.id.toString())
             this.authSvc.setTipo("PROFESIONAL")
             console.log( this.perfilSer.usuarioBD);
@@ -82,9 +76,38 @@ export class LoginComponent implements OnInit {
   }
 
   async accessGoogle() {
+    var usurioLogeado = new UserFB()
     try {
       await this.authSvc.loginWithGoogle();
-        this.router.navigate(['/perfil']);
+      await this.authSvc.angularAuth.onAuthStateChanged(async user=>{
+        if(user){
+          usurioLogeado.email=user.email
+          this.usuarioFull=await this.perfilSer.getEmail(usurioLogeado)
+          var sinEmail= await this.perfilSer.getEmail(usurioLogeado)
+          console.log(this.usuarioFull);
+          console.log(sinEmail)
+          debugger
+          if(sinEmail.userEmail ==="ninguno"){
+           return this.router.navigate(['/registar']);
+          }
+          if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
+            this.perfilSer.cliente.next(true)
+            this.perfilSer.profesional.next(false)
+            this.authSvc.setId(this.usuarioFull.id.toString())
+            this.authSvc.setTipo("CLIENTE")
+            console.log( this.perfilSer.usuarioBD);
+          }
+          if(this.usuarioFull.usuario.tipo===Tipo.PROFESIONAL){
+            this.perfilSer.cliente.next(false)
+            this.perfilSer.profesional.next(true)
+            this.authSvc.setId(this.usuarioFull.id.toString())
+            this.authSvc.setTipo("PROFESIONAL")
+            console.log( this.perfilSer.usuarioBD);
+          }
+          console.log(this.usuarioFull);
+          this.router.navigate(['/perfil']);
+        }
+      })
     } catch (error) {
       console.log(error);
     }

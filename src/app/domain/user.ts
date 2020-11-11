@@ -62,6 +62,7 @@ export enum Tipo {
 }
 
 export class UserFB {
+  userEmail: string;
   constructor(
     public providerId?: string,
     public uid?: string,
@@ -69,7 +70,7 @@ export class UserFB {
     public tipo?: Tipo
   ) {}
   static fromJson(usuarioJSON): UserFB {
-    return Object.assign(new UserFB(), usuarioJSON, {
+    return Object.assign(new UserFB(), usuarioJSON, usuarioJSON.userEmail==="ninguno"?null: {
       usuario: Usuario.fromJson(usuarioJSON.usuario),
     });
   }

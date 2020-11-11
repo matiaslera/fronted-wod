@@ -18,6 +18,8 @@ export class Cliente {
   }
 
   toJSON(): any {
+    console.log(this)
+    console.log(this.usuario)
     return {
       ...this,
       usuario: this.usuario.toJSON(),

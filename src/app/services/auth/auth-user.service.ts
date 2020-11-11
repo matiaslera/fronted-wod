@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { User, auth } from 'firebase/app';
+import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
@@ -11,45 +14,59 @@ import { Usuario } from 'src/app/domain/user';
   providedIn: 'root',
 })
 export class AuthUserService {
-  public tecnico: boolean;
-  public cliente: boolean;
-  usuario: User
 
-  constructor(public angularAuth: AngularFireAuth) {
-    this.tecnico = false;
-    this.cliente = false;
+  private user: Observable<firebase.User>;
+  private authState: any;
+
+  constructor(public angularAuth: AngularFireAuth,
+    private db: AngularFireDatabase,private snackBar: MatSnackBar) { 
+      this.user = angularAuth.authState;
+  }
+
+  get currentUserId(): string {
+    return this.authState !== null ? this.authState.uid : '';
+  }
+
+  authUser() {
+    return this.user;
   }
 
   async login(email: string, password: string) {
     try {
-      if (this.angularAuth.currentUser) {
-        this.angularAuth.signOut(); }
-      const user = await this.angularAuth.signInWithEmailAndPassword( email, password);
-      this.usuario = null;
-      this.usuario =  user.user;
+      return this.angularAuth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user;
+        this.setUserStatus('online');
+      });
     } catch (error) {
-      console.log(error);
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode === 'auth/wrong-password') {
-        alert('Usuario o contraseña incorrecta.');
+        this.mensaje('Usuario o contraseña incorrecta.');
       } 
       if(errorCode ==="auth/user-not-found"){
-        alert('Usuario o contraseña incorrecta.');
+        this.mensaje('Usuario o contraseña incorrecta.');
       }
       else {
-        alert(errorMessage);
+        this.mensaje(errorMessage);
       }
       console.log(error);
     }
+  }
+
+  setUserStatus(status: string): void {
+    const path = `users/${this.currentUserId}`;
+    const data = { status: status};
+    this.db.object(path).update(data)
+      .catch(error => console.log(error));
   }
 
   async register(email: string, password: string,name:string) {
     try {
       const user = await this.angularAuth.createUserWithEmailAndPassword( email, password);
       this.updateName(name)
-      this.usuario = user.user;
-      console.log("este es el usuario",this.usuario)
+      //this.usuario = user.user;
+      //console.log("este es el usuario",this.usuario)
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -129,8 +146,8 @@ export class AuthUserService {
         provider.addScope('profile');
         provider.addScope('email');
         const resultado = this.angularAuth.signInWithPopup(provider);
-        this.usuario = null;
-        this.usuario = (await resultado).user;
+        //this.usuario = null;
+        //this.usuario = (await resultado).user;
         // The signed-in user info
         console.log('nombre del usuario', (await resultado).user.displayName);
         console.log('email del usuario', (await resultado).user.email);
@@ -294,6 +311,11 @@ export class AuthUserService {
     }
   }
 
+  mensaje(errorType: string) {
+    this.snackBar.open(errorType, 'x', {
+      duration: 3000,
+    });
+  }
 /*
     return this.authService
         .login(this.formGroup.value)

@@ -59,9 +59,10 @@ export class RegisterComponent implements OnInit {
   async register() {
     const { youEmail, contrasenia } = this.formulario.value;
     var usuarioFire=new UserFB()
+    if(!this.user$){
     usuarioFire.email=youEmail
     this.perfilSer.usurioFB=usuarioFire
-    await this.auth.register(youEmail, contrasenia, this.matchWorlds());
+    await this.auth.register(youEmail, contrasenia, this.matchWorlds());}
   }
   async registerClient() {
     try {
@@ -79,7 +80,7 @@ export class RegisterComponent implements OnInit {
 
   async crearCliente() {
     var user = this.crearUser(Tipo.CLIENTE)
-    this.cliente.usuario = user;
+    this.cliente.usuario = await user;
     return this.cliente
   }
   async registerProf() {
@@ -95,20 +96,39 @@ export class RegisterComponent implements OnInit {
     }
     console.log('se ingreso como Profesional');
   }
-  crearProfesional() {
+  async crearProfesional() {
     var user = this.crearUser(Tipo.PROFESIONAL)
-    this.profesional.usuario=user;
+    this.profesional.usuario= await user;
     return this.profesional
   }
 
-  crearUser(tipo:Tipo){
+  async crearUser(tipo:Tipo){
+    debugger
     let user = new Usuario();
-    user.email = this.formulario.get('youEmail').value;
-    user.nombre = this.formulario.get('nombre').value;
-    user.apellido = this.formulario.get('apellido').value;
-    user.tipo=tipo
-    return user
+    if(this.user$){
+      await this.auth.angularAuth.onAuthStateChanged(async userFireBase=>{
+        if(userFireBase){
+          user.nombre = this.formulario.get('nombre').value;
+          user.apellido = this.formulario.get('apellido').value;
+          user.tipo=tipo
+          user.email=userFireBase.email  
+        }  
+        })
+        return user
+    }
+    if(!this.user$){
+      user.email = this.formulario.get('youEmail').value;
+      user.nombre = this.formulario.get('nombre').value;
+      user.apellido = this.formulario.get('apellido').value;
+      user.tipo=tipo
+      return user
+    }
+    /*   this.auth.angularAuth.onAuthStateChanged((userFireBase)=>{
+        user.email = userFireBase.email
+        console.log(user.email)
+      }) */
   }
+
   matchWorlds() {
     const { nombre, apellido } = this.formulario.value;
     var resultado = nombre + ' ' + apellido;
@@ -137,4 +157,6 @@ export class RegisterComponent implements OnInit {
       this.registerProf();
     }
   }
+
+  /*SI ESTA INGRESANDO POR PRIMERA VEZ CON GOOOGLE */
 }
