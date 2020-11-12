@@ -87,7 +87,6 @@ export class JobPendienteComponent implements OnInit {
   }
 
   async tieneProfesion(){
-    debugger
     this.profesional= await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
     console.log(this.profesional.profesion!==null )
     return this.profesional.profesion!==null 
@@ -99,6 +98,4 @@ export class JobPendienteComponent implements OnInit {
     this.profesional.profesion=this.opcion
     this.perfilServ.actualizarProfesional(this.profesional)
   }
- // this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
-   //   this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
 }

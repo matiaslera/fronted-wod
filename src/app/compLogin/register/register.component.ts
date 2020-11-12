@@ -118,7 +118,6 @@ export class RegisterComponent implements OnInit {
   }
 
   async crearUser(tipo: Tipo) {
-    debugger;
     let user = new Usuario();
     await this.auth.angularAuth.onAuthStateChanged((userFireBase) => {
       if (userFireBase) {
@@ -136,6 +135,13 @@ export class RegisterComponent implements OnInit {
     return user;
   }
 
+  online():boolean{
+    return this.auth.getOnline()==="online"
+  }
+
+  off():boolean{
+    return this.auth.getOnline()==="off"
+  }
   matchWorlds() {
     const { nombre, apellido } = this.formulario.value;
     var resultado = nombre + ' ' + apellido;

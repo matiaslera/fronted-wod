@@ -1,4 +1,4 @@
-<div class="contenedor" *ngIf="!user$">
+<div class="contenedor" *ngIf="!online()">
   <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()" >
     <h1 class="form__titulo">Crea una cuenta gratis</h1>
     <label class="form__label">NOMBRE</label>
@@ -42,7 +42,7 @@
   </form>
 </div>
 <!-- <ng-template #login class="botones"></ng-template> -->
-<div class="contenedor"*ngIf="user$">
+<div class="contenedor"*ngIf="online()">
   <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()">
     <h1 class="form__titulo">Crea una cuenta gratis</h1>
     <label class="form__label">NOMBRE</label>

@@ -12,9 +12,9 @@ export class UserListComponent implements OnInit {
   users: Usuario[];
   
   constructor(chat: ChatService) {
-    chat.getUsers().subscribe(users => {
+    /* chat.getUsers().subscribe(users => {
       this.users = users;
-    });
+    }); */
   }
 
   ngOnInit(): void {

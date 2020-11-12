@@ -5,9 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { User, auth } from 'firebase/app';
 import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { Cliente } from 'src/app/domain/cliente';
-import { Profesional } from 'src/app/domain/profesional';
 import { Usuario } from 'src/app/domain/user';
 
 @Injectable({
@@ -36,6 +33,7 @@ export class AuthUserService {
       .then((user) => {
         this.authState = user;
         this.setUserStatus('online');
+        this.setOnline("online")
       })
       .catch((errorCode)=>{
         if (errorCode === 'auth/wrong-password') {
@@ -50,7 +48,6 @@ export class AuthUserService {
           this.mensaje('Usuario o contraseña incorrecta.');
         }
       })
-     
      /*  var errorCode = error.code;
       var errorMessage = error.message;
       console.log(error); */
@@ -65,7 +62,6 @@ export class AuthUserService {
 
   async register(email: string, password: string,name:string) {
     try {
-      debugger
       await this.angularAuth.createUserWithEmailAndPassword( email, password)
       .then((user) => {
         this.authState = user;
@@ -126,6 +122,7 @@ export class AuthUserService {
     try {
     localStorage.removeItem("calificacion");
     localStorage.removeItem("id");
+    this.setOnline("off")
     await this.angularAuth.signOut();
     } catch (error) {
       console.log(error);
@@ -160,9 +157,7 @@ export class AuthUserService {
         provider.addScope('profile');
         provider.addScope('email');
         const resultado = this.angularAuth.signInWithPopup(provider);
-        //this.usuario = null;
-        //this.usuario = (await resultado).user;
-        // The signed-in user info
+        this.setOnline("online")
         console.log('nombre del usuario', (await resultado).user.displayName);
         console.log('email del usuario', (await resultado).user.email);
         console.log('email verificado', (await resultado).user.emailVerified);
@@ -211,27 +206,6 @@ export class AuthUserService {
     }
   }
 
-  async userActual() {
-    try {
-      this.angularAuth.onAuthStateChanged(function (user) {
-        if (user) {
-          // User is signed in.
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-        } else {
-          console.log('esta sin entrar');
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async volverAutenticar(credencial: auth.AuthCredential) {
     try {
       var user = await this.angularAuth.currentUser;
@@ -265,14 +239,9 @@ export class AuthUserService {
     } catch (error) {}
   }
 
-/*  setCliente(user: Cliente): void {
-    let user_string = JSON.stringify(user);
-    localStorage.setItem("currentCliente", user_string);
+  setOnline(online:string){
+    localStorage.setItem("online", online);
   }
-  setProfesional(user: Profesional): void {
-    let user_string = JSON.stringify(user);
-    localStorage.setItem("currentProfesional", user_string);
-  } */
   setId(id:string){
     localStorage.setItem("id", id);
   }
@@ -284,6 +253,10 @@ export class AuthUserService {
   }
   getId(){
     return localStorage.getItem("id");
+  }
+
+  getOnline(){
+    return localStorage.getItem("online");
   }
 /*   getCurrentCliente(): Cliente {
     let user_string = localStorage.getItem("currentCliente");

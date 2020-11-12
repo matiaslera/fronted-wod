@@ -24,14 +24,14 @@ export class ChatService {
           if (auth !== undefined && auth !== null) {
             this.user = auth;
           }
-          this.getUser().subscribe(a => {
+          /* this.getUser().subscribe(a => {
             this.userName = a.displayName;
-          });
+          }); */
         });
     }
 
   getUser() {
-    const userId = this.user.uid;g
+    const userId = this.user.uid;
     const path = `/users/${userId}`;
     return this.db.object(path);
   }
@@ -45,21 +45,21 @@ export class ChatService {
     const timestamp = this.getTimeStamp();
     const email = this.user.email;
     this.chatMessages = this.getMessages();
-    this.chatMessages.push({
+   /*  this.chatMessages.push({
       message: msg,
       timeSent: timestamp,
       userName: this.userName,
-      email: email });
+      email: email }); */
   }
 
   getMessages(): AngularFireList<ChatMessage[]> {
     // query to create our message feed binding
-    return this.db.list('messages', {
+    return this.db.list('messages', /* {
       query: {
         limitToLast: 25,
         orderByKey: true
       }
-    });
+    } */);
   }
 
   getTimeStamp() {

@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
       await this.authSvc.angularAuth.onAuthStateChanged(async user=>{
         if(user){
           this.usuarioFull=await this.perfilSer.getEmail(usurioLogeado)
-          debugger
           if(this.usuarioFull.usuario.tipo ===Tipo.CLIENTE){
             this.perfilSer.cliente.next(true)
             this.perfilSer.profesional.next(false)
@@ -84,9 +83,6 @@ export class LoginComponent implements OnInit {
           usurioLogeado.email=user.email
           this.usuarioFull=await this.perfilSer.getEmail(usurioLogeado)
           var sinEmail= await this.perfilSer.getEmail(usurioLogeado)
-          console.log(this.usuarioFull);
-          console.log(sinEmail)
-          debugger
           if(sinEmail.userEmail ==="ninguno"){
            return this.router.navigate(['/registar']);
           }
