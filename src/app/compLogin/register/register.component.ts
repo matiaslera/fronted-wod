@@ -106,7 +106,7 @@ export class RegisterComponent implements OnInit {
     debugger
     let user = new Usuario();
     if(this.user$){
-      await this.auth.angularAuth.onAuthStateChanged(async userFireBase=>{
+      await this.auth.angularAuth.onAuthStateChanged(userFireBase=>{
         if(userFireBase){
           user.nombre = this.formulario.get('nombre').value;
           user.apellido = this.formulario.get('apellido').value;
@@ -123,10 +123,6 @@ export class RegisterComponent implements OnInit {
       user.tipo=tipo
       return user
     }
-    /*   this.auth.angularAuth.onAuthStateChanged((userFireBase)=>{
-        user.email = userFireBase.email
-        console.log(user.email)
-      }) */
   }
 
   matchWorlds() {
@@ -157,6 +153,4 @@ export class RegisterComponent implements OnInit {
       this.registerProf();
     }
   }
-
-  /*SI ESTA INGRESANDO POR PRIMERA VEZ CON GOOOGLE */
 }

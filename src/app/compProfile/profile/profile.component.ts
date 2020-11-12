@@ -49,9 +49,10 @@ export class ProfileComponent implements OnInit {
   }
 
   foto(): boolean {
-    if (this.usuarioBDatos.usuario) {
+    /* if (this.usuarioBDatos.usuario) {
       return false;
-    }
+    } */
+    console.log(this.usuarioBDatos.usuario.fotoUrl)
     return this.usuarioBDatos.usuario.fotoUrl !== null;
     /*   if (this.authServ.usuario.photoURL===null){
       return false
