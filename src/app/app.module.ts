@@ -33,6 +33,10 @@ import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.com
 import { PopupPresupuestoComponent } from './compJob/popup-presupuesto/popup-presupuesto.component';
 import { JobPresupuestoComponent } from './compJob/job-presupuesto/job-presupuesto.component';
 import { PayJobComponent } from './compJob/pay-job/pay-job.component';
+import { ChatRoomComponent } from './compChat/chat-room/chat-room.component';
+import { ChatFormComponent } from './compChat/chat-form/chat-form.component';
+import { FeedComponent } from './compChat/feed/feed.component';
+import { UserListComponent } from './compChat/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { PayJobComponent } from './compJob/pay-job/pay-job.component';
     JobPendienteComponent,
     PopupPresupuestoComponent,
     JobPresupuestoComponent,
-    PayJobComponent
+    PayJobComponent,
+    ChatRoomComponent,
+    ChatFormComponent,
+    FeedComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,7 @@ import { JobDetallesComponent } from './compJob/job-detalles/job-detalles.compon
 import { JobRespuestaComponent } from './compJob/job-respuesta/job-respuesta.component';
 import { JobPresupuestoComponent } from './compJob/job-presupuesto/job-presupuesto.component';
 import { JobFinalizadoComponent } from './compJob/job-finalizado/job-finalizado.component';
+import { ChatRoomComponent } from './compChat/chat-room/chat-room.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: "jobPendientes", component: JobPendienteComponent, pathMatch: "full" },
   { path: "jobFinalizado", component: JobFinalizadoComponent, pathMatch: "full" },
   {path: 'jobDetalles/:id', component: JobDetallesComponent,pathMatch: "full" },
+  {path: 'chat', component: ChatRoomComponent,pathMatch: "full" },
  // {path: 'jobRespuesta/:id', component: JobRespuestaComponent,pathMatch:"full"},
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, 
