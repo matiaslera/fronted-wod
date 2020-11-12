@@ -22,8 +22,8 @@ function mostrarError(component, error) {
 })
 export class RegisterComponent implements OnInit {
   public user$: Observable<any> = this.auth.angularAuth.user;
-  cliente: Cliente = new Cliente()
-  profesional: Profesional= new Profesional();
+  cliente: Cliente = new Cliente();
+  profesional: Profesional = new Profesional();
   errors = [];
   formulario: FormGroup = this.formularioFB.group(
     {
@@ -31,15 +31,24 @@ export class RegisterComponent implements OnInit {
       apellido: ['', Validators.required],
       youEmail: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarContrasenia: ['',[Validators.required, Validators.minLength(4)],
+      confirmarContrasenia: [
+        '',
+        [Validators.required, Validators.minLength(4)],
       ],
     },
     { validator: this.matchingPasswords('contrasenia', 'confirmarContrasenia') }
   );
-  constructor(private formularioFB: FormBuilder,public router: Router,
-    private auth: AuthUserService,private perfilSer: ProfileService) {}
+  constructor(
+    private formularioFB: FormBuilder,
+    public router: Router,
+    private auth: AuthUserService,
+    private perfilSer: ProfileService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.user$);
+    console.log(this.auth.authUser());
+  }
 
   get nombre() {
     return this.formulario.get('nombre');
@@ -57,17 +66,23 @@ export class RegisterComponent implements OnInit {
     return this.formulario.get('contrasenia');
   }
   async register() {
-    const { youEmail, contrasenia } = this.formulario.value;
-    var usuarioFire=new UserFB()
-    if(!this.user$){
-    usuarioFire.email=youEmail
-    this.perfilSer.usurioFB=usuarioFire
-    await this.auth.register(youEmail, contrasenia, this.matchWorlds());}
+    this.auth.angularAuth.onAuthStateChanged((userFireBase) => {
+      if (userFireBase) {
+        return;
+      } else {
+        const { youEmail, contrasenia } = this.formulario.value;
+        var usuarioFire = new UserFB();
+        usuarioFire.email = youEmail;
+        this.perfilSer.usurioFB = usuarioFire;
+        this.auth.register(youEmail, contrasenia, this.matchWorlds());
+      }
+    });
   }
+  /*Situacion 1, sin registro de google */
   async registerClient() {
     try {
-      this.register();
       await this.perfilSer.crearCliente(await this.crearCliente());
+      this.register();
       if (this.user$) {
         this.router.navigate(['/bienvenido']);
       }
@@ -79,14 +94,14 @@ export class RegisterComponent implements OnInit {
   }
 
   async crearCliente() {
-    var user = this.crearUser(Tipo.CLIENTE)
+    var user = this.crearUser(Tipo.CLIENTE);
     this.cliente.usuario = await user;
-    return this.cliente
+    return this.cliente;
   }
   async registerProf() {
     try {
-      this.register();
       await this.perfilSer.crearProfesional(await this.crearProfesional());
+      this.register();
       if (this.user$) {
         this.router.navigate(['/bienvenido']);
       }
@@ -97,32 +112,28 @@ export class RegisterComponent implements OnInit {
     console.log('se ingreso como Profesional');
   }
   async crearProfesional() {
-    var user = this.crearUser(Tipo.PROFESIONAL)
-    this.profesional.usuario= await user;
-    return this.profesional
+    var user = this.crearUser(Tipo.PROFESIONAL);
+    this.profesional.usuario = await user;
+    return this.profesional;
   }
 
-  async crearUser(tipo:Tipo){
-    debugger
+  async crearUser(tipo: Tipo) {
+    debugger;
     let user = new Usuario();
-    if(this.user$){
-      await this.auth.angularAuth.onAuthStateChanged(userFireBase=>{
-        if(userFireBase){
-          user.nombre = this.formulario.get('nombre').value;
-          user.apellido = this.formulario.get('apellido').value;
-          user.tipo=tipo
-          user.email=userFireBase.email  
-        }  
-        })
-        return user
-    }
-    if(!this.user$){
-      user.email = this.formulario.get('youEmail').value;
-      user.nombre = this.formulario.get('nombre').value;
-      user.apellido = this.formulario.get('apellido').value;
-      user.tipo=tipo
-      return user
-    }
+    await this.auth.angularAuth.onAuthStateChanged((userFireBase) => {
+      if (userFireBase) {
+        user.nombre = this.formulario.get('nombre').value;
+        user.apellido = this.formulario.get('apellido').value;
+        user.tipo = tipo;
+        user.email = userFireBase.email;
+      } else {
+        user.email = this.formulario.get('youEmail').value;
+        user.nombre = this.formulario.get('nombre').value;
+        user.apellido = this.formulario.get('apellido').value;
+        user.tipo = tipo;
+      }
+    });
+    return user;
   }
 
   matchWorlds() {
@@ -133,8 +144,7 @@ export class RegisterComponent implements OnInit {
 
   matchingPasswords(password: string, passwordConfirmation: string) {
     return (group: FormGroup) => {
-      let passwordInput = group.controls[password],
-        passwordConfirmationInput = group.controls[passwordConfirmation];
+      let passwordInput = group.controls[password],passwordConfirmationInput = group.controls[passwordConfirmation];
       if (passwordInput.value !== passwordConfirmationInput.value) {
         return passwordConfirmationInput.setErrors({ notEquivalent: true });
       } else {

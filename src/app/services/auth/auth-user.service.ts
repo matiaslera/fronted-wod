@@ -32,26 +32,28 @@ export class AuthUserService {
   }
 
   async login(email: string, password: string) {
-    try {
       return this.angularAuth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
         this.setUserStatus('online');
-      });
-    } catch (error) {
-      var errorCode = error.code;
+      })
+      .catch((errorCode)=>{
+        if (errorCode === 'auth/wrong-password') {
+          this.mensaje('Usuario o contraseña incorrecta.');
+          alert('Usuario o contraseña incorrecta.')
+        } 
+        if(errorCode ==="auth/user-not-found"){
+          this.mensaje('Usuario o contraseña incorrecta.');
+          alert('Usuario o contraseña incorrecta.')
+        }
+        else {
+          this.mensaje('Usuario o contraseña incorrecta.');
+        }
+      })
+     
+     /*  var errorCode = error.code;
       var errorMessage = error.message;
-      if (errorCode === 'auth/wrong-password') {
-        this.mensaje('Usuario o contraseña incorrecta.');
-      } 
-      if(errorCode ==="auth/user-not-found"){
-        this.mensaje('Usuario o contraseña incorrecta.');
-      }
-      else {
-        this.mensaje(errorMessage);
-      }
-      console.log(error);
-    }
+      console.log(error); */
   }
 
   setUserStatus(status: string): void {
@@ -63,23 +65,37 @@ export class AuthUserService {
 
   async register(email: string, password: string,name:string) {
     try {
-      const user = await this.angularAuth.createUserWithEmailAndPassword( email, password);
+      debugger
+      await this.angularAuth.createUserWithEmailAndPassword( email, password)
+      .then((user) => {
+        this.authState = user;
+        const status = 'online';
+        this.setUserData(email, name, status);
+      }).catch(error => console.log(error));
       this.updateName(name)
-      //this.usuario = user.user;
-      //console.log("este es el usuario",this.usuario)
+      console.log("este es el usuario", this.authState)
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode == 'auth/weak-password') {
-        alert('La password es demasiado debil.');
+        this.mensaje('La password es demasiado debil.');
       }if (errorCode == "auth/network-request-failed"){
-        alert('Error, no tenemos conexion con el servidor')
+        this.mensaje('Error, no tenemos conexion con el servidor')
       }
        else {
-        alert(errorMessage);
+        this.mensaje(errorMessage);
       }
       console.log(error);
     }
+  }
+
+  setUserData(email: string, displayName: string, status: string): void {
+    const path = `users/${this.currentUserId}`;
+    const data = {email: email,
+      displayName: displayName,
+      status: status };
+    this.db.object(path).update(data)
+      .catch(error => console.log(error));
   }
 
   async sendEmailVerification() {
@@ -109,8 +125,6 @@ export class AuthUserService {
   async logOut() {
     try {
     localStorage.removeItem("calificacion");
-    localStorage.removeItem("currentProfesional");
-    localStorage.removeItem("currentCliente");
     localStorage.removeItem("id");
     await this.angularAuth.signOut();
     } catch (error) {
@@ -197,10 +211,6 @@ export class AuthUserService {
     }
   }
 
-  getCurretUser() {
-    return this.angularAuth.authState.pipe(first()).toPromise();
-  }
-
   async userActual() {
     try {
       this.angularAuth.onAuthStateChanged(function (user) {
@@ -255,14 +265,14 @@ export class AuthUserService {
     } catch (error) {}
   }
 
- setCliente(user: Cliente): void {
+/*  setCliente(user: Cliente): void {
     let user_string = JSON.stringify(user);
     localStorage.setItem("currentCliente", user_string);
   }
   setProfesional(user: Profesional): void {
     let user_string = JSON.stringify(user);
     localStorage.setItem("currentProfesional", user_string);
-  }
+  } */
   setId(id:string){
     localStorage.setItem("id", id);
   }
@@ -275,7 +285,7 @@ export class AuthUserService {
   getId(){
     return localStorage.getItem("id");
   }
-  getCurrentCliente(): Cliente {
+/*   getCurrentCliente(): Cliente {
     let user_string = localStorage.getItem("currentCliente");
     if (user_string != null && user_string != undefined) {
       let user: Cliente = JSON.parse(user_string);
@@ -292,7 +302,7 @@ export class AuthUserService {
     } else {
       return null;
     }
-  }
+  } */
   rememberMe(user: Usuario, recordarme: boolean): void {
     if (recordarme) {
       let user_string = JSON.stringify(user);
@@ -313,31 +323,7 @@ export class AuthUserService {
 
   mensaje(errorType: string) {
     this.snackBar.open(errorType, 'x', {
-      duration: 3000,
+      duration: 5000,
     });
   }
-/*
-    return this.authService
-        .login(this.formGroup.value)
-        .subscribe(
-          data => {
-            this.authService.setUser(data.username);
-            this.authService.setToken(data.id);
-            this.authService.rememberMe(data.username, this.recordarme)
-            this.authService.onLogin();
-            this.isError = false;
-          },
-          message => {
-            if (message.status === 0) {
-              this.errorMessage = "Error de conexion con el servidor"
-            } else {
-              this.errorMessage = message.error
-            }
-            this.onIsError()
-          }
-        );
-    } else {
-      this.formSubmitIntento = true
-    }
- */
 }

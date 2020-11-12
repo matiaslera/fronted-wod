@@ -92,7 +92,7 @@ export class ProfileUpdateComponent implements OnInit {
       this.perfilSer.actualizarCliente(this.cliente);
       //localStorage.removeItem('currentCliente');;
       //this.authServ.setCliente( await this.perfilSer.getIdCliente(this.cliente.id) );
-      this.usuarioBD = this.authServ.getCurrentCliente();
+      //this.usuarioBD = this.authServ.getCurrentCliente();
       this.update.emit('listo');
       this.mensaje('se actualizo la direccion correctamente');
     }

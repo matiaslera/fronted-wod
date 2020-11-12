@@ -1,5 +1,5 @@
 <div class="contenedor" *ngIf="!user$">
-  <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()" >
     <h1 class="form__titulo">Crea una cuenta gratis</h1>
     <label class="form__label">NOMBRE</label>
     <input type="text" formControlName="nombre" placeholder="Ingrese su nombre" autocomplete="off" required />
@@ -41,8 +41,8 @@
         Ingresar</a></span>
   </form>
 </div>
-
-<div class="contenedor" *ngIf="user$">
+<!-- <ng-template #login class="botones"></ng-template> -->
+<div class="contenedor"*ngIf="user$">
   <form [formGroup]="formulario" class="form" (ngSubmit)="onSubmit()">
     <h1 class="form__titulo">Crea una cuenta gratis</h1>
     <label class="form__label">NOMBRE</label>
@@ -59,7 +59,5 @@
       <button type="submit" id="btn1">REGISTRARSE COMO CLIENTE</button>
       <button type="submit" id="btn2">REGISTRARSE COMO PROFESIONAL</button>
     </div>
-    <span class="label-inf">Tenés una cuenta? <a class="form__label" [routerLink]="['/ingresar']">
-        Ingresar</a></span>
   </form>
 </div>
