@@ -37,6 +37,9 @@ import { ChatRoomComponent } from './compChat/chat-room/chat-room.component';
 import { ChatFormComponent } from './compChat/chat-form/chat-form.component';
 import { FeedComponent } from './compChat/feed/feed.component';
 import { UserListComponent } from './compChat/user-list/user-list.component';
+import { ChatService } from './services/chat/chat.service';
+import { UserItemComponent } from './compChat/user-item/user-item.component';
+import { MessageComponent } from './compChat/message/message.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import { UserListComponent } from './compChat/user-list/user-list.component';
     ChatRoomComponent,
     ChatFormComponent,
     FeedComponent,
-    UserListComponent
+    UserListComponent,
+    UserItemComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,7 @@ import { UserListComponent } from './compChat/user-list/user-list.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
-  providers: [CookieService,AuthUserService],
+  providers: [CookieService,AuthUserService,ChatService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

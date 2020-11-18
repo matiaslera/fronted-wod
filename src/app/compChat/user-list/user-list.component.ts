@@ -16,6 +16,7 @@ export class UserListComponent implements OnInit {
       this.users = users;
     }); */
   }
+  /**LISTA DE TODOS LOS USUARIOS DEL CHAT */
 
   ngOnInit(): void {
   }

@@ -47,7 +47,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.user$);
-    console.log(this.auth.authUser());
   }
 
   get nombre() {
@@ -68,6 +67,7 @@ export class RegisterComponent implements OnInit {
   async register() {
     this.auth.angularAuth.onAuthStateChanged((userFireBase) => {
       if (userFireBase) {
+        this.auth.setUserData(userFireBase.email,userFireBase.displayName,'online')
         return;
       } else {
         const { youEmail, contrasenia } = this.formulario.value;

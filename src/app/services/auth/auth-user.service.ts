@@ -12,64 +12,50 @@ import { Usuario } from 'src/app/domain/user';
 })
 export class AuthUserService {
 
-  private user: Observable<firebase.User>;
-  private authState: any;
+  private userState: Observable<User|null>;
+  private userFire: User;
 
   constructor(public angularAuth: AngularFireAuth,
     private db: AngularFireDatabase,private snackBar: MatSnackBar) { 
-      this.user = angularAuth.authState;
+      this.userState = angularAuth.authState;
   }
 
   get currentUserId(): string {
-    return this.authState !== null ? this.authState.uid : '';
-  }
-
-  authUser() {
-    return this.user;
+    return this.userFire !== null ? this.userFire.uid : '';
   }
 
   async login(email: string, password: string) {
-      return this.angularAuth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authState = user;
+    try {
+      const user= this.angularAuth.signInWithEmailAndPassword(email, password)
+        this.userFire = (await user).user
         this.setUserStatus('online');
         this.setOnline("online")
-      })
-      .catch((errorCode)=>{
-        if (errorCode === 'auth/wrong-password') {
-          this.mensaje('Usuario o contraseña incorrecta.');
-          alert('Usuario o contraseña incorrecta.')
-        } 
-        if(errorCode ==="auth/user-not-found"){
-          this.mensaje('Usuario o contraseña incorrecta.');
-          alert('Usuario o contraseña incorrecta.')
-        }
-        else {
-          this.mensaje('Usuario o contraseña incorrecta.');
-        }
-      })
-     /*  var errorCode = error.code;
+    } catch (error) {
+      var errorCode = error.code;
       var errorMessage = error.message;
-      console.log(error); */
+      console.log(errorMessage)
+      if (errorCode === 'auth/wrong-password') {
+        this.mensaje('Usuario o contraseña incorrecta.');
+        alert('Usuario o contraseña incorrecta.')
+      } 
+      if(errorCode ==="auth/user-not-found"){
+        this.mensaje('Usuario o contraseña incorrecta.');
+        alert('Usuario o contraseña incorrecta.')
+      }
+      else {
+        this.mensaje('Usuario o contraseña incorrecta.');
+      }
+    }
   }
-
-  setUserStatus(status: string): void {
-    const path = `users/${this.currentUserId}`;
-    const data = { status: status};
-    this.db.object(path).update(data)
-      .catch(error => console.log(error));
-  }
-
+  
   async register(email: string, password: string,name:string) {
     try {
-      await this.angularAuth.createUserWithEmailAndPassword( email, password)
-      .then((user) => {
-        this.authState = user;
-        const status = 'online';
-        this.setUserData(email, name, status);
-      }).catch(error => console.log(error));
+      const user= this.angularAuth.createUserWithEmailAndPassword( email, password)
+      this.userFire = (await user).user
+      const status = 'online';
+      this.setUserData(email, name, status);
       this.updateName(name)
-      console.log("este es el usuario", this.authState)
+      console.log("este es el usuario", this.userFire)
     } catch (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -78,13 +64,23 @@ export class AuthUserService {
       }if (errorCode == "auth/network-request-failed"){
         this.mensaje('Error, no tenemos conexion con el servidor')
       }
-       else {
+      else {
         this.mensaje(errorMessage);
       }
       console.log(error);
     }
   }
-
+  
+  setUserStatus(status: string): void {
+    this.angularAuth.onAuthStateChanged(user=>{
+      if(user){
+        const path = `users/${user.uid}`;
+        const data = { status: status};
+        this.db.object(path).update(data)
+          .catch(error => console.log(error));
+      }
+    })
+  }
   setUserData(email: string, displayName: string, status: string): void {
     const path = `users/${this.currentUserId}`;
     const data = {email: email,
@@ -92,6 +88,74 @@ export class AuthUserService {
       status: status };
     this.db.object(path).update(data)
       .catch(error => console.log(error));
+  }
+
+  async logOut() {
+    try {
+    localStorage.removeItem("calificacion");
+    localStorage.removeItem("id");
+    this.setOnline("off")
+    this.setUserStatus("offline")
+    await this.angularAuth.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  async updateName(nombre: string) {
+    const user=await this.angularAuth.currentUser
+    try {
+      user.updateProfile({
+        displayName:nombre
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async loginWithGoogle() {
+    try {
+      if (this.angularAuth.user !== null && this.angularAuth.user !== undefined ) {
+        var provider = new auth.GoogleAuthProvider();
+        provider.addScope('profile');
+        provider.addScope('email');
+        const resultado = this.angularAuth.signInWithPopup(provider);
+        this.setOnline("online")
+        console.log('nombre del usuario', (await resultado).user.displayName);
+        console.log('email del usuario', (await resultado).user.email);
+        console.log('email verificado', (await resultado).user.emailVerified);
+        console.log('provider Id es:', (await resultado).user.providerId);
+        console.log('id unica del usuario:', (await resultado).user.uid);
+      } else { this.angularAuth.signOut();}
+    } catch (error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage)
+      if (errorCode === 'auth/wrong-password') {
+        this.mensaje('Usuario o contraseña incorrecta.');
+        alert('Usuario o contraseña incorrecta.')
+      } 
+      if(errorCode ==="auth/user-not-found"){
+        this.mensaje('Usuario o contraseña incorrecta.');
+        alert('Usuario o contraseña incorrecta.')
+      }
+      else {
+        this.mensaje('Usuario o contraseña incorrecta.');
+      }
+      console.log(error);
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      var email = error.email;
+      var credential = error.credential;
+    }
+  }
+  
+  async loginWithFacebook() {
+    try {
+      this.angularAuth.currentUser;
+      auth.FacebookAuthProvider;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async sendEmailVerification() {
@@ -116,77 +180,19 @@ export class AuthUserService {
       }
       console.log(error);
     }
-  }
+  } 
 
-  async logOut() {
-    try {
-    localStorage.removeItem("calificacion");
-    localStorage.removeItem("id");
-    this.setOnline("off")
-    await this.angularAuth.signOut();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async deleteUser(credential) {
-    try {
-      this.volverAutenticar(credential);
-      var user = await this.angularAuth.currentUser;
-      user.delete();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async updateName(nombre: string) {
-    const user=await this.angularAuth.currentUser
-    try {
-      user.updateProfile({
-        displayName:nombre
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async loginWithGoogle() {
-    try {
-      if (this.angularAuth.user !== null && this.angularAuth.user !== undefined ) {
-        /*Accedo con popup*/
-        var provider = new auth.GoogleAuthProvider();
-        provider.addScope('profile');
-        provider.addScope('email');
-        const resultado = this.angularAuth.signInWithPopup(provider);
-        this.setOnline("online")
-        console.log('nombre del usuario', (await resultado).user.displayName);
-        console.log('email del usuario', (await resultado).user.email);
-        console.log('email verificado', (await resultado).user.emailVerified);
-        console.log('provider Id es:', (await resultado).user.providerId);
-        console.log('id unica del usuario:', (await resultado).user.uid);
-      } else {
-        await this.angularAuth.signOut();
+  /*   async deleteUser(credential) {
+      try {
+        this.volverAutenticar(credential);
+        var user = await this.angularAuth.currentUser;
+        user.delete();
+      } catch (error) {
+        console.log(error);
       }
-      /*Acceder por google*/
-      console.log('proveedor id', provider.providerId); // google.com
-    } catch (error) {
-      console.log(error);
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      var email = error.email;
-      var credential = error.credential;
-    }
-  }
+    } 
 
-  async loginWithFacebook() {
-    try {
-      this.angularAuth.currentUser;
-      auth.FacebookAuthProvider;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async updateEmail(nuevoEmail: string, credential) {
+/*   async updateEmail(nuevoEmail: string, credential) {
     try {
       this.volverAutenticar(credential);
       var user = await this.angularAuth.currentUser;
@@ -214,30 +220,7 @@ export class AuthUserService {
       console.log(error);
     }
   }
-
-  async initApp() {
-    try {
-      this.angularAuth.onAuthStateChanged(function (user) {
-        if (user) {
-          // User is signed in.
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          console.log('Nombre:', displayName);
-          console.log('Email:', email);
-          console.log('Email verificado:', emailVerified);
-          console.log('Foto:', photoURL);
-          console.log('Es anonimo:', isAnonymous);
-          console.log('Uid :', uid);
-          console.log('Provedor:', providerData);
-        }
-      });
-    } catch (error) {}
-  }
+ */
 
   setOnline(online:string){
     localStorage.setItem("online", online);
@@ -258,24 +241,7 @@ export class AuthUserService {
   getOnline(){
     return localStorage.getItem("online");
   }
-/*   getCurrentCliente(): Cliente {
-    let user_string = localStorage.getItem("currentCliente");
-    if (user_string != null && user_string != undefined) {
-      let user: Cliente = JSON.parse(user_string);
-      return user;
-    } else {
-      return null;
-    }
-  }
-  getCurrentProfesional(): Profesional {
-    let user_string = localStorage.getItem("currentProfesional");
-    if (user_string != null && user_string != undefined) {
-      let user: Profesional = JSON.parse(user_string);
-      return user;
-    } else {
-      return null;
-    }
-  } */
+
   rememberMe(user: Usuario, recordarme: boolean): void {
     if (recordarme) {
       let user_string = JSON.stringify(user);
