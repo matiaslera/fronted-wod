@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/domain/user';
+import {  UsuarioFireBD } from 'src/app/domain/user';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
@@ -9,14 +9,22 @@ import { ChatService } from 'src/app/services/chat/chat.service';
 })
 export class UserListComponent implements OnInit {
   
-  users: Usuario[];
+  users: UsuarioFireBD[];
   
   constructor(chat: ChatService) {
-    /* chat.getUsers().subscribe(users => {
-      this.users = users;
-    }); */
+    chat.getUsers().valueChanges().subscribe(users=>{
+      this.users=users
+    })
+    /**
+     *   chat.getUsers().valueChanges().subscribe(users=>{
+      this.users=users.filter(u=>u.displayName==="algo")
+    })
+     */
+    console.log(this.users)
   }
-  /**LISTA DE TODOS LOS USUARIOS DEL CHAT */
+  /**LISTA DE TODOS LOS USUARIOS DEL CHAT
+   * Si el usuario es tecnico que sean todos los usuarios sean profesionales, viceversa
+   */
 
   ngOnInit(): void {
   }

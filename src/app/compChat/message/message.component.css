@@ -1,7 +1,7 @@
 .messageContainer{
     display: flex;
     height: auto;
-    width: 70%;
+    width: 90%;
     min-width: 400px;
     border-radius: 5px;
     align-items:stretch;
@@ -26,7 +26,7 @@
 }
 
 .isOwnSender{
-    color: #E1F5FE;
+    color: var(--color_cyan-400);
 }
 
 .timestamp {
@@ -45,6 +45,7 @@
     padding: 10px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    color:var(--color_cyan-900);
 }
 
 .isOwnMessageContent{

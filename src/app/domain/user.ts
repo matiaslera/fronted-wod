@@ -78,5 +78,11 @@ export class UserFB {
     return { ...this };
   }
 }
+export class UsuarioFireBD{
+  displayName:string
+  email:string
+  status:string
+  tipo:Tipo
+}
 
 export type Calificacion = Cliente | Profesional;

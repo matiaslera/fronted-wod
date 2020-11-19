@@ -10,7 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ChatMessage } from 'src/app/domain/chat';
 import { Jugador } from 'src/app/domain/jugador';
 import { map } from 'rxjs/operators';
-import { Usuario } from 'src/app/domain/user';
+import { Usuario, UsuarioFireBD } from 'src/app/domain/user';
 import { User } from 'firebase';
 
 @Injectable({
@@ -18,7 +18,7 @@ import { User } from 'firebase';
 })
 export class ChatService {
   user: User;
-  chatMessages: AngularFireList<ChatMessage[]>;
+  chatMessages: AngularFireList<ChatMessage>;
   chatMessage: ChatMessage;
   userName: Observable<string>;
   userID: string;
@@ -34,16 +34,7 @@ export class ChatService {
     //? y se implementa la funcionalidad en el segundo argumento.
     //? La referencia que es nuestra lista de jugadores, se va a ordenar por nombre.
     //this.jugadoresDB = this.db.list('/jugadores', (ref) => ref.orderByChild('nombre'));
-    /* this.afAuth.authState.subscribe((auth) => {
-      if (auth !== undefined && auth !== null) {
-        this.user = auth;}
-      this.getUser().snapshotChanges().subscribe(a => {
-            //this.userName = a.displayName;
-            console.log(a.type);
-            console.log(a.key)
-            console.log(a.payload.val())
-          }); 
-        }); */
+   this.chatMessages = this.db.list('/mensajes',ref => ref.limitToLast(25).orderByKey())
     this.cargarUser();
     console.log(this.userID);
     this.getUser();
@@ -77,49 +68,40 @@ export class ChatService {
     console.log(this.userID);
   }
 
-  getUsers() {
+  getUsers():AngularFireList<UsuarioFireBD> {
     const path = '/users';
     return this.db.list(path);
   }
 
   sendMessage(msg: string) {
-    const timestamp = this.getTimeStamp();
-    const email = this.user.email;
-    this.chatMessages = this.getMessages();
-    /*  this.chatMessages.push({
-      message: msg,
-      timeSent: timestamp,
-      userName: this.userName,
-      email: email }); */
+    this.afAuth.onAuthStateChanged(user=>{
+      const timestamp = this.getTimeStamp();
+     // const email = this.user.email;
+      //this.chatMessages = this.getMessages();
+       this.chatMessages.push({
+        message: msg,
+        timeEnvio: timestamp,
+        userName: user.displayName,
+        email: user.email 
+       });
+    })
   }
 
-  getMessages(): AngularFireList<ChatMessage[]> {
+  getMessages(): AngularFireList<ChatMessage> {
     // query to create our message feed binding
-    return this.db.list(
-      'messages' /* {
-      query: {
-        limitToLast: 25,
-        orderByKey: true
-      }
-    } */
-    );
+    return this.db.list('/mensajes' ,ref => ref.limitToLast(25).orderByKey());
   }
 
   getTimeStamp() {
     const now = new Date();
     const date =
-      now.getUTCFullYear() +
-      '/' +
-      (now.getUTCMonth() + 1) +
-      '/' +
-      now.getUTCDate();
-    const time =
-      now.getUTCHours() + ':' + now.getUTCMinutes() + ':' + now.getUTCSeconds();
-
+      now.getFullYear() +'/' +
+      (now.getMonth() + 1) +'/' +now.getDate();
+    const time =now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
     return date + ' ' + time;
   }
-  /* 
-   //Devuelve un Observable de tipo Jugador Array.
+
+  /*  //Devuelve un Observable de tipo Jugador Array.
    getJugadores(): Observable<Jugador[]> {
     //? this.jugadoresDB ya tiene la base de datos.
     //? snapshotChanges obtiene la informacion en este momento.

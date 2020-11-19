@@ -1,5 +1,6 @@
 .mainContent{
     display: flex;
+    height: 85%;
 }
 
 .userListWrapper {
@@ -12,13 +13,14 @@
     order: 1;
     padding:20px 0px 40px 30px;
     border-right: 1px solid #222;
+    width: 30%;
 }
 
 .feedWrapper {
     background-color: #fff;
-    /* background: 
-        linear-gradient(181deg, rgba(100,200,255,0.6), rgba(0, 0, 0, 0.9)),
-        url('../../assets/img/chat-bg-1.png') center center no-repeat;; */
+     background: 
+        linear-gradient(181deg, rgba(100,200,255,0.6), rgba(0, 0, 0, 0.9))/* ,
+        url('../../assets/img/chat-bg-1.png') center center no-repeat */;
     font-family: "Open Sans", sans-serif;
     font-size: 1.2em;
     flex: 5;
@@ -28,10 +30,13 @@
 }
 
 .chatFormWrapper {
-    display: flex;
-    height: 50px;
+    height: 15%;
     background-color: #eee;
     z-index: 3;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0 0 0;
 }
 
 #scroll-style::-webkit-scrollbar-track

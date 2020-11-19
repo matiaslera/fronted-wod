@@ -29,3 +29,10 @@
 .chatButton:hover{
     background-color: #444;
 }
+
+.contenido{
+    width: 100%;
+    display: flex;
+    padding: 0 2rem;
+    justify-content: center;
+}
