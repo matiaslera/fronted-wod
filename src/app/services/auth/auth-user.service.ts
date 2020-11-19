@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { User, auth } from 'firebase/app';
 import { Observable } from 'rxjs';
-import { Usuario } from 'src/app/domain/user';
+import { Tipo, Usuario } from 'src/app/domain/user';
 
 @Injectable({
   providedIn: 'root',
@@ -48,12 +48,12 @@ export class AuthUserService {
     }
   }
   
-  async register(email: string, password: string,name:string) {
+  async register(email: string, password: string,name:string,tipo:Tipo) {
     try {
       const user= this.angularAuth.createUserWithEmailAndPassword( email, password)
       this.userFire = (await user).user
       const status = 'online';
-      this.setUserData(email, name, status);
+      this.setUserData(email, name, status,tipo);
       this.updateName(name)
       console.log("este es el usuario", this.userFire)
     } catch (error) {
@@ -63,6 +63,9 @@ export class AuthUserService {
         this.mensaje('La password es demasiado debil.');
       }if (errorCode == "auth/network-request-failed"){
         this.mensaje('Error, no tenemos conexion con el servidor')
+      }
+      if(errorCode="auth/email-already-in-use"){
+        this.mensaje('Ingrese sus datos nuevamente, para logearse')
       }
       else {
         this.mensaje(errorMessage);
@@ -81,10 +84,11 @@ export class AuthUserService {
       }
     })
   }
-  setUserData(email: string, displayName: string, status: string): void {
+  setUserData(email: string, displayName: string, status: string,tipo:Tipo): void {
     const path = `users/${this.currentUserId}`;
     const data = {email: email,
       displayName: displayName,
+      tipo:tipo,
       status: status };
     this.db.object(path).update(data)
       .catch(error => console.log(error));

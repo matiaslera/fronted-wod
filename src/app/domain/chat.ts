@@ -6,4 +6,5 @@ export class ChatMessage {
     message?: string;
     timeSent?: Date = new Date();
     timeEnvio?:string;
+    remitente?:string;
 }

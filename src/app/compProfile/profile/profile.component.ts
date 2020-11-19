@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
     if (this.authServ.getTipo() === 'PROFESIONAL') {
      // this.usuarioBDatos = this.authServ.getCurrentProfesional();
      this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
+     this.foto();
       console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBDatos);
     }
     console.log(this.usuarioBDatos);
@@ -49,9 +50,6 @@ export class ProfileComponent implements OnInit {
   }
 
   foto(): boolean {
-    /* if (this.usuarioBDatos.usuario) {
-      return false;
-    } */
     console.log(this.usuarioBDatos.usuario.fotoUrl)
     return this.usuarioBDatos.usuario.fotoUrl !== null;
     /*   if (this.authServ.usuario.photoURL===null){

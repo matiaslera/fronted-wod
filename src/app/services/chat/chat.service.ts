@@ -35,10 +35,6 @@ export class ChatService {
     //? La referencia que es nuestra lista de jugadores, se va a ordenar por nombre.
     //this.jugadoresDB = this.db.list('/jugadores', (ref) => ref.orderByChild('nombre'));
    this.chatMessages = this.db.list('/mensajes',ref => ref.limitToLast(25).orderByKey())
-    this.cargarUser();
-    console.log(this.userID);
-    this.getUser();
-    console.log(this.getUsers().stateChanges());
   }
 
   getUser() /* :AngularFireObject<Usuario>  */ {
@@ -47,7 +43,7 @@ export class ChatService {
     return this.db.object(path);
   }
 
-  async cargarUser() {
+ /*  async cargarUser() {
     await this.afAuth.onAuthStateChanged((user) => {
       console.log(user.uid);
       this.userID = user.uid;
@@ -66,7 +62,7 @@ export class ChatService {
       )
     });
     console.log(this.userID);
-  }
+  } */
 
   getUsers():AngularFireList<UsuarioFireBD> {
     const path = '/users';

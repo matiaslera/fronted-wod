@@ -64,25 +64,26 @@ export class RegisterComponent implements OnInit {
   get contrasenia() {
     return this.formulario.get('contrasenia');
   }
-  async register() {
+  async register(tipo: Tipo) {
     this.auth.angularAuth.onAuthStateChanged((userFireBase) => {
       if (userFireBase) {
-        this.auth.setUserData(userFireBase.email,userFireBase.displayName,'online')
+        /*Me registro con google*/
+        this.auth.setUserData(userFireBase.email,userFireBase.displayName,'online',tipo)
         return;
       } else {
+        /*Me registro sin google */
         const { youEmail, contrasenia } = this.formulario.value;
         var usuarioFire = new UserFB();
         usuarioFire.email = youEmail;
         this.perfilSer.usurioFB = usuarioFire;
-        this.auth.register(youEmail, contrasenia, this.matchWorlds());
+        this.auth.register(youEmail, contrasenia, this.matchWorlds(),tipo);
       }
     });
   }
-  /*Situacion 1, sin registro de google */
   async registerClient() {
     try {
       await this.perfilSer.crearCliente(await this.crearCliente());
-      this.register();
+      this.register(Tipo.CLIENTE);
       if (this.user$) {
         this.router.navigate(['/bienvenido']);
       }
@@ -101,7 +102,7 @@ export class RegisterComponent implements OnInit {
   async registerProf() {
     try {
       await this.perfilSer.crearProfesional(await this.crearProfesional());
-      this.register();
+      this.register(Tipo.PROFESIONAL);
       if (this.user$) {
         this.router.navigate(['/bienvenido']);
       }
