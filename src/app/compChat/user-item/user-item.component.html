@@ -1,4 +1,4 @@
-<div class="userItem">
+<div class="userItem" (click)="seleccionar(user)">
   <span class="status" [ngClass]=(user.status)></span>
   <span class="userName">{{user.displayName}}</span>
 </div>

@@ -1,22 +1,21 @@
 <div class="mainContent">
     <div class="userListWrapper">
-        <app-user-list></app-user-list>
+        <!-- <app-user-list></app-user-list> -->
+        <div class="userList" *ngFor="let user of users ">
+            <!-- <app-user-item
+            [user]=user *ngFor="let user of users ">
+            </app-user-item> -->
+            <div class="userItem" (click)="seleccionar(user)">
+              <span class="status" [ngClass]=(user.status)></span>
+              <span class="userName">{{user.displayName}}</span>
+            </div>
+          </div>
     </div>
     <div #scroller class="feedWrapper">
-        <app-feed></app-feed>
+        <app-feed [usuario]="selecionUser" [remitenteChat]="soyRemitente"></app-feed>
     </div>
 </div>
 <div class="chatFormWrapper">
     <app-chat-form></app-chat-form>
 </div>
 
-<!-- <h1>{{ userDB | async | json }}</h1>
-<h1>{{ usuarioChat.email  }}</h1>
-<h1>{{ usuarioChat.displayName  }}</h1>
-<h1>{{ usuarioChat.status  }}</h1>
-
-<ul *ngFor="let item of usuariosChatRefs  | async">
-    <li><h2> {{item|json}}</h2></li>
-    <li><h2> {{item.email}}</h2></li>
-</ul>
- -->

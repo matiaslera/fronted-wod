@@ -4,7 +4,7 @@ import {
   AngularFireList,
   AngularFireObject,
 } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ChatMessage } from 'src/app/domain/chat';
@@ -22,6 +22,11 @@ export class ChatService {
   chatMessage: ChatMessage;
   userName: Observable<string>;
   userID: string;
+  remitente:string=null;
+  public remitente$ = new Subject<string>();
+  feed: Observable<ChatMessage>;
+  public feed$ = new Subject<ChatMessage>();
+  chatMensajes$=new Subject<ChatMessage[]>();
 
   private jugadoresDB: AngularFireList<Jugador>;
 
@@ -36,6 +41,26 @@ export class ChatService {
     //this.jugadoresDB = this.db.list('/jugadores', (ref) => ref.orderByChild('nombre'));
    this.chatMessages = this.db.list('/mensajes',ref => ref.limitToLast(25).orderByKey())
   }
+  /*  async cargarUser() {
+     await this.afAuth.onAuthStateChanged((user) => {
+       console.log(user.uid);
+       this.userID = user.uid;
+       console.log(this.userID);
+       console.log(user.providerId);
+       console.log(user.email);
+       console.log(user.displayName);
+       console.log(user.photoURL);
+       const path = `/users/${this.userID}`;
+       console.log(path);
+       this.db.object(path).snapshotChanges().subscribe(
+         action => {
+           console.log(action.type);
+           console.log(action.key)
+           console.log(action.payload.val())}
+       )
+     });
+     console.log(this.userID);
+   } */
 
   getUser() /* :AngularFireObject<Usuario>  */ {
     const path = `/users/${this.userID}`;
@@ -43,26 +68,6 @@ export class ChatService {
     return this.db.object(path);
   }
 
- /*  async cargarUser() {
-    await this.afAuth.onAuthStateChanged((user) => {
-      console.log(user.uid);
-      this.userID = user.uid;
-      console.log(this.userID);
-      console.log(user.providerId);
-      console.log(user.email);
-      console.log(user.displayName);
-      console.log(user.photoURL);
-      const path = `/users/${this.userID}`;
-      console.log(path);
-      this.db.object(path).snapshotChanges().subscribe(
-        action => {
-          console.log(action.type);
-          console.log(action.key)
-          console.log(action.payload.val())}
-      )
-    });
-    console.log(this.userID);
-  } */
 
   getUsers():AngularFireList<UsuarioFireBD> {
     const path = '/users';
@@ -72,14 +77,17 @@ export class ChatService {
   sendMessage(msg: string) {
     this.afAuth.onAuthStateChanged(user=>{
       const timestamp = this.getTimeStamp();
-     // const email = this.user.email;
-      //this.chatMessages = this.getMessages();
-       this.chatMessages.push({
+      this.esRemitente.subscribe(rem=>this.remitente=rem)
+      if(this.remitente!==null){
+      this.chatMessages.push({
         message: msg,
         timeEnvio: timestamp,
         userName: user.displayName,
-        email: user.email 
-       });
+        email: user.email,
+        remitente:this.remitente 
+      });}
+      // const email = this.user.email;
+       //this.chatMessages = this.getMessages();
     })
   }
 
@@ -95,6 +103,15 @@ export class ChatService {
       (now.getMonth() + 1) +'/' +now.getDate();
     const time =now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
     return date + ' ' + time;
+  }
+
+  mensajes(ownEmail:string,remitente:string){
+   return this.getMessages().valueChanges().pipe()/* .subscribe(chatMensaje=>{chatMensaje.filter
+      (chat=>(chat.email===ownEmail && chat.remitente===remitente)||(chat.email===remitente && chat.remitente===ownEmail))}) */
+  } 
+
+  get esRemitente(): Observable<string> {
+    return this.remitente$.asObservable();
   }
 
   /*  //Devuelve un Observable de tipo Jugador Array.

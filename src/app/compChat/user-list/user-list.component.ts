@@ -13,13 +13,10 @@ export class UserListComponent implements OnInit {
   
   users: UsuarioFireBD[];
   usuarioBDatos: Calificacion;
+  chatRemitente: string;
   
   constructor(public chat: ChatService,public authServ: AuthUserService,
     public perfilSer: ProfileService,) {
-   /*  chat.getUsers().valueChanges().subscribe(usuarios=>{
-      this.users=usuarios.filter(user=>{user.tipo})
-    }) */
-    console.log(this.users)
   }
   /**LISTA DE TODOS LOS USUARIOS DEL CHAT
    * Si el usuario es tecnico que sean todos los usuarios sean profesionales, viceversa
@@ -37,6 +34,13 @@ export class UserListComponent implements OnInit {
     this.chat.getUsers().valueChanges().subscribe(usuarios=>{
       this.users=usuarios.filter(user=>user.tipo!==this.usuarioBDatos.usuario.tipo)/* .filter(user=>{user.tipo!==this.usuarioBDatos.usuario.tipo, console.log(user.tipo)}) */
     })
+  }
+
+  seleccionar(usuario:UsuarioFireBD){
+    this.chat.remitente$.next(usuario.email)
+    this.chat.esRemitente.subscribe(chat=>this.chatRemitente=chat)
+    console.log(this.chat.remitente$.subscribe())
+    console.log(this.chatRemitente)
   }
 
 }

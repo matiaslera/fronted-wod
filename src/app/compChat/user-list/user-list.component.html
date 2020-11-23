@@ -1,5 +1,9 @@
-<div class="userList" >
-    <app-user-item
+<div class="userList" *ngFor="let user of users ">
+    <!-- <app-user-item
     [user]=user *ngFor="let user of users ">
-    </app-user-item>
+    </app-user-item> -->
+    <div class="userItem" (click)="seleccionar(user)">
+      <span class="status" [ngClass]=(user.status)></span>
+      <span class="userName">{{user.displayName}}</span>
+    </div>
   </div>

@@ -10,32 +10,27 @@ import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 export class MessageComponent implements OnInit {
   
   @Input() chatMessage: ChatMessage;
-  userEmail: string;
-  userName: string;
-  messageContent: string;
-  timeStamp: Date = new Date();
-  timeEnvio:string;
-  isOwnMessage: boolean;
-  ownEmail: string;
+  userEmail: string;//email del emisor chat del mensaje
+  userName: string;//display name del emisor del chat del mensaje
+  messageContent: string;//contenido del mensaje
+  //timeStamp: Date = new Date();
+  timeEnvio:string;//tiempo de envio
+  isOwnMessage: boolean;//es el que escribio ese mensaje
+  //ownEmail: string;//email iniciado en firebase
 
   constructor(private authService: AuthUserService) {
     this.authService.angularAuth.onAuthStateChanged(user=>{
-      this.ownEmail = user.email;
-      this.isOwnMessage = this.ownEmail === this.userEmail;
+      this.isOwnMessage = user.email === this.userEmail;
+      // this.ownEmail = user.email;//email iniciado
     })
   }
 
   ngOnInit(chatMessage = this.chatMessage) {
-    console.log(chatMessage)
     console.log(this.chatMessage)
     this.messageContent = chatMessage.message;
-    console.log(this.messageContent )
     this.timeEnvio = chatMessage.timeEnvio;
-    console.log(this.timeEnvio)
     this.userEmail = chatMessage.email;
-    console.log(this.userEmail)
     this.userName = chatMessage.userName;
-    console.log(this.userName)
   }
 
 }
