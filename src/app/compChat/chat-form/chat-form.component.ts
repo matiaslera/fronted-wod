@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UsuarioFireBD } from 'src/app/domain/user';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
@@ -9,12 +10,14 @@ import { ChatService } from 'src/app/services/chat/chat.service';
 export class ChatFormComponent implements OnInit {
 
   message: string;
+  @Input() usuario:UsuarioFireBD
   constructor(private chat: ChatService) { }
 
   ngOnInit() {
   }
 
   send() {
+    this.chat.remitente=this.usuario.email
     this.chat.sendMessage(this.message);
     this.message = '';
     console.log("mensaje enviado")

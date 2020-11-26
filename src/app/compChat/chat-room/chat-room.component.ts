@@ -21,10 +21,8 @@ export class ChatRoomComponent implements OnInit {
   users: UsuarioFireBD[];
   usuariosChatRefs: Observable<any[]>;
   usuarioBDatos: Calificacion;
-  chatRemitente: string;
-  soyRemitente:string;
 
-  selecionUser =new EventEmitter<UsuarioFireBD>();
+  selecionUser:UsuarioFireBD
   @ViewChild(FeedComponent) childView: FeedComponent;
 
   constructor(private db: AngularFireDatabase,private afAuth: AngularFireAuth, private chatSer:ChatService,public authServ: AuthUserService,
@@ -42,7 +40,7 @@ export class ChatRoomComponent implements OnInit {
       console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBDatos);
     }
     this.chatSer.getUsers().valueChanges().subscribe(usuarios=>{
-      this.users=usuarios.filter(user=>user.tipo!==this.usuarioBDatos.usuario.tipo)/* .filter(user=>{user.tipo!==this.usuarioBDatos.usuario.tipo, console.log(user.tipo)}) */
+      this.users=usuarios.filter(user=>user.tipo!==this.usuarioBDatos.usuario.tipo)
     })
   }
 
@@ -55,13 +53,10 @@ export class ChatRoomComponent implements OnInit {
   }
 
   seleccionar(usuario:UsuarioFireBD){
-    this.selecionUser.emit(usuario)
+    this.selecionUser=usuario
+    console.log(this.selecionUser)
     console.log("este es el usuario", usuario)
     this.childView.cargarFeed(usuario)
-    /* this.soyRemitente=usuario.email
-    this.chatSer.remitente$.next(usuario.email)
-    this.chatSer.esRemitente.subscribe(chat=>this.chatRemitente=chat)
-    console.log(this.chatSer.remitente$.subscribe()) */
   }
 
 }

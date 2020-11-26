@@ -23,10 +23,10 @@ export class ChatService {
   userName: Observable<string>;
   userID: string;
   remitente:string=null;
-  public remitente$ = new Subject<string>();
+  /* public remitente$ = new Subject<string>();
   feed: Observable<ChatMessage>;
   public feed$ = new Subject<ChatMessage>();
-  chatMensajes$=new Subject<ChatMessage[]>();
+  chatMensajes$=new Subject<ChatMessage[]>(); */
 
   private jugadoresDB: AngularFireList<Jugador>;
 
@@ -77,8 +77,9 @@ export class ChatService {
   sendMessage(msg: string) {
     this.afAuth.onAuthStateChanged(user=>{
       const timestamp = this.getTimeStamp();
-      this.esRemitente.subscribe(rem=>this.remitente=rem)
-      if(this.remitente!==null){
+     // this.esRemitente.subscribe(rem=>this.remitente=rem)
+     console.log(this.remitente)
+      if(this.remitente!==null || this.remitente!==undefined){
       this.chatMessages.push({
         message: msg,
         timeEnvio: timestamp,
@@ -110,10 +111,10 @@ export class ChatService {
       (chat=>(chat.email===ownEmail && chat.remitente===remitente)||(chat.email===remitente && chat.remitente===ownEmail))}) */
   } 
 
-  get esRemitente(): Observable<string> {
+ /*  get esRemitente(): Observable<string> {
     return this.remitente$.asObservable();
   }
-
+ */
   /*  //Devuelve un Observable de tipo Jugador Array.
    getJugadores(): Observable<Jugador[]> {
     //? this.jugadoresDB ya tiene la base de datos.
