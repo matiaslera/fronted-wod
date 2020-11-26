@@ -40,6 +40,9 @@ import { UserListComponent } from './compChat/user-list/user-list.component';
 import { ChatService } from './services/chat/chat.service';
 import { UserItemComponent } from './compChat/user-item/user-item.component';
 import { MessageComponent } from './compChat/message/message.component';
+import { TurnSearchComponent } from './compTurn/turn-search/turn-search.component';
+import { TurnPopupComponent } from './compTurn/turn-popup/turn-popup.component';
+import { TurnDatosComponent } from './compTurn/turn-datos/turn-datos.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +72,10 @@ import { MessageComponent } from './compChat/message/message.component';
     FeedComponent,
     UserListComponent,
     UserItemComponent,
-    MessageComponent
+    MessageComponent,
+    TurnSearchComponent,
+    TurnPopupComponent,
+    TurnDatosComponent
   ],
   imports: [
     BrowserModule,

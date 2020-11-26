@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Usuario, UserFB } from 'src/app/domain/user';
 import { HttpClient } from '@angular/common/http';
 import { REST_SERVER_URL } from '../routes';
-import { of } from 'rxjs/internal/observable/of';
-import { User } from 'firebase';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
 import { BehaviorSubject, Subject } from 'rxjs';
