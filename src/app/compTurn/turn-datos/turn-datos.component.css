@@ -1,0 +1,88 @@
+.container {
+  color: black;
+  margin: 0.5rem;
+}
+
+/*Car de titulo*/
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+/*Formulario de busqueda*/
+.search_header {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.5em;
+  flex-flow: column wrap;
+  border: var(--color_cyan-100) 1px solid;
+}
+.search_title {
+  display: flex;
+  margin: 1em 0 0 2em;
+  font-size: 1.8em;
+}
+.search_form {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column wrap;
+  margin: 0.5em 0 0 0;
+}
+.search_linea {
+  display: flex;
+  margin: 0.5em 1.5em;
+  align-items: baseline;
+  flex-flow: row wrap;
+}
+.search_label {
+  font-size: 1.2em;
+  color: var(--color_cyan-900, #08d9d6);
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-right: 1em;
+  display: flex;
+}
+.search_label-dato {
+  color: var(--color_uno, #252a34);
+  padding: 0.2em;
+  border-radius: 4px;
+  font-size: 1.2em;
+}
+
+input[type="text"] {
+  transition: width 0.4s ease-in-out;
+}
+
+input[type="text"]:focus {
+  width: 60%;
+}
+
+/*Botones*/
+.search_btn {
+  margin: 0.5em 0 0.5em 0.5em;
+}
+.btn:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.btn {
+  border-radius: 4px;
+  margin: 0 2em;
+}

@@ -1,17 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Oferta } from 'src/app/domain/oferta';
 import { Presupuesto } from 'src/app/domain/presupuesto';
 import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
+import { Turno } from 'src/app/domain/turno';
 import { REST_SERVER_URL } from '../routes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrabajoService {
-  constructor(private httpCLient: HttpClient) {}
   
+  motivoTurno:string
+  constructor(private httpCLient: HttpClient,private snackBar: MatSnackBar,) {}
+  
+  mensaje(errorType: string) {
+    this.snackBar.open(errorType, 'x', {
+      duration: 3000,
+    });
+  }
+
   /*Devuelve los trabajos finalizados */
   async trabajosFinalizados(): Promise<Trabajo[]> {
     //debugger
@@ -21,7 +31,7 @@ export class TrabajoService {
     return trabajos.map((job) => Trabajo.fromJson(job));
     //return await this.httpCLient.get<Trabajo[]>(REST_SERVER_URL + '/job_final').toPromise();
   }
- /*Devuelve los trabajos finalizados,  de un cliente */
+  /*Devuelve los trabajos finalizados,  de un cliente */
   async trabajosFinalizadosDe(id:number): Promise<Trabajo[]> {
     //debugger
     const trabajos = await this.httpCLient
@@ -83,7 +93,7 @@ export class TrabajoService {
     console.log('este es el trabajo modificado, contratado', job, job.toJSON(),JSON.stringify(job));
     await this.httpCLient.put(REST_SERVER_URL + '/job_contratado' , job.toJSON()).toPromise();;
   }
-
+  
   /*Updatear trabajo */
   async update(job: Trabajo) {
     await this.httpCLient.put(REST_SERVER_URL + '/job_update' , job.toJSON()).toPromise();;
@@ -97,4 +107,46 @@ export class TrabajoService {
     console.log(trabajos);
     return trabajos.map((job) => Trabajo.fromJson(job));
   }
+  /*Crea un nuevo Turno */
+  async crearTurno(nuevoTurno: Turno) {
+    //console.log('este es el trabajo', trabajo);
+    await this.httpCLient.post(REST_SERVER_URL + '/create_turno', nuevoTurno.toJSON()).toPromise();
+    this.mensaje("se creo su turno, ingrese a la parte de proximo para verlo")
+  }
+  /*Leer un Turno por ID*/
+  async leerTurno(id:number): Promise<Turno> {
+    //console.log('este es el trabajo', trabajo);
+    const turno= await this.httpCLient.get(REST_SERVER_URL + '/reed_turno'+id).toPromise();
+    return Trabajo.fromJson(turno);
+  }
+  //Leer todos los turnos cargados
+  async listTurnos(): Promise<Turno[]> {
+    const turnos = await this.httpCLient
+    .get<Trabajo[]>(REST_SERVER_URL + '/reed_turnos').toPromise();
+    console.log(turnos);
+    return turnos.map((job) => Turno.fromJson(job));
+  }
+  //actualiza el turno
+  async actualizarTurno(turno:Turno) {
+    await this.httpCLient.put(REST_SERVER_URL + '/update_turno',turno.toJSON() ).toPromise();;
+  }
+   //eliminar el turno
+   async eliminarTurno(turno:Turno) {
+    await this.httpCLient.delete(REST_SERVER_URL + '/delete_turno',turno.toJSON() ).toPromise();;
+  }
+   //Leer todos los turnos de los clientes
+   async turnosClientes(id:number): Promise<Turno[]> {
+    const turnos = await this.httpCLient
+    .get<Turno[]>(REST_SERVER_URL + '/reed_turnoCliente'+id).toPromise();
+    console.log(turnos);
+    return turnos.map((job) => Turno.fromJson(job));
+  }
+  //Leer todos los turnos de los clientes
+  async turnosProfesional(id:number): Promise<Turno[]> {
+    const turnos = await this.httpCLient
+    .get<Turno[]>(REST_SERVER_URL + '/reed_turnoProfesional'+id).toPromise();
+    console.log(turnos);
+    return turnos.map((job) => Turno.fromJson(job));
+  }
+
 }

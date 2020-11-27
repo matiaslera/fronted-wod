@@ -1,6 +1,6 @@
 .mainContent{
     display: flex;
-    height: 85%;
+    height: 80%;
 }
 
 .userListWrapper {
@@ -33,7 +33,7 @@
     background-color: #eee;
     z-index: 3;
     position: absolute;
-    bottom: 0;
+    /* bottom: 0; */
     width: 100%;
     padding: 15px 0 0 0;
 }

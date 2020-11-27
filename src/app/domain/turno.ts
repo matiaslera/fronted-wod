@@ -1,40 +1,31 @@
+import { Direccion } from './direccion';
 import { Presupuesto } from './presupuesto';
 
-export class Trabajo {
+export class Turno {
   constructor(
     public id?: number,
     public idProfesional?: number,
     public idCliente?: number,
-    public presupuesto?: Presupuesto,
     public montoFinal?: number,
     public estado?: Estado,
     public calificacion?: number,
-    public fechaFinalizacion?: Date
+    public direccion?:Direccion,
+    public fechaTrabajo?: Date,
+    public turnoDelDia?:string
   ) {}
 
-  static fromJson(problemJSON): Trabajo {
+  static fromJson(problemJSON): Turno {
     console.log("este es el json de trabajo:", problemJSON)
     return Object.assign(
-      new Trabajo(),
+      new Turno(),
       problemJSON,
      {presupuesto:Presupuesto.fromJson(problemJSON.presupuesto)},
-     {fechaFinalizacion: problemJSON.fechaFinalizacion!=="null"? this.fechaFromJSON(
-        problemJSON.fechaFinalizacion): null},
+    {fechaTrabajo: problemJSON.fechaTrabajo!=="null"? this.fechaFromJSON(
+            problemJSON.fechaTrabajo): null},
       {estado:this.estadoFromJSON(problemJSON.estado)}, 
     );
   }
-  
-/*   static fechaFromJSON(day: string, month: string, year: string): Date {
-    console.log(day);
-    console.log(month);
-    console.log(year);
-    const res = new Date();
-    res.setDate(Number(day));
-    res.setMonth(Number(month));
-    res.setFullYear(Number(year));
-    return res;
-  }
- */
+
   static fechaFromJSON(fecha: string): Date {
     const data = fecha.split('/')
     const res = new Date()
@@ -45,11 +36,19 @@ export class Trabajo {
   }
 
   static fechaToJSON(fecha: Date) {
-    const local=fecha.toLocaleDateString('es-AR')
-    const data = local.split('/')
+    const fecha2= fecha.toString()
+    console.log(fecha2)
+    const fecha3= fecha2.split('-')
+      console.log(fecha3)
+    return fecha3[0]+"/"+fecha3[1]+"/"+fecha3[2]
+      
+      //return fecha.toLocaleDateString('es-AR')
+      //return fecha.getFullYear()+"/"+ fecha.getMonth()+"/"+fecha.getDate()
+    //const local=fecha.toLocaleDateString('es-AR')
+    /* const data = local.split('/')
     const dia =this.dateDayJson(data[0])
     const mes=this.dateDayJson(data[1])
-    return data[2]+"/"+ mes+"/"+dia
+    return data[2]+"/"+ mes+"/"+dia */
   }
   static dateDayJson(day): string{
     const number = parseInt(day,10)
@@ -61,7 +60,6 @@ export class Trabajo {
     return day
   }
 
-
   static estadoFromJSON(estado: string) {
     if (estado === 'PUBLICADO') {
       return Estado.PUBLICADO;
@@ -72,12 +70,16 @@ export class Trabajo {
     if (estado === 'FINALIZADO') {
       return Estado.FINALIZADO;
     }
+    if (estado === 'CANCELADO') {
+        return Estado.CANCELADO;
+      }
   }
   toJSON(): any {
-    //console.log(this.fechaFinalizacion.getFullYear()+"/"+ this.fechaFinalizacion.getMonth()+"/"+this.fechaFinalizacion.getDate())
+    //console.log(this.fechaTrabajo.getFullYear()+"/"+ this.fechaTrabajo.getMonth()+"/"+this.fechaTrabajo.getDate())
+    console.log(this.fechaTrabajo) 
     return {
       ...this,
-      fechaFinalizacion:this.fechaFinalizacion!==undefined && this.fechaFinalizacion!==null?Trabajo.fechaToJSON(this.fechaFinalizacion):null
+      fechaTrabajo:this.fechaTrabajo!==undefined && this.fechaTrabajo!==null?Turno.fechaToJSON(this.fechaTrabajo):null
       //fechaFinalizacion:this.fechaFinalizacion.getFullYear()+"/"+ this.fechaFinalizacion.getMonth()+"/"+this.fechaFinalizacion.getDate()
     };
   }

@@ -18,6 +18,7 @@ import { JobPresupuestoComponent } from './compJob/job-presupuesto/job-presupues
 import { JobFinalizadoComponent } from './compJob/job-finalizado/job-finalizado.component';
 import { ChatRoomComponent } from './compChat/chat-room/chat-room.component';
 import { TurnSearchComponent } from './compTurn/turn-search/turn-search.component';
+import { TurnDatosComponent } from './compTurn/turn-datos/turn-datos.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'jobDetalles/:id', component: JobDetallesComponent,pathMatch: "full" },
   { path: 'chat', component: ChatRoomComponent,pathMatch: "full" },
   { path: 'turnos', component: TurnSearchComponent,pathMatch: "full" },
+  { path: 'turnosDetalles/:id', component: TurnDatosComponent,pathMatch: "full" },
  // {path: 'jobRespuesta/:id', component: JobRespuestaComponent,pathMatch:"full"},
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, 

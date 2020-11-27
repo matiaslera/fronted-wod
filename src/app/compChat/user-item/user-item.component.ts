@@ -17,10 +17,7 @@ export class UserItemComponent implements OnInit {
   }
 
   seleccionar(usuario:UsuarioFireBD){
-    this.chat.remitente$.next(usuario.email)
-    this.chat.esRemitente.subscribe(chat=>this.chatRemitente=chat)
-    console.log(this.chat.remitente$.subscribe())
-    console.log(this.chatRemitente)
+
   }
 
 }

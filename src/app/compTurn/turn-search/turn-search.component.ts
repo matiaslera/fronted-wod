@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Profesional } from 'src/app/domain/profesional';
-import { Trabajo } from 'src/app/domain/trabajo';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
@@ -13,9 +12,6 @@ import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
   styleUrls: ['./turn-search.component.css']
 })
 export class TurnSearchComponent implements OnInit {
-
-  /* problemas: Trabajo[] = [];
-  job: Trabajo; */
 
   profesionales:Profesional[]=[]
   tecnicos:Profesional[]=[]
@@ -46,7 +42,8 @@ export class TurnSearchComponent implements OnInit {
     private builder: FormBuilder,
     public authServ: AuthUserService,
     public dialog: MatDialog,
-    private profileServ: ProfileService
+    private profileServ: ProfileService,
+    private trabajoServ:TrabajoService
   ) {}
 
   ngOnInit(): void {
@@ -91,18 +88,6 @@ export class TurnSearchComponent implements OnInit {
     });
     await this.getTecnicos();
   }
-  /* create() {
-    const dialogRef = this.dialog.open(PopupPresupuestoComponent, {
-      height: '600px',
-      width: '700px',
-      hasBackdrop: false,
-      panelClass: 'custom-dialog-container',
-      data: {
-        especialidad: this.busquedaForm.get('especialidad').value,
-        problema: this.busquedaForm.get('problema').value,
-      },
-    });
-  } */
 
   esCliente(): boolean {
     return this.authServ.getTipo() === 'CLIENTE';
@@ -120,11 +105,16 @@ export class TurnSearchComponent implements OnInit {
   previo(){
 
   }
+
+
   
   cancelar(){
     this.nuevoTurno=false
   }
-  aceptar(){
 
+
+  datosGuardar(){
+    console.log(this.busquedaForm.get('motivo').value)
+    this.trabajoServ.motivoTurno=this.busquedaForm.get('motivo').value
   }
 }

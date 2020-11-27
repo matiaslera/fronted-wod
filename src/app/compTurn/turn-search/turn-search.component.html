@@ -41,6 +41,7 @@
               <th>Email</th>
               <th>Especialidad</th>
               <th>Trabajo Realizado </th>
+              <th>Accion</th>
             </tr>
           </thead>
         </table>
@@ -49,10 +50,12 @@
         <table>
           <tbody>
             <tr *ngFor="let profesional of profesionales">
-              <td>{{profesional.usuario.nombre}}</td>
-              <td>{{profesional.usuario.email }}</td>
-              <td>{{profesional.profesion}}</td>
-              <td>1</td>
+              <!-- <a mat-raised-button [routerLink]="['../turnosDetalles', profesional.id]" color="accent" class="btn"> -->
+              <td> {{profesional.usuario.nombre}}      </td>
+              <td> {{profesional.usuario.email }}      </td>
+              <td> {{profesional.profesion}}           </td>
+              <td> 1                                    </td>
+              <td><a [routerLink]="['../turnosDetalles', profesional.id]" (click)="datosGuardar()"> Contratar </a> </td>
             </tr>
           </tbody>
         </table>
