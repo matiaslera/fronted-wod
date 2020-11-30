@@ -1,0 +1,74 @@
+<div class="box">
+    <div class="search_btn">
+        <button mat-raised-button color="accent" class="btn" (click)="previo()">Previos</button>
+        <button mat-raised-button color="accent" class="btn" (click)="nuevo()" *ngIf="esCliente()">Nuevo</button>
+        <button mat-raised-button color="accent" class="btn" (click)="proximo()">Proximos</button>
+    </div>
+    <div *ngIf="nuevoTurno">
+        <app-turn-search (cancelar)="cancelarAll($event)"></app-turn-search>
+    </div>
+    <div class="container" *ngIf="previosTurno">
+        <table>
+            <mat-divider></mat-divider>
+            <h2 *ngIf="noTieneTurnos()"> NO TIENE NINGUN PRESUPUESTO CARGADO </h2>
+            <div *ngIf="esCliente()">
+                <div *ngFor="let elemento of turnos">
+                    <app-tuno-item [item]="elemento" [imagen]="imagen" [estado]="opcion"></app-tuno-item>
+                   <!--  <app-job [consulta]="elemento" [imagen]="imagen" [estado]="publicado"></app-job> -->
+                </div>
+            </div>
+            <div *ngIf="esProfesional()">
+                <div *ngIf="profesional.profesion else noTiene">
+                    <div *ngFor="let elemento of turnos">
+                       <!--  <app-job [consulta]="elemento" [imagen]="imagen" [estado]="publicado"></app-job> -->
+                    </div>
+                </div>
+            </div>
+        </table>
+    </div>
+    <ng-template #noTiene style="color:black">
+        <div>
+            NO TIENE CARGADO SU ESPECIALIDAD, DESEA ACTUALIZARLA?
+            <div class="perfil__linea">
+                <label class="perfil__label">Especialidad: </label>
+                <select class="search_label-dato" [(ngModel)]="opcion" required>
+                    <option [value]="item" *ngFor="let item of especialidad">{{item}}</option>
+                </select>
+            </div>
+            <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+                (click)="aceptar()">Aceptar</button>
+        </div>
+    </ng-template>
+    <div class="container" *ngIf="proximoTurno">
+        <table>
+            <mat-divider></mat-divider>
+            <h2 *ngIf="noTieneTurnos()"> NO TIENE NINGUN PRESUPUESTO CARGADO </h2>
+            <div *ngIf="esCliente()">
+                <div *ngFor="let elemento of turnos">
+                    <app-tuno-item [item]="elemento" [imagen]="imagen" [estado]="opcion"></app-tuno-item>
+                 
+                </div>
+            </div>
+            <div *ngIf="esProfesional()">
+                <div *ngIf="profesional.profesion else noTiene">
+                    <div *ngFor="let elemento of turnos">
+                        <app-tuno-item [item]="elemento" [imagen]="imagen" [estado]="opcion"></app-tuno-item>
+                    </div>
+                </div>
+            </div>
+        </table>
+    </div>
+    <ng-template #noTiene style="color:black">
+        <div>
+            NO TIENE CARGADO SU ESPECIALIDAD, DESEA ACTUALIZARLA?
+            <div class="perfil__linea">
+                <label class="perfil__label">Especialidad: </label>
+                <select class="search_label-dato" [(ngModel)]="opcion" required>
+                    <option [value]="item" *ngFor="let item of especialidad">{{item}}</option>
+                </select>
+            </div>
+            <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+                (click)="aceptar()">Aceptar</button>
+        </div>
+    </ng-template>
+</div>

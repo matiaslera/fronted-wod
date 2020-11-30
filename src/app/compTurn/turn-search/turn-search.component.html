@@ -1,11 +1,5 @@
 <div class="box">
-
-  <div class="search_btn">
-    <button mat-raised-button color="accent" class="btn" (click)="previo()">Previos</button>
-    <button mat-raised-button color="accent" class="btn" (click)="nuevo()">Nuevo</button>
-    <button mat-raised-button color="accent" class="btn" (click)="proximo()">Proximos</button>
-  </div>
-  <div class="search_header" *ngIf="nuevoTurno">
+  <div class="search_header" >
     <h2 class="search_title">Buscar Profesional</h2>
     <form [formGroup]="busquedaForm" (ngSubmit)="buscar()" class="search_form">
       <div class="search_linea">
@@ -28,8 +22,8 @@
     </form>
     <div class="search_btn">
       <button mat-raised-button color="accent" class="btn" (click)="buscar()">Buscar</button>
-      <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Cancelar</button>
       <button mat-raised-button color="accent" class="btn" (click)="clear()">Limpiar Campos</button>
+      <button mat-raised-button color="accent" class="btn" (click)="cancelar.emit(false)">Cancelar</button>
     </div>
     <h2 class="search_title">Elegir Profesional</h2>
     <section>
@@ -50,7 +44,6 @@
         <table>
           <tbody>
             <tr *ngFor="let profesional of profesionales">
-              <!-- <a mat-raised-button [routerLink]="['../turnosDetalles', profesional.id]" color="accent" class="btn"> -->
               <td> {{profesional.usuario.nombre}}      </td>
               <td> {{profesional.usuario.email }}      </td>
               <td> {{profesional.profesion}}           </td>

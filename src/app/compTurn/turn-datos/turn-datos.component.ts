@@ -23,7 +23,7 @@ export class TurnDatosComponent implements OnInit {
   idCliente:number
   fecha:Date=new Date()
   turno:string[]=[
-    "mañana",
+    "mañana", 
     "tarde"
   ]
   motivos: string[] = [
@@ -60,6 +60,8 @@ export class TurnDatosComponent implements OnInit {
   userName(){
 
   }
+
+
 
   contratar(){
     var nuevoTurno = new Turno()

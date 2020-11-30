@@ -43,6 +43,10 @@ import { MessageComponent } from './compChat/message/message.component';
 import { TurnSearchComponent } from './compTurn/turn-search/turn-search.component';
 import { TurnPopupComponent } from './compTurn/turn-popup/turn-popup.component';
 import { TurnDatosComponent } from './compTurn/turn-datos/turn-datos.component';
+import { TurnPreviosComponent } from './compTurn/turn-previos/turn-previos.component';
+import { TurnProximosComponent } from './compTurn/turn-proximos/turn-proximos.component';
+import { TurnMainComponent } from './compTurn/turn-main/turn-main.component';
+import { TunoItemComponent } from './compTurn/tuno-item/tuno-item.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +79,11 @@ import { TurnDatosComponent } from './compTurn/turn-datos/turn-datos.component';
     MessageComponent,
     TurnSearchComponent,
     TurnPopupComponent,
-    TurnDatosComponent
+    TurnDatosComponent,
+    TurnPreviosComponent,
+    TurnProximosComponent,
+    TurnMainComponent,
+    TunoItemComponent
   ],
   imports: [
     BrowserModule,

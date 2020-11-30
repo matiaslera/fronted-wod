@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Profesional } from 'src/app/domain/profesional';
@@ -15,6 +15,7 @@ export class TurnSearchComponent implements OnInit {
 
   profesionales:Profesional[]=[]
   tecnicos:Profesional[]=[]
+  @Output() cancelar = new EventEmitter<boolean>();
   busquedaForm = this.builder.group({
     problema: ['', Validators.required],
     especialidad: ['', Validators.required],
@@ -34,9 +35,6 @@ export class TurnSearchComponent implements OnInit {
     'Consulta Tecnica',
     'Presupuesto',
   ];
-  nuevoTurno:boolean=false;
-  proximoTurno:boolean;
-  previosTurno:boolean;
 
   constructor(
     private builder: FormBuilder,
@@ -57,13 +55,11 @@ export class TurnSearchComponent implements OnInit {
     console.log(this.busquedaForm.value);
     this.profesionales=this.tecnicos.filter((profesional) =>
     this.contiene(profesional, palabra));
-   // this.profesionales=this.tecnicos
   if (especial) {
     this.tecnicos = this.profesionales.filter(
       (profesional) =>
         profesional.profesion===this.busquedaForm.get('especialidad').value
     );
-   // this.profesionales=this.tecnicos
   }
   }
 
@@ -92,26 +88,6 @@ export class TurnSearchComponent implements OnInit {
   esCliente(): boolean {
     return this.authServ.getTipo() === 'CLIENTE';
   }
-
-  nuevo(){
-    this.nuevoTurno=true
-    
-  }
-
-  proximo(){
-
-  }
-
-  previo(){
-
-  }
-
-
-  
-  cancelar(){
-    this.nuevoTurno=false
-  }
-
 
   datosGuardar(){
     console.log(this.busquedaForm.get('motivo').value)

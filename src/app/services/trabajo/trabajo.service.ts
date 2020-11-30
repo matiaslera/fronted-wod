@@ -137,14 +137,14 @@ export class TrabajoService {
    //Leer todos los turnos de los clientes
    async turnosClientes(id:number): Promise<Turno[]> {
     const turnos = await this.httpCLient
-    .get<Turno[]>(REST_SERVER_URL + '/reed_turnoCliente'+id).toPromise();
+    .get<Turno[]>(REST_SERVER_URL + '/reed_turnoCliente/'+id).toPromise();
     console.log(turnos);
     return turnos.map((job) => Turno.fromJson(job));
   }
   //Leer todos los turnos de los clientes
   async turnosProfesional(id:number): Promise<Turno[]> {
     const turnos = await this.httpCLient
-    .get<Turno[]>(REST_SERVER_URL + '/reed_turnoProfesional'+id).toPromise();
+    .get<Turno[]>(REST_SERVER_URL + '/reed_turnoProfesional/'+id).toPromise();
     console.log(turnos);
     return turnos.map((job) => Turno.fromJson(job));
   }

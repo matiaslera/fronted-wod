@@ -1,0 +1,46 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+.box {
+  height: auto;
+  margin: 1em;
+  color: black;
+}
+/*Botones*/
+.search_btn {
+  margin: 0.5em 0 0.5em 0.5em;
+}
+.btn:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.btn {
+  border-radius: 4px;
+  margin: 0 2em;
+}
+/**/
+.container {
+  color: black;
+  margin: 0.5em;
+  justify-content: center;
+  display: flex;
+}
+ /*Pequeño formulario*/
+ .perfil__label-cont {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  margin: 0 1.5em;
+}
+.perfil__linea {
+  display: flex;
+  margin: 0 1.5em;
+  align-items: baseline;
+  flex-flow: row wrap;
+}
+.perfil__label {
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--color_cyan-700, #08d9d6);
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0.5em 0.3em;
+}

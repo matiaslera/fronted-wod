@@ -19,7 +19,6 @@ export class Turno {
     return Object.assign(
       new Turno(),
       problemJSON,
-     {presupuesto:Presupuesto.fromJson(problemJSON.presupuesto)},
     {fechaTrabajo: problemJSON.fechaTrabajo!=="null"? this.fechaFromJSON(
             problemJSON.fechaTrabajo): null},
       {estado:this.estadoFromJSON(problemJSON.estado)}, 
@@ -30,7 +29,7 @@ export class Turno {
     const data = fecha.split('/')
     const res = new Date()
     res.setDate(Number(data[2]))
-    res.setMonth(Number(data[1]))
+    res.setMonth(Number(data[1])-1)
     res.setFullYear(Number(data[0]))
     return res
   }
