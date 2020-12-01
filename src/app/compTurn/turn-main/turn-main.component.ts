@@ -86,13 +86,13 @@ export class TurnMainComponent implements OnInit {
     this.previosTurno=falso
   }
 
-  noTieneTurnos(){
+  /* noTieneTurnos(){
     return this.turnos.length===0
   }
 
   aceptar(){
 
-  }
+  } */
 
 
 

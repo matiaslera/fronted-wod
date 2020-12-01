@@ -1,23 +1,24 @@
 <div class="container">
     <div class="cardContainer">
         <mat-card>
-            <mat-card-header>
-                <img height="100rem" width="100rem" src={{imagen}} />
-            </mat-card-header>
+                <img class="imagen" src={{imagen}} />
             <mat-card-content>
-                <mat-card-title>
+                <mat-card-title class="titulo">
+                    <mat-icon>person</mat-icon>
                     {{profesional.usuario.nombre}} {{profesional.usuario.apellido}}
                 </mat-card-title>
-                <mat-card-title>
-                    {{profesional.usuario.email}}
+                <mat-card-title class="titulo">
+                    <mat-icon>email</mat-icon> {{profesional.usuario.email}}
                 </mat-card-title>
-                <mat-card-subtitle>
-                    Especialidad: {{profesional.profesion?profesional.profesion:'ninguna'}}
-                </mat-card-subtitle>
-                <mat-card-subtitle>
-                    Fecha de Trabajo:{{item.fechaTrabajo| date: 'dd/MM/yyyy' }}
-                </mat-card-subtitle>
-                <mat-icon mat-list-icon>map</mat-icon>
+                <div class="item_subtitulo">
+                    <label class="subtitulo">
+                        <mat-icon>build</mat-icon> Especialidad:
+                        {{profesional.profesion?profesional.profesion:'ninguna'}}
+                    </label>
+                    <label class="subtitulo">
+                        <mat-icon>date_range</mat-icon> Fecha de Trabajo:{{item.fechaTrabajo| date: 'dd/MM/yyyy' }}
+                    </label>
+                </div>
                 <!--    {{consulta.presupuesto.direccion.calle}} {{consulta.presupuesto.direccion.altura}} -->
             </mat-card-content>
             <!--  <div *ngIf="esCliente()" class="orden">

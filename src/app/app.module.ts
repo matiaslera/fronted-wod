@@ -47,6 +47,7 @@ import { TurnPreviosComponent } from './compTurn/turn-previos/turn-previos.compo
 import { TurnProximosComponent } from './compTurn/turn-proximos/turn-proximos.component';
 import { TurnMainComponent } from './compTurn/turn-main/turn-main.component';
 import { TunoItemComponent } from './compTurn/tuno-item/tuno-item.component';
+import { TunoListComponent } from './compTurn/tuno-list/tuno-list.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { TunoItemComponent } from './compTurn/tuno-item/tuno-item.component';
     TurnPreviosComponent,
     TurnProximosComponent,
     TurnMainComponent,
-    TunoItemComponent
+    TunoItemComponent,
+    TunoListComponent
   ],
   imports: [
     BrowserModule,

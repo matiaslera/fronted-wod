@@ -9,15 +9,30 @@ mat-card-content {
   margin-left: 2rem;
   margin-right: 2rem;
 }
-mat-card-title {
+mat-card-title .mat-card .titulo {
   margin-right: 2rem;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+mat-card-subtitle .mat-card-subtitle .subtitulo{
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  color: white;
+}
+.subtitulo{
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    color: white;
+  }
+
+.item_subtitulo{
+    display: flex;
+    flex-flow: column wrap;
 }
 
-mat-card-title{
-    margin-top: 0.5em;
-}
-.mat-card>:first-child, .mat-card-content>:first-child{
-    margin-top: 0.5em;
+.mat-card > :first-child,
+.mat-card-content > :first-child {
+  margin-top: 0.5em;
 }
 
 .cardContainer {
@@ -65,4 +80,9 @@ button {
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
+}
+/*Imagen*/
+.imagen{
+    height:10em;
+    width:10em;
 }
