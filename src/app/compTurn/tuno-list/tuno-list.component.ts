@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
 import { Turno } from 'src/app/domain/turno';
@@ -19,11 +20,21 @@ export class TunoListComponent implements OnInit {
   opcion:string;
   profesional:Profesional
   cliente:Cliente;
+  especialidad: string[] = [
+    'Electricidad',
+    'Plomeria',
+    'Herreria',
+    'Gasista',
+    'Carpinteria',
+    'Pintor',
+    'Armado en Seco',
+  ];
   constructor(
     public authServ: AuthUserService,
     public dialog: MatDialog,
     public perfilServ: ProfileService,
-    public trabajoServ:TrabajoService
+    public trabajoServ:TrabajoService,
+    public router: Router
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -51,7 +62,11 @@ export class TunoListComponent implements OnInit {
     return this.turnos.length===0
   }
 
-  aceptar(){
-
+  async aceptar(){
+    console.log(this.profesional.id);
+    this.profesional = await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(), 10)   );
+    this.profesional.profesion = this.opcion;
+    this.perfilServ.actualizarProfesional(this.profesional);
+    this.router.navigate['turnos'];
   }
 }

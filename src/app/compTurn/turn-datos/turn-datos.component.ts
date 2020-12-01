@@ -22,6 +22,8 @@ export class TurnDatosComponent implements OnInit {
   idProfesional:number
   idCliente:number
   fecha:Date=new Date()
+  hora:any
+  
   turno:string[]=[
     "mañana", 
     "tarde"
@@ -46,6 +48,7 @@ export class TurnDatosComponent implements OnInit {
     if (this.authServ.getTipo() === 'CLIENTE') {
       this.idCliente = parseInt(this.authServ.getId(),10) ;
     } 
+    console.log(this.hora)
   } 
 
   async loadJob(id){
@@ -57,12 +60,6 @@ export class TurnDatosComponent implements OnInit {
       this.profesional.profesion
   }
 
-  userName(){
-
-  }
-
-
-
   contratar(){
     var nuevoTurno = new Turno()
     nuevoTurno.idProfesional=this.idProfesional
@@ -73,6 +70,7 @@ export class TurnDatosComponent implements OnInit {
     nuevoTurno.fechaTrabajo=this.fecha
     this.jobService.crearTurno(nuevoTurno)
     this.router.navigate(['/turnos'])
+    console.log(this.hora)
   }
   
   cancelar(){

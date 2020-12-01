@@ -1,6 +1,6 @@
 <div class="container">
     <div class="cardContainer">
-        <mat-card>
+        <mat-card [class]="claseEstado">
                 <img class="imagen" src={{imagen}} />
             <mat-card-content>
                 <mat-card-title class="titulo">
@@ -19,16 +19,15 @@
                         <mat-icon>date_range</mat-icon> Fecha de Trabajo:{{item.fechaTrabajo| date: 'dd/MM/yyyy' }}
                     </label>
                 </div>
-                <!--    {{consulta.presupuesto.direccion.calle}} {{consulta.presupuesto.direccion.altura}} -->
             </mat-card-content>
-            <!--  <div *ngIf="esCliente()" class="orden">
-                <a mat-raised-button [routerLink]="['../jobDetalles', consulta.id]" color="accent" class="btn" *ngIf="estaPublicado()">DETALLES</a>
-                <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado()" (click)="info()">INFO</button>
-                <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado()" (click)="pagar()">PAGAR</button>
+             <div *ngIf="esCliente()" class="orden">
+              <!--   <a mat-raised-button [routerLink]="['../jobDetalles', consulta.id]" color="accent" class="btn" *ngIf="estaPublicado()">DETALLES</a> -->
+                <button mat-raised-button color="accent" class="btn" (click)="info()">VER DETALLES</button>
+                <!-- <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado()" (click)="pagar()">PAGAR</button> -->
             </div>
             <div *ngIf="esProfesional()">
-                <button mat-raised-button color="accent" class="btn"  (click)="respuesta()">RESPONDER</button>
-            </div> -->
+                <button mat-raised-button color="accent" class="btn"  (click)="info()">VER DETALLES</button>
+            </div>
         </mat-card>
 
     </div>

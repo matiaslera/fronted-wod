@@ -1,0 +1,75 @@
+.perfil__linea textarea {
+  width: 600px;
+}
+
+.perfil__linea input {
+  padding: 6px 8px;
+  margin: 2px 0;
+}
+
+.perfil {
+  border: 1px solid var(--color_cyan-700);
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 3em;
+  background-color: white;
+}
+.card__lat {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+.card__lat-colum {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+}
+
+.perfil__label-cont {
+  display: flex;
+  color: var(--color_uno);
+  justify-content: center;
+  flex-flow: column wrap;
+  margin: 0 0.5em;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.perfil__linea {
+  display: flex;
+  margin: 0 1.5em;
+  align-items: baseline;
+  flex-flow: row wrap;
+  color: black;
+}
+
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid var(--color_cyan-200);
+}
+
+input:focus {
+  border-bottom: transparent;
+}
+
+.perfil__label {
+  text-align: center;
+  font-size: 1em;
+  color: var(--color_cyan-700, #08d9d6);
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
+  display: flex;
+}
+
+.search_label-dato {
+  color: var(--color_uno, #252a34);
+  padding: 0.2em;
+  border-radius: 4px;
+  font-size: 1.2em;
+}

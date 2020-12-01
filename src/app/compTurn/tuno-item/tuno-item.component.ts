@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Profesional } from 'src/app/domain/profesional';
-import { Turno } from 'src/app/domain/turno';
+import { DialogTurno, Estado, Turno } from 'src/app/domain/turno';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
+import { TurnPopupComponent } from '../turn-popup/turn-popup.component';
 
 @Component({
   selector: 'app-tuno-item',
@@ -16,47 +18,50 @@ export class TunoItemComponent implements OnInit {
   @Input() item: Turno;
   @Input() estado: String;
   @Input() imagen: String;
-  profesional:Profesional
+  profesional:Profesional=new Profesional();
+  claseEstado:string;
+  
   constructor(
-  public dialog: MatDialog,
+    private perfilSer:ProfileService,
     public authServ: AuthUserService,
-    public perfilSer:ProfileService
+    public dialog: MatDialog,
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.cambioDeEstado()
     console.log(this.item.idProfesional)
     this.profesional= await this.perfilSer.getIdProfesional(this.item.idProfesional)
   }
-/* 
+ 
   respuesta() {
-    const dialogRef = this.dialog.open(JobRespuestaComponent, {
+  /*   const dialogRef = this.dialog.open(JobRespuestaComponent, {
       height: '600px',
       width: '700px',
       hasBackdrop: false,
       panelClass: 'custom-dialog-container',
       data: { presupuesto: this.consulta },
-    });
+    }); */
   }
 
   info() {
-    const dialogRef = this.dialog.open(JobContatarComponent, {
+    const dialogRef = this.dialog.open(TurnPopupComponent, {
       height: '600px',
       width: '700px',
       hasBackdrop: false,
       panelClass: 'custom-dialog-container',
-      data: { presupuesto: this.consulta,estado:this.estado },
+      data: { turno: this.item },
     });
   }
   
   pagar(){
-    this.dialog.open(PayJobComponent, {
+/*     this.dialog.open(PayJobComponent, {
       height: '400px',
       width: '650px',
       hasBackdrop: false,
       panelClass: 'custom-dialog-container',
       data: { presupuesto: this.consulta,estado:this.estado },
-    });
-  } */
+    }); */
+  } 
 
   estaContratado(){
     return this.estado==="pendiente"
@@ -72,6 +77,21 @@ export class TunoItemComponent implements OnInit {
 
   esProfesional(): boolean {
     return this.authServ.getTipo() === 'PROFESIONAL';
+  }
+
+  cambioDeEstado(){
+    if(this.item.estado===Estado.PUBLICADO){
+      this.claseEstado="bordes_publicado"
+    }
+    if(this.item.estado===Estado.CONTRATADO){
+      this.claseEstado="bordes_respondido"
+    }
+    if(this.item.estado===Estado.FINALIZADO){
+      this.claseEstado="bordes_finalizado"
+    }
+    if(this.item.estado===Estado.CANCELADO){
+      this.claseEstado="bordes_cancelado"
+    }
   }
 
 }

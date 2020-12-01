@@ -16,19 +16,9 @@ export class TurnMainComponent implements OnInit {
   nuevoTurno:boolean=false;
   proximoTurno:boolean;
   previosTurno:boolean;
-  opcion:string;
   turnos:Turno[];
   turnosBd:Turno[];
   profesional:Profesional
-  especialidad: string[] = [
-    'Electricidad',
-    'Plomeria',
-    'Herreria',
-    'Gasista',
-    'Carpinteria',
-    'Pintor',
-    'Armado en Seco',
-  ];
 
   constructor(
     public authServ: AuthUserService,
@@ -85,15 +75,5 @@ export class TurnMainComponent implements OnInit {
     this.proximoTurno=falso
     this.previosTurno=falso
   }
-
-  /* noTieneTurnos(){
-    return this.turnos.length===0
-  }
-
-  aceptar(){
-
-  } */
-
-
 
 }

@@ -5,6 +5,9 @@ mat-card {
   padding: 0.6rem 5rem;
   background-color: var(--color_cyan-400);
 }
+
+
+
 mat-card-content {
   margin-left: 2rem;
   margin-right: 2rem;
@@ -85,4 +88,18 @@ button {
 .imagen{
     height:10em;
     width:10em;
+}
+
+/*Bordes-colores*/
+.bordes_publicado{
+  border: 0.5em double #455a64 ;
+}
+.bordes_respondido{
+  border: 0.5em double #faeb18 ;
+}
+.bordes_finalizado{
+  border: 0.5em double #39df06 ;
+}
+.bordes_cancelado{
+  border: 0.5em double #f00505 ;
 }

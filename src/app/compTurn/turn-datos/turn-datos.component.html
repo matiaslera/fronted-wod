@@ -1,66 +1,57 @@
 <div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">Finalice el turno</h2>
-            <h3 class="card-title">Datos del Profesional</h3>
-            <div class="search_linea">
-                <label class="search_label">Nombre: {{profesional.usuario.nombre}}</label>
-            </div>
-            <div class="search_linea">
-                <label class="search_label">Email: {{profesional.usuario.email}}</label>
-            </div>
-            <div class="search_linea">
-                <label class="search_label">Especialidad: {{profesional.profesion}}</label>
-            </div>
-            <div class="search_linea" *ngIf="motivo">
-                <label class="search_label">Motivo: {{motivo}}</label>
-            </div>
-            <div class="search_linea"  *ngIf="!motivo">
-                <label class="search_label">Motivo:</label>
-                <select class="search_label-dato"  [(ngModel)]="motivo" required>
-                  <option [value]="item" *ngFor="let item of motivos">{{item}}</option>
-                </select>
-              </div>
-            <h3 class="card-title">Ingresar la Direccion</h3> 
-            <div class="search_linea">
-                <label class="search_label">Provincia:</label>
-                <input type="text" class="search_label-dato"  [(ngModel)]="direccion.provincia" required>
-              </div>
-              <div class="search_linea">
-                <label class="search_label">Ciudad:</label>
-                <input type="text" class="search_label-dato"  [(ngModel)]="direccion.ciudad" required>
-              </div>
-              <div class="search_linea">
-                <label class="search_label">Cod Postal:</label>
-                <input type="text" class="search_label-dato"  [(ngModel)]="direccion.codPostal" required>
-              </div>
-              <div class="search_linea">
-                <label class="search_label">Calle:</label>
-                <input type="text" class="search_label-dato"  [(ngModel)]="direccion.calle" required>
-              </div>
-              <div class="search_linea">
-                <label class="search_label">Altura:</label>
-                <input type="text" class="search_label-dato"  [(ngModel)]="direccion.altura" required>
-              </div>
-              <div class="search_linea">
-                <label class="search_label">Piso /Dep:</label>
-                <input type="text" class="search_label-dato"  [(ngModel)]="direccion.pisoDep" >
-              </div>
-              <h3 class="card-title">Ingresar la Fecha y el Turno</h3> 
-              <div class="search_linea">
-                <label class="search_label">Fecha:</label>
-                <input type="date" [(ngModel)]="fecha" min="{{fecha|date:'yyyy-MM-dd'}}">
-              </div>
-              <div class="search_linea">
-                <label class="search_label">Turno:</label>
-                <select class="search_label-dato"  [(ngModel)]="turnoElegido" required>
-                    <option [value]="item" *ngFor="let item of turno">{{item}}</option>
-                  </select>
-              </div>
-        </div>
-        <div class="search_btn">
-            <button mat-raised-button color="accent" class="btn" (click)="contratar()">Contratar</button>
-            <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Cancelar</button>
-          </div>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Finalice el turno</h2>
+      <h3 class="card-title">Datos del Profesional</h3>
+      <div class="search_linea">
+        <label class="search_label">Nombre: {{profesional.usuario.nombre}} {{profesional.usuario.apellido}}</label> </div>
+      <div class="search_linea">
+        <label class="search_label">Email: {{profesional.usuario.email}}</label></div>
+      <div class="search_linea">
+        <label class="search_label">Especialidad: {{profesional.profesion}}</label></div>
+      <h3 class="card-title">Ingresar la Direccion</h3>
+      <div class="search_linea">
+        <label class="search_label">Provincia:</label>
+        <input type="text" class="search_label-dato" [(ngModel)]="direccion.provincia" required> </div>
+      <div class="search_linea">
+        <label class="search_label">Ciudad:</label>
+        <input type="text" class="search_label-dato" [(ngModel)]="direccion.ciudad" required> </div>
+      <div class="search_linea">
+        <label class="search_label">Cod Postal:</label>
+        <input type="text" class="search_label-dato" [(ngModel)]="direccion.codPostal" required> </div>
+      <div class="search_linea">
+        <label class="search_label">Calle:</label>
+        <input type="text" class="search_label-dato" [(ngModel)]="direccion.calle" required></div>
+      <div class="search_linea">
+        <label class="search_label">Altura:</label>
+        <input type="text" class="search_label-dato" [(ngModel)]="direccion.altura" required> </div>
+      <div class="search_linea">
+        <label class="search_label">Piso /Dep:</label>
+        <input type="text" class="search_label-dato" [(ngModel)]="direccion.pisoDep"> </div>
+      <h3 class="card-title">Ingresar la Fecha y el Turno</h3>
+      <div class="search_linea">
+        <label class="search_label">Fecha:</label>
+        <input type="date" [(ngModel)]="fecha" min="{{fecha|date:'yyyy-MM-dd'}}" required>
+        <input type="time" [(ngModel)]="hora" step="1800" min="07:00" max="18:00" required>
+      </div>
+      <div class="search_linea">
+        <label class="search_label">Turno:</label>
+        <select class="search_label-dato" [(ngModel)]="turnoElegido" required>
+          <option [value]="item" *ngFor="let item of turno">{{item}}</option>
+        </select>
+      </div>
+      <div class="search_linea" *ngIf="motivo">
+        <label class="search_label">Motivo del Turno: {{motivo}}</label></div>
+      <div class="search_linea" *ngIf="!motivo">
+        <label class="search_label">Motivo:</label>
+        <select class="search_label-dato" [(ngModel)]="motivo" required>
+          <option [value]="item" *ngFor="let item of motivos">{{item}}</option>
+        </select>
+      </div>
     </div>
+    <div class="search_btn">
+      <button mat-raised-button color="accent" class="btn" (click)="contratar()">Contratar</button>
+      <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
 </div>

@@ -1,1 +1,68 @@
-<p>turn-popup works!</p>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Detalles del turno</h2>
+            <h3 class="card-title">Datos del Profesional</h3>
+            <div class="search_linea">
+                <label class="search_label">Nombre: {{profesional.usuario.nombre}} {{profesional.usuario.nombre}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Email: {{profesional.usuario.email}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Especialidad: {{profesional.profesion}}</label>
+            </div>
+            <!-- <div class="search_linea" *ngIf="motivo">
+                <label class="search_label">Motivo: {{motivo}}</label>
+            </div>
+            <div class="search_linea"  *ngIf="!motivo">
+                <label class="search_label">Motivo:</label>
+                <select class="search_label-dato"  [(ngModel)]="motivo" required>
+                  <option [value]="item" *ngFor="let item of motivos">{{item}}</option>
+                </select>
+              </div> -->
+            <h3 class="card-title">Datos del Cliente</h3>
+            <div class="search_linea">
+                <label class="search_label">Nombre: {{cliente.usuario.nombre}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Email: {{cliente.usuario.email}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Telefono: {{cliente.usuario.telefono ===0?'-':cliente.usuario.telefono}}</label>
+            </div>
+            <h3 class="card-title">Direccion del Trabajo</h3>
+            <div class="search_linea">
+                <label class="search_label">Provincia:{{turno.direccion.provincia}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Ciudad:{{turno.direccion.ciudad}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Cod Postal:{{turno.direccion.codPostal}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Calle:{{turno.direccion.calle}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Altura:{{turno.direccion.altura}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Piso /Dep:{{turno.direccion.pisoDep}}</label>
+            </div>
+            <h3 class="card-title">Fecha y el Turno</h3>
+            <div class="search_linea">
+                <label class="search_label">Fecha:{{turno.fechaTrabajo |date:'yyyy-MM-dd'}}</label>
+            </div>
+            <div class="search_linea">
+                <label class="search_label">Turno:{{turno.turnoDelDia}}</label>
+            </div>
+        </div>
+        <div class="search_btn">
+            <button mat-raised-button color="accent" class="btn" *ngIf="!estaCancelado()" (click)="cancelarTurno()">Cancelar Turno</button>
+            <button mat-raised-button color="accent" class="btn" *ngIf="!estaContratado() && !estaCancelado() && esProfesional()" (click)="confirmarTurno()">Confirmar Turno</button>
+            <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado() && !estaCancelado() && esCliente()"  (click)="finalizarTurno()">Finalizar Turno</button>
+            <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Volver</button>
+        </div>
+    </div>
+</div>
