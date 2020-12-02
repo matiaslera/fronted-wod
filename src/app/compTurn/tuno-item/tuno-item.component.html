@@ -21,9 +21,7 @@
                 </div>
             </mat-card-content>
              <div *ngIf="esCliente()" class="orden">
-              <!--   <a mat-raised-button [routerLink]="['../jobDetalles', consulta.id]" color="accent" class="btn" *ngIf="estaPublicado()">DETALLES</a> -->
                 <button mat-raised-button color="accent" class="btn" (click)="info()">VER DETALLES</button>
-                <!-- <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado()" (click)="pagar()">PAGAR</button> -->
             </div>
             <div *ngIf="esProfesional()">
                 <button mat-raised-button color="accent" class="btn"  (click)="info()">VER DETALLES</button>

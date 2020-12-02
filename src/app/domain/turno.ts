@@ -11,7 +11,10 @@ export class Turno {
     public calificacion?: number,
     public direccion?:Direccion,
     public fechaTrabajo?: Date,
-    public turnoDelDia?:string
+    //public turnoDelDia?:string,
+    public motivos?:string,
+    public hora?:number,
+    public minutos?:number,
   ) {}
 
   static fromJson(problemJSON): Turno {
@@ -35,15 +38,15 @@ export class Turno {
   }
 
   static fechaToJSON(fecha: Date) {
-    /* const fecha2= fecha.toString()
+    const fecha2= fecha.toString()
     console.log(fecha2)
     const fecha3= fecha2.split('-')
       console.log(fecha3)
-    return fecha3[0]+"/"+fecha3[1]+"/"+fecha3[2] */
+    return fecha3[0]+"/"+fecha3[1]+"/"+fecha3[2]
       
-       fecha.toLocaleDateString('es-AR')
+      /*  fecha.toLocaleDateString('es-AR')
        const mes= (fecha.getMonth()+1)
-      return fecha.getFullYear()+"/"+ mes+"/"+Turno.dateDayJson(fecha.getDate())
+      return fecha.getFullYear()+"/"+ mes+"/"+Turno.dateDayJson(fecha.getDate()) */
     //const local=fecha.toLocaleDateString('es-AR')
     /* const data = local.split('/')
     const dia =this.dateDayJson(data[0])

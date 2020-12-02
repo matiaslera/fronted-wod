@@ -1,57 +1,58 @@
 <div class="container">
-  <div class="card">
-    <div class="card-body">
-      <h2 class="card-title">Finalice el turno</h2>
-      <h3 class="card-title">Datos del Profesional</h3>
-      <div class="search_linea">
-        <label class="search_label">Nombre: {{profesional.usuario.nombre}} {{profesional.usuario.apellido}}</label> </div>
-      <div class="search_linea">
-        <label class="search_label">Email: {{profesional.usuario.email}}</label></div>
-      <div class="search_linea">
-        <label class="search_label">Especialidad: {{profesional.profesion}}</label></div>
+  <div class="card-body">
+    <h2 class="card-title">Finalice el turno</h2>
+    <h3 class="card-title">Datos del Profesional</h3>
+    <div class="search_linea">
+      <label class="search_label">Nombre: {{profesional.usuario.nombre}} {{profesional.usuario.apellido}}</label>
+    </div>
+    <div class="search_linea">
+      <label class="search_label">Email: {{profesional.usuario.email}}</label></div>
+    <div class="search_linea">
+      <label class="search_label">Especialidad: {{profesional.profesion}}</label></div>
+    <form [formGroup]="formularioTurno" class="form" (ngSubmit)="onSubmit()">
       <h3 class="card-title">Ingresar la Direccion</h3>
       <div class="search_linea">
         <label class="search_label">Provincia:</label>
-        <input type="text" class="search_label-dato" [(ngModel)]="direccion.provincia" required> </div>
+        <input type="text"  formControlName="provincia" placeholder="Ej: Buenos Aires" class="search_label-dato" required> </div>
       <div class="search_linea">
         <label class="search_label">Ciudad:</label>
-        <input type="text" class="search_label-dato" [(ngModel)]="direccion.ciudad" required> </div>
+        <input type="text" formControlName="ciudad" placeholder="Ej: CABA" class="search_label-dato" required> </div>
       <div class="search_linea">
         <label class="search_label">Cod Postal:</label>
-        <input type="text" class="search_label-dato" [(ngModel)]="direccion.codPostal" required> </div>
+        <input type="number" formControlName="codPostal" placeholder="Ej: 1478" class="search_label-dato" required> </div>
       <div class="search_linea">
         <label class="search_label">Calle:</label>
-        <input type="text" class="search_label-dato" [(ngModel)]="direccion.calle" required></div>
+        <input type="text" formControlName="calle" placeholder="Ej: San Martin" class="search_label-dato"  required></div>
       <div class="search_linea">
-        <label class="search_label">Altura:</label>
-        <input type="text" class="search_label-dato" [(ngModel)]="direccion.altura" required> </div>
+        <label class="search_label">Altura /Num:</label>
+        <input type="number" formControlName="altura" placeholder="Ej: 140" class="search_label-dato" required> </div>
       <div class="search_linea">
         <label class="search_label">Piso /Dep:</label>
-        <input type="text" class="search_label-dato" [(ngModel)]="direccion.pisoDep"> </div>
+        <input type="text" formControlName="pisoDep" placeholder="Ej: 1c" class="search_label-dato" > </div>
       <h3 class="card-title">Ingresar la Fecha y el Turno</h3>
       <div class="search_linea">
         <label class="search_label">Fecha:</label>
-        <input type="date" [(ngModel)]="fecha" min="{{fecha|date:'yyyy-MM-dd'}}" required>
-        <input type="time" [(ngModel)]="hora" step="1800" min="07:00" max="18:00" required>
+        <input type="date" formControlName="fechaForm" min="{{fecha|date:'yyyy-MM-dd'}}" required>
+        <input type="time" formControlName="horaForm" step="600" min="07:00" max="18:00"  required>
       </div>
-      <div class="search_linea">
+      <!-- <div class="search_linea">
         <label class="search_label">Turno:</label>
-        <select class="search_label-dato" [(ngModel)]="turnoElegido" required>
+        <select class="search_label-dato" formControlName="turnoForm" required>
           <option [value]="item" *ngFor="let item of turno">{{item}}</option>
         </select>
-      </div>
+      </div> -->
       <div class="search_linea" *ngIf="motivo">
         <label class="search_label">Motivo del Turno: {{motivo}}</label></div>
       <div class="search_linea" *ngIf="!motivo">
         <label class="search_label">Motivo:</label>
-        <select class="search_label-dato" [(ngModel)]="motivo" required>
+        <select class="search_label-dato"formControlName="motivoForm" required>
           <option [value]="item" *ngFor="let item of motivos">{{item}}</option>
         </select>
       </div>
-    </div>
-    <div class="search_btn">
-      <button mat-raised-button color="accent" class="btn" (click)="contratar()">Contratar</button>
-      <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Cancelar</button>
-    </div>
+      <div class="search_btn">
+        <button type="submit" mat-raised-button color="accent" class="btn" id="contratar" [disabled]="formularioTurno.invalid">Contratar</button>
+        <button type="submit" mat-raised-button color="accent" class="btn" id="cancelar"  >Cancelar</button>
+      </div>
+    </form>
   </div>
 </div>

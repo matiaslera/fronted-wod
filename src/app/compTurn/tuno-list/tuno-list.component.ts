@@ -44,7 +44,7 @@ export class TunoListComponent implements OnInit {
       console.log("profesionallll",this.profesional)
      }
     if (this.esCliente()) {
-      this.cliente = await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
+      this.cliente = await this.perfilServ.getIdCliente(parseInt(this.authServ.getId(),10))
       //this.turnosBd= await this.trabajoServ.turnosClientes(parseInt(this.authServ.getId(),10))
       console.log("clienteee",this.cliente)
      }
