@@ -138,11 +138,11 @@ export class TrabajoService {
    async turnosClientes(id:number): Promise<Turno[]> {
     const turnos = await this.httpCLient
     .get<Turno[]>(REST_SERVER_URL + '/reed_turnoCliente/'+id).toPromise();
-    if (turnos.length===0){
+   /*  if (turnos.length===0){
       console.log(turnos);
       const turnEnviado:Turno[] = []
       return turnEnviado
-    }
+    } */
     console.log(turnos);
     return turnos.map((job) => Turno.fromJson(job));
   }

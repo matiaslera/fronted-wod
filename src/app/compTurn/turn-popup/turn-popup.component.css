@@ -86,3 +86,8 @@
     border-radius: 4px;
     margin: 0 2em;
   }
+
+  .mat-raised-button[disabled]{
+    color: var(--color_cyan-900);
+    border:1px solid var(--color_uno);
+  }

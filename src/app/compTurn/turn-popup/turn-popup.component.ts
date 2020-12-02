@@ -85,6 +85,10 @@ export class TurnPopupComponent implements OnInit {
     return this.turno.estado===Estado.CONTRATADO
    }
 
+   estaPublicado():boolean{
+    return this.turno.estado===Estado.PUBLICADO
+   }
+
    estaFinalizado(){
     return this.turno.estado===Estado.FINALIZADO
    }

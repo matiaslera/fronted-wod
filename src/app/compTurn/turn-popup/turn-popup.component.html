@@ -4,14 +4,12 @@
             <h2 class="card-title">Detalles del turno</h2>
             <h3 class="card-title">Datos del Profesional</h3>
             <div class="search_linea">
-                <label class="search_label">Nombre: {{profesional.usuario.nombre}} {{profesional.usuario.nombre}}</label>
-            </div>
+                <label class="search_label">Nombre: {{profesional.usuario.nombre}}
+                    {{profesional.usuario.nombre}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Email: {{profesional.usuario.email}}</label>
-            </div>
+                <label class="search_label">Email: {{profesional.usuario.email}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Especialidad: {{profesional.profesion}}</label>
-            </div>
+                <label class="search_label">Especialidad: {{profesional.profesion}}</label></div>
             <!-- <div class="search_linea" *ngIf="motivo">
                 <label class="search_label">Motivo: {{motivo}}</label>
             </div>
@@ -23,45 +21,53 @@
               </div> -->
             <h3 class="card-title">Datos del Cliente</h3>
             <div class="search_linea">
-                <label class="search_label">Nombre: {{cliente.usuario.nombre}}</label>
-            </div>
+                <label class="search_label">Nombre: {{cliente.usuario.nombre}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Email: {{cliente.usuario.email}}</label>
-            </div>
+                <label class="search_label">Email: {{cliente.usuario.email}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Telefono: {{cliente.usuario.telefono ===0?'-':cliente.usuario.telefono}}</label>
-            </div>
+                <label class="search_label">Telefono:
+                    {{cliente.usuario.telefono ===0?'-':cliente.usuario.telefono}}</label></div>
             <h3 class="card-title">Direccion del Trabajo</h3>
             <div class="search_linea">
-                <label class="search_label">Provincia:{{turno.direccion.provincia}}</label>
-            </div>
+                <label class="search_label">Provincia: {{turno.direccion.provincia}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Ciudad:{{turno.direccion.ciudad}}</label>
-            </div>
+                <label class="search_label">Ciudad: {{turno.direccion.ciudad}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Cod Postal:{{turno.direccion.codPostal}}</label>
-            </div>
+                <label class="search_label">Cod Postal: {{turno.direccion.codPostal}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Calle:{{turno.direccion.calle}}</label>
-            </div>
+                <label class="search_label">Calle: {{turno.direccion.calle}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Altura:{{turno.direccion.altura}}</label>
-            </div>
+                <label class="search_label">Altura: {{turno.direccion.altura}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Piso /Dep:{{turno.direccion.pisoDep}}</label>
-            </div>
-            <h3 class="card-title">Fecha y el Turno</h3>
+                <label class="search_label">Piso /Dep: {{turno.direccion.pisoDep}}</label></div>
+            <h3 class="card-title">Fecha y Hora</h3>
             <div class="search_linea">
-                <label class="search_label">Fecha:{{turno.fechaTrabajo |date:'yyyy-MM-dd'}}</label>
-            </div>
+                <label class="search_label">Fecha: {{turno.fechaTrabajo |date:'yyyy-MM-dd'}}</label></div>
             <div class="search_linea">
-                <label class="search_label">Turno:{{turno.turnoDelDia}}</label>
+                <label class="search_label">Hora: {{turno.hora}}:{{turno.minutos ===0? '00' : turno.minutos }}</label></div>
+            <h3 class="card-title">Motivo:</h3>
+            <div class="search_linea">
+                <label class="search_label">{{turno.motivos}}</label></div>
+            <div *ngIf="estaContratado() || estaFinalizado()">
+                <h3 class="card-title">Monto del Turno:  </h3> <label class="search_label">$ {{turno.montoFinal}}</label>
+               </div>
+            <div *ngIf="!estaContratado() && !estaCancelado() && esProfesional()">
+                <h3 class="card-title">Cual es la remuneracion por el turno?</h3>
+                <div class="search_linea">
+                   $ <input type="number" [(ngModel)]="turno.montoFinal">
+                </div>
             </div>
+            <!-- <div class="search_linea">
+                <label class="search_label">{{turno.montoFinal}}</label>
+            </div> -->
         </div>
         <div class="search_btn">
-            <button mat-raised-button color="accent" class="btn" *ngIf="!estaCancelado()" (click)="cancelarTurno()">Cancelar Turno</button>
-            <button mat-raised-button color="accent" class="btn" *ngIf="!estaContratado() && !estaCancelado() && esProfesional()" (click)="confirmarTurno()">Confirmar Turno</button>
-            <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado() && !estaCancelado() && esCliente()"  (click)="finalizarTurno()">Finalizar Turno</button>
+            <button mat-raised-button color="accent" class="btn" *ngIf="!estaCancelado()"
+                (click)="cancelarTurno()">Cancelar Turno</button>
+            <button mat-raised-button color="accent" class="btn"
+                *ngIf="!estaContratado() && !estaCancelado() && esProfesional()" (click)="confirmarTurno()" [disabled]="1 > turno.montoFinal || !turno.montoFinal  ">Confirmar Turno</button>
+            <button mat-raised-button color="accent" class="btn"
+                *ngIf="estaContratado() && !estaCancelado() && esCliente()" (click)="finalizarTurno()">Finalizar Turno</button>
             <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Volver</button>
         </div>
     </div>

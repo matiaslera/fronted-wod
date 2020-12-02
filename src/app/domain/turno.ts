@@ -38,11 +38,14 @@ export class Turno {
   }
 
   static fechaToJSON(fecha: Date) {
-    const fecha2= fecha.toString()
+    const fechaLocale = fecha.toLocaleDateString()	
+    console.log(fechaLocale)
+    const fechaConBarra = fechaLocale.split('/')
+    /* const fecha2= fecha.toString()
     console.log(fecha2)
     const fecha3= fecha2.split('-')
-      console.log(fecha3)
-    return fecha3[0]+"/"+fecha3[1]+"/"+fecha3[2]
+      console.log(fecha3) */
+    return fechaConBarra[2]+"/"+fechaConBarra[1]+"/"+Turno.dateDayJson(fechaConBarra[0])
       
       /*  fecha.toLocaleDateString('es-AR')
        const mes= (fecha.getMonth()+1)

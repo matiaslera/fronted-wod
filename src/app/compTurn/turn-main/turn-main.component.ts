@@ -56,7 +56,7 @@ export class TurnMainComponent implements OnInit {
 
   proximo(){
     var fechauno = new Date();
-    if(this.turnos.length>0){
+    if(this.turnosBd.length>0){
       this.turnos=this.turnosBd.filter(turnosCargado=>turnosCargado.fechaTrabajo>=fechauno)
     }
     this.nuevoTurno=false
@@ -66,7 +66,7 @@ export class TurnMainComponent implements OnInit {
 
   previo(){
     var fechauno = new Date();
-    if(this.turnos.length>0){
+    if(this.turnosBd.length>0){
       this.turnos=this.turnosBd.filter(turnosCargado=>turnosCargado.fechaTrabajo<=fechauno)
     }
     this.nuevoTurno=false

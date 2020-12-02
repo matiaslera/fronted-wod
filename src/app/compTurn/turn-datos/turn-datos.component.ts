@@ -23,12 +23,7 @@ export class TurnDatosComponent implements OnInit {
   idProfesional:number
   idCliente:number
   fecha:Date=new Date()
-  hora:any
-  
-  turno:string[]=[
-    "mañana", 
-    "tarde"
-  ]
+
   motivos: string[] = [
     'Mantenimiento',
     'Consulta Tecnica',
@@ -46,7 +41,7 @@ export class TurnDatosComponent implements OnInit {
       pisoDep:[''],
       fechaForm:['',Validators.required],
       horaForm:['',Validators.required],
-      motivoForm:['',Validators.required],
+      motivoForm:[''],
     },
   );
   constructor( private jobService: TrabajoService,  private route: ActivatedRoute,public dialog: MatDialog, public perfilServ:ProfileService, private router: Router,
@@ -54,9 +49,11 @@ export class TurnDatosComponent implements OnInit {
     private formularioFB: FormBuilder,) { 
     console.log(jobService.motivoTurno)
     this.motivo=jobService.motivoTurno
-    /* this.formularioTurno.patchValue({
-      turnoForm:jobService.motivoTurno,
-    }); */
+    if(this.motivo!==''){
+      this.formularioTurno.patchValue({
+        motivoForm:this.motivo,
+      });
+    }
   }
 
   ngOnInit():void {
@@ -67,7 +64,6 @@ export class TurnDatosComponent implements OnInit {
     if (this.authServ.getTipo() === 'CLIENTE') {
       this.idCliente = parseInt(this.authServ.getId(),10) ;
     } 
-    console.log(this.hora)
   } 
 
   get provincia() {
@@ -123,8 +119,7 @@ export class TurnDatosComponent implements OnInit {
     nuevoTurno.motivos=this.motivoForm.value
     nuevoTurno.direccion=this.direccion
     nuevoTurno.estado=Estado.PUBLICADO
-    nuevoTurno.fechaTrabajo=this.fechaForm.value
-    console.log(this.hora)
+    nuevoTurno.fechaTrabajo=new Date(this.fechaForm.value)
     const palabra = this.horaForm.value.toString()
     const lista = palabra.split(':')
     const ab=lista[0]

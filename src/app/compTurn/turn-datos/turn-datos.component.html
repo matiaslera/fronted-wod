@@ -45,7 +45,7 @@
         <label class="search_label">Motivo del Turno: {{motivo}}</label></div>
       <div class="search_linea" *ngIf="!motivo">
         <label class="search_label">Motivo:</label>
-        <select class="search_label-dato"formControlName="motivoForm" required>
+        <select class="search_label-dato"formControlName="motivoForm" >
           <option [value]="item" *ngFor="let item of motivos">{{item}}</option>
         </select>
       </div>
