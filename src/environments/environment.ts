@@ -16,6 +16,40 @@ export const environment = {
   },
 };
 
+/* var mercadopago = require('mercadopago');
+mercadopago.configure({
+    access_token: 'TEST-6590390036249147-120205-df8dbbdce5653e53c78f05d5c5e1301e-146617094'
+});
+ 
+var preference = {
+  items: [
+    {
+      title: 'Test',
+      quantity: 1,
+      currency_id: 'ARS',
+      unit_price: 10.5
+    }
+  ]
+};
+ 
+mercadopago.preferences.create(preference)
+
+ */
+
+/* const mercadopagoCtrl = require(‘./mercadopago’);
+exports.checkout = functions.https.onCall((preference, context) => {
+  return mercadopagoCtrl.makecheckout(preference).then(response => {
+  // Este es el checkout generado o link al que nos vamos a posicionar para pagar
+  console.log(response.body.init_point);
+  let init_point = response.body.init_point
+  return { result: init_point };
+  }).catch(error => {
+   console.log(error);
+   return error
+  });
+});
+
+ */
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

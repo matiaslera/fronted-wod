@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Direccion } from 'src/app/domain/direccion';
 import { Profesional } from 'src/app/domain/profesional';
-import { Trabajo } from 'src/app/domain/trabajo';
 import { Estado, Turno } from 'src/app/domain/turno';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
@@ -90,9 +89,7 @@ export class TurnDatosComponent implements OnInit {
   get horaForm(){
     return this.formularioTurno.get('horaForm');
   }
- /*  get turnoForm(){
-    return this.formularioTurno.get('turnoForm');
-  } */
+
   get motivoForm(){
     return this.formularioTurno.get('motivoForm');
   }

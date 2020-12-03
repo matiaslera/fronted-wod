@@ -20,6 +20,7 @@ import { ChatRoomComponent } from './compChat/chat-room/chat-room.component';
 import { TurnSearchComponent } from './compTurn/turn-search/turn-search.component';
 import { TurnDatosComponent } from './compTurn/turn-datos/turn-datos.component';
 import { TurnMainComponent } from './compTurn/turn-main/turn-main.component';
+import { TurnPagoComponent } from './compTurn/turn-pago/turn-pago.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatRoomComponent,pathMatch: "full" },
   { path: 'turnos', component: TurnMainComponent,pathMatch: "full" },
   { path: 'turnosDetalles/:id', component: TurnDatosComponent,pathMatch: "full" },
+  { path: 'turnoPago/:id', component: TurnPagoComponent,pathMatch: "full" },
  // {path: 'jobRespuesta/:id', component: JobRespuestaComponent,pathMatch:"full"},
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, 

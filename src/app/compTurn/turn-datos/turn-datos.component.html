@@ -35,12 +35,6 @@
         <input type="date" formControlName="fechaForm" min="{{fecha|date:'yyyy-MM-dd'}}" required>
         <input type="time" formControlName="horaForm" step="600" min="07:00" max="18:00"  required>
       </div>
-      <!-- <div class="search_linea">
-        <label class="search_label">Turno:</label>
-        <select class="search_label-dato" formControlName="turnoForm" required>
-          <option [value]="item" *ngFor="let item of turno">{{item}}</option>
-        </select>
-      </div> -->
       <div class="search_linea" *ngIf="motivo">
         <label class="search_label">Motivo del Turno: {{motivo}}</label></div>
       <div class="search_linea" *ngIf="!motivo">

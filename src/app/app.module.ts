@@ -46,6 +46,7 @@ import { TurnDatosComponent } from './compTurn/turn-datos/turn-datos.component';
 import { TurnMainComponent } from './compTurn/turn-main/turn-main.component';
 import { TunoItemComponent } from './compTurn/tuno-item/tuno-item.component';
 import { TunoListComponent } from './compTurn/tuno-list/tuno-list.component';
+import { TurnPagoComponent } from './compTurn/turn-pago/turn-pago.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { TunoListComponent } from './compTurn/tuno-list/tuno-list.component';
     TurnDatosComponent,
     TurnMainComponent,
     TunoItemComponent,
-    TunoListComponent
+    TunoListComponent,
+    TurnPagoComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +98,7 @@ import { TunoListComponent } from './compTurn/tuno-list/tuno-list.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
-  providers: [CookieService,AuthUserService,ChatService],
+  providers: [CookieService,AuthUserService,ChatService, { provide: Window, useValue: window }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
