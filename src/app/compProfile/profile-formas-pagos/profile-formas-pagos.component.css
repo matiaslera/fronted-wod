@@ -1,0 +1,138 @@
+/*Botones*/
+
+.search_btn {
+  margin: 0.5em 0 0 0.5em;
+}
+.btn:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.btn {
+  /* display: flex;
+  flex-direction: row; */
+  border-radius: 4px;
+  margin: 0.5em;
+}
+
+/*Centrar el div*/
+.contenedor {
+  min-width: 250px;
+  flex-direction: column;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.form {
+  padding: 2rem 3rem;
+  border-radius: 2.5rem;
+  background-color: var(--color_uno, #252a34);
+  box-shadow: 0 3px 6px #eaeaea, 0 3px 6px #08d9d6;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 5em auto 10.5em auto;
+  min-width: 250px;
+  max-width: 55%;
+}
+.contenido {
+  flex-direction: column;
+  display: flex;
+  align-content: center;
+  flex-flow: row nowrap;
+}
+
+/*Label*/
+.perfil__label-cont {
+  display: flex;
+  color: var(--color_uno);
+  justify-content: center;
+  flex-flow: column wrap;
+  margin: 0 0.5em;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.perfil__linea {
+  display: flex;
+  margin: 0 1.5em;
+  align-items: baseline;
+  flex-flow: row nowrap;
+  color: black;
+}
+
+input {
+  width: 90%;
+  padding: 6px 10px;
+  margin: 0.31em 1.5em;
+  border: none;
+  border-bottom: 2px solid var(--color_cyan-200);
+}
+
+.perfil__label {
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+  margin-right:1.5em ;
+  display: flex;
+}
+.label {
+  display: flex;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 0.4em;
+  margin-bottom: 0.1em;
+  flex-flow: column nowrap;
+}
+h5 {
+  color: white;
+}
+h2 {
+  color: black;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 1em 2em;
+}
+/*Lista de medios de pagos*/
+.listaCuenta {
+ /*  display: flex;
+  flex-flow: row wrap; */
+  width: 20%;
+  list-style-type: none;
+  margin: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction:column;
+}
+.listaDetalles{
+  width: 35%;
+  color: black;
+  display: flex;
+  flex-flow: column  wrap;
+  margin:0.5em 2em;
+  border:1px double black;
+  padding: 0.6em 1.6em;
+  border-radius: 5%;
+  background-color: var(--color_cyan-50) ;
+  box-shadow: 0 3px 6px #eaeaea, 0 3px 6px  var(--color_uno);
+}
+.lista{
+  width: 80%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  margin: 0.5em 2em;
+}
+.item{
+  width: fit-content;
+  max-width: 100%;
+  background: blue;
+  margin: 1% 0px;
+}
+.input{
+  display: flex;
+  flex-flow: column;
+  width: 65%;
+}

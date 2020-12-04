@@ -6,6 +6,7 @@ import { Cliente } from 'src/app/domain/cliente';
 import { Profesional } from 'src/app/domain/profesional';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { Pago } from 'src/app/domain/pago';
 
 //export Type const TIPO =Cliente|Profesional
 export type Condicion=Cliente|Profesional
@@ -114,5 +115,25 @@ async eliminarProfesional(profesional: Profesional): Promise<void> {
     .delete<Profesional>(REST_SERVER_URL + '/delete_profesional/' + profesional.id, profesional.toJSON())
     .toPromise();
 }
+
+/*Agregar Metodo De Pago con la id, y mandar el pago*/
+async agregarMetodoDePago(id: number, pago:Pago): Promise<void>{
+ // console.log("ES PROFESIONAL toJSON "+profesional.toJSON)
+ // console.log("ES PROFESIONAL toJSON() "+profesional.toJSON())
+  await this.httpCLient.put<Profesional>(REST_SERVER_URL + '/agregarMp/'+id, pago.toJSON()).toPromise();
+}
+
+async eliminarMetodoDePago(id: number, pago:Pago): Promise<void>{
+  console.log("ES Pago  "+pago.nombreEntidad)
+  console.log("ES el ID  "+id)
+ // console.log("ES Pago toJSON "+pago.toJSON())
+  var json = JSON.stringify(pago);
+  console.log(json)
+  var json2= JSON.parse(JSON.stringify(pago))
+  console.log(json2)
+  //var json3= JSON.parse(pago)
+   await this.httpCLient.put<Profesional>(REST_SERVER_URL + '/eliminarMp/'+id, JSON.stringify(pago)).toPromise();
+ }
+ 
 
 }

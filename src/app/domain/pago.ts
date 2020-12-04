@@ -16,8 +16,8 @@ export class Pago {
   }
 
   toJSON(): any {
-    /* console.log('{...this}');
-    console.log({ ...this }); */
+    console.log('{...this}');
+    console.log({ ...this });
     return {
       ...this,
       //usuario: this.usuario.toJSON(),

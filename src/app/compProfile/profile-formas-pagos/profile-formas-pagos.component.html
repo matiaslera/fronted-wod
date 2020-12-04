@@ -1,0 +1,80 @@
+<div *ngIf="esProfesional()">
+    <div class="search_btn" *ngIf="tieneMediosPago()  else noTiene">
+        <button mat-raised-button color="accent" class="btn" (click)="agregar()">Agregar </button>
+        <div class="lista">
+            <div class="listaCuenta">
+                <div *ngFor="let elemento of mediosPagos" >
+                    <!-- A class="listaCuenta" -->
+                    <button mat-raised-button color="accent" class="btn" (click)="mostarPago(elemento)">{{elemento.nombreEntidad}}
+                    </button>
+                </div>
+                <button mat-raised-button color="primary" class="btn" *ngIf="elementoSeleccion" (click)="eliminarSeleccionado()">Eliminar Seleccionado</button>
+            </div>
+        <div class="listaDetalles" *ngIf="elementoSeleccion">
+            <label class="perfil__label">DETALLES DE METODO DE PAGO</label> 
+            <label class="perfil__label">Nombre De Entidad: {{elementoSeleccion.nombreEntidad}} </label> 
+            <label class="perfil__label">Nombre De Cuenta: {{elementoSeleccion.nombreCuenta}} </label>
+            <label class="perfil__label">Numero de Cuenta: {{elementoSeleccion.numeroCuenta}} </label>
+            <label class="perfil__label">Cbu: {{elementoSeleccion.cbu}} </label>
+            <label class="perfil__label">Alias: {{elementoSeleccion.alias}} </label>
+        </div>
+    </div>
+    </div>
+    <ng-template #noTiene>
+        <h2> NO TIENE CARGADO NINGUN MEDIO DE PAGO, DESEA AGREGAR?</h2>
+            <form [formGroup]="formularioPago" class="form" (ngSubmit)="addMedioPago()">
+                <div class="contenido">
+                    <div class="label">
+                        <label class="perfil__label">Nombre de Entidad: </label>
+                        <label class="perfil__label">Nombre Cuenta: </label>
+                        <label class="perfil__label">Numero Cuenta: </label>
+                        <label class="perfil__label">Cbu: </label>
+                        <label class="perfil__label">Alias: </label>
+                    </div>
+                    <div class="input">
+                        <input type="text" formControlName="nombreEntidad" placeholder="Ej: Banco Galicia"
+                            class="search_label-dato" required>
+                        <input type="text" formControlName="nombreCuenta" placeholder="Ej: Juan Galarza"
+                            class="search_label-dato" required>
+                        <input type="number" formControlName="numeroCuenta" placeholder="Ej: 1234 1234 12 1234567890"
+                            class="search_label-dato" required>
+                        <input type="number" formControlName="cbu" placeholder="Ej: 1234567890123456789012"
+                            class="search_label-dato" required>
+                        <input type="text" formControlName="alias" placeholder="Ej: LANA.CASA.TONA.CITA"
+                            class="search_label-dato">
+                    </div>
+                </div>
+                <h5>*No es obligatorio el ALIAS</h5>
+                <button type="submit" mat-raised-button type="submit" color="accent" class="btn">Agregar Medio
+                    Pago</button>
+            </form>
+    </ng-template>
+    <div *ngIf="mostarAdd && tieneMediosPago()">
+        <form [formGroup]="formularioPago" class="form" (ngSubmit)="addMedioPago()">
+            <div class="contenido">
+                <div class="label">
+                    <label class="perfil__label">Nombre de Entidad: </label>
+                    <label class="perfil__label">Nombre Cuenta: </label>
+                    <label class="perfil__label">Numero Cuenta: </label>
+                    <label class="perfil__label">Cbu: </label>
+                    <label class="perfil__label">Alias: </label>
+                </div>
+                <div class="input">
+                    <input type="text" formControlName="nombreEntidad" placeholder="Ej: Banco Galicia"
+                        class="search_label-dato" required>
+                    <input type="text" formControlName="nombreCuenta" placeholder="Ej: Juan Galarza"
+                        class="search_label-dato" required>
+                    <input type="number" formControlName="numeroCuenta" placeholder="Ej: 1234 1234 12 1234567890"
+                        class="search_label-dato" required>
+                    <input type="number" formControlName="cbu" placeholder="Ej: 1234567890123456789012"
+                        class="search_label-dato" required>
+                    <input type="text" formControlName="alias" placeholder="Ej: LANA.CASA.TONA.CITA"
+                        class="search_label-dato">
+                </div>
+            </div>
+            <h5>*No es obligatorio el ALIAS</h5>
+            <button type="submit" mat-raised-button type="submit" color="accent" class="btn">Agregar Medio
+                Pago</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="texto">
+    Si el trabajo finalizo, elija un metodo de pago para finalizar el trabajo. <br>
+    Una vez finalizado el pago, la notificacion sera recibida por el tecnico. <br>
+    Informacion del profesional <br>
+    {{profesional.usuario.nombre}} {{profesional.usuario.apellido}}
+    {{profesional.usuario.email}}
+    Usted debe pagar $ {{turno.montoFinal}}
+</div>
+<!-- <div class="botones perfil__acc">
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn" (click)="mercadoPago()">Mercardo
+        Pago</button>
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="transferencia()">Tranferencia Bancaria</button>
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="finalizar()">Efectivo</button>
+    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+        (click)="cancelar()">Cancelar</button>
+</div> -->
+
+<div class="lista">
+    <div class="listaCuenta">
+        <div *ngFor="let elemento of mediosPagos" >
+            <!-- A class="listaCuenta" -->
+            <button mat-raised-button color="accent" class="btn" (click)="mostarPago(elemento)">{{elemento.nombreEntidad}}
+            </button>
+        </div>
+        <button mat-raised-button color="primary" class="btn" *ngIf="elementoSeleccion" (click)="eliminarSeleccionado()">Finalizar turno</button>
+        <button mat-raised-button color="primary" class="btn">Cancelar</button>
+    </div>
+<div class="listaDetalles" *ngIf="elementoSeleccion">
+    <label class="perfil__label">DETALLES DE METODO DE PAGO</label> 
+    <label class="perfil__label">Nombre De Entidad: {{elementoSeleccion.nombreEntidad}} </label> 
+    <label class="perfil__label">Nombre De Cuenta: {{elementoSeleccion.nombreCuenta}} </label>
+    <label class="perfil__label">Numero de Cuenta: {{elementoSeleccion.numeroCuenta}} </label>
+    <label class="perfil__label">Cbu: {{elementoSeleccion.cbu}} </label>
+    <label class="perfil__label">Alias: {{elementoSeleccion.alias}} </label>
+</div>
+</div>
+
+<!-- <div class="container">
+    <div *ngIf="metodoPago===2">
+        <div class="perfil__linea">
+            <label class="perfil__label">CBU: </label>
+            <label class="perfil__label-dato">5646546544</label>
+        </div>
+        <div class="perfil__linea">
+            <label class="perfil__label">ALIAS:</label>
+            <label class="perfil__label-dato"> JATA.ABNA.DOTA</label>
+        </div>
+        <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+            (click)="finalizar()">Finalizar</button>
+    </div>
+    <div *ngIf="metodoPago===1">
+        <div class="perfil__linea">
+            <label class="perfil__label">CBU:</label>
+            <label class="perfil__label-dato"> 848484080484</label>
+        </div>
+        <div class="perfil__linea">
+            <label class="perfil__label">ALIAS: </label>
+            <label class="perfil__label-dato">848484080484</label>
+        </div>
+        <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
+            (click)="finalizar()">Finalizar</button>
+    </div>
+</div> -->

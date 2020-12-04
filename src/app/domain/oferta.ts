@@ -1,5 +1,8 @@
+import { Cliente } from './cliente';
 import { Presupuesto } from './presupuesto';
+import { Profesional } from './profesional';
 import { Trabajo } from './trabajo';
+import { Turno } from './turno';
 
 export class  Oferta {
   constructor(
@@ -67,4 +70,11 @@ export class  Oferta {
 export interface DialogJob {
   presupuesto: Trabajo;
   oferta: Oferta;
+}
+
+export interface PagoInterface {
+  trabajo: Trabajo;
+  turno:Turno;
+  profesional:Profesional
+  cliente:Cliente
 }

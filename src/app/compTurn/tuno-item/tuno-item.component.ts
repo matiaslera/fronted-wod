@@ -29,7 +29,6 @@ export class TunoItemComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.cambioDeEstado()
-    console.log(this.item.idProfesional)
     this.profesional= await this.perfilSer.getIdProfesional(this.item.idProfesional)
   }
  

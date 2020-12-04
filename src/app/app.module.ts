@@ -47,6 +47,8 @@ import { TurnMainComponent } from './compTurn/turn-main/turn-main.component';
 import { TunoItemComponent } from './compTurn/tuno-item/tuno-item.component';
 import { TunoListComponent } from './compTurn/tuno-list/tuno-list.component';
 import { TurnPagoComponent } from './compTurn/turn-pago/turn-pago.component';
+import { TurnPayComponent } from './compTurn/turn-pay/turn-pay.component';
+import { ProfileFormasPagosComponent } from './compProfile/profile-formas-pagos/profile-formas-pagos.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,9 @@ import { TurnPagoComponent } from './compTurn/turn-pago/turn-pago.component';
     TurnMainComponent,
     TunoItemComponent,
     TunoListComponent,
-    TurnPagoComponent
+    TurnPagoComponent,
+    TurnPayComponent,
+    ProfileFormasPagosComponent
   ],
   imports: [
     BrowserModule,

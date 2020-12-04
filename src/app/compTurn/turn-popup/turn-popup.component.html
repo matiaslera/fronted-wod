@@ -5,7 +5,7 @@
             <h3 class="card-title">Datos del Profesional</h3>
             <div class="search_linea">
                 <label class="search_label">Nombre: {{profesional.usuario.nombre}}
-                    {{profesional.usuario.nombre}}</label></div>
+                    {{profesional.usuario.apellido}}</label></div>
             <div class="search_linea">
                 <label class="search_label">Email: {{profesional.usuario.email}}</label></div>
             <div class="search_linea">
@@ -56,11 +56,11 @@
         <div class="search_btn" *ngIf="esCliente()">
             <button mat-raised-button color="accent" class="btn" *ngIf="!estaCancelado()"
                 (click)="cancelarTurno()">Cancelar Turno</button>
-            <a mat-raised-button color="accent" class="btn" *ngIf="estaContratado() && !estaCancelado()"
-                [routerLink]="['../turnoPago', turno.id]" (click)="finalizarTurno()"> Abonar </a>
+            <button mat-raised-button color="accent" class="btn" *ngIf="estaContratado() && !estaCancelado()" (click)="finalizarTurno()"> Abonar </button>
             <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Volver</button>
         </div>
-        <div class="search_btn" *ngIf="!tieneMediosPago() && esProfesional() else noTiene">
+        <div *ngIf="esProfesional()">
+        <div class="search_btn" *ngIf="tieneMediosPago()  else noTiene">
             <button mat-raised-button color="accent" class="btn" *ngIf="!estaCancelado()"
                 (click)="cancelarTurno()">Cancelar Turno</button>
             <button mat-raised-button color="accent" class="btn" *ngIf="!estaContratado() && !estaCancelado()"
@@ -69,66 +69,9 @@
             <button mat-raised-button color="accent" class="btn" (click)="cancelar()">Volver</button>
         </div>
         <ng-template #noTiene style="color:black">
-            <div>
-                NO TIENE CARGADO NINGUN MEDIO DE PAGO, DESEA ACTUALIZARLO?
-                <form [formGroup]="formularioTurno" class="form" (ngSubmit)="addMedioPago()">
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Nombre de Entidad: </label>
-                        <input type="text" formControlName="nombreEntidad" placeholder="Ej: Banco Galicia"
-                            class="search_label-dato" required> </div>
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Nombre Cuenta: </label>
-                        <input type="text" formControlName="nombreCuenta" placeholder="Ej: Juana Galarza"
-                            class="search_label-dato" required> </div>
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Cbu: </label>
-                        <input type="number" formControlName="cbu" placeholder="Ej: Banco Galicia"
-                            class="search_label-dato" required> </div>
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Alias: </label>
-                        <input type="number" formControlName="alias" placeholder="Ej: LANA.CASA.TONA.CITA"
-                            class="search_label-dato" required> </div>
-                    <div class="perfil__linea">
-                        <label class="perfil__label">Numero Cuenta: </label>
-                        <input type="number" formControlName="numeroCuenta" placeholder="Ej: 1234567890123456789012"
-                            class="search_label-dato" required> </div>
-                    <button type="submit" mat-raised-button type="submit" color="accent" class="btn">Agregar Medio
-                        Pago</button>
-                </form>
+            <div> NO TIENE CARGADO NINGUN MEDIO DE PAGO, DESEA ACTUALIZARLO? <a href="formaDePago">Cargar Forma De Pago</a>
             </div>
         </ng-template>
     </div>
+    </div>
 </div>
-
-<!-- <table>
-    <mat-divider></mat-divider>
-    <div *ngIf="esCliente()">
-        <h2 *ngIf="noTieneTurnos()"> NO TIENE NINGUN TURNO CARGADO </h2>
-        <div *ngFor="let elemento of turnos">
-            <app-tuno-item [item]="elemento" [imagen]="imagen" [estado]="opcion"></app-tuno-item>
-         
-        </div>
-    </div>
-    <div *ngIf="esProfesional()">
-        <div *ngIf="profesional.profesion else noTiene">
-            <h2 *ngIf="noTieneTurnos()"> NO TIENE NINGUN TURNO CARGADO </h2>
-            <div *ngFor="let elemento of turnos">
-                <app-tuno-item [item]="elemento" [imagen]="imagen" [estado]="opcion"></app-tuno-item>
-            </div>
-        </div>
-    </div>
-</table>
-
-<ng-template #noTiene style="color:black">
-    <div>
-        NO TIENE CARGADO SU ESPECIALIDAD, DESEA ACTUALIZARLA?
-        <div class="perfil__linea">
-            <label class="perfil__label">Especialidad: </label>
-            <select class="search_label-dato" [(ngModel)]="opcion" required>
-                <option [value]="item" *ngFor="let item of especialidad">{{item}}</option>
-            </select>
-        </div>
-        <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
-            (click)="aceptar()">Aceptar</button>
-    </div>
-</ng-template> -->
