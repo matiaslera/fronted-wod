@@ -49,6 +49,7 @@ import { TunoListComponent } from './compTurn/tuno-list/tuno-list.component';
 import { TurnPagoComponent } from './compTurn/turn-pago/turn-pago.component';
 import { TurnPayComponent } from './compTurn/turn-pay/turn-pay.component';
 import { ProfileFormasPagosComponent } from './compProfile/profile-formas-pagos/profile-formas-pagos.component';
+import {AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -101,8 +102,9 @@ import { ProfileFormasPagosComponent } from './compProfile/profile-formas-pagos/
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireStorageModule,
   ],
-  providers: [CookieService,AuthUserService,ChatService, { provide: Window, useValue: window }],
+  providers: [CookieService,AuthUserService,ChatService, { provide: Window, useValue: window }, { provide: BUCKET, useValue: 'gs://workofday-873ba.appspot.com' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

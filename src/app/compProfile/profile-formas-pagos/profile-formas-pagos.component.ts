@@ -40,8 +40,7 @@ export class ProfileFormasPagosComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     if(this.esProfesional()){
-      this.profesional= await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
-      this.mediosPagos=this.profesional.mediosPagos
+      this.actualizarLista()
     }
   }
 
@@ -108,11 +107,16 @@ export class ProfileFormasPagosComponent implements OnInit {
     this.elementoSeleccion=null
     this.mostarDetalles=false
     this.mostarAdd=false
-    this.router.navigate['formaDePago'];
+    this.actualizarLista()
   }
 
   tieneMediosPago():boolean{
     console.log("medios de pagos",this.profesional.mediosPagos.length)
     return this.profesional.mediosPagos.length>0
+  }
+
+  async actualizarLista(){
+    this.profesional= await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
+    this.mediosPagos=this.profesional.mediosPagos
   }
 }
