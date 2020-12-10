@@ -3,7 +3,26 @@
     Una vez finalizado el pago, la notificacion sera recibida por el tecnico. <br>
     Usted debe pagar ${{data.presupuesto.montoFinal}}
 </div>
-<div class="botones perfil__acc">
+
+<div class="lista">
+    <div class="listaCuenta">
+        <div *ngFor="let elemento of mediosPagos">
+            <!-- A class="listaCuenta" -->
+            <button mat-raised-button color="accent" class="btn"
+                (click)="mostarPago(elemento)">{{elemento.nombreEntidad}}
+            </button>
+        </div>
+    </div>
+    <div class="listaDetalles" *ngIf="elementoSeleccion">
+        <label class="perfil__label">DETALLES DE METODO DE PAGO</label>
+        <label class="perfil__label">Nombre De Entidad: {{elementoSeleccion.nombreEntidad}} </label>
+        <label class="perfil__label">Nombre De Cuenta: {{elementoSeleccion.nombreCuenta}} </label>
+        <label class="perfil__label">Numero de Cuenta: {{elementoSeleccion.numeroCuenta}} </label>
+        <label class="perfil__label">Cbu: {{elementoSeleccion.cbu}} </label>
+        <label class="perfil__label">Alias: {{elementoSeleccion.alias}} </label>
+    </div>
+</div>
+<!-- <div class="botones perfil__acc">
     <button type="submit" mat-raised-button type="submit" color="accent" class="btn" (click)="mercadoPago()">Mercardo
         Pago</button>
     <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
@@ -39,4 +58,4 @@
         <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
             (click)="finalizar()">Finalizar</button>
     </div>
-</div>
+</div> -->

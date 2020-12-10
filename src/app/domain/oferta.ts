@@ -59,11 +59,12 @@ export class  Oferta {
   } */
 
   static fechaFromJSON(fecha: string): Date {
+    console.log("es la fecha de oferta"+ fecha)
     const data = fecha.split('/')
     const res = new Date()
-    res.setDate(Number(data[0]))
+    res.setDate(Number(data[2]))
     res.setMonth(Number(data[1]))
-    res.setFullYear(Number(data[2]))
+    res.setFullYear(Number(data[0]))
     return res
   }
 }

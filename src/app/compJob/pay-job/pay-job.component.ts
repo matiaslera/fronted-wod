@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DialogJob } from 'src/app/domain/oferta';
+import { Pago } from 'src/app/domain/pago';
 import { Profesional } from 'src/app/domain/profesional';
 import { Estado } from 'src/app/domain/trabajo';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
@@ -16,6 +17,12 @@ import { JobComponent } from '../job/job.component';
 })
 export class PayJobComponent implements OnInit {
   profesional: Profesional = new Profesional();
+  /** */
+  mostarAdd:boolean=false
+  mostarDetalles:boolean=false
+  mediosPagos:Pago[]
+  elementoSeleccion:Pago
+  
   metodoPago: number;
   constructor(
     public dialogRef: MatDialogRef<JobComponent>,
@@ -28,7 +35,6 @@ export class PayJobComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateData();
-    console.log('data:', this.data);
     console.log('oferta:', this.data.oferta);
     console.log('presupuesto:', this.data.presupuesto);
   }
@@ -42,6 +48,7 @@ export class PayJobComponent implements OnInit {
       this.profesional = await this.perfil.getIdProfesional(
         this.data.presupuesto.idProfesional
       );
+      this.mediosPagos=this.profesional.mediosPagos
     }
   }
 
@@ -87,5 +94,11 @@ export class PayJobComponent implements OnInit {
     this.snackBar.open(errorType, 'x', {
       duration: 3000,
     });
+  }
+
+  mostarPago(elemento:Pago){
+    this.elementoSeleccion=elemento
+    this.mostarDetalles=true
+    this.mostarAdd=false
   }
 }

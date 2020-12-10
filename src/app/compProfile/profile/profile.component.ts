@@ -87,7 +87,6 @@ export class ProfileComponent implements OnInit {
 
   onUpload(event): void {
     this.storageSvc.uploadFile(event);
-    //this.storageSvc.urlImg.subscribe(url=>fotoURL=url)
     this.updateUser()
   }
 
@@ -96,15 +95,18 @@ export class ProfileComponent implements OnInit {
       this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
       console.log("este es el url para actualizar: "+this.storageSvc.refPerfil)
       this.usuarioBDatos.fotoUrl=this.storageSvc.refPerfil
+      const ref = this.storage.ref(this.usuarioBDatos.fotoUrl);
+     this.fotoServicio = ref.getDownloadURL();
       this.perfilSer.actualizarCliente(this.usuarioBDatos)
-      console.log('estoy en LOCAL STORAGE- CLIENTE:', this.usuarioBDatos);
+     
     }
     if (this.authServ.getTipo() === 'PROFESIONAL') {
      this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
      console.log("este es el url para actualizar: "+this.storageSvc.refPerfil)
      this.usuarioBDatos.fotoUrl=this.storageSvc.refPerfil
+     const ref = this.storage.ref(this.usuarioBDatos.fotoUrl);
+     this.fotoServicio = ref.getDownloadURL();
      this.perfilSer.actualizarProfesional(this.usuarioBDatos)
-      console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBDatos);
     }
   }
 

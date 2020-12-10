@@ -1,24 +1,24 @@
 <div *ngIf="user$ | async">
   <div *ngIf="esCliente | async">
     <div class="barra_lat">
-      <div class="linea"><a routerLink="perfil"> Perfil</a> <i class="far fa-user icon"></i> </div>
-      <div class="linea"><a href="chat">Chat</a> <i class="far fa-comment icon"> </i> </div>
-      <div class="linea"><a href="searchPresupuesto">Buscar Presupuesto</a> <i class="fas fa-pencil-alt icon"></i> </div>
-      <div class="linea"><a href="misPresupuestos">Mis Presupuestos</a> <i class="fas fa-file-contract icon"></i> </div>
-      <div class="linea"><a href="turnos">Turnos</a> <i class="fas fa-file-contract icon"></i> </div>
-      <div class="linea"><a href="jobPendientes">Trabajos Pendientes</a> <i class="fas fa-hammer  icon"> </i> </div>
-      <div class="linea"><a href="jobFinalizado">Trabajos Finalizados</a> <i class="fas fa-toolbox icon"> </i> </div>
+      <div class="linea"><i class="far fa-user icon"></i><a routerLink="perfil"> Perfil</a>  </div>
+      <div class="linea"><i class="far fa-comment icon"> </i><a href="chat">Chat</a>  </div>
+      <div class="linea"><i class="fas fa-pencil-alt icon"></i><a href="searchPresupuesto">Buscar Arreglos</a>  </div>
+      <div class="linea"><i class="fas fa-file-contract icon"></i><a href="misPresupuestos">Mis Consultas</a>  </div>
+      <div class="linea"><i class="fas fa-file-contract icon"></i><a href="turnos">Turnos</a> </div>
+      <div class="linea"><i class="fas fa-hammer  icon"> </i> <a href="jobPendientes">Trabajos Confirmados</a> </div>
+      <div class="linea"><i class="fas fa-toolbox icon"> </i><a href="jobFinalizado">Trabajos Finalizados</a> </div>
     </div>
   </div>
 
   <div *ngIf="esTecnico | async">
     <div class="barra_lat">
-      <div class="linea"><a routerLink="perfil"> Perfil</a> <i class="far fa-user icon"></i></div>
-      <div class="linea"><a href="chat">Chat</a> <i class="far fa-comment icon"> </i> </div>
-      <div class="linea"><a href="misPresupuestos"> Ofertas de Trabajos</a> <i class="far fas fa-hammer  icon"></i></div>
-      <div class="linea"><a href="jobFinalizado">Trabajo Finalizado</a> <i class="fas fa-toolbox icon"> </i> </div>
-      <div class="linea"><a href="turnos"> Turnos</a> <i class="fas fa-file-contract icon"></i></div>
-      <div class="linea"><a href="formaDePago"> Forma De Pago</a> <i class="fas fa-file-contract icon"></i></div>
+      <div class="linea"><i class="far fa-user icon"></i><a routerLink="perfil"> Perfil</a></div>
+      <div class="linea"><i class="far fa-comment icon"> </i><a href="chat">Chat</a> </div>
+      <div class="linea"> <i class="far fas fa-hammer  icon"></i><a href="misPresupuestos"> Ofertas de Trabajos</a></div>
+      <div class="linea"><i class="fas fa-toolbox icon"> </i> <a href="jobFinalizado">Trabajo Finalizado</a> </div>
+      <div class="linea"> <i class="fas fa-file-contract icon"></i><a href="turnos"> Turnos</a></div>
+      <div class="linea"> <i class="fas fa-file-contract icon"></i><a href="formaDePago"> Forma De Pago</a></div>
     </div>
   </div>
 

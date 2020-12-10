@@ -1,6 +1,6 @@
 <div class="box">
   <div class="search_header">
-    <h2 class="search_title">Buscar Presupuesto</h2>
+    <h2 class="search_title">Buscar Arreglos</h2>
     <form [formGroup]="busquedaForm" (ngSubmit)="buscar()" class="search_form">
       <div class="search_linea">
         <label class="search_label">Especialidad:</label>
@@ -20,7 +20,7 @@
     <button mat-raised-button color="accent" class="btn" (click)="clear()">Limpiar Campos </button> &nbsp;
     <!-- <a mat-raised-button color="accent" class="btn" (click)="create()" *ngIf="esCliente()">Realizar un Presupuesto
     </a> -->
-    <a mat-raised-button color="accent" class="btn" [routerLink]="['../tarea']" *ngIf="esCliente()"> Realizar un Presupuestoooo </a>
+    <a mat-raised-button color="accent" class="btn" [routerLink]="['../tarea']" *ngIf="esCliente()"> Publicar Consulta </a>
   </div>
   <section>
     <div class="tbl-header">
