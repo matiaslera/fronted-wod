@@ -10,3 +10,4 @@ export class FileItem {
     this.name = file.name;
   }
 }
+

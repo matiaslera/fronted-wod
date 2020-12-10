@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
+import { FileItem } from 'src/app/domain/fileItem';
 import { Calificacion, UserFB } from 'src/app/domain/user';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { StorageService } from 'src/app/services/storages/storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,21 +19,32 @@ export class ProfileComponent implements OnInit {
   usuarioFire: User;
   actualizar: number = 0;
   errors = [];
+  fotoServicio:Observable<string|null>
+  fotoDefault:string="../../assets/perfil01.jpg"
+
+  /* */
+  showImg:boolean=false
+  uploadPercent: Observable<number>=this.storageSvc.uploadPercent
+  downloadURL: Observable<string>=this.storageSvc.downloadURL
   constructor(
     public authServ: AuthUserService,
     public perfilSer: ProfileService,
+    private readonly storageSvc: StorageService,
+    private storage: AngularFireStorage
   ) {}
 
   async ngOnInit(): Promise<void> {
     if (this.authServ.getTipo() === 'CLIENTE') {
-      //this.usuarioBDatos = this.authServ.getCurrentCliente();
       this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
+      const ref = this.storage.ref(this.usuarioBDatos.fotoUrl);
+      this.fotoServicio = ref.getDownloadURL();
       this.foto();
       console.log('estoy en LOCAL STORAGE- CLIENTE:', this.usuarioBDatos);
     }
     if (this.authServ.getTipo() === 'PROFESIONAL') {
-     // this.usuarioBDatos = this.authServ.getCurrentProfesional();
      this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
+     const ref = this.storage.ref(this.usuarioBDatos.fotoUrl);
+     this.fotoServicio = ref.getDownloadURL();
      this.foto();
       console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBDatos);
     }
@@ -49,13 +63,8 @@ export class ProfileComponent implements OnInit {
     this.actualizar = condicion;
   }
 
-  foto(): boolean {
-    console.log(this.usuarioBDatos.usuario.fotoUrl)
-    return this.usuarioBDatos.usuario.fotoUrl !== null;
-    /*   if (this.authServ.usuario.photoURL===null){
-      return false
-    }
-    return true */
+  foto() {
+    this.storageSvc.getFoto( this.usuarioBDatos.fotoUrl)
   }
 
   async updateDatos(event) {
@@ -63,12 +72,10 @@ export class ProfileComponent implements OnInit {
     if (event === 'listo') {
       console.log("entre a updatear")
       if (this.authServ.getTipo() === 'CLIENTE') {
-        //this.usuarioBDatos = this.authServ.getCurrentCliente();
         this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
         console.log(this.usuarioBDatos)
       }
       if (this.authServ.getTipo() === 'PROFESIONAL') {
-       // this.usuarioBDatos = this.authServ.getCurrentProfesional();
        this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
        console.log(this.usuarioBDatos)
       }
@@ -76,6 +83,43 @@ export class ProfileComponent implements OnInit {
       console.log(event);
     }
   }
+
+
+  onUpload(event): void {
+    this.storageSvc.uploadFile(event);
+    //this.storageSvc.urlImg.subscribe(url=>fotoURL=url)
+    this.updateUser()
+  }
+
+  async updateUser(){
+    if (this.authServ.getTipo() === 'CLIENTE') {
+      this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
+      console.log("este es el url para actualizar: "+this.storageSvc.refPerfil)
+      this.usuarioBDatos.fotoUrl=this.storageSvc.refPerfil
+      this.perfilSer.actualizarCliente(this.usuarioBDatos)
+      console.log('estoy en LOCAL STORAGE- CLIENTE:', this.usuarioBDatos);
+    }
+    if (this.authServ.getTipo() === 'PROFESIONAL') {
+     this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
+     console.log("este es el url para actualizar: "+this.storageSvc.refPerfil)
+     this.usuarioBDatos.fotoUrl=this.storageSvc.refPerfil
+     this.perfilSer.actualizarProfesional(this.usuarioBDatos)
+      console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBDatos);
+    }
+  }
+
+  verImg(){
+    console.log("presione un boton")
+    if(this.showImg===false){
+     this.showImg=true
+     return 
+    }
+    if(this.showImg===true){
+      this.showImg=false
+      return 
+    }
+  }
+
 }
 
 export const urlLocal = '../../assets/perfil01.jpg';

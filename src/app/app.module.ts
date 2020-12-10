@@ -50,6 +50,7 @@ import { TurnPagoComponent } from './compTurn/turn-pago/turn-pago.component';
 import { TurnPayComponent } from './compTurn/turn-pay/turn-pay.component';
 import { ProfileFormasPagosComponent } from './compProfile/profile-formas-pagos/profile-formas-pagos.component';
 import {AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+import { NgFileDirective } from './directive/file/ng-file.directive';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import {AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
     TunoListComponent,
     TurnPagoComponent,
     TurnPayComponent,
-    ProfileFormasPagosComponent
+    ProfileFormasPagosComponent,
+    NgFileDirective
   ],
   imports: [
     BrowserModule,

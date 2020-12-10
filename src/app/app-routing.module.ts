@@ -13,15 +13,14 @@ import { NewPresupuestoComponent } from './compJob/new-presupuesto/new-presupues
 import { ListTrabajosComponent } from './compJob/list-trabajos/list-trabajos.component';
 import { JobPendienteComponent } from './compJob/job-pendiente/job-pendiente.component';
 import { JobDetallesComponent } from './compJob/job-detalles/job-detalles.component';
-import { JobRespuestaComponent } from './compJob/job-respuesta/job-respuesta.component';
 import { JobPresupuestoComponent } from './compJob/job-presupuesto/job-presupuesto.component';
 import { JobFinalizadoComponent } from './compJob/job-finalizado/job-finalizado.component';
 import { ChatRoomComponent } from './compChat/chat-room/chat-room.component';
-import { TurnSearchComponent } from './compTurn/turn-search/turn-search.component';
 import { TurnDatosComponent } from './compTurn/turn-datos/turn-datos.component';
 import { TurnMainComponent } from './compTurn/turn-main/turn-main.component';
 import { TurnPagoComponent } from './compTurn/turn-pago/turn-pago.component';
 import { ProfileFormasPagosComponent } from './compProfile/profile-formas-pagos/profile-formas-pagos.component';
+import { PopupPresupuestoComponent } from './compJob/popup-presupuesto/popup-presupuesto.component';
 
 
 const routes: Routes = [
@@ -46,6 +45,7 @@ const routes: Routes = [
   { path: 'turnosDetalles/:id', component: TurnDatosComponent,pathMatch: "full" },
   { path: 'turnoPago/:id', component: TurnPagoComponent,pathMatch: "full" },
   { path: 'formaDePago', component: ProfileFormasPagosComponent,pathMatch: "full" },
+  { path: 'tarea', component: PopupPresupuestoComponent, pathMatch: "full" },
  // {path: 'jobRespuesta/:id', component: JobRespuestaComponent,pathMatch:"full"},
   { path: "listaTrabajos", component: ListTrabajosComponent, pathMatch: "full" },
   { path: '**', redirectTo: '404', pathMatch: 'full' }, 

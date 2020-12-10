@@ -3,10 +3,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Direccion } from 'src/app/domain/direccion';
+import { FileItem } from 'src/app/domain/fileItem';
 import { Presupuesto } from 'src/app/domain/presupuesto';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { Calificacion } from 'src/app/domain/user';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
+import { StorageService } from 'src/app/services/storages/storage.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { NewPresupuestoComponent } from '../new-presupuesto/new-presupuesto.component';
 
@@ -19,6 +21,8 @@ export class PopupPresupuestoComponent implements OnInit {
   usuarioBDatos: Calificacion;
   consulta:Trabajo = new Trabajo()
   dire = new Direccion()
+  files: FileItem[] = [];
+  isOverDrop = false;
   presupuesto:Presupuesto = new Presupuesto()
   busquedaForm = this.builder.group({
     idCreador: ['', Validators.required],
@@ -44,12 +48,13 @@ export class PopupPresupuestoComponent implements OnInit {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<NewPresupuestoComponent>,
+    /* public dialogRef: MatDialogRef<NewPresupuestoComponent>, */
+    /* @Inject(MAT_DIALOG_DATA) public data: DialogData, */
     private builder: FormBuilder,
     private presupuetoSer: TrabajoService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public authServ: AuthUserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private readonly storageSvc: StorageService
   ) {
   }
   
@@ -60,8 +65,8 @@ export class PopupPresupuestoComponent implements OnInit {
   updateFrom() {
     this.busquedaForm.patchValue({
       idCreador:  parseInt(this.authServ.getId(),10),
-      problema: this.data.problema,
-      especialidad: this.data.especialidad,
+      /* problema: this.data.problema,
+      especialidad: this.data.especialidad, */
     });
   }
 
@@ -90,18 +95,22 @@ export class PopupPresupuestoComponent implements OnInit {
     }
     console.log(this.busquedaForm.value);
     console.log('The dialog envio la consulta');
-    this.dialogRef.close();
+    /* this.dialogRef.close(); */
   }
   
   cancelar() {
     console.log('The dialog esta cerrado');
-    this.dialogRef.close();
+    /* this.dialogRef.close(); */
   }
 
   mensaje(errorType: string) {
     this.snackBar.open(errorType, 'x', {
       duration: 3000,
     });
+  }
+
+  onUpload(): void {
+    this.storageSvc.uploadImage(this.files);
   }
 }
 

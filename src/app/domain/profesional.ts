@@ -13,6 +13,7 @@ export class Profesional {
     public guardia?: boolean,
     public trabajos?:Trabajo[],
     public mediosPagos?:Pago[],
+    public fotoUrl?:string,
   ) {}
 
   static fromJson(usuarioJSON): Profesional {

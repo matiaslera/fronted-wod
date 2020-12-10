@@ -18,8 +18,9 @@
   <div class="search_btn">
     <button mat-raised-button color="accent" class="btn" (click)="buscar()">Buscar</button> &nbsp;
     <button mat-raised-button color="accent" class="btn" (click)="clear()">Limpiar Campos </button> &nbsp;
-    <button mat-raised-button color="accent" class="btn" (click)="create()" *ngIf="esCliente()">Realizar un Presupuesto
-    </button>
+    <!-- <a mat-raised-button color="accent" class="btn" (click)="create()" *ngIf="esCliente()">Realizar un Presupuesto
+    </a> -->
+    <a mat-raised-button color="accent" class="btn" [routerLink]="['../tarea']" *ngIf="esCliente()"> Realizar un Presupuestoooo </a>
   </div>
   <section>
     <div class="tbl-header">

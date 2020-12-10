@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
-import { ProfileService } from 'src/app/services/perfil/profile.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuesto.component';
 

@@ -1,5 +1,5 @@
 
-  <form [formGroup]="busquedaForm" (ngSubmit)="enviarConsulta()" class="card__lat-colum">
+  <form [formGroup]="busquedaForm" class="card__lat-colum">
     <div class="perfil__linea">
       <label class="perfil__label"> <strong>Especialidad: </strong></label>
       <select class="search_label-dato" formControlName="especialidad" required>
@@ -42,10 +42,56 @@
       <label class="perfil__label">Piso/Departamento: </label>
       <input type="text" formControlName="pisoDep">
     </div>
-    <div class="perfil__linea">
-      <label class="perfil__label">Adjuntar un archivo</label>
-      <input type="file">
+    <div class="perfil__linea-img">
+      <div class="perfil__linea-column">
+        <div appNgFile  [files]="files"
+        (mouseOver)="isOverDrop = $event"
+        [ngClass]="{ 'file-over': isOverDrop }"
+        class="drop-zone"></div>
+        <label class="perfil__label">Cargue sus imagenes</label>
+        <img class="img-up" src="../../../assets/upload-file.png" alt="drop-imagen">
+      </div>
+      <!-- <input type="file"> -->
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre Imagen</th>
+              <th>Tamanaño</th>
+              <!-- <th>Progreso</th> -->
+              <th>URL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of files">
+              <td>{{ file.name }}</td>
+              <td>{{ file.file.size / 1024 / 1024 | number: '2.2' }}MB</td>
+              <!-- <td *ngIf="(file.uploadPercent | async); as uploadPercent">
+                <div class="progress">
+                  <div class="progress-bar" role="progessbar"
+                    [ngStyle]="{ width: uploadPercent + '%' }"  >
+                    {{ uploadPercent | number: "1.0-0" }} %
+                  </div>
+                </div>
+              </td> -->
+              <td *ngIf="file.downloadURL | async as downloadURL">
+                <a [href]="downloadURL" target="_blank">Download URL</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="container-buttons">
+          <button  mat-raised-button (click)="files = []" class="btn btn-danger">Limpiar todo</button>
+          <button  mat-raised-button class="btn" color="accent"
+            (click)="onUpload()"
+            [disabled]="files.length === 0"
+          >
+            Cargar
+          </button>
+        </div>
+      </div>
     </div>
+    
   </form>
 
   <mat-card-actions class="perfil__acc">

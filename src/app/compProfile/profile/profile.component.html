@@ -1,7 +1,14 @@
 <div class="box" *ngIf="user$ | async as user else load">
 	<mat-card class="perfil">
-		<img *ngIf="user?.photoURL" src="{{user?.photoURL}}" class="imag" alt="No se encontro imagen">
-		<img *ngIf="!user?.photoURL" src="../../assets/perfil01.jpg" class="imag" alt="No se encontro imagen">
+		<div class="perfil__label-cont">
+			<!-- <img [src]="(fotoServicio|async) ? fotoServicio: fotoDefault" class="imag" alt="No se encontro imagen"> -->
+			<img  [src]="fotoServicio | async" class="imag" alt="No se encontro imagen"/>
+			<button mat-raised-button (click)="verImg()"> <mat-icon >add_a_photo</mat-icon> </button><br>
+			<!-- <a *ngIf="showImg" [href]="downloadURL | async">Descargar Imagen: {{ downloadURL | async }}</a> -->
+		<!-- 	<img *ngIf="user?.photoURL" src="{{user?.photoURL}}" class="imag" alt="No se encontro imagen">
+			<img *ngIf="!user?.photoURL" src="../../assets/perfil01.jpg" class="imag" alt="No se encontro imagen"> -->
+			<input *ngIf="showImg" type="file" (change)="onUpload($event)">
+		</div>
 		<mat-card-content class="perfil__label-cont">
 			<div class="perfil__linea">
 				<label class="perfil__label">Nombre: </label>
