@@ -65,7 +65,7 @@ export class AuthUserService {
         this.mensaje('Error, no tenemos conexion con el servidor')
       }
       if(errorCode="auth/email-already-in-use"){
-        this.mensaje('Ingrese sus datos nuevamente, para logearse')
+        this.mensaje('Email es usado en otra cuenta, reintente registrase')
       }
       else {
         this.mensaje(errorMessage);

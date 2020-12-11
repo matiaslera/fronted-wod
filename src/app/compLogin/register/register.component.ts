@@ -84,9 +84,14 @@ export class RegisterComponent implements OnInit {
     try {
       await this.perfilSer.crearCliente(await this.crearCliente());
       this.register(Tipo.CLIENTE);
-      if (this.user$) {
+      /* if (this.user$) {
         this.router.navigate(['/bienvenido']);
-      }
+      } */
+      this.auth.angularAuth.onAuthStateChanged((userFireBase) => {
+        if (userFireBase) {
+          /*Me registro con google*/
+          this.router.navigate(['/bienvenido']);
+          return;}})
     } catch (error) {
       console.log(error);
       mostrarError(this, error);

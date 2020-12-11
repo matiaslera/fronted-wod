@@ -1,8 +1,10 @@
-<p *ngIf="user$ | async as user else load" style="color:black">Gracias por registrarse {{user.displayName}}. <br>
-    El equipo de Wod, le da la bienvenidad a la app. <br>
-    Ingrese nuevamente con sus datos para utilizar todas las funciones de la app.
-</p>
-<button  mat-raised-button color="accent" class="btn" (click)="salir()">Ingrese nuevamente</button>
+<div *ngIf="user$ | async as user else load">
+    <p  style="color:black">Gracias por registrarse {{user.displayName}}. <br>
+        El equipo de Wod, le da la bienvenidad a la app. <br>
+        Ingrese nuevamente con sus datos para utilizar todas las funciones de la app.
+    </p>
+    <button mat-raised-button color="accent" class="btn" (click)="salir()">Ingrese nuevamente</button>
+</div>
 <ng-template #load style="color:black">
     Cargando....
 </ng-template>
