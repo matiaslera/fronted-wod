@@ -11,6 +11,9 @@
       <h3 class="card-subtitle">Descripcion: {{presupuesto.descripcion}}</h3>
       <h3 class="card-subtitle">Notas: {{presupuesto.notas}}</h3>
     </div>
+  <!--   <div class="imagenes" *ngFor="let item of jobData.urlImagenes">
+      <img  [src]="devolverObs(item) | async" class="imag" alt="No se encontro imagen"/>
+    </div> -->
   </div>
 
   <form class="card__lat-colum">
@@ -20,7 +23,7 @@
         [ngModelOptions]="{standalone: true}"></textarea>
     </div>
     <div class="perfil__linea">
-      <label class="perfil__label"><strong>Monto: </strong></label>
+      <label class="perfil__label"><strong>Precio: </strong></label>
       <input type="number" [(ngModel)]="ofertaJob.montoAprox" [ngModelOptions]="{standalone: true}">
     </div>
     <button type="submit" *ngIf="!respondido()" mat-raised-button type="submit" color="accent" class="btn"

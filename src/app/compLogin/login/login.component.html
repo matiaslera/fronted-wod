@@ -7,7 +7,7 @@
     <form [formGroup]="formulario" (ngSubmit)="login()" class="login-form">
         <label class="form__label">EMAIL</label>
         <input type="email" class="form__imput" formControlName="usuario" autocomplete="off"
-            placeholder="ingrese el usuario" required>
+            placeholder="Ej: usuario@hotmail.com" required>
         <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="alert">
             Error:
             <div *ngIf="usuario.errors.required"> Email requerido</div>

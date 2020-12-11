@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Direccion } from 'src/app/domain/direccion';
 import { FileItem } from 'src/app/domain/fileItem';
 import { Presupuesto } from 'src/app/domain/presupuesto';
@@ -22,6 +23,7 @@ export class PopupPresupuestoComponent implements OnInit {
   consulta:Trabajo = new Trabajo()
   dire = new Direccion()
   files: FileItem[] = [];
+  refFiles:string[]
   isOverDrop = false;
   presupuesto:Presupuesto = new Presupuesto()
   busquedaForm = this.builder.group({
@@ -54,7 +56,8 @@ export class PopupPresupuestoComponent implements OnInit {
     private presupuetoSer: TrabajoService,
     public authServ: AuthUserService,
     private snackBar: MatSnackBar,
-    private readonly storageSvc: StorageService
+    private readonly storageSvc: StorageService,
+    public router: Router
   ) {
   }
   
@@ -71,7 +74,6 @@ export class PopupPresupuestoComponent implements OnInit {
   }
 
   async enviarConsulta() {
-    this.consulta.idCliente=this.busquedaForm.get('idCreador').value
     this.dire.provincia = this.busquedaForm.get('provincia').value;
     this.dire.ciudad = this.busquedaForm.get('ciudad').value;
     this.dire.codPostal = this.busquedaForm.get('codPostal').value;
@@ -84,6 +86,8 @@ export class PopupPresupuestoComponent implements OnInit {
     this.presupuesto.notas=this.busquedaForm.get('notas').value
     this.presupuesto.direccion=this.dire
     this.presupuesto.fechaCreacion=new Date()
+    this.consulta.urlImagenes=this.storageSvc.urlsImags
+    this.consulta.idCliente=this.busquedaForm.get('idCreador').value
     this.consulta.presupuesto=this.presupuesto
     console.log(this.consulta)
     try {
@@ -95,22 +99,23 @@ export class PopupPresupuestoComponent implements OnInit {
     }
     console.log(this.busquedaForm.value);
     console.log('The dialog envio la consulta');
-    /* this.dialogRef.close(); */
+    this.router.navigateByUrl("/searchPresupuesto");
   }
   
   cancelar() {
     console.log('The dialog esta cerrado');
-    /* this.dialogRef.close(); */
+    this.router.navigateByUrl("/searchPresupuesto");
   }
 
   mensaje(errorType: string) {
     this.snackBar.open(errorType, 'x', {
-      duration: 3000,
+      duration: 4000,
     });
   }
 
   onUpload(): void {
     this.storageSvc.uploadImage(this.files);
+    //this.refFiles=this.storageSvc.urlsImags
   }
 }
 

@@ -9,7 +9,8 @@ export class Trabajo {
     public montoFinal?: number,
     public estado?: Estado,
     public calificacion?: number,
-    public fechaFinalizacion?: Date
+    public fechaFinalizacion?: Date,
+    public urlImagenes?:string[]
   ) {}
 
   static fromJson(problemJSON): Trabajo {

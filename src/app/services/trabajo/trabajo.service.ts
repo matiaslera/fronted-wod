@@ -107,6 +107,16 @@ export class TrabajoService {
     console.log(trabajos);
     return trabajos.map((job) => Trabajo.fromJson(job));
   }
+
+  /*Traer los trabajos pendientes */
+  async trabajoQueMeContrataron(id: number): Promise<Trabajo[]> {
+    const trabajos = await this.httpCLient
+    .get<Trabajo[]>(REST_SERVER_URL + '/job_contratado_prof/' + id)
+    .toPromise();
+    console.log(trabajos);
+    return trabajos.map((job) => Trabajo.fromJson(job));
+  }
+
   /*Crea un nuevo Turno */
   async crearTurno(nuevoTurno: Turno) {
     //console.log('este es el trabajo', trabajo);

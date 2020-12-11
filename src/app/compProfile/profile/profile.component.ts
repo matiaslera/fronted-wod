@@ -38,14 +38,14 @@ export class ProfileComponent implements OnInit {
       this.usuarioBDatos = await this.perfilSer.getIdCliente(parseInt(this.authServ.getId(),10)) ;
       const ref = this.storage.ref(this.usuarioBDatos.fotoUrl);
       this.fotoServicio = ref.getDownloadURL();
-      this.foto();
+     /*  this.foto(); */
       console.log('estoy en LOCAL STORAGE- CLIENTE:', this.usuarioBDatos);
     }
     if (this.authServ.getTipo() === 'PROFESIONAL') {
      this.usuarioBDatos = await this.perfilSer.getIdProfesional(parseInt(this.authServ.getId(),10))
      const ref = this.storage.ref(this.usuarioBDatos.fotoUrl);
      this.fotoServicio = ref.getDownloadURL();
-     this.foto();
+    /*  this.foto(); */
       console.log('estoy en LOCAL STORAGE- PROFESIONAL:', this.usuarioBDatos);
     }
     console.log(this.usuarioBDatos);
@@ -63,9 +63,9 @@ export class ProfileComponent implements OnInit {
     this.actualizar = condicion;
   }
 
-  foto() {
+ /*  foto() {
     this.storageSvc.getFoto( this.usuarioBDatos.fotoUrl)
-  }
+  } */
 
   async updateDatos(event) {
     console.log(event);

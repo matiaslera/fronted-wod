@@ -1,13 +1,12 @@
 <div class="texto">
-    Si el trabajo finalizo, elija un metodo de pago para finalizar el trabajo. <br>
-    Una vez finalizado el pago, la notificacion sera recibida por el tecnico. <br>
-    Usted debe pagar ${{data.presupuesto.montoFinal}}
+    Elija un metodo de pago para finalizar el trabajo. <br>
+    La notificacion sera recibida por el tecnico. <br>
+    Monto a abonar: ${{data.presupuesto.montoFinal}}
 </div>
 <h2>Metodos de Pago</h2>
 <div class="lista">
     <div class="listaCuenta">
         <div *ngFor="let elemento of mediosPagos">
-            <!-- A class="listaCuenta" -->
             <button mat-raised-button color="accent" class="btn"
                 (click)="mostarPago(elemento)">{{elemento.nombreEntidad}}
             </button>
@@ -16,10 +15,11 @@
     </div>
     <div class="listaDetalles" *ngIf="elementoSeleccion">
         <label class="perfil__label">DETALLES DE METODO DE PAGO</label>
-        <label class="perfil__label">Nombre De Entidad: {{elementoSeleccion.nombreEntidad}} </label>
-        <label class="perfil__label">Nombre De Cuenta: {{elementoSeleccion.nombreCuenta}} </label>
+        <label class="perfil__label">Nombre de Entidad: {{elementoSeleccion.nombreEntidad}} </label>
+        <label class="perfil__label">Nombre del Titular: {{elementoSeleccion.nombreCuenta}} </label>
         <label class="perfil__label">Numero de Cuenta: {{elementoSeleccion.numeroCuenta}} </label>
         <label class="perfil__label">Cbu: {{elementoSeleccion.cbu}} </label>
         <label class="perfil__label">Alias: {{elementoSeleccion.alias}} </label>
+        <button mat-raised-button color="primary" class="btn" (click)="finalizar()">Pagar</button>
     </div>
 </div>

@@ -103,3 +103,7 @@ input:focus {
   margin-bottom: 0.1em;
   display: flex;
 }
+/*Imagenes*/
+.imagenes{
+  border:1px solid black;
+}

@@ -1,11 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, Subject } from 'rxjs';
 import { Oferta } from 'src/app/domain/oferta';
 import { Profesional } from 'src/app/domain/profesional';
 import { Trabajo } from 'src/app/domain/trabajo';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';
 import { ProfileService } from 'src/app/services/perfil/profile.service';
+import { StorageService } from 'src/app/services/storages/storage.service';
 import { TrabajoService } from 'src/app/services/trabajo/trabajo.service';
 import { JobComponent } from '../job/job.component';
 
@@ -17,8 +20,10 @@ import { JobComponent } from '../job/job.component';
 export class JobRespuestaComponent implements OnInit {
   ofertaJob: Oferta = new Oferta();
   jobData: Trabajo = new Trabajo();
-  id: number;
   profesional:Profesional= new Profesional()
+  fotosJob$:Observable<string[]|null>
+  private clientes$ = new Subject<string[]>();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<JobComponent>,
@@ -26,6 +31,8 @@ export class JobRespuestaComponent implements OnInit {
     private snackBar: MatSnackBar,
     private trabajoSer: TrabajoService,
     public profileServ:ProfileService,
+    private readonly storageSvc: StorageService,
+    private storage: AngularFireStorage
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -40,6 +47,11 @@ export class JobRespuestaComponent implements OnInit {
   }
   get presupuesto(){
     return this.data.presupuesto.presupuesto
+  }
+
+  devolverObs(val:string):Observable<string|null>{
+    const ref = this.storage.ref(val);
+    return ref.getDownloadURL()
   }
 
   async aceptar() {

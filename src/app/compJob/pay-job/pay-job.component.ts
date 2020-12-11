@@ -45,9 +45,7 @@ export class PayJobComponent implements OnInit {
 
   async updateData() {
     if (this.estaContratado()) {
-      this.profesional = await this.perfil.getIdProfesional(
-        this.data.presupuesto.idProfesional
-      );
+      this.profesional = await this.perfil.getIdProfesional(this.data.presupuesto.idProfesional);
       this.mediosPagos=this.profesional.mediosPagos
     }
   }
@@ -73,13 +71,13 @@ export class PayJobComponent implements OnInit {
       this.profesional.trabajos.push(this.data.presupuesto)
       await this.trabajoServ.update(this.data.presupuesto);
       this.perfil.actualizarProfesional(this.profesional);
-      this.router.navigate(['/jobPendientes'])
       this.mensaje('Se ha finalizado el trabajo');
     } catch (e) {
       e.error;
     }
     console.log('The dialog rechazo finalizar la consulta');
     this.dialogRef.close();
+    this.router.navigate(['/jobFinalizado'])
   }
 
   mercadoPago() {

@@ -56,7 +56,7 @@ export class JobPendienteComponent implements OnInit {
 
   async getTrabajosTecnicos(){
     try{
-      this.trabajos=await this.trabajosServices.trabajoPorEsp(this.profesional)
+      this.trabajos=await this.trabajosServices.trabajoQueMeContrataron(this.profesional.id)
       console.log(this.trabajos)    
   } catch{
      console.log('error en cargar lista de tecnicos')
@@ -86,11 +86,6 @@ export class JobPendienteComponent implements OnInit {
      return this.authServ.getTipo() === 'PROFESIONAL' 
   }
 
-  async tieneProfesion(){
-    this.profesional= await this.perfilServ.getIdProfesional(parseInt(this.authServ.getId(),10))
-    console.log(this.profesional.profesion!==null )
-    return this.profesional.profesion!==null 
-  }
 
   async aceptar(){
     console.log(this.profesional.id)

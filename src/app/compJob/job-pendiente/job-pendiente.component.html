@@ -7,25 +7,10 @@
         <app-job [consulta]="elemento" [imagen]="imagen" [estado]="pendiente"></app-job>
       </div>
     </div>
-    <!-- <div *ngIf="esProfesional()">
-      <div *ngIf="profesional.profesion else noTiene">
+    <div *ngIf="esProfesional()">
         <div *ngFor="let elemento of trabajos">
           <app-job [consulta]="elemento" [imagen]="imagen" [estado]="pendiente"></app-job>
         </div>
-      </div>
-    </div> -->
+    </div>
   </table>
 </div>
-<!-- <ng-template #noTiene style="color:black">
-  <div>
-    NO TIENE CARGADO SU ESPECIALIDAD, DESEA ACTUALIZARLA?
-    <div class="perfil__linea">
-      <label class="perfil__label">Especialidad: </label>
-      <select class="search_label-dato" [(ngModel)]="opcion" required>
-        <option [value]="item" *ngFor="let item of especialidad">{{item}}</option>
-      </select>
-    </div>
-    <button type="submit" mat-raised-button type="submit" color="accent" class="btn"
-      (click)="aceptar()">Aceptar</button>
-  </div>
-</ng-template> -->

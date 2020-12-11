@@ -39,7 +39,6 @@
   flex-flow: column wrap;
 }
 .perfil__label {
-  text-align: center;
   font-size: 1.6em;
   color: var(--color_cyan-700, #08d9d6);
   font-weight: bold;
@@ -53,4 +52,48 @@
   font-weight: 600;
   font-size: 1.3em;
   padding: 0.2em;
+}
+
+/*Lista de medios de pagos*/
+.listaCuenta {
+  width: 20%;
+  list-style-type: none;
+  margin: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.listaDetalles {
+  color: black;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0.4em 2em;
+  border: 1px double black;
+  padding: 0.6em 1.6em;
+  font-size: 0.7em;
+  border-radius: 5%;
+  background-color: var(--color_cyan-50);
+  box-shadow: 0 3px 6px #eaeaea, 0 3px 6px var(--color_uno);
+}
+.lista {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+}
+.item {
+  width: fit-content;
+  max-width: 100%;
+  background: blue;
+  margin: 1% 0px;
+}
+.input {
+  display: flex;
+  flex-flow: column;
+  width: 65%;
+}
+
+div .btn{
+  margin-bottom: 0.5em;
 }
