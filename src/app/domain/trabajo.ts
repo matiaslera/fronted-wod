@@ -39,9 +39,15 @@ export class Trabajo {
   static fechaFromJSON(fecha: string): Date {
     const data = fecha.split('/')
     const res = new Date()
-    res.setDate(Number(data[2]))
-    res.setMonth(Number(data[1]))
-    res.setFullYear(Number(data[0]))
+    if(data[0].length >3){
+      res.setDate(Number(data[2]))
+      res.setMonth(Number(data[1]))
+      res.setFullYear(Number(data[0]))
+      return res
+    }
+    res.setDate(Number(data[0]))
+      res.setMonth(Number(data[1]))
+      res.setFullYear(Number(data[2]))
     return res
   }
 
