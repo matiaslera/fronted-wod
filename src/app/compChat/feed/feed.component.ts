@@ -1,7 +1,4 @@
-import { SimpleChanges } from '@angular/core';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { AngularFireList } from '@angular/fire/database';
-import { Observable, Subject } from 'rxjs';
 import { ChatMessage } from 'src/app/domain/chat';
 import { UsuarioFireBD } from 'src/app/domain/user';
 import { AuthUserService } from 'src/app/services/auth/auth-user.service';

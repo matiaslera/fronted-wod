@@ -19,14 +19,10 @@ import { User } from 'firebase';
 export class ChatService {
   user: User;
   chatMessages: AngularFireList<ChatMessage>;
-  chatMessage: ChatMessage;
+  chatMensaje: ChatMessage;
   userName: Observable<string>;
   userID: string;
   remitente:string=null;
-  /* public remitente$ = new Subject<string>();
-  feed: Observable<ChatMessage>;
-  public feed$ = new Subject<ChatMessage>();
-  chatMensajes$=new Subject<ChatMessage[]>(); */
 
   private jugadoresDB: AngularFireList<Jugador>;
 
@@ -79,6 +75,9 @@ export class ChatService {
       const timestamp = this.getTimeStamp();
      // this.esRemitente.subscribe(rem=>this.remitente=rem)
      console.log(this.remitente)
+     
+    
+    // var newPostKey = firebase.database().ref().child('posts').push().key;
       if(this.remitente!==null || this.remitente!==undefined){
       this.chatMessages.push({
         message: msg,
@@ -92,10 +91,25 @@ export class ChatService {
     })
   }
 
+  removeMensaje(msg:string){
+    this.db.list('/mensajes',ref=>ref.equalTo(msg)).remove()
+  }
+
   getMessages(): AngularFireList<ChatMessage> {
     // query to create our message feed binding
     return this.db.list('/mensajes' ,ref => ref.limitToLast(25).orderByKey());
   }
+
+  /* getMesaje():Observable<ChatMessage> {
+    return this.chatMensaje.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((c) => ({
+          $key: c.payload.key,
+          ...c.payload.val(),
+        }));
+      })
+    );
+  } */
 
   getTimeStamp() {
     const now = new Date();

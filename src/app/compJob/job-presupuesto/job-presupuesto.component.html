@@ -1,7 +1,7 @@
 <div class="container">
     <table>
       <mat-divider></mat-divider>
-      <h2 *ngIf="noTieneTrabajos()"> NO TIENE NINGUN PRESUPUESTO CARGADO </h2>
+      <h2 *ngIf="noTieneTrabajos()"> NO TIENE NINGUN CONSULTA CARGADO </h2>
       <div *ngIf="esCliente()">
         <div *ngFor="let elemento of trabajos">
           <app-job [consulta]="elemento" [imagen]="imagen" [estado]="publicado"></app-job>

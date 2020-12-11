@@ -16,8 +16,9 @@ export class TurnMainComponent implements OnInit {
   nuevoTurno:boolean=false;
   proximoTurno:boolean;
   previosTurno:boolean;
-  turnos:Turno[]=[]
-  turnosBd:Turno[];
+  turnosProximo:Turno[]=[]
+  turnosPrevio:Turno[]=[]
+  turnosBd:Turno[]=[];
   profesional:Profesional
 
   constructor(
@@ -57,7 +58,7 @@ export class TurnMainComponent implements OnInit {
   proximo(){
     var fechauno = new Date();
     if(this.turnosBd.length>0){
-      this.turnos=this.turnosBd.filter(turnosCargado=>turnosCargado.fechaTrabajo>=fechauno)
+      this.turnosProximo=this.turnosBd.filter(turnosCargado=>turnosCargado.fechaTrabajo>=fechauno)
     }
     this.nuevoTurno=false
     this.proximoTurno=true
@@ -67,7 +68,7 @@ export class TurnMainComponent implements OnInit {
   previo(){
     var fechauno = new Date();
     if(this.turnosBd.length>0){
-      this.turnos=this.turnosBd.filter(turnosCargado=>turnosCargado.fechaTrabajo<=fechauno)
+      this.turnosPrevio=this.turnosBd.filter(turnosCargado=>turnosCargado.fechaTrabajo<=fechauno)
     }
     this.nuevoTurno=false
     this.proximoTurno=false
@@ -79,5 +80,6 @@ export class TurnMainComponent implements OnInit {
     this.proximoTurno=falso
     this.previosTurno=falso
   }
+
 
 }

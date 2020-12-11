@@ -1,7 +1,6 @@
 <table>
     <mat-divider></mat-divider>
     <div *ngIf="esCliente()">
-        <h2 *ngIf="noTieneTurnos()"> NO TIENE NINGUN TURNO CARGADO </h2>
         <div *ngFor="let elemento of turnos">
             <app-tuno-item [item]="elemento" [imagen]="imagen" [estado]="opcion"></app-tuno-item>
          
@@ -9,7 +8,7 @@
     </div>
     <div *ngIf="esProfesional()">
         <div *ngIf="profesional.profesion else noTiene">
-            <h2 *ngIf="noTieneTurnos()"> NO TIENE NINGUN TURNO CARGADO </h2>
+           
             <div *ngFor="let elemento of turnos">
                 <app-tuno-item [item]="elemento" [imagen]="imagen" [estado]="opcion"></app-tuno-item>
             </div>
@@ -18,7 +17,7 @@
 </table>
 
 <ng-template #noTiene style="color:black">
-    <div>
+    <div class="card-notiene">
         NO TIENE CARGADO SU ESPECIALIDAD, DESEA ACTUALIZARLA?
         <div class="perfil__linea">
             <label class="perfil__label">Especialidad: </label>

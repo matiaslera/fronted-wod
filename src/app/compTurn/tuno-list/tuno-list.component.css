@@ -73,3 +73,10 @@ input:focus {
   border-radius: 4px;
   font-size: 1.2em;
 }
+/*Sin profesion*/
+.card-notiene{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2em;
+}

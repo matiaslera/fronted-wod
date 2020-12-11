@@ -4,7 +4,6 @@
         <div class="lista">
             <div class="listaCuenta">
                 <div *ngFor="let elemento of mediosPagos" >
-                    <!-- A class="listaCuenta" -->
                     <button mat-raised-button color="accent" class="btn" (click)="mostarPago(elemento)">{{elemento.nombreEntidad}}
                     </button>
                 </div>
@@ -21,12 +20,12 @@
     </div>
     </div>
     <ng-template #noTiene>
-        <h2> NO TIENE CARGADO NINGUN MEDIO DE PAGO, DESEA AGREGAR?</h2>
+        <h2> NO TIENE CARGADO NINGUN MEDIO DE PAGO</h2>
             <form [formGroup]="formularioPago" class="form" (ngSubmit)="addMedioPago()">
                 <div class="contenido">
                     <div class="label">
                         <label class="perfil__label">Nombre de Entidad: </label>
-                        <label class="perfil__label">Nombre Cuenta: </label>
+                        <label class="perfil__label">Nombre Titular: </label>
                         <label class="perfil__label">Numero Cuenta: </label>
                         <label class="perfil__label">Cbu: </label>
                         <label class="perfil__label">Alias: </label>

@@ -8,11 +8,13 @@
         <app-turn-search (cancelar)="cancelarAll($event)"></app-turn-search>
     </div>
     <div class="container" *ngIf="previosTurno">
-        <app-tuno-list [turnos]="turnos"></app-tuno-list>
+        <h2 *ngIf="turnosPrevio.length===0"> NO TIENE NINGUN TURNO CARGADO </h2>
+        <app-tuno-list [turnos]="turnosPrevio"></app-tuno-list>
     </div>
 
     <div class="container" *ngIf="proximoTurno">
-        <app-tuno-list [turnos]="turnos"></app-tuno-list>
+        <h2 *ngIf="turnosProximo.length===0"> NO TIENE NINGUN TURNO ASIGNADO </h2>
+        <app-tuno-list [turnos]="turnosProximo"></app-tuno-list>
     </div>
 
 </div>

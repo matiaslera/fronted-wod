@@ -13,6 +13,7 @@ import { PopupPresupuestoComponent } from '../popup-presupuesto/popup-presupuest
 })
 export class NewPresupuestoComponent implements OnInit {
   problemas: Trabajo[] = [];
+  arregloBuscado:Trabajo[] = [];
   job: Trabajo;
   busquedaForm = this.builder.group({
     problema: ['', Validators.required],
@@ -43,11 +44,12 @@ export class NewPresupuestoComponent implements OnInit {
     var palabra = this.busquedaForm.get('problema').value;
     var especial = this.busquedaForm.get('especialidad').dirty;
     console.log(this.busquedaForm.value);
-    this.problemas = this.problemas.filter((trabajo) =>
+    this.arregloBuscado = this.problemas.filter((trabajo) =>
       this.contiene(trabajo, palabra)
     );
+    console.log("canitdad de arreglos"+this.problemas.length)
     if (especial) {
-      this.problemas = this.problemas.filter(
+      this.arregloBuscado = this.problemas.filter(
         (trabajo) =>
           trabajo.presupuesto.especialidad ===
           this.busquedaForm.get('especialidad').value
@@ -75,6 +77,7 @@ export class NewPresupuestoComponent implements OnInit {
       problema: '',
       especialidad: '',
     });
+    this.arregloBuscado=[]
     await this.getPresupuestos();
   }
   create() {
